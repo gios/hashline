@@ -1,5 +1,5 @@
-# Top Request
-React Demo
+# Cogitate
+Event planning system
 
 ## Technologies
 * Redux
