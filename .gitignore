@@ -28,3 +28,4 @@ node_modules
 
 # Own
 public/index.js
+.idea

@@ -3,7 +3,7 @@
     "jsx": true,
     "modules": true
   },
-  "extends": "eslint:recommended",
+  "extends": "defaults",
   "parser": "babel-eslint",
   "env": {
     "browser": true,
