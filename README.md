@@ -1,5 +1,5 @@
-# Cogitate
-Event planning system
+# Sportalking
+Real time sports discussion
 
 ## Technologies
 * Redux

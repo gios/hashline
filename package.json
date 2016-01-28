@@ -1,7 +1,7 @@
 {
-  "name": "cogitate",
+  "name": "sportalking",
   "version": "0.0.11",
-  "description": "Event planning system",
+  "description": "Real time sports discussion",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gios/cogitate.git"
+    "url": "git+https://github.com/gios/sportalking.git"
   },
   "author": "Gios",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/gios/cogitate/issues"
+    "url": "https://github.com/gios/sportalking/issues"
   },
-  "homepage": "https://github.com/gios/cogitate#readme",
+  "homepage": "https://github.com/gios/sportalking#readme",
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.2",
     "immutable": "^3.7.6",

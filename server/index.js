@@ -67,4 +67,4 @@ app.use(serve(__dirname + '/../public'))
 
 app.listen(process.env.PORT || 5000)
 
-console.log('Top Request is running on port', process.env.PORT || 5000) // eslint-disable-line no-console
+console.log('Sportalking is running on port', process.env.PORT || 5000) // eslint-disable-line no-console
