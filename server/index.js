@@ -13,11 +13,11 @@ var exists = fs.existsSync(file)
 var sqlite3 = require('sqlite3').verbose()
 var db = new sqlite3.Database(file)
 
-router.get('/api/hello', function *() {
+router.get('/api/hello', function* () {
   this.body = 'Hello World!'
 })
 
-router.get('/api/runSqlite', function *() {
+router.get('/api/runSqlite', function* () {
   db.serialize(function() {
     if (exists) {
       db.run('CREATE TABLE lorem (info TEXT)')
