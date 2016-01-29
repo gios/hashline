@@ -7,7 +7,7 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         query: {
-          presets: ["es2015", "stage-0", "react"]
+          presets: ["es2015", "stage-3", "react"]
         }
       },
       {
