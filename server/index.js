@@ -1,4 +1,5 @@
 'use strict';
+
 const app = require('koa')()
 const router = require('koa-router')()
 const serve = require('koa-static')
@@ -22,5 +23,4 @@ require('./apis/src/routes/fakeData.js')(router, db)
 require('./apis/src/routes/users.js')(router, db)
 
 app.listen(process.env.PORT || 5000)
-
 console.log('Sportalking is running on port', process.env.PORT || 5000) // eslint-disable-line no-console

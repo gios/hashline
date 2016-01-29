@@ -1,11 +1,8 @@
 module.exports = function(router, db) {
   'use strict';
+
   const fs = require('fs');
   let exists = fs.existsSync(db.filename);
-
-  router.get('/api/hello', function *() {
-    this.body = 'Hello World!'
-  })
 
   router.get('/api/runSqlite', function *() {
     db.serialize(function() {
