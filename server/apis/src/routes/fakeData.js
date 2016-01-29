@@ -1,6 +1,7 @@
 module.exports = function(router, db) {
+  'use strict';
   const fs = require('fs');
-  var exists = fs.existsSync(db.filename);
+  let exists = fs.existsSync(db.filename);
 
   router.get('/api/hello', function *() {
     this.body = 'Hello World!'
@@ -12,8 +13,8 @@ module.exports = function(router, db) {
         db.run('CREATE TABLE lorem (info TEXT)')
       }
 
-      var stmt = db.prepare('INSERT INTO lorem VALUES (?)')
-      for (var i = 0; i < 10; i++) {
+      let stmt = db.prepare('INSERT INTO lorem VALUES (?)')
+      for (let i = 0; i < 10; i++) {
         stmt.run('Ipsum ' + i)
       }
       stmt.finalize()

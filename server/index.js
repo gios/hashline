@@ -6,9 +6,9 @@ const bodyParser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const jwt = require('koa-jwt')
 
-var file = __dirname + '/../base.db'
-var sqlite3 = require('sqlite3').verbose()
-var db = new sqlite3.Database(file)
+let file = __dirname + '/../base.db'
+let sqlite3 = require('sqlite3').verbose()
+let db = new sqlite3.Database(file)
 
 app.use(router.routes())
 app.use(router.allowedMethods())
@@ -19,7 +19,7 @@ app.use(jwt({ secret: 'sportalking' }))
 
 // Routes
 require('./apis/src/routes/fakeData.js')(router, db)
-require('./apis/src/routes/users.js')(router)
+require('./apis/src/routes/users.js')(router, db)
 
 app.listen(process.env.PORT || 5000)
 
