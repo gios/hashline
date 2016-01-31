@@ -1,15 +1,20 @@
 module.exports = function(router, bookshelf) {
   'use strict';
 
+  const logger = require('winston')
+
   router.get('/api/runSqlite', function *() {
-    bookshelf.knex.schema.createTableIfNotExists('users', function (table) {
+    yield bookshelf.knex.schema.createTableIfNotExists('users', (table) => {
       table.increments()
       table.string('name')
       table.string('password')
       table.timestamps()
     })
+    .catch(function(error) {
+      logger.error(error)
+    })
 
-    this.body = 'runSqlite'
+    this.body = 'DB Create via SQlite3 and knex'
   })
 
   router.get('/api/fakeData', function *() {

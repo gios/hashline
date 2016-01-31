@@ -8,7 +8,7 @@ const logger = require('koa-logger')
 const jwt = require('koa-jwt')
 
 // Bookshelf instance
-const bookshelf = require('./lib/bookshelf.js')
+let bookshelf = require('./lib/bookshelf.js')
 
 app.use(router.routes())
 app.use(router.allowedMethods())

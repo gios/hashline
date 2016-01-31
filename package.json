@@ -39,7 +39,8 @@
     "react-router": "^2.0.0-rc5",
     "react-router-redux": "^2.1.0",
     "redux": "^3.0.6",
-    "sqlite3": "^3.1.1"
+    "sqlite3": "^3.1.1",
+    "winston": "^2.1.1"
   },
   "devDependencies": {
     "babel-core": "^6.4.5",
