@@ -2,6 +2,13 @@ module.exports = function(router, bookshelf) {
   'use strict';
 
   router.get('/api/runSqlite', function *() {
+    bookshelf.knex.schema.createTableIfNotExists('users', function (table) {
+      table.increments()
+      table.string('name')
+      table.string('password')
+      table.timestamps()
+    })
+
     this.body = 'runSqlite'
   })
 

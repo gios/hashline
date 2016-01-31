@@ -1,4 +1,4 @@
-module.exports = function(router, bookshelf) {
+module.exports = function(router) {
   'use strict';
 
   router.get('/api/authenticate', function *() {

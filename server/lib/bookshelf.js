@@ -1,9 +1,11 @@
 'use strict';
 
+const path = require('path')
+
 let knex = require('knex')({
   client: 'sqlite3',
   conncetion: {
-    filename: __dirname + '/../base.db'
+    filename: path.join(__dirname, '/../base.db')
   }
 })
 
