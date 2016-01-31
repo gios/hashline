@@ -7,9 +7,8 @@ const bodyParser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const jwt = require('koa-jwt')
 
-let file = __dirname + '/../base.db'
-let sqlite3 = require('sqlite3').verbose()
-let db = new sqlite3.Database(file)
+// Bookshelf instance
+const bookshelf = require('./lib/bookshelf.js')
 
 app.use(router.routes())
 app.use(router.allowedMethods())
@@ -19,8 +18,8 @@ app.use(serve(__dirname + '/../public'))
 app.use(jwt({ secret: 'sportalking' }))
 
 // Routes
-require('./apis/src/routes/fakeData.js')(router, db)
-require('./apis/src/routes/users.js')(router, db)
+require('./apis/src/routes/fakeData.js')(router, bookshelf)
+require('./apis/src/routes/users.js')(router, bookshelf)
 
 app.listen(process.env.PORT || 5000)
 console.log('Sportalking is running on port', process.env.PORT || 5000) // eslint-disable-line no-console

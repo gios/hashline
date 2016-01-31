@@ -1,11 +1,7 @@
-module.exports = function(router, db) {
+module.exports = function(router, bookshelf) {
   'use strict';
 
-  router.get('/api/authenticate', function *(next) {
-    db.serialize(function() {
-      db.each('SELECT rowid AS id, name, password FROM Users', function(err, row) {
-        console.log(`${row.id}: User, ${row.name} with password ${row.password}`);
-      });
-    })
+  router.get('/api/authenticate', function *() {
+    this.body = 'User'
   })
 }

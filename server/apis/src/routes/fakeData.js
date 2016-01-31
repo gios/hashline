@@ -1,27 +1,8 @@
-module.exports = function(router, db) {
+module.exports = function(router, bookshelf) {
   'use strict';
 
-  const fs = require('fs');
-  let exists = fs.existsSync(db.filename);
-
   router.get('/api/runSqlite', function *() {
-    db.serialize(function() {
-      if (exists) {
-        db.run('CREATE TABLE lorem (info TEXT)')
-      }
-
-      let stmt = db.prepare('INSERT INTO lorem VALUES (?)')
-      for (let i = 0; i < 10; i++) {
-        stmt.run('Ipsum ' + i)
-      }
-      stmt.finalize()
-
-      db.each('SELECT rowid AS id, info FROM lorem', function(err, row) {
-        console.log(row.id + ': ' + row.info)
-      })
-    })
-
-    db.close()
+    this.body = 'runSqlite'
   })
 
   router.get('/api/fakeData', function *() {
