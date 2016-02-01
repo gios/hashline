@@ -1,8 +1,26 @@
 $logo-color: #5cb85c;
 
 .intro-logo {
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  animation-name: logo-blink;
+  animation-timing-function: ease-in;
   color: darken($logo-color, 20%);
   font-weight: bold;
   margin-top: 1em;
   text-shadow: 1px 1px 1px $logo-color;
+}
+
+@keyframes logo-blink {
+  80% {
+    color: darken($logo-color, 20%);
+  }
+
+  90% {
+    color: darken($logo-color, 30%);
+  }
+
+  100% {
+    color: darken($logo-color, 20%);
+  }
 }
