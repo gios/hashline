@@ -4,6 +4,15 @@ $login-menu-link: #5cb85c;
 .forgot-password {
   color: $forgot-link;
   font-size: .9em;
+
+  &:hover {
+    color: darken($forgot-link, 20%);
+  }
+
+  &:focus {
+    color: darken($forgot-link, 20%);
+    text-decoration: none;
+  }
 }
 
 .login-menu-link {
@@ -11,6 +20,15 @@ $login-menu-link: #5cb85c;
 
   &.active {
     font-weight: bold;
+  }
+
+  &:hover {
+    color: darken($login-menu-link, 20%);
+  }
+
+  &:focus {
+    color: darken($login-menu-link, 20%);
+    text-decoration: none;
   }
 }
 

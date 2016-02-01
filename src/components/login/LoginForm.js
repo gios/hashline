@@ -22,7 +22,7 @@ class LoginForm extends Component {
         </div>
         <div className='form-group row'>
           <div className='text-center col-xs-8 col-xs-offset-2 col-md-8 col-md-offset-2'>
-            <a className='forgot-password'><ins>Frogot password?</ins></a>
+            <a href='#' className='forgot-password'><abbr title='What happend, you forgot your password?'>Frogot password?</abbr></a>
           </div>
         </div>
       </form>
