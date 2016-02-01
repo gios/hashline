@@ -7,6 +7,11 @@ class SignUpForm extends Component {
       <form>
         <div className='form-group row'>
             <div className='col-xs-12 col-md-8 col-md-offset-2'>
+              <input type='text' className='form-control' placeholder='Nickname'/>
+            </div>
+        </div>
+        <div className='form-group row'>
+            <div className='col-xs-12 col-md-8 col-md-offset-2'>
               <input type='email' className='form-control' placeholder='Email'/>
             </div>
         </div>

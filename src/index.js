@@ -21,6 +21,12 @@ import requireAuth from './utils/requireAuth'
 // Styles (SCSS)
 import './index.scss'
 
+// Bootstrap
+import $ from '../node_modules/jquery/dist/jquery'
+window.$ = $
+import bootstrap from '../node_modules/bootstrap/dist/js/npm'
+bootstrap.$ = $
+
 const store = config.configureStore()
 config.reduxRouterMiddleware.listenForReplays(store)
 

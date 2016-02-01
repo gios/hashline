@@ -2,6 +2,7 @@ import React, { Component } from 'react' // eslint-disable-line no-unused-vars
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import { routeActions } from 'react-router-redux'
+import Footer from '../components/parts/Footer'
 
 class App extends Component {
   render() {
@@ -31,6 +32,7 @@ class App extends Component {
         <div>
           {this.props.children}
         </div>
+        <Footer/>
       </div>
     )
   }
