@@ -1,0 +1,8 @@
+$logo-color: #5cb85c;
+
+.intro-logo {
+  color: darken($logo-color, 20%);
+  font-weight: bold;
+  margin-top: 1em;
+  text-shadow: 1px 1px 1px $logo-color;
+}
