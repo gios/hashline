@@ -5,11 +5,11 @@ import { routeActions } from 'react-router-redux'
 
 class App extends Component {
   render() {
-    const { dispatch, push, currentRoute } = this.props
+    const { currentRoute } = this.props
     return (
       <div>
         <nav className='navbar navbar-fixed-top navbar-dark bg-inverse'>
-          <Link className='navbar-brand' to='/'>Top Request</Link>
+          <Link className='navbar-brand' to='/'>Sportalking</Link>
           <ul className='nav navbar-nav'>
             <li className='nav-item'>
               <Link className={currentRoute === '/' ? 'nav-link active' : 'nav-link'} to='/'>
@@ -28,16 +28,8 @@ class App extends Component {
             </li>
           </ul>
         </nav>
-        <div className='container-fluid'>
-          <button type='button' className='btn btn-primary' style={{marginTop: '5em'}} onClick={() => dispatch(push({
-            pathname: '/counter',
-            state: { name: 'Hello' }
-          }))}>
-            Say Hello
-          </button>
-          <div style={{marginTop: '8em'}}>
-            {this.props.children}
-          </div>
+        <div>
+          {this.props.children}
         </div>
       </div>
     )

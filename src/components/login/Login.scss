@@ -1,0 +1,19 @@
+$forgot-link: #999a9c;
+$login-menu-link: #5cb85c;
+
+.forgot-password {
+  color: $forgot-link;
+  font-size: .9em;
+}
+
+.login-menu-link {
+  color: darken($login-menu-link, 20%);
+
+  &.active {
+    font-weight: bold;
+  }
+}
+
+.login-block {
+  top: 10em;
+}

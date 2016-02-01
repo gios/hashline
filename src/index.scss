@@ -1,3 +1,9 @@
 @import '~bootstrap/scss/bootstrap';
 
 @import './components/IndexWelcome';
+
+// Global Styles
+@import './global';
+
+// Login Component
+@import './components/login/Login';
