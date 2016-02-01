@@ -21,11 +21,12 @@ import requireAuth from './utils/requireAuth'
 // Styles (SCSS)
 import './index.scss'
 
-// Bootstrap
-import $ from '../node_modules/jquery/dist/jquery'
-window.$ = $
-import bootstrap from '../node_modules/bootstrap/dist/js/npm'
-bootstrap.$ = $
+// Bootstrap, jQuery, Tether
+import $ from 'jquery'
+import Tether from 'tether'
+window.$ = window.jQuery = $
+window.Tether = Tether
+require('bootstrap')
 
 const store = config.configureStore()
 config.reduxRouterMiddleware.listenForReplays(store)
