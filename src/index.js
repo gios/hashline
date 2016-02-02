@@ -37,7 +37,7 @@ render(
       <Route path='/' component={Containers.App}>
         <IndexRoute component={IndexWelcome} onEnter={requireAuth}/>
         <Route path='/login' component={Containers.Login}/>
-        <Route path='/signup' component={Containers.SignUp}/>
+        <Route path='/signup' component={Containers.Login}/>
         <Route path='/counter' component={Containers.Counter}/>
         <Route path='/wonders' component={Containers.Wonders}/>
       </Route>
