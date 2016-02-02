@@ -5,29 +5,29 @@ class LoginForm extends Component {
   loginEvent(e) {
     e.preventDefault()
     let emailInput = this.refs.loginEmail
-    let passwordInput = this.refs.loginPassword
     let isValidEmail = this.validateEmail(emailInput.value)
 
-    if (emailInput.value === '') {
-      emailInput.classList.add('email-incorrect')
-    } else if(!isValidEmail) {
-      $(emailInput).popover('show')
-      emailInput.classList.add('email-incorrect')
-    } else {
-      $(emailInput).popover('hide')
-      emailInput.classList.remove('email-incorrect')
+    let loginInputs = document.querySelectorAll('.form-control')
+    for (var i = 0; i < loginInputs.length; i++) {
+      if (loginInputs[i].value === '') {
+        loginInputs[i].classList.add('input-incorrect')
+      } else {
+        loginInputs[i].classList.remove('input-incorrect')
+      }
     }
 
-    if(passwordInput.value === '') {
-      passwordInput.classList.add('email-incorrect')
+    if(!isValidEmail) {
+      $(emailInput).popover('show')
+      emailInput.classList.add('input-incorrect')
     } else {
-      passwordInput.classList.remove('email-incorrect')
+      $(emailInput).popover('hide')
+      emailInput.classList.remove('input-incorrect')
     }
   }
 
   validateEmail(email) {
-    var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
+    var emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return emailRegex.test(email);
   }
 
   render() {
@@ -36,13 +36,13 @@ class LoginForm extends Component {
         <div className='form-group row'>
             <div className='col-xs-12 col-md-8 col-md-offset-2'>
               <input type='email' className='form-control' placeholder='Email' ref='loginEmail'
-              data-toggle='popover' data-html='true' title='Incorrect Email' data-trigger='manual'
+              data-toggle='popover' data-html='true' data-trigger='manual'
               data-content='You entered a wrong email adresses. Example: <strong>John.Smith@example.com</strong>'/>
             </div>
         </div>
         <div className='form-group row'>
           <div className='col-xs-12 col-md-8 col-md-offset-2'>
-            <input type='password' className='form-control' placeholder='Password' ref='loginPassword'/>
+            <input type='password' className='form-control' placeholder='Password'/>
           </div>
         </div>
         <div className='form-group row'>
