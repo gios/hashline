@@ -2,6 +2,10 @@ import React, { Component } from 'react' // eslint-disable-line no-unused-vars
 
 class LoginForm extends Component {
 
+  componentWillMount() {
+    $('.tooltip').remove()
+  }
+
   loginEvent(e) {
     e.preventDefault()
     let emailInput = this.refs.loginEmail

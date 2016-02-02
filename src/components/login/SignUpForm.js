@@ -2,6 +2,10 @@ import React, { Component } from 'react' // eslint-disable-line no-unused-vars
 
 class SignUpForm extends Component {
 
+  componentWillMount() {
+    $('.tooltip').remove()
+  }
+
   signUpEvent(e) {
     e.preventDefault()
     let emailInput = this.refs.signUpEmail
