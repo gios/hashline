@@ -1,5 +1,6 @@
 $forgot-link: #999a9c;
 $login-menu-link: #5cb85c;
+$error-color: #ff9494;
 
 .forgot-password {
   color: $forgot-link;
@@ -34,4 +35,27 @@ $login-menu-link: #5cb85c;
 
 .login-block {
   top: 10em;
+}
+
+.email-incorrect {
+  animation-duration: 3s;
+  animation-fill-mode: backwards;
+  animation-iteration-count: infinite;
+  animation-name: pulse-error;
+  animation-timing-function: ease-out;
+  border: 1px solid $error-color;
+}
+
+@keyframes pulse-error {
+  from {
+    border: 1px solid $error-color;
+  }
+
+  50% {
+    border: 1px solid darken($error-color, 30%);
+  }
+
+  to {
+    border: 1px solid $error-color;
+  }
 }
