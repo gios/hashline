@@ -23,27 +23,27 @@ class SignUpForm extends Component {
     }
 
     if(!isValidEmail) {
-      $(emailInput).popover('show')
+      $(emailInput).tooltip('show')
       emailInput.classList.add('input-incorrect')
     } else {
-      $(emailInput).popover('hide')
+      $(emailInput).tooltip('hide')
       emailInput.classList.remove('input-incorrect')
     }
 
     if(!isValidUsername) {
-      $(usernameInput).popover('show')
+      $(usernameInput).tooltip('show')
       usernameInput.classList.add('input-incorrect')
     } else {
-      $(usernameInput).popover('hide')
+      $(usernameInput).tooltip('hide')
       usernameInput.classList.remove('input-incorrect')
     }
 
     if(!isValidPassword) {
-      $(passwordInput).popover('show')
+      $(passwordInput).tooltip('show')
       passwordInput.classList.add('input-incorrect')
       rePasswordInput.classList.add('input-incorrect')
     } else {
-      $(passwordInput).popover('hide')
+      $(passwordInput).tooltip('hide')
       passwordInput.classList.remove('input-incorrect')
       rePasswordInput.classList.remove('input-incorrect')
     }
@@ -71,22 +71,22 @@ class SignUpForm extends Component {
         <div className='form-group row'>
             <div className='col-xs-12 col-md-8 col-md-offset-2'>
               <input type='text' className='form-control' placeholder='Username' ref='signUpUsername'
-              data-toggle='popover' data-html='true' data-trigger='manual'
-              data-content='You entered a wrong username. Example: <strong>John.Smith@example.com</strong>'/>
+              data-toggle='tooltip' data-html='true' data-trigger='manual' data-placement='right'
+              title='You entered a wrong username.'/>
             </div>
         </div>
         <div className='form-group row'>
             <div className='col-xs-12 col-md-8 col-md-offset-2'>
               <input type='email' className='form-control' placeholder='Email' ref='signUpEmail'
-              data-toggle='popover' data-html='true' data-trigger='manual'
-              data-content='You entered a wrong email adresses. Example: <strong>Jack34, Michael1 etc.</strong>'/>
+              data-toggle='tooltip' data-html='true' data-trigger='manual' data-placement='right'
+              title='You entered a wrong email adresses.'/>
             </div>
         </div>
         <div className='form-group row'>
           <div className='col-xs-12 col-md-8 col-md-offset-2'>
             <input type='password' className='form-control' placeholder='Password' ref='signUpPassword'
-            data-toggle='popover' data-html='true' data-trigger='manual'
-            data-content="Your passwords don't match."/>
+            data-toggle='tooltip' data-html='true' data-trigger='manual' data-placement='right'
+            title="Your passwords don't match, check them."/>
           </div>
         </div>
         <div className='form-group row'>

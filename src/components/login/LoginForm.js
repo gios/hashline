@@ -17,10 +17,10 @@ class LoginForm extends Component {
     }
 
     if(!isValidEmail) {
-      $(emailInput).popover('show')
+      $(emailInput).tooltip('show')
       emailInput.classList.add('input-incorrect')
     } else {
-      $(emailInput).popover('hide')
+      $(emailInput).tooltip('hide')
       emailInput.classList.remove('input-incorrect')
     }
   }
@@ -36,8 +36,8 @@ class LoginForm extends Component {
         <div className='form-group row'>
             <div className='col-xs-12 col-md-8 col-md-offset-2'>
               <input type='email' className='form-control' placeholder='Email' ref='loginEmail'
-              data-toggle='popover' data-html='true' data-trigger='manual'
-              data-content='You entered a wrong email adresses. Example: <strong>John.Smith@example.com</strong>'/>
+              data-toggle='tooltip' data-html='true' data-trigger='manual' data-placement='right'
+              title='You entered a wrong email adress.'/>
             </div>
         </div>
         <div className='form-group row'>
