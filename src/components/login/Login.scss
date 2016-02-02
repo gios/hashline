@@ -38,7 +38,7 @@ $error-color: #ff9494;
 }
 
 .email-incorrect {
-  animation-duration: 3s;
+  animation-duration: 2.5s;
   animation-fill-mode: backwards;
   animation-iteration-count: infinite;
   animation-name: pulse-error;
@@ -47,15 +47,12 @@ $error-color: #ff9494;
 }
 
 @keyframes pulse-error {
-  from {
-    border: 1px solid $error-color;
+  from,
+  to {
+    border: 1px solid lighten($error-color, 10%);
   }
 
   50% {
     border: 1px solid darken($error-color, 30%);
-  }
-
-  to {
-    border: 1px solid $error-color;
   }
 }

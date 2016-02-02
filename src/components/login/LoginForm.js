@@ -5,13 +5,23 @@ class LoginForm extends Component {
   loginEvent(e) {
     e.preventDefault()
     let emailInput = this.refs.loginEmail
+    let passwordInput = this.refs.loginPassword
     let isValidEmail = this.validateEmail(emailInput.value)
-    if (!isValidEmail) {
+
+    if (emailInput.value === '') {
+      emailInput.classList.add('email-incorrect')
+    } else if(!isValidEmail) {
       $(emailInput).popover('show')
       emailInput.classList.add('email-incorrect')
     } else {
       $(emailInput).popover('hide')
       emailInput.classList.remove('email-incorrect')
+    }
+
+    if(passwordInput.value === '') {
+      passwordInput.classList.add('email-incorrect')
+    } else {
+      passwordInput.classList.remove('email-incorrect')
     }
   }
 
@@ -32,7 +42,7 @@ class LoginForm extends Component {
         </div>
         <div className='form-group row'>
           <div className='col-xs-12 col-md-8 col-md-offset-2'>
-            <input type='password' className='form-control' placeholder='Password'/>
+            <input type='password' className='form-control' placeholder='Password' ref='loginPassword'/>
           </div>
         </div>
         <div className='form-group row'>
