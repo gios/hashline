@@ -1,37 +1,37 @@
 import fetch from 'isomorphic-fetch'
 
-export const LOGIN_REQUEST = 'LOGIN_REQUEST'
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
-export const LOGIN_FAILURE = 'LOGIN_FAILURE'
+export const SIGNUP_REQUEST = 'SIGNUP_REQUEST'
+export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS'
+export const SIGNUP_FAILURE = 'SIGNUP_FAILURE'
 
-function requestLogin(creds) {
+function requestSignUp(creds) {
   return {
-    type: LOGIN_REQUEST,
+    type: SIGNUP_REQUEST,
     isFetching: true,
     isAuthenticated: false,
     creds
   }
 }
 
-function receiveLogin(user) {
+function signUpSuccess(user) {
   return {
-    type: LOGIN_SUCCESS,
+    type: SIGNUP_SUCCESS,
     isFetching: false,
     isAuthenticated: true,
     id_token: user.id_token
   }
 }
 
-function loginError(message) {
+function signUpError(message) {
   return {
-    type: LOGIN_FAILURE,
+    type: SIGNUP_FAILURE,
     isFetching: false,
     isAuthenticated: false,
     message
   }
 }
 
-export function loginUser(creds) {
+export function signUpUser(creds) {
   let config = {
     method: 'post',
     headers: {
@@ -41,19 +41,19 @@ export function loginUser(creds) {
   }
 
   return dispatch => {
-    dispatch(requestLogin(creds))
+    dispatch(requestSignUp(creds))
 
-    return fetch('/authenticate', config)
+    return fetch('/registration', config)
       .then(response => {
         if (response.status >= 400) {
-          dispatch(loginError(response.statusText))
+          dispatch(signUpError(response.statusText))
           throw new Error(response.statusText)
         }
         return response.json()
       })
       .then(user => {
         localStorage.setItem('id_token', user.id_token)
-        dispatch(receiveLogin(user))
+        dispatch(signUpSuccess(user))
       })
       .catch(err => console.error('Error: ', err)) // eslint-disable-line no-console
   }

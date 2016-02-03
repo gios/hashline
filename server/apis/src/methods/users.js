@@ -6,7 +6,8 @@ const logger = require('winston')
 function initUsersTable() {
   knex.schema.createTableIfNotExists('users', (table) => {
     table.increments()
-    table.string('name')
+    table.string('username').unique()
+    table.string('email').unique()
     table.string('password')
     table.timestamps()
   })

@@ -23,7 +23,9 @@ module.exports = {
     port: 8080,
     host: '0.0.0.0',
     proxy: {
-      '/api/*': 'http://localhost:5000'
+      '/api/*': 'http://localhost:5000',
+      '/authenticate': 'http://localhost:5000',
+      '/registration': 'http://localhost:5000'
     }
   },
   devtool: 'source-map'

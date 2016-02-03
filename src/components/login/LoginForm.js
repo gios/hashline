@@ -13,13 +13,11 @@ class LoginForm extends Component {
     let emailInput = this.refs.loginEmail
     let passwordInput = this.refs.loginPassword
 
-    const creds = {
-      email: emailInput.value.trim(),
-      password: passwordInput.value.trim()
-    }
-
     if (this.validateFields(emailInput)) {
-      this.props.onClickLogin(creds)
+      this.props.onClickLogin({
+        email: emailInput.value.trim(),
+        password: passwordInput.value.trim()
+      })
     }
   }
 

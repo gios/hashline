@@ -1,6 +1,7 @@
 import React, { Component } from 'react' // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux'
 import { loginUser } from '../actions/loginAction'
+import { signUpUser } from '../actions/signUpAction'
 import LoginMenu from '../components/login/LoginMenu'
 import LoginForm from '../components/login/LoginForm'
 import SignUpForm from '../components/login/SignUpForm'
@@ -14,7 +15,7 @@ class Login extends Component {
       if (pathname === '/login') {
         return <LoginForm onClickLogin={creds => dispatch(loginUser(creds))}/>
       } else {
-        return <SignUpForm/>
+        return <SignUpForm onClickSignUp={creds => dispatch(signUpUser(creds))}/>
       }
     };
 

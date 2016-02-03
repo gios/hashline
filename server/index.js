@@ -14,7 +14,7 @@ app.use(bodyParser())
 app.use(router.routes())
 app.use(router.allowedMethods())
 app.use(serve(__dirname + '/../public'))
-app.use(jwt({ secret: SHARED_SECRET }).unless({ path: [/^\/api\/authenticate/] }))
+app.use(jwt({ secret: SHARED_SECRET }).unless({ path: [/^\/authenticate/, /^\/registration/] }))
 
 // Routes
 require('./apis/src/routes/users.js')(router, jwt, SHARED_SECRET)

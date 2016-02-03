@@ -10,11 +10,21 @@ class SignUpForm extends Component {
 
   signUpEvent(e) {
     e.preventDefault()
-    let emailInput = this.refs.signUpEmail
     let usernameInput = this.refs.signUpUsername
+    let emailInput = this.refs.signUpEmail
     let passwordInput = this.refs.signUpPassword
     let rePasswordInput = this.refs.signUpRePassword
 
+    if (this.validateFields(usernameInput, emailInput, passwordInput, rePasswordInput)) {
+      this.props.onClickSignUp({
+        username: usernameInput.value.trim(),
+        email: emailInput.value.trim(),
+        password: passwordInput.value.trim()
+      })
+    }
+  }
+
+  validateFields(usernameInput, emailInput, passwordInput, rePasswordInput) {
     let isValidEmail = this.validateEmail(emailInput.value)
     let isValidUsername = this.validateUsername(usernameInput.value)
     let isValidPassword = this.validatePasswords(passwordInput.value, rePasswordInput.value)
@@ -53,6 +63,8 @@ class SignUpForm extends Component {
       passwordInput.classList.remove('input-incorrect')
       rePasswordInput.classList.remove('input-incorrect')
     }
+
+    return DOMtoArray(signUpInputs).every(elem => !elem.classList.contains('input-incorrect'))
   }
 
   validateEmail(email) {
