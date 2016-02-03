@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('path')
-const DBName = path.join(__dirname, '/../base.db')
+const DBName = path.join(__dirname, 'base.db')
 
 let knex = require('knex')({
   client: 'sqlite3',
@@ -14,4 +14,4 @@ let knex = require('knex')({
   }
 })
 
-module.exports = require('bookshelf')(knex)
+module.exports = knex
