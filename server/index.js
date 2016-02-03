@@ -7,15 +7,17 @@ const bodyParser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const jwt = require('koa-jwt')
 
+const SHARED_SECRET = 'sportalking'
+
+app.use(logger())
+app.use(bodyParser())
 app.use(router.routes())
 app.use(router.allowedMethods())
-app.use(bodyParser())
-app.use(logger())
 app.use(serve(__dirname + '/../public'))
-app.use(jwt({ secret: 'sportalking' }))
+app.use(jwt({ secret: SHARED_SECRET }).unless({ path: [/^\/api\/authenticate/] }))
 
 // Routes
-require('./apis/src/routes/users.js')(router)
+require('./apis/src/routes/users.js')(router, jwt, SHARED_SECRET)
 
 app.listen(process.env.PORT || 5000)
 console.log('Sportalking is running on port', process.env.PORT || 5000) // eslint-disable-line no-console

@@ -1,4 +1,5 @@
 import React, { Component } from 'react' // eslint-disable-line no-unused-vars
+import { DOMtoArray } from '../../utils/helpers'
 
 class LoginForm extends Component {
 
@@ -9,6 +10,19 @@ class LoginForm extends Component {
   loginEvent(e) {
     e.preventDefault()
     let emailInput = this.refs.loginEmail
+    let passwordInput = this.refs.loginPassword
+
+    const creds = {
+      email: emailInput.value.trim(),
+      password: passwordInput.value.trim()
+    }
+
+    if (this.validateFields(emailInput)) {
+      this.props.onClickLogin(creds)
+    }
+  }
+
+  validateFields(emailInput) {
     let isValidEmail = this.validateEmail(emailInput.value)
 
     let loginInputs = document.querySelectorAll('.form-control')
@@ -27,6 +41,8 @@ class LoginForm extends Component {
       $(emailInput).tooltip('hide')
       emailInput.classList.remove('input-incorrect')
     }
+
+    return DOMtoArray(loginInputs).every(elem => !elem.classList.contains('input-incorrect'))
   }
 
   validateEmail(email) {
@@ -46,7 +62,7 @@ class LoginForm extends Component {
         </div>
         <div className='form-group row'>
           <div className='col-xs-12 col-md-8 col-md-offset-2'>
-            <input type='password' className='form-control' placeholder='Password'/>
+            <input type='password' className='form-control' placeholder='Password' ref='loginPassword'/>
           </div>
         </div>
         <div className='form-group row'>
