@@ -1,9 +1,11 @@
 import React, { Component } from 'react' // eslint-disable-line no-unused-vars
+import { DOMtoArray } from '../../utils/helpers'
 
 class SignUpForm extends Component {
 
   componentWillMount() {
-    $('.tooltip').remove()
+    let tooltips = document.querySelectorAll('.tooltip')
+    DOMtoArray(tooltips).map(elem => elem.remove())
   }
 
   signUpEvent(e) {

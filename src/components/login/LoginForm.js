@@ -4,7 +4,8 @@ import { DOMtoArray } from '../../utils/helpers'
 class LoginForm extends Component {
 
   componentWillMount() {
-    $('.tooltip').remove()
+    let tooltips = document.querySelectorAll('.tooltip')
+    DOMtoArray(tooltips).map(elem => elem.remove())
   }
 
   loginEvent(e) {
