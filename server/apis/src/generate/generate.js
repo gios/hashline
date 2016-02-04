@@ -1,3 +1,3 @@
 'use strict';
 
-require('./users.js').initUsersTable()
+require('./userGenerate.js').initUsersTable()

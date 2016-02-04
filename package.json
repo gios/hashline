@@ -10,7 +10,8 @@
     "server": "nodemon ./server/index.js",
     "lint": "eslint ./src",
     "clear": "rimraf ./public",
-    "generate": "node ./server/apis/src/generate/generate.js"
+    "generate": "node ./server/apis/src/generate/generate.js",
+    "node-debug": "node-inspector --web-port=7000 ./server/index.js "
   },
   "repository": {
     "type": "git",
@@ -56,6 +57,7 @@
     "eslint": "^1.10.3",
     "eslint-config-defaults": "^8.0.2",
     "eslint-plugin-react": "^3.16.1",
+    "node-inspector": "^0.12.5",
     "node-sass": "^3.4.2",
     "nodemon": "^1.8.1",
     "redux-thunk": "^1.0.3",

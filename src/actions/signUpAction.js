@@ -45,16 +45,18 @@ export function signUpUser(creds) {
 
     return fetch('/registration', config)
       .then(response => {
-        if (response.status >= 400) {
+        if (response.ok) {
+          return Promise.resolve(response)
+        } else {
           dispatch(signUpError(response.statusText))
-          throw new Error(response.statusText)
+          return Promise.reject(new Error(response.statusText))
         }
-        return response.json()
       })
+      .then(response => response.json())
       .then(user => {
         localStorage.setItem('id_token', user.id_token)
         dispatch(signUpSuccess(user))
       })
-      .catch(err => console.error('Error: ', err)) // eslint-disable-line no-console
+      .catch(err => console.error(err)) // eslint-disable-line no-console
   }
 }
