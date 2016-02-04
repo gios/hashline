@@ -1,6 +1,6 @@
 {
   "name": "sportalking",
-  "version": "0.0.16",
+  "version": "0.1.0-alpha",
   "description": "Real time sports discussion",
   "main": "index.js",
   "scripts": {
