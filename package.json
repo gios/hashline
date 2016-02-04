@@ -9,7 +9,7 @@
     "deploy": "webpack -p --config ./build/prod.config.js",
     "server": "nodemon ./server/index.js",
     "lint": "eslint ./src",
-    "clear": "rimraf  ./public/index.js"
+    "clear": "rimraf ./public"
   },
   "repository": {
     "type": "git",
