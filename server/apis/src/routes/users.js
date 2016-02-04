@@ -1,10 +1,8 @@
 module.exports = function(router, jwt, SHARED_SECRET) {
   'use strict';
 
-  const logger = require('winston')
+  const logger = require('tracer').colorConsole()
   const knex = require('../knex.js')
-  const UserMethods = require('../methods/users.js');
-  UserMethods.initUsersTable()
 
   router.post('/authenticate', function *(next) {
     let email = this.request.body.email
@@ -15,6 +13,9 @@ module.exports = function(router, jwt, SHARED_SECRET) {
       password
     })
     .first('username', 'email', 'id')
+    .catch(function(error) {
+      logger.error(error)
+    })
 
     let token = jwt.sign(foundUser, SHARED_SECRET, { expiresIn: 60 * 5 });
     this.body = { id_token: token }
@@ -40,6 +41,9 @@ module.exports = function(router, jwt, SHARED_SECRET) {
     let user = yield knex('users')
     .where('id', userId[0])
     .first('username', 'email', 'id')
+    .catch(function(error) {
+      logger.error(error)
+    })
 
     let token = jwt.sign(user, SHARED_SECRET, { expiresIn: 60 * 5 });
     this.body = { id_token: token }
