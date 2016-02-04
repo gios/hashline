@@ -5,6 +5,13 @@ module.exports = function(router, jwt, SHARED_SECRET) {
   const knex = require('../knex.js')
 
   router.post('/authenticate', function *(next) {
+    try {
+      yield next
+    } catch (err) {
+      logger.error(err)
+      this.throw(err, err.status)
+    }
+
     let email = this.request.body.email
     let password = this.request.body.password
 
@@ -13,16 +20,28 @@ module.exports = function(router, jwt, SHARED_SECRET) {
       password
     })
     .first('username', 'email', 'id')
-    .catch(function(error) {
+    .catch((error) => {
       logger.error(error)
     })
 
+    if (foundUser === undefined) {
+      this.status = 401
+      this.body = 'Wrong user or password'
+      return
+    }
+
     let token = jwt.sign(foundUser, SHARED_SECRET, { expiresIn: 60 * 5 });
     this.body = { id_token: token }
-    yield next
   })
 
   router.post('/registration', function *(next) {
+    try {
+      yield next
+    } catch (err) {
+      logger.error(err)
+      this.throw(err, err.status)
+    }
+
     let username = this.request.body.username
     let email = this.request.body.email
     let password = this.request.body.password
@@ -34,19 +53,18 @@ module.exports = function(router, jwt, SHARED_SECRET) {
       created_at: Date.now(),
       updated_at: Date.now()
     })
-    .catch(function(error) {
+    .catch((error) => {
       logger.error(error)
     })
 
     let user = yield knex('users')
     .where('id', userId[0])
     .first('username', 'email', 'id')
-    .catch(function(error) {
+    .catch((error) => {
       logger.error(error)
     })
 
     let token = jwt.sign(user, SHARED_SECRET, { expiresIn: 60 * 5 });
     this.body = { id_token: token }
-    yield next
   })
 }
