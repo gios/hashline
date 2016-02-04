@@ -26,7 +26,7 @@ module.exports = function(router, jwt, SHARED_SECRET) {
 
     if (foundUser === undefined) {
       this.status = 401
-      this.body = 'Wrong user or password'
+      this.message = 'Wrong user or password'
       return
     }
 
