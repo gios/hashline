@@ -48,7 +48,9 @@ export function loginUser(creds) {
         if (response.ok) {
           return Promise.resolve(response)
         } else {
-          dispatch(loginError(response.statusText))
+          response.text().then((err) => {
+            dispatch(loginError(err))
+          })
           return Promise.reject(new Error(response.statusText))
         }
       })

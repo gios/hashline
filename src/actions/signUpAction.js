@@ -48,7 +48,9 @@ export function signUpUser(creds) {
         if (response.ok) {
           return Promise.resolve(response)
         } else {
-          dispatch(signUpError(response.statusText))
+          response.text().then((err) => {
+            dispatch(signUpError(err))
+          })
           return Promise.reject(new Error(response.statusText))
         }
       })
