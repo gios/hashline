@@ -3,6 +3,14 @@ import { DOMtoArray } from '../../utils/helpers'
 
 class LoginForm extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      emailError: 'You entered a wrong email adress.',
+      passwordError: 'Password length must be greater than 6.'
+    }
+  }
+
   componentWillMount() {
     let tooltips = document.querySelectorAll('.tooltip')
     DOMtoArray(tooltips).map(elem => elem.remove())
@@ -13,7 +21,7 @@ class LoginForm extends Component {
     let emailInput = this.refs.loginEmail
     let passwordInput = this.refs.loginPassword
 
-    if (this.validateFields(emailInput)) {
+    if (this.validateFields(emailInput, passwordInput)) {
       this.props.onClickLogin({
         email: emailInput.value.trim(),
         password: passwordInput.value.trim()
@@ -21,8 +29,9 @@ class LoginForm extends Component {
     }
   }
 
-  validateFields(emailInput) {
+  validateFields(emailInput, passwordInput) {
     let isValidEmail = this.validateEmail(emailInput.value)
+    let isValidPassword = this.validatePassword(passwordInput.value)
 
     let loginInputs = document.querySelectorAll('.form-control')
     for (var i = 0; i < loginInputs.length; i++) {
@@ -41,6 +50,14 @@ class LoginForm extends Component {
       emailInput.classList.remove('input-incorrect')
     }
 
+    if(!isValidPassword) {
+      $(passwordInput).tooltip('show')
+      passwordInput.classList.add('input-incorrect')
+    } else {
+      $(passwordInput).tooltip('hide')
+      passwordInput.classList.remove('input-incorrect')
+    }
+
     return DOMtoArray(loginInputs).every(elem => !elem.classList.contains('input-incorrect'))
   }
 
@@ -49,19 +66,25 @@ class LoginForm extends Component {
     return emailRegex.test(email);
   }
 
+  validatePassword(password) {
+    return (password.length >= 6) ? true : false
+  }
+
   render() {
     return (
       <form onSubmit={this.loginEvent.bind(this)} noValidate>
         <div className='form-group row'>
-            <div className='col-xs-12 col-md-8 col-md-offset-2'>
-              <input type='email' className='form-control' placeholder='Email' ref='loginEmail'
-              data-toggle='tooltip' data-html='true' data-trigger='manual' data-placement='right'
-              title='You entered a wrong email adress.'/>
-            </div>
+          <div className='col-xs-12 col-md-8 col-md-offset-2'>
+            <input type='email' className='form-control' placeholder='Email' ref='loginEmail'
+            data-toggle='tooltip' data-html='true' data-trigger='manual' data-placement='right'
+            data-original-title={this.state.emailError}/>
+          </div>
         </div>
         <div className='form-group row'>
           <div className='col-xs-12 col-md-8 col-md-offset-2'>
-            <input type='password' className='form-control' placeholder='Password' ref='loginPassword'/>
+            <input type='password' className='form-control' placeholder='Password' ref='loginPassword'
+            data-toggle='tooltip' data-html='true' data-trigger='manual' data-placement='right'
+            data-original-title={this.state.passwordError}/>
           </div>
         </div>
         <div className='form-group row'>
