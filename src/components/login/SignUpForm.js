@@ -40,13 +40,6 @@ class SignUpForm extends Component {
     let isValidPasswords = this.validatePasswords(passwordInput.value, rePasswordInput.value)
 
     let signUpInputs = document.querySelectorAll('.form-control')
-    for (var i = 0; i < signUpInputs.length; i++) {
-      if (signUpInputs[i].value === '') {
-        signUpInputs[i].classList.add('input-incorrect')
-      } else {
-        signUpInputs[i].classList.remove('input-incorrect')
-      }
-    }
 
     if(!isValidUsername) {
       $(usernameInput).tooltip('show')

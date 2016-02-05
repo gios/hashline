@@ -34,13 +34,6 @@ class LoginForm extends Component {
     let isValidPassword = this.validatePassword(passwordInput.value)
 
     let loginInputs = document.querySelectorAll('.form-control')
-    for (var i = 0; i < loginInputs.length; i++) {
-      if (loginInputs[i].value === '') {
-        loginInputs[i].classList.add('input-incorrect')
-      } else {
-        loginInputs[i].classList.remove('input-incorrect')
-      }
-    }
 
     if(!isValidEmail) {
       $(emailInput).tooltip('show')
