@@ -1,4 +1,5 @@
 $logo-color: #5cb85c;
+$copyright-link: rgba(0, 0, 0, .8);
 
 .intro-logo {
   animation-duration: 10s;
@@ -20,4 +21,8 @@ $logo-color: #5cb85c;
   90% {
     color: darken($logo-color, 30%);
   }
+}
+
+.navbar-light .navbar-nav .copyright-footer {
+  color: $copyright-link;
 }

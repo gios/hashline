@@ -5,11 +5,13 @@ import { signUpUser } from '../actions/signUpAction'
 import LoginMenu from '../components/login/LoginMenu'
 import LoginForm from '../components/login/LoginForm'
 import SignUpForm from '../components/login/SignUpForm'
+import ErrorMessage from '../components/helpers/ErrorMessage'
 
 class Login extends Component {
 
   render() {
-    let { dispatch, pathname } = this.props
+    let { dispatch, pathname, errorMessage } = this.props
+    let errorComponent
 
     let loginFromSelector = () => {
       if (pathname === '/login') {
@@ -17,13 +19,22 @@ class Login extends Component {
       } else {
         return <SignUpForm onClickSignUp={creds => dispatch(signUpUser(creds))}/>
       }
-    };
+    }
+
+    if (errorMessage) {
+      errorComponent = <ErrorMessage message={errorMessage}/>
+    }
 
     return (
-      <div className='login-block card card-block col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xl-4 col-xl-offset-4'>
-        <LoginMenu active={pathname}/>
-        <hr className='col-xs-11 col-md-11'/>
-        {loginFromSelector()}
+      <div>
+        <div className='login-block card card-block col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xl-4 col-xl-offset-4'>
+          <LoginMenu active={pathname}/>
+          <hr className='col-xs-11 col-md-11'/>
+          {errorComponent}
+          <div className='col-sm-12 col-md-12 col-xl-12'>
+            {loginFromSelector()}
+          </div>
+        </div>
       </div>
     )
   }
@@ -31,7 +42,8 @@ class Login extends Component {
 
 function inject(state) {
   return {
-    pathname: state.routing.location.pathname
+    pathname: state.routing.location.pathname,
+    errorMessage: state.reducers.auth.get('errorMessage')
   }
 }
 
