@@ -13,9 +13,7 @@ class LoginForm extends Component {
 
   componentWillMount() {
     let tooltips = document.querySelectorAll('.tooltip')
-    let errorMessage = document.querySelector('.login-error-message')
     DOMtoArray(tooltips).map(elem => elem.remove())
-    errorMessage && errorMessage.remove()
   }
 
   loginEvent(e) {
