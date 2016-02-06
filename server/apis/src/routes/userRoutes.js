@@ -3,23 +3,35 @@ module.exports = function(router, jwt, SHARED_SECRET) {
 
   const logger = require('tracer').colorConsole()
   const knex = require('../knex.js')
+  const userMethods = require('../methods/userMethods.js')
 
   router.post('/authenticate', function *(next) {
     let email = this.request.body.email
     let password = this.request.body.password
 
-    let foundUser = yield knex('users').where({
-      email,
-      password
-    })
-    .first('username', 'email', 'id')
+    let foundUserPassword = yield knex('users')
+    .where('email', email)
+    .first('id', 'password')
     .catch((err) => {
       logger.error(err)
     })
 
-    if (!foundUser) {
-      this.throw(404, 'Wrong user or password')
+    if (!foundUserPassword) {
+      this.throw(404, 'User is not found')
     }
+
+    let isCorrectPassword = (userMethods.encryptoPassword(foundUserPassword.password) === password ? true : false)
+
+    if (!isCorrectPassword) {
+      this.throw(404, 'Password is not correct')
+    }
+
+    let foundUser = yield knex('users')
+    .where('id', foundUserPassword.id)
+    .first('username', 'email', 'id')
+    .catch((err) => {
+      logger.error(err)
+    })
 
     let token = jwt.sign(foundUser, SHARED_SECRET, { expiresIn: 60 * 5 });
     this.body = { id_token: token }
@@ -30,6 +42,8 @@ module.exports = function(router, jwt, SHARED_SECRET) {
     let username = this.request.body.username
     let email = this.request.body.email
     let password = this.request.body.password
+
+    let passwordHash = userMethods.cryptoPassword(password)
 
     let usernameExist = yield knex('users').first('id').where('username', username)
     let emailExist = yield knex('users').first('id').where('email', email)
@@ -45,7 +59,7 @@ module.exports = function(router, jwt, SHARED_SECRET) {
     let userId = yield knex('users').insert({
       username,
       email,
-      password,
+      password: passwordHash,
       created_at: Date.now(),
       updated_at: Date.now()
     })
