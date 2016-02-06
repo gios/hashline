@@ -1,6 +1,7 @@
 import Immutable from 'immutable'
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from '../actions/loginAction'
 import { SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE } from '../actions/signUpAction'
+import { UPDATE_LOCATION } from 'react-router-redux'
 
 const authState = Immutable.Map({
   isFetching: false,
@@ -29,6 +30,10 @@ export function auth(state = authState, action) {
         isFetching: false,
         isAuthenticated: false,
         errorMessage: action.message
+      })
+    case UPDATE_LOCATION:
+      return state.merge({
+        errorMessage: ''
       })
     default:
       return state
