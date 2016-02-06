@@ -31,6 +31,17 @@ module.exports = function(router, jwt, SHARED_SECRET) {
     let email = this.request.body.email
     let password = this.request.body.password
 
+    let usernameExist = yield knex('users').first('id').where('username', username)
+    let emailExist = yield knex('users').first('id').where('email', email)
+
+    if (usernameExist && emailExist) {
+      this.throw(409, 'Username and email should be unique')
+    } else if (usernameExist) {
+      this.throw(409, 'Username should be unique')
+    } else if (emailExist) {
+      this.throw(409, 'Email should be unique')
+    }
+
     let userId = yield knex('users').insert({
       username,
       email,
@@ -41,10 +52,6 @@ module.exports = function(router, jwt, SHARED_SECRET) {
     .catch((err) => {
       logger.error(err)
     })
-
-    if (!userId) {
-      this.throw(409, 'Username and email should be unique')
-    }
 
     let user = yield knex('users')
     .where('id', userId[0])
