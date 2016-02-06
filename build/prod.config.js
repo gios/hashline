@@ -1,24 +1,24 @@
 var webpack = require('webpack')
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: './src/index.js',
   output: {
-    path: 'public',
+    path: './public',
     filename: 'index.js'
   },
   module: {
     loaders: [
       {
-        loader: "babel-loader",
+        loader: 'babel-loader',
         test: /\.js$/,
         exclude: /node_modules/,
         query: {
-          presets: ["es2015", "stage-0", "react"]
+          presets: ['es2015', 'stage-3', 'react']
         }
       },
       {
         test: /\.scss$/,
-        loaders: ["style", "css", "sass"],
+        loaders: ['style', 'css', 'sass'],
         exclude: /node_modules/
       }
     ]

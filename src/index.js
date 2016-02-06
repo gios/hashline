@@ -7,9 +7,7 @@ import { Provider } from 'react-redux'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 
 // Containers
-import Counter from './containers/Counter'
-import App from './containers/App'
-import Wonders from './containers/Wonders'
+import Containers from './containers/Index'
 
 // Components
 import IndexWelcome from './components/IndexWelcome'
@@ -17,8 +15,18 @@ import IndexWelcome from './components/IndexWelcome'
 // Store
 import config from './store/configureStore'
 
+// Utils
+import requireAuth from './utils/requireAuth'
+
 // Styles (SCSS)
 import './index.scss'
+
+// Bootstrap, jQuery, Tether
+import $ from 'jquery'
+import Tether from 'tether'
+window.$ = window.jQuery = $
+window.Tether = Tether
+require('bootstrap')
 
 const store = config.configureStore()
 config.reduxRouterMiddleware.listenForReplays(store)
@@ -26,10 +34,10 @@ config.reduxRouterMiddleware.listenForReplays(store)
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={App}>
-        <IndexRoute component={IndexWelcome}/>
-        <Route path="/counter" component={Counter}/>
-        <Route path="/wonders" component={Wonders}/>
+      <Route path='/' component={Containers.App}>
+        <IndexRoute component={IndexWelcome} onEnter={requireAuth}/>
+        <Route path='/login' component={Containers.Login}/>
+        <Route path='/signup' component={Containers.Login}/>
       </Route>
     </Router>
   </Provider>,

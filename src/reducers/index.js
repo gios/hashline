@@ -1,10 +1,8 @@
-import { number } from '../reducers/counter'
-import { wonders } from '../reducers/wonders'
+import { auth } from '../reducers/login'
 import { combineReducers } from 'redux'
 
 const reducers = combineReducers({
-  number,
-  wonders
+  auth
 })
 
 export default reducers
