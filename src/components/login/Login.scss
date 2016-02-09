@@ -4,7 +4,7 @@ $error-color: #ff9494;
 
 .forgot-password {
   color: $forgot-link;
-  font-size: .9em;
+  font-size: 0.9em;
 
   &:hover {
     color: darken($forgot-link, 20%);
