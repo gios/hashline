@@ -1,7 +1,7 @@
 {
   "name": "sportalking",
   "version": "0.1.1-alpha",
-  "description": "Real time sports discussion",
+  "description": "Realtime sports discussions",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
