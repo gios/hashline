@@ -58,7 +58,6 @@
     "eslint-config-defaults": "^8.0.2",
     "eslint-plugin-react": "^3.16.1",
     "extract-text-webpack-plugin": "^1.0.1",
-    "node-inspector": "^0.12.6",
     "node-sass": "^3.4.2",
     "nodemon": "^1.8.1",
     "redux-thunk": "^1.0.3",
