@@ -1,34 +1,30 @@
-$forgot-link: #999a9c;
-$login-menu-link: #5cb85c;
-$error-color: #ff9494;
-
 .forgot-password {
-  color: $forgot-link;
+  color: #999a9c;
   font-size: .9em;
 
   &:hover {
-    color: darken($forgot-link, 20%);
+    color: darken(#999a9c, 20%);
   }
 
   &:focus {
-    color: darken($forgot-link, 20%);
+    color: darken(#999a9c, 20%);
     text-decoration: none;
   }
 }
 
 .login-menu-link {
-  color: darken($login-menu-link, 20%);
+  color: darken(#5cb85c, 20%);
 
   &.active {
     font-weight: bold;
   }
 
   &:hover {
-    color: darken($login-menu-link, 20%);
+    color: darken(#5cb85c, 20%);
   }
 
   &:focus {
-    color: darken($login-menu-link, 20%);
+    color: darken(#5cb85c, 20%);
     text-decoration: none;
   }
 }
@@ -43,16 +39,15 @@ $error-color: #ff9494;
   animation-iteration-count: infinite;
   animation-name: pulse-error;
   animation-timing-function: ease-out;
-  border: 1px solid $error-color;
+  border: 1px solid #ff9494;
 }
 
 @keyframes pulse-error {
-  from,
-  to {
-    border: 1px solid lighten($error-color, 10%);
+  from, to {
+    border: 1px solid lighten(#ff9494, 10%);
   }
 
   50% {
-    border: 1px solid darken($error-color, 30%);
+    border: 1px solid darken(#ff9494, 30%);
   }
 }
