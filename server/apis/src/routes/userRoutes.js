@@ -32,6 +32,7 @@ module.exports = function(router, jwt, SHARED_SECRET) {
       this.body = { id_token: token }
     } catch (err) {
       logger.error(err)
+      this.throw(err.message, err.status)
     }
   })
 
@@ -69,6 +70,7 @@ module.exports = function(router, jwt, SHARED_SECRET) {
       this.body = { id_token: token }
     } catch (err) {
       logger.error(err)
+      this.throw(err.message, err.status)
     }
   })
 }
