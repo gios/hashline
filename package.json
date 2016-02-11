@@ -6,10 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server -d --progress --open --colors --config ./build/dev.config.js",
-    "deploy": "webpack -p --config ./build/prod.config.js",
+    "deploy": "npm run clear && webpack -p --progress --config ./build/prod.config.js",
     "server": "nodemon ./server/index.js",
     "lint": "eslint ./src",
-    "clear": "rimraf ./public",
+    "clear": "rimraf ./public/index.js",
     "generate": "node ./server/apis/src/generate/generate.js",
     "node-debug": "node-inspector --web-port=7000 ./server/index.js "
   },
