@@ -25,7 +25,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin(),
     new ExtractTextPlugin('styles.css'),
     new webpack.DefinePlugin({
