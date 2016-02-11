@@ -27,5 +27,4 @@ build/Release
 node_modules
 
 # Others
-public/index.js
 .idea
