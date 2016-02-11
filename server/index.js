@@ -6,6 +6,7 @@ const serve = require('koa-static')
 const bodyParser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const jwt = require('koa-jwt')
+const tracer = require('tracer').colorConsole()
 
 const SHARED_SECRET = 'sportalking'
 
@@ -13,6 +14,7 @@ app.use(function *(next) {
   try {
     yield next;
   } catch (err) {
+    tracer.error(err)
     this.status = err.status || 500
     this.body = err.message || 'Internal server error'
     this.app.emit('error', err, this)
