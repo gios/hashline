@@ -9,10 +9,6 @@ const jwt = require('koa-jwt')
 
 const SHARED_SECRET = 'sportalking'
 
-app.use(logger())
-app.use(bodyParser())
-app.use(router.routes())
-app.use(router.allowedMethods())
 app.use(function *(next) {
   try {
     yield next;
@@ -22,6 +18,10 @@ app.use(function *(next) {
     this.app.emit('error', err, this);
   }
 })
+app.use(logger())
+app.use(bodyParser())
+app.use(router.routes())
+app.use(router.allowedMethods())
 app.use(serve(__dirname + '/../public'))
 app.use(jwt({ secret: SHARED_SECRET }).unless({ path: [/^\/authenticate/, /^\/registration/] }))
 
