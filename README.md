@@ -1,5 +1,5 @@
 # Sportalking
-Real time sports discussion
+Realtime sports discussions
 
 ## Technologies
 * Redux
