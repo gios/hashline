@@ -33,7 +33,8 @@ module.exports = {
     proxy: {
       '/api/*': 'http://localhost:5000',
       '/authenticate': 'http://localhost:5000',
-      '/registration': 'http://localhost:5000'
+      '/registration': 'http://localhost:5000',
+      '/img/*': 'http://localhost:5000'
     }
   },
   devtool: 'source-map'
