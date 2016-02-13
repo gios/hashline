@@ -28,7 +28,8 @@ class Login extends Component {
     }
 
     return (
-      <div className='background-wrapper'>
+      <div>
+        <div className='background-wrapper img-responsive'></div>
         <IntroLogo/>
         <div className='login-block card card-block col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xl-4 col-xl-offset-4'>
           <LoginMenu active={pathname}/>
