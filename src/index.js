@@ -34,10 +34,10 @@ config.reduxRouterMiddleware.listenForReplays(store)
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
+      <Route path='/login' component={Containers.Login}/>
+      <Route path='/signup' component={Containers.Login}/>
       <Route path='/' component={Containers.App}>
         <IndexRoute component={IndexWelcome} onEnter={requireAuth}/>
-        <Route path='/login' component={Containers.Login}/>
-        <Route path='/signup' component={Containers.Login}/>
       </Route>
     </Router>
   </Provider>,

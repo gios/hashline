@@ -6,6 +6,8 @@ import LoginMenu from '../components/login/LoginMenu'
 import LoginForm from '../components/login/LoginForm'
 import SignUpForm from '../components/login/SignUpForm'
 import ErrorMessage from '../components/helpers/ErrorMessage'
+import IntroLogo from '../components/parts/IntroLogo'
+import Footer from '../components/parts/Footer'
 
 class Login extends Component {
 
@@ -26,7 +28,8 @@ class Login extends Component {
     }
 
     return (
-      <div>
+      <div className='background-wrapper'>
+        <IntroLogo/>
         <div className='login-block card card-block col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xl-4 col-xl-offset-4'>
           <LoginMenu active={pathname}/>
           <hr className='col-xs-11 col-md-11'/>
@@ -35,6 +38,7 @@ class Login extends Component {
             {loginFromSelector()}
           </div>
         </div>
+        <Footer/>
       </div>
     )
   }

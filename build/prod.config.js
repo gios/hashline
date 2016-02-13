@@ -1,10 +1,13 @@
-var webpack = require('webpack')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
+'use strict';
+
+let webpack = require('webpack')
+let ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   entry: './src/index.js',
   output: {
     path: './public',
+    publicPath: '/',
     filename: 'index.js'
   },
   module: {
@@ -19,7 +22,15 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('style', ['css', 'sass']),
+        loader: ExtractTextPlugin.extract('style', ['css', 'resolve-url?fail', 'sass?sourceMap']),
+        exclude: /node_modules/
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loaders: [
+            'file?hash=sha512&digest=hex&name=img/[name].[ext]',
+            'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
+        ],
         exclude: /node_modules/
       }
     ]
