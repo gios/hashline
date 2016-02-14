@@ -9,16 +9,7 @@ html, body {
   padding: 0;
   height: 100%;
   width: 100%;
-}
-
-.background-wrapper {
-  background: url(assets/img/background-wrapper.jpg) no-repeat center center fixed;
-  background-size: cover;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
+  background-image: linear-gradient(to right, #357935, lighten(#357935, 10%));
 }
 
 a:hover {
@@ -27,4 +18,8 @@ a:hover {
 
 .text-center {
   text-align: center;
+}
+
+.hidden {
+  display: none;
 }
