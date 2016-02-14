@@ -4,7 +4,10 @@ class IntroLogo extends Component {
 
   render() {
     return (
-      <h2 className='intro-logo text-center'>Sportalking</h2>
+      <div className='intro-logo text-center'>
+        <h1>Sportalking</h1>
+        <p>Realtime sports discussions</p>
+      </div>
     )
   }
 }

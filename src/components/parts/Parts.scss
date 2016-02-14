@@ -1,21 +1,16 @@
 .intro-logo {
-  animation-duration: 10s;
-  animation-iteration-count: infinite;
-  animation-name: logo-blink;
-  animation-timing-function: ease-in;
-  color: darken(#5cb85c, 20%);
-  font-weight: bold;
-  margin-top: 1em;
-  text-shadow: 1px 1px 1px #5cb85c;
-}
+  position: relative;
 
-@keyframes logo-blink {
-  80%, 100% {
-    color: darken(#5cb85c, 20%);
+  > h1 {
+    font-size: 58px;
+    margin: 0 0 10px;
+    text-align: center;
+    font-weight: 700;
   }
 
-  90% {
-    color: darken(#5cb85c, 30%);
+  > p {
+    font-size: 22px;
+    margin-bottom: 30px;
   }
 }
 
