@@ -5,7 +5,7 @@ class Footer extends Component {
 
   render() {
     return (
-      <nav className='navbar navbar-fixed-bottom navbar-light'>
+      <nav className='navbar navbar-fixed-bottom navbar-dark'>
         <ul className='nav navbar-nav'>
           <li className='nav-item active'>
             <a className='nav-link' href='#'>Home <span className='sr-only'>(current)</span></a>
