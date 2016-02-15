@@ -8,6 +8,7 @@ import SignUpForm from '../components/login/SignUpForm'
 import ErrorMessage from '../components/helpers/ErrorMessage'
 import IntroLogo from '../components/parts/IntroLogo'
 import Footer from '../components/parts/Footer'
+import Navbar from '../components/parts/Navbar'
 
 class Login extends Component {
 
@@ -30,6 +31,7 @@ class Login extends Component {
     return (
       <div>
         <div className='background-wrapper img-responsive'></div>
+        <Navbar/>
         <IntroLogo/>
         <div className='login-block card card-block col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xl-4 col-xl-offset-4'>
           <LoginMenu active={pathname}/>
