@@ -131,7 +131,7 @@ class SignUpForm extends Component {
         </div>
         <div className='form-group row'>
           <div className='col-md-8 col-md-offset-2'>
-            <button type='submit' className='btn btn-success-outline col-xs-12 col-md-12'>Sign Up</button>
+            <button type='submit' className='btn btn-success col-xs-12 col-md-12'>Sign Up</button>
           </div>
         </div>
       </form>

@@ -82,7 +82,7 @@ class LoginForm extends Component {
         </div>
         <div className='form-group row'>
           <div className='col-xs-12 col-md-8 col-md-offset-2'>
-            <button type='submit' className='btn btn-success-outline col-xs-12 col-md-12'>Login</button>
+            <button type='submit' className='btn btn-success col-xs-12 col-md-12'>Login</button>
           </div>
         </div>
         <div className='form-group row'>
