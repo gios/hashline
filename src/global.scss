@@ -9,7 +9,18 @@ html, body {
   padding: 0;
   height: 100%;
   width: 100%;
-  background-image: linear-gradient(to right, #357935, lighten(#357935, 10%));
+}
+
+.background-wrapper {
+  background: url(./assets/img/background-wrapper.jpg) no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100%;
+  min-width: 1024px;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 a:hover {
