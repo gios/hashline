@@ -4,7 +4,7 @@ class IndexWelcome extends Component {
   render() {
     return (
       <div className='col-sm-8 col-sm-offset-2'>
-        <h1 className='text-center'>Welcome!</h1>
+        <h1 className='text-xs-center'>Welcome!</h1>
       </div>
     )
   }

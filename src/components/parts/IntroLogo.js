@@ -4,7 +4,7 @@ class IntroLogo extends Component {
 
   render() {
     return (
-      <div className='intro-logo text-center'>
+      <div className='intro-logo text-xs-center'>
         <h1>Sportalking</h1>
         <p>Realtime sports discussions</p>
       </div>

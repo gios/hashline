@@ -7,10 +7,10 @@ class LoginMenu extends Component {
     let active = this.props.active
     return (
       <div className='col-xs-12 col-md-12'>
-        <div className='text-center col-xs-6 col-md-6'>
+        <div className='text-xs-center col-xs-6 col-md-6'>
           <Link to='/login' className={('/login' === active) ? 'login-menu-link active' : 'login-menu-link'}>Login</Link>
         </div>
-        <div className='text-center col-xs-6 col-md-6'>
+        <div className='text-xs-center col-xs-6 col-md-6'>
           <Link to='/signup' className={('/signup' === active) ? 'login-menu-link active' : 'login-menu-link'}>Sign Up</Link>
         </div>
       </div>
