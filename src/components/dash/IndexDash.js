@@ -8,7 +8,7 @@ class IndexDash extends Component {
     let sidebarEl = document.querySelector('.navbar-static')
 
     window.addEventListener('resize', throttle(() => {
-      if (window.innerWidth < 400) {
+      if (window.innerWidth < 576) {
         sidebarEl.classList.add('toggle')
       } else {
         sidebarEl.classList.remove('toggle')
