@@ -8,6 +8,10 @@
   background: #23232c;
   border-radius: 0;
   padding: 0;
+
+  &.toggle {
+    margin-left: -270px;
+  }
 }
 
 .sidebar-list-static {

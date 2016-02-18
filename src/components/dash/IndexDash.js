@@ -5,8 +5,14 @@ import { throttle } from '../../utils/helpers'
 class IndexDash extends Component {
 
   componentDidMount() {
+    let sidebarEl = document.querySelector('.navbar-static')
+
     window.addEventListener('resize', throttle(() => {
-      console.log(1)
+      if (window.innerWidth < 400) {
+        sidebarEl.classList.add('toggle')
+      } else {
+        sidebarEl.classList.remove('toggle')
+      }
     }))
   }
 
