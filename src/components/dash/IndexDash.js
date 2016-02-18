@@ -107,6 +107,7 @@ class IndexDash extends Component {
           </ul>
         </div>
         <div className='navbar-footer'>
+          <span className='label label-success text-xs-center'>Alpha v0.1.1</span>
           <p>&copy; {moment().format('YYYY')}</p>
         </div>
       </nav>
