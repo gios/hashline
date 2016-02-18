@@ -16,11 +16,6 @@
   }
 
   & > li {
-
-    &.active {
-      background-color: darken(#5cb85c, 20%);
-    }
-
     border-bottom: 1px solid #484848;
   }
 }
@@ -50,11 +45,14 @@
   padding: .7em;
   width: 100%;
 
-  &:hover:not(.deactivate) {
-    background: #1c1c25;
-    transition: 0.2s all ease-in-out;
+  &:hover {
     outline: none;
     color: #fff;
+  }
+
+  &:hover:not(.deactivate):not(.active) {
+    background: #1c1c25;
+    transition: 0.2s all ease-in-out;
   }
 
   &:focus {
@@ -68,6 +66,10 @@
   &.deactivate {
     padding: 1.40em;
     width: 100%;
+  }
+
+  &.active {
+    background-color: darken(#5cb85c, 20%);
   }
 }
 

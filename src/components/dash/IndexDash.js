@@ -15,8 +15,8 @@ class IndexDash extends Component {
         </div>
         <div className='collapse navbar-toggleable-xs'>
           <ul className='nav sidebar-list-static'>
-            <li className='nav-item active'>
-              <a className='nav-link sidebar-link' href='#'>
+            <li className='nav-item'>
+              <a className='nav-link sidebar-link active' href='#'>
                 <i className='fa fa-dashcube'></i>
                 <span className='sidebar-list-item'>Dash</span>
               </a>
