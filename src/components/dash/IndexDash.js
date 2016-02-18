@@ -1,4 +1,5 @@
 import React, { Component } from 'react' // eslint-disable-line no-unused-vars
+import moment from 'moment'
 
 class IndexDash extends Component {
 
@@ -27,46 +28,46 @@ class IndexDash extends Component {
               </a>
             </li>
             <div className='collapse' id='soccerCollapse'>
-              <ul className='nav sidebar-list-static'>
+              <ul className='nav sidebar-list-static nested'>
                 <li className='nav-item'>
-                  <a className='nav-link sidebar-link-nested' href='#'>
-                    <i className='fa fa-angle-right'></i>
+                  <a className='nav-link sidebar-link nested' href='#'>
+                    <i className='fa fa-chevron-circle-right'></i>
                     <span className='sidebar-list-item'>English Premier League</span>
                   </a>
                 </li>
                 <li className='nav-item'>
-                  <a className='nav-link sidebar-link-nested' href='#'>
-                    <i className='fa fa-angle-right'></i>
+                  <a className='nav-link sidebar-link nested' href='#'>
+                    <i className='fa fa-chevron-circle-right'></i>
                     <span className='sidebar-list-item'>Bundesliga</span>
                   </a>
                 </li>
                 <li className='nav-item'>
-                  <a className='nav-link sidebar-link-nested' href='#'>
-                    <i className='fa fa-angle-right'></i>
+                  <a className='nav-link sidebar-link nested' href='#'>
+                    <i className='fa fa-chevron-circle-right'></i>
                     <span className='sidebar-list-item'>La Liga</span>
                   </a>
                 </li>
                 <li className='nav-item'>
-                  <a className='nav-link sidebar-link-nested' href='#'>
-                    <i className='fa fa-angle-right'></i>
+                  <a className='nav-link sidebar-link nested' href='#'>
+                    <i className='fa fa-chevron-circle-right'></i>
                     <span className='sidebar-list-item'>Ukrainian Premier League</span>
                   </a>
                 </li>
                 <li className='nav-item'>
-                  <a className='nav-link sidebar-link-nested' href='#'>
-                    <i className='fa fa-angle-right'></i>
+                  <a className='nav-link sidebar-link nested' href='#'>
+                    <i className='fa fa-chevron-circle-right'></i>
                     <span className='sidebar-list-item'>Serie A</span>
                   </a>
                 </li>
                 <li className='nav-item'>
-                  <a className='nav-link sidebar-link-nested' href='#'>
-                    <i className='fa fa-angle-right'></i>
+                  <a className='nav-link sidebar-link nested' href='#'>
+                    <i className='fa fa-chevron-circle-right'></i>
                     <span className='sidebar-list-item'>Eredivisie</span>
                   </a>
                 </li>
                 <li className='nav-item'>
-                  <a className='nav-link sidebar-link-nested' href='#'>
-                    <i className='fa fa-angle-right'></i>
+                  <a className='nav-link sidebar-link nested' href='#'>
+                    <i className='fa fa-chevron-circle-right'></i>
                     <span className='sidebar-list-item'>Major League Soccer</span>
                   </a>
                 </li>
@@ -74,25 +75,25 @@ class IndexDash extends Component {
             </div>
             <li className='nav-item'>
               <a className='nav-link sidebar-link' href='#'>
-                <i className='fa fa-angle-down'></i>
+                <i className='fa fa-angle-right'></i>
                 <span className='sidebar-list-item'>Basketball</span>
               </a>
             </li>
             <li className='nav-item'>
               <a className='nav-link sidebar-link' href='#'>
-                <i className='fa fa-angle-down'></i>
+                <i className='fa fa-angle-right'></i>
                 <span className='sidebar-list-item'>American Football</span>
               </a>
             </li>
             <li className='nav-item'>
               <a className='nav-link sidebar-link' href='#'>
-                <i className='fa fa-angle-down'></i>
+                <i className='fa fa-angle-right'></i>
                 <span className='sidebar-list-item'>Hockey</span>
               </a>
             </li>
             <li className='nav-item'>
               <a className='nav-link sidebar-link' href='#'>
-                <i className='fa fa-angle-down'></i>
+                <i className='fa fa-angle-right'></i>
                 <span className='sidebar-list-item'>Tennis</span>
               </a>
             </li>
@@ -104,6 +105,9 @@ class IndexDash extends Component {
               </a>
             </li>
           </ul>
+        </div>
+        <div className='navbar-footer'>
+          <p>&copy; {moment().format('YYYY')}</p>
         </div>
       </nav>
     )
