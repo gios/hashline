@@ -5,7 +5,7 @@
   min-height: 100%;
   width: 250px;
   transition: 0.3s all linear;
-  background: #3c3c3c;
+  background: #23232c;
   border-radius: 0;
   padding: 0;
 }
@@ -14,19 +14,12 @@
   & > li {
 
     &.active {
-      background-color: lighten(#5cb85c, 8%);
+      background-color: darken(#5cb85c, 20%);
     }
 
-    & > a {
-      padding: .7em;
+    &.deactivate {
+      padding: 1.45em;
       width: 100%;
-
-      &:hover {
-        background: #303030;
-        transition: 0.2s all ease-in-out;
-        outline: none;
-        color: #fff;
-      }
     }
 
     border-bottom: 1px solid #484848;
@@ -55,8 +48,22 @@
 
 .sidebar-link {
   color: #d9d9d9;
+  padding: .7em;
+  width: 100%;
 
-  &:focus, &:hover {
+  &:hover {
+    background: #1c1c25;
+    transition: 0.2s all ease-in-out;
+    outline: none;
+    color: #fff;
+  }
+
+  &:focus {
     color: #d9d9d9;
   }
+}
+
+.sidebar-link-nested {
+  @extend .sidebar-link;
+  padding: .7em 1.6em;
 }
