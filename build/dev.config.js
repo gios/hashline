@@ -1,5 +1,9 @@
 module.exports = {
   entry: './src/index.js',
+  output: {
+    publicPath: '/assets/',
+    filename: 'bundle.js'
+  },
   module: {
     loaders: [
       {
@@ -22,6 +26,10 @@ module.exports = {
             'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
         ],
         exclude: /node_modules/
+      },
+      {
+        test: /\.(eot|woff|woff2|ttf|svg)$/,
+        loader: 'url-loader?limit=8192'
       }
     ]
   },

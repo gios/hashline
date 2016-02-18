@@ -25,6 +25,7 @@
   "homepage": "https://github.com/gios/sportalking#readme",
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.2",
+    "font-awesome": "^4.5.0",
     "immutable": "^3.7.6",
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^2.2.0",
@@ -67,6 +68,7 @@
     "rimraf": "^2.5.2",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
+    "url-loader": "^0.5.7",
     "webpack": "^1.12.13",
     "webpack-dev-server": "^1.14.1"
   }
