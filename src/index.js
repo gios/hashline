@@ -15,9 +15,6 @@ import IndexWelcome from './components/IndexWelcome'
 // Store
 import config from './store/configureStore'
 
-// Utils
-import requireAuth from './utils/requireAuth'
-
 // Styles (SCSS)
 import './index.scss'
 
@@ -37,7 +34,7 @@ render(
       <Route path='/login' component={Containers.Login}/>
       <Route path='/signup' component={Containers.Login}/>
       <Route path='/' component={Containers.App}>
-        <IndexRoute component={IndexWelcome} onEnter={requireAuth}/>
+        <IndexRoute component={IndexWelcome}/>
       </Route>
     </Router>
   </Provider>,
