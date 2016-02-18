@@ -21,11 +21,6 @@
       background-color: darken(#5cb85c, 20%);
     }
 
-    &.deactivate {
-      padding: 1.45em;
-      width: 100%;
-    }
-
     border-bottom: 1px solid #484848;
   }
 }
@@ -55,7 +50,7 @@
   padding: .7em;
   width: 100%;
 
-  &:hover {
+  &:hover:not(.deactivate) {
     background: #1c1c25;
     transition: 0.2s all ease-in-out;
     outline: none;
@@ -68,6 +63,11 @@
 
   &.nested {
     padding: .7em 1.6em;
+  }
+
+  &.deactivate {
+    padding: 1.40em;
+    width: 100%;
   }
 }
 

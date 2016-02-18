@@ -97,11 +97,20 @@ class IndexDash extends Component {
                 <span className='sidebar-list-item'>Tennis</span>
               </a>
             </li>
-            <li className='nav-item deactivate'></li>
+            <li className='nav-item'>
+              <a className='nav-link sidebar-link deactivate'></a>
+            </li>
             <li className='nav-item'>
               <a className='nav-link sidebar-link' href='#'>
                 <i className='fa fa-rss'></i>
                 <span className='sidebar-list-item'>Feed</span>
+              </a>
+            </li>
+            <li className='nav-item'>
+              <a className='nav-link sidebar-link' href='#'>
+                <i className='fa fa-bell-o'></i>
+                <span className='label label-default label-pill pull-xs-right'>14</span>
+                <span className='sidebar-list-item'>Notification</span>
               </a>
             </li>
           </ul>
