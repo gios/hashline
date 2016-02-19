@@ -5,8 +5,11 @@ class IndexDash extends Component {
 
   render() {
     return (
-      <div>
-         <Sidebar/>
+      <div className='content-wrapper'>
+        <Sidebar/>
+        <div className='container-fluid'>
+          LALALAL
+        </div>
       </div>
     )
   }

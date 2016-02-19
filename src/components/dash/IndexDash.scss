@@ -1,0 +1,9 @@
+.content-wrapper {
+  transition: 0.5s padding linear;
+}
+
+@media (min-width: 576px) {
+  .content-wrapper {
+    padding-left: 270px;
+  }
+}
