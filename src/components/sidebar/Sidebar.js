@@ -54,13 +54,13 @@ class Sidebar extends Component {
 
   render() {
     let toggleSidebarBtn = (
-      <div className='back-sidebar-button' onClick={this.toggleSidebar.bind(this)}>
+      <div className='toggle-sidebar-button' onClick={this.toggleSidebar.bind(this)}>
         <i className='fa fa-bars'></i>
       </div>
     )
 
     let toggleSidebarBtnContent = (
-      <div className='back-sidebar-button' onClick={this.toggleSidebar.bind(this)}>
+      <div className='toggle-sidebar-button-content' onClick={this.toggleSidebar.bind(this)}>
         <i className='fa fa-bars'></i>
       </div>
     )

@@ -15,7 +15,7 @@
   }
 }
 
-.back-sidebar-button {
+.toggle-sidebar-button {
   position: absolute;
   display: table;
   height: 3.8em;
@@ -33,6 +33,15 @@
       color: #fff;
       transition: .3s color linear;
     }
+  }
+}
+
+.toggle-sidebar-button-content {
+  display: table;
+
+  & > i {
+    display: table-cell;
+    vertical-align: middle;
   }
 }
 
