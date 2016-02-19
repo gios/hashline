@@ -43,19 +43,16 @@ class Sidebar extends Component {
   }
 
   render() {
-    let toggledComponent
-
-    if(this.state.isToggled) {
-      toggledComponent = (
-        <div className='toggledComponent' onClick={this.toggleSidebar.bind(this)}>
-          <i className='fa fa-arrow-circle-o-right'></i>
-        </div>
-      )
-    }
+    let toggledSidebar = (
+      <div className='back-sidebar-button' onClick={this.toggleSidebar.bind(this)}>
+        <i className='fa fa-bars'></i>
+      </div>
+    )
 
     return (
       <div>
         <nav role='navigation' className='navbar navbar-dark navbar-static'>
+          {(this.state.isToggled) ? toggledSidebar : null}
           <div className='navbar-info'>
             <p className='navbar-logo'>Sportalking</p>
             <div className='navbar-user-info'>
@@ -168,7 +165,6 @@ class Sidebar extends Component {
             <p>&copy; {moment().format('YYYY')}</p>
           </div>
         </nav>
-        {toggledComponent}
       </div>
     )
   }

@@ -15,32 +15,24 @@
   }
 }
 
-.toggledComponent {
-  z-index: 1;
+.back-sidebar-button {
   position: absolute;
   display: table;
-  left: 0;
-  overflow-y: auto;
-  height: 100%;
-  width: 30px;
-  transition-duration: .3s;
-  transition-property: width, margin;
-  transition-timing-function: linear;
-  padding: 0;
-  background-color: rgba(92, 184, 92, .3);
-  cursor: pointer;
-
-  &:hover {
-    width: 35px;
-    transition: .3s width ease-in;
-  }
+  height: 3.8em;
+  color: #d9d9d9;
+  font-size: 20px;
+  margin: .5em;
 
   & > i {
-    font-size: 24px;
     display: table-cell;
     vertical-align: middle;
-    text-align: center;
-    color: lighten(#23232c, 20%);
+    cursor: pointer;
+    transition: .3s color linear;
+
+    &:hover {
+      color: #fff;
+      transition: .3s color linear;
+    }
   }
 }
 
