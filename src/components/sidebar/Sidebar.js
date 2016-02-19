@@ -7,7 +7,8 @@ class Sidebar extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isToggled: (window.innerWidth < 577) ? true : false
+      isToggled: (window.innerWidth < 577) ? true : false,
+      isSmallScreen: (window.innerWidth < 577) ? true : false
     }
   }
 
@@ -22,10 +23,16 @@ class Sidebar extends Component {
 
   windowSizeAction(el) {
     if (window.innerWidth < 577) {
-        this.setState({isToggled: true})
+        this.setState({
+          isToggled: true,
+          isSmallScreen: true
+        })
         el.classList.add('toggle')
       } else {
-        this.setState({isToggled: false})
+        this.setState({
+          isToggled: false,
+          isSmallScreen: false
+        })
         el.classList.remove('toggle')
       }
   }
@@ -49,10 +56,16 @@ class Sidebar extends Component {
       </div>
     )
 
+    let toggleSidebarBtnContent = (
+      <div className='back-sidebar-button' onClick={this.toggleSidebar.bind(this)}>
+        <i className='fa fa-bars'></i>
+      </div>
+    )
+
     return (
       <div>
         <nav role='navigation' className='navbar navbar-dark navbar-static'>
-          {(this.state.isToggled) ? toggleSidebarBtn : null}
+          {(this.state.isSmallScreen) ? toggleSidebarBtn : null}
           <div className='navbar-info'>
             <p className='navbar-logo'>Sportalking</p>
             <div className='navbar-user-info'>
@@ -165,6 +178,7 @@ class Sidebar extends Component {
             <p>&copy; {moment().format('YYYY')}</p>
           </div>
         </nav>
+        {(this.state.isSmallScreen) ? toggleSidebarBtnContent : null}
       </div>
     )
   }
