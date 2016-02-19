@@ -7,3 +7,9 @@
     padding-left: 270px;
   }
 }
+
+@media (max-width: 576px) {
+  .content-wrapper {
+    padding-left: 30px;
+  }
+}

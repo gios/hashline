@@ -5,13 +5,42 @@
   overflow-y: auto;
   height: 100%;
   width: 270px;
-  transition: 0.3s margin linear;
+  transition: .3s margin linear;
   background: #23232c;
   border-radius: 0;
   padding: 0;
 
   &.toggle {
     margin-left: -270px;
+  }
+}
+
+.toggledComponent {
+  z-index: 1;
+  position: absolute;
+  display: table;
+  left: 0;
+  overflow-y: auto;
+  height: 100%;
+  width: 30px;
+  transition-duration: .3s;
+  transition-property: width, margin;
+  transition-timing-function: linear;
+  padding: 0;
+  background-color: rgba(92, 184, 92, .3);
+  cursor: pointer;
+
+  &:hover {
+    width: 35px;
+    transition: .3s width ease-in;
+  }
+
+  & > i {
+    font-size: 24px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    color: lighten(#23232c, 20%);
   }
 }
 
