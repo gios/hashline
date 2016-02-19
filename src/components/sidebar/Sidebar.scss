@@ -15,34 +15,35 @@
   }
 }
 
-.toggle-sidebar-button {
-  position: absolute;
-  display: table;
-  height: 3.8em;
-  color: #d9d9d9;
-  font-size: 20px;
-  margin: .5em;
-
+@mixin icon-toggle() {
   & > i {
-    display: table-cell;
-    vertical-align: middle;
     cursor: pointer;
     transition: .3s color linear;
 
     &:hover {
-      color: #fff;
+      color: lighten(#fff, 20%);
       transition: .3s color linear;
     }
   }
 }
 
-.toggle-sidebar-button-content {
-  display: table;
+.toggle-sidebar-button {
+  position: absolute;
+  height: 3.8em;
+  color: #d9d9d9;
+  font-size: 20px;
+  margin: 0.3em;
+  @include icon-toggle();
+}
 
-  & > i {
-    display: table-cell;
-    vertical-align: middle;
-  }
+.toggle-sidebar-button-content {
+  position: absolute;
+  width: 30px;
+  height: 100%;
+  color: #23232c;
+  left: 0;
+  margin-top: .3em;
+  @include icon-toggle();
 }
 
 .sidebar-list-static {
