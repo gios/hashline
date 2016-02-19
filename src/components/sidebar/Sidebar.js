@@ -43,7 +43,7 @@ class Sidebar extends Component {
   }
 
   render() {
-    let toggledSidebar = (
+    let toggleSidebarBtn = (
       <div className='back-sidebar-button' onClick={this.toggleSidebar.bind(this)}>
         <i className='fa fa-bars'></i>
       </div>
@@ -52,7 +52,7 @@ class Sidebar extends Component {
     return (
       <div>
         <nav role='navigation' className='navbar navbar-dark navbar-static'>
-          {(this.state.isToggled) ? toggledSidebar : null}
+          {(this.state.isToggled) ? toggleSidebarBtn : null}
           <div className='navbar-info'>
             <p className='navbar-logo'>Sportalking</p>
             <div className='navbar-user-info'>
