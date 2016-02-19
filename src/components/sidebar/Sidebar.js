@@ -7,7 +7,7 @@ class Sidebar extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isToggled: (window.innerWidth < 576) ? true : false
+      isToggled: (window.innerWidth < 577) ? true : false
     }
   }
 
@@ -21,7 +21,7 @@ class Sidebar extends Component {
   }
 
   windowSizeAction(el) {
-    if (window.innerWidth < 576) {
+    if (window.innerWidth < 577) {
         this.setState({isToggled: true})
         el.classList.add('toggle')
       } else {
