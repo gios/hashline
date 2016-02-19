@@ -7,8 +7,8 @@ class Sidebar extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isToggled: (window.innerWidth < 577) ? true : false,
-      isSmallScreen: (window.innerWidth < 577) ? true : false
+      isToggled: (window.innerWidth < 720) ? true : false,
+      isSmallScreen: (window.innerWidth < 720) ? true : false
     }
   }
 
@@ -22,7 +22,7 @@ class Sidebar extends Component {
   }
 
   windowSizeAction(el) {
-    if (window.innerWidth < 577) {
+    if (window.innerWidth < 720) {
         this.setState({
           isToggled: true,
           isSmallScreen: true
