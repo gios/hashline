@@ -2,7 +2,8 @@
   z-index: 1;
   position: absolute;
   left: 0;
-  min-height: 100%;
+  overflow-y: auto;
+  height: 100%;
   width: 270px;
   transition: 0.3s margin linear;
   background: #23232c;
@@ -11,18 +12,6 @@
 
   &.toggle {
     margin-left: -270px;
-  }
-
-  &:after {
-    content: '\f061';
-    font-size: 25px;
-    font-family: FontAwesome;
-    font-style: normal;
-    font-weight: normal;
-    text-decoration: inherit;
-    position: absolute;
-    left: 275px;
-    top: 45%;
   }
 }
 
@@ -90,10 +79,10 @@
 }
 
 .navbar-footer {
-  position: inherit;
-  bottom: 0;
+  position: relative;
   width: 100%;
   text-align: center;
+  margin-top: 2em;
 
   & > p {
     color: #fff;
