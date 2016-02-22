@@ -79,6 +79,9 @@ class Sidebar extends Component {
               <div>oneal@gmail.com</div>
             </div>
           </div>
+          <div className='createDiscussion'>
+            <button type='button' className='btn btn-success btn-sm'>Create Discussion</button>
+          </div>
           <ul className='nav sidebar-list-static'>
             <li className='nav-item'>
               <a className='nav-link sidebar-link active' href='#'>
@@ -143,14 +146,14 @@ class Sidebar extends Component {
             </li>
             <li className='nav-item'>
               <a className='nav-link sidebar-link' href='#'>
-                <i className='fa fa-hashtag'></i>
-                <span className='sidebar-list-item'>Create room</span>
+                <i className='fa fa-rss'></i>
+                <span className='sidebar-list-item'>Feed</span>
               </a>
             </li>
             <li className='nav-item'>
               <a className='nav-link sidebar-link' href='#'>
-                <i className='fa fa-rss'></i>
-                <span className='sidebar-list-item'>Feed</span>
+                <i className='fa fa-tags'></i>
+                <span className='sidebar-list-item'>My Tags</span>
               </a>
             </li>
             <li className='nav-item'>

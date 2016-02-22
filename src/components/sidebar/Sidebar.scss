@@ -27,6 +27,15 @@
   }
 }
 
+.createDiscussion {
+  width: 100%;
+  text-align: center;
+
+  & > button {
+    margin: 1em;
+  }
+}
+
 .toggle-sidebar-button {
   position: absolute;
   height: 3.8em;
