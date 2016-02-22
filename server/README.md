@@ -17,14 +17,14 @@ Realtime discussions
   - Input:
   ```json
   {
-      name: string,
-      password: string
+      "name": "string",
+      "password": "string"
   }
   ```
   - Output:
   ```json
   {
-      id_token: string
+      "id_token": "string"
   }
   ```
   - Errors:
@@ -40,15 +40,15 @@ Realtime discussions
   - Input:
   ```json
   {
-      name: string,
-      password: string,
-      username: string
+      "name": "string",
+      "password": "string",
+      "username": "string"
   }
   ```
   - Output:
   ```json
   {
-      id_token: string
+      "id_token": "string"
   }
   ```
   - Errors:
