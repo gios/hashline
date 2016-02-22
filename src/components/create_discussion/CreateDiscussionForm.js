@@ -12,28 +12,29 @@ class createDiscussionForm extends Component {
   }
 
   handleDelete(i) {
-        var tags = this.state.tags
-        tags.splice(i, 1)
-        this.setState({ tags: tags })
+    let tags = this.state.tags
+    tags.splice(i, 1)
+    this.setState({ tags: tags })
   }
 
   handleAddition(tag) {
-      var tags = this.state.tags
-      tags.push({
-          id: tags.length + 1,
-          text: tag
-      });
-      this.setState({ tags: tags })
+    let tags = this.state.tags
+    tags.push({
+        id: tags.length + 1,
+        text: tag
+    });
+    this.setState({ tags: tags })
   }
+
   handleDrag(tag, currPos, newPos) {
-      var tags = this.state.tags
+    let tags = this.state.tags
 
-      // mutate array
-      tags.splice(currPos, 1)
-      tags.splice(newPos, 0, tag)
+    // mutate array
+    tags.splice(currPos, 1)
+    tags.splice(newPos, 0, tag)
 
-      // re-render
-      this.setState({ tags: tags })
+    // re-render
+    this.setState({ tags: tags })
   }
 
   render() {
