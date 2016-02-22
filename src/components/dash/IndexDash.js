@@ -8,7 +8,11 @@ class IndexDash extends Component {
       <div className='content-wrapper'>
         <Sidebar/>
         <div className='container-fluid'>
-          LALALAL
+          <div className='col-md-12'>
+            <div className='col-md-6'>Create discussion</div>
+            <div className='col-md-6'>Feed</div>
+            <div className='col-md-6'>Trending</div>
+          </div>
         </div>
       </div>
     )
