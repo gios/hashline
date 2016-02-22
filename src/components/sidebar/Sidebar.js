@@ -87,73 +87,55 @@ class Sidebar extends Component {
               </a>
             </li>
             <li className='nav-item'>
-              <a className='nav-link sidebar-link' data-toggle='collapse' href='#soccerCollapse' aria-expanded='false' aria-controls='soccerCollapse'>
-                <i className='fa fa-angle-down'></i>
-                <span className='sidebar-list-item'>Soccer</span>
+              <a className='nav-link sidebar-link' data-toggle='collapse' href='#trandingCollapse' aria-expanded='false' aria-controls='trandingCollapse'>
+                <i className='fa fa-fire'></i>
+                <span className='sidebar-list-item'>Trending</span>
               </a>
             </li>
-            <div className='collapse' id='soccerCollapse'>
+            <div className='collapse' id='trandingCollapse'>
               <ul className='nav sidebar-list-static nested'>
                 <li className='nav-item'>
                   <a className='nav-link sidebar-link nested' href='#'>
                     <i className='fa fa-chevron-circle-right'></i>
-                    <span className='sidebar-list-item'>English Premier League</span>
+                    <span className='sidebar-list-item'>Today</span>
                   </a>
                 </li>
                 <li className='nav-item'>
                   <a className='nav-link sidebar-link nested' href='#'>
                     <i className='fa fa-chevron-circle-right'></i>
-                    <span className='sidebar-list-item'>Bundesliga</span>
+                    <span className='sidebar-list-item'>This Week</span>
                   </a>
                 </li>
                 <li className='nav-item'>
                   <a className='nav-link sidebar-link nested' href='#'>
                     <i className='fa fa-chevron-circle-right'></i>
-                    <span className='sidebar-list-item'>La Liga</span>
+                    <span className='sidebar-list-item'>This Month</span>
                   </a>
                 </li>
                 <li className='nav-item'>
                   <a className='nav-link sidebar-link nested' href='#'>
                     <i className='fa fa-chevron-circle-right'></i>
-                    <span className='sidebar-list-item'>Ukrainian Premier League</span>
+                    <span className='sidebar-list-item'>This Year</span>
                   </a>
                 </li>
                 <li className='nav-item'>
                   <a className='nav-link sidebar-link nested' href='#'>
                     <i className='fa fa-chevron-circle-right'></i>
-                    <span className='sidebar-list-item'>Serie A</span>
-                  </a>
-                </li>
-                <li className='nav-item'>
-                  <a className='nav-link sidebar-link nested' href='#'>
-                    <i className='fa fa-chevron-circle-right'></i>
-                    <span className='sidebar-list-item'>Champions League</span>
+                    <span className='sidebar-list-item'>All Time</span>
                   </a>
                 </li>
               </ul>
             </div>
             <li className='nav-item'>
               <a className='nav-link sidebar-link' href='#'>
-                <i className='fa fa-angle-right'></i>
-                <span className='sidebar-list-item'>Basketball</span>
+                <i className='fa fa-comments'></i>
+                <span className='sidebar-list-item'>Most discussed</span>
               </a>
             </li>
             <li className='nav-item'>
               <a className='nav-link sidebar-link' href='#'>
-                <i className='fa fa-angle-right'></i>
-                <span className='sidebar-list-item'>American Football</span>
-              </a>
-            </li>
-            <li className='nav-item'>
-              <a className='nav-link sidebar-link' href='#'>
-                <i className='fa fa-angle-right'></i>
-                <span className='sidebar-list-item'>Hockey</span>
-              </a>
-            </li>
-            <li className='nav-item'>
-              <a className='nav-link sidebar-link' href='#'>
-                <i className='fa fa-angle-right'></i>
-                <span className='sidebar-list-item'>Tennis</span>
+                <i className='fa fa-clock-o'></i>
+                <span className='sidebar-list-item'>Limited</span>
               </a>
             </li>
             <li className='nav-item'>
