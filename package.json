@@ -43,6 +43,8 @@
     "react-router": "^2.0.0",
     "react-router-redux": "^2.1.0",
     "redux": "^3.3.1",
+    "socket.io": "^1.4.5",
+    "socket.io-client": "^1.4.5",
     "sqlite3": "^3.1.1",
     "tether": "^1.1.1",
     "tracer": "^0.8.3"

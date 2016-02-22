@@ -1,6 +1,8 @@
 'use strict';
 
 const app = require('koa')()
+const server = require('http').createServer(app.callback())
+const io = require('socket.io')(server)
 const router = require('koa-router')()
 const serve = require('koa-static')
 const bodyParser = require('koa-bodyparser')
@@ -36,5 +38,9 @@ app.use(jwt({ secret: SHARED_SECRET }).unless({
 // Routes
 require('./apis/src/routes/userRoutes.js')(router, jwt, SHARED_SECRET)
 
-app.listen(process.env.PORT || 5000)
+io.on('connection', function(socket){
+  console.log('a user connected')
+})
+
+server.listen(process.env.PORT || 5000)
 console.log('Sportalking is running on port', process.env.PORT || 5000) // eslint-disable-line no-console

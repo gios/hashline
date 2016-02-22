@@ -1,6 +1,8 @@
 import React, { Component } from 'react' // eslint-disable-line no-unused-vars
 import moment from 'moment'
 import { throttle } from '../../utils/helpers'
+import io from 'socket.io-client'
+let socket = io('http://localhost:5000')
 
 class Sidebar extends Component {
 
