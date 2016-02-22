@@ -90,45 +90,17 @@ class Sidebar extends Component {
               </a>
             </li>
             <li className='nav-item'>
-              <a className='nav-link sidebar-link' data-toggle='collapse' href='#trandingCollapse' aria-expanded='false' aria-controls='trandingCollapse'>
+              <a className='nav-link sidebar-link' href='#'>
                 <i className='fa fa-fire'></i>
                 <span className='sidebar-list-item'>Trending</span>
               </a>
             </li>
-            <div className='collapse' id='trandingCollapse'>
-              <ul className='nav sidebar-list-static nested'>
-                <li className='nav-item'>
-                  <a className='nav-link sidebar-link nested' href='#'>
-                    <i className='fa fa-chevron-circle-right'></i>
-                    <span className='sidebar-list-item'>Today</span>
-                  </a>
-                </li>
-                <li className='nav-item'>
-                  <a className='nav-link sidebar-link nested' href='#'>
-                    <i className='fa fa-chevron-circle-right'></i>
-                    <span className='sidebar-list-item'>This Week</span>
-                  </a>
-                </li>
-                <li className='nav-item'>
-                  <a className='nav-link sidebar-link nested' href='#'>
-                    <i className='fa fa-chevron-circle-right'></i>
-                    <span className='sidebar-list-item'>This Month</span>
-                  </a>
-                </li>
-                <li className='nav-item'>
-                  <a className='nav-link sidebar-link nested' href='#'>
-                    <i className='fa fa-chevron-circle-right'></i>
-                    <span className='sidebar-list-item'>This Year</span>
-                  </a>
-                </li>
-                <li className='nav-item'>
-                  <a className='nav-link sidebar-link nested' href='#'>
-                    <i className='fa fa-chevron-circle-right'></i>
-                    <span className='sidebar-list-item'>All Time</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
+            <li className='nav-item'>
+              <a className='nav-link sidebar-link' href='#'>
+                <i className='fa fa-clock-o'></i>
+                <span className='sidebar-list-item'>Recent</span>
+              </a>
+            </li>
             <li className='nav-item'>
               <a className='nav-link sidebar-link' href='#'>
                 <i className='fa fa-comments'></i>
@@ -136,8 +108,42 @@ class Sidebar extends Component {
               </a>
             </li>
             <li className='nav-item'>
+              <a className='nav-link sidebar-link' data-toggle='collapse' href='#typeCollapse' aria-expanded='false' aria-controls='typeCollapse'>
+                <i className='fa fa-caret-square-o-right'></i>
+                <span className='sidebar-list-item'>By Type</span>
+              </a>
+            </li>
+            <div className='collapse' id='typeCollapse'>
+              <ul className='nav sidebar-list-static nested'>
+                <li className='nav-item'>
+                  <a className='nav-link sidebar-link nested' href='#'>
+                    <i className='fa fa-chevron-circle-right'></i>
+                    <span className='sidebar-list-item'>Posts</span>
+                  </a>
+                </li>
+                <li className='nav-item'>
+                  <a className='nav-link sidebar-link nested' href='#'>
+                    <i className='fa fa-chevron-circle-right'></i>
+                    <span className='sidebar-list-item'>Galleries</span>
+                  </a>
+                </li>
+                <li className='nav-item'>
+                  <a className='nav-link sidebar-link nested' href='#'>
+                    <i className='fa fa-chevron-circle-right'></i>
+                    <span className='sidebar-list-item'>Events</span>
+                  </a>
+                </li>
+                <li className='nav-item'>
+                  <a className='nav-link sidebar-link nested' href='#'>
+                    <i className='fa fa-chevron-circle-right'></i>
+                    <span className='sidebar-list-item'>Chats</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <li className='nav-item'>
               <a className='nav-link sidebar-link' href='#'>
-                <i className='fa fa-clock-o'></i>
+                <i className='fa fa-hourglass-start'></i>
                 <span className='sidebar-list-item'>Limited</span>
               </a>
             </li>
