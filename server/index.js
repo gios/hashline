@@ -10,7 +10,7 @@ const logger = require('koa-logger')
 const jwt = require('koa-jwt')
 const tracer = require('tracer').colorConsole()
 
-const SHARED_SECRET = 'sportalking'
+const SHARED_SECRET = 'hashline'
 
 app.use(function *(next) {
   try {
@@ -43,4 +43,4 @@ io.on('connection', function(socket){
 })
 
 server.listen(process.env.PORT || 5000)
-console.log('Sportalking is running on port', process.env.PORT || 5000) // eslint-disable-line no-console
+console.log('Hashline is running on port', process.env.PORT || 5000) // eslint-disable-line no-console

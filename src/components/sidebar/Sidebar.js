@@ -73,7 +73,7 @@ class Sidebar extends Component {
         <nav role='navigation' className='navbar navbar-dark navbar-static'>
           {(this.state.isMobileView) ? toggleSidebarBtn : null}
           <div className='navbar-info'>
-            <p className='navbar-logo'>Sportalking</p>
+            <p className='navbar-logo'>Hashline</p>
             <div className='navbar-user-info'>
               <div>Oneal</div>
               <div>oneal@gmail.com</div>
@@ -127,13 +127,7 @@ class Sidebar extends Component {
                 <li className='nav-item'>
                   <a className='nav-link sidebar-link nested' href='#'>
                     <i className='fa fa-chevron-circle-right'></i>
-                    <span className='sidebar-list-item'>Eredivisie</span>
-                  </a>
-                </li>
-                <li className='nav-item'>
-                  <a className='nav-link sidebar-link nested' href='#'>
-                    <i className='fa fa-chevron-circle-right'></i>
-                    <span className='sidebar-list-item'>Major League Soccer</span>
+                    <span className='sidebar-list-item'>Champions League</span>
                   </a>
                 </li>
               </ul>

@@ -1,5 +1,5 @@
-# Sportalking
-Realtime sports discussions
+# Hashline
+Realtime discussions
 
 ## Technologies
 * Redux
@@ -10,3 +10,4 @@ Realtime sports discussions
 * Immutable
 * Koa
 * Bootstrap
+* Socket.io
