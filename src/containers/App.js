@@ -1,6 +1,7 @@
 import React, { Component } from 'react' // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux'
 import { routeActions } from 'react-router-redux'
+import Sidebar from './../components/sidebar/Sidebar'
 
 class App extends Component {
 
@@ -15,6 +16,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <Sidebar/>
         {this.props.children}
       </div>
     )
