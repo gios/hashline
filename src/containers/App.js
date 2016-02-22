@@ -17,7 +17,11 @@ class App extends Component {
     return (
       <div>
         <Sidebar/>
-        {this.props.children}
+        <div className='content-wrapper'>
+          <div className='container-fluid'>
+            {this.props.children}
+          </div>
+        </div>
       </div>
     )
   }

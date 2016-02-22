@@ -1,4 +1,5 @@
 import React, { Component } from 'react' // eslint-disable-line no-unused-vars
+import { Link } from 'react-router'
 import moment from 'moment'
 import { throttle } from '../../utils/helpers'
 import io from 'socket.io-client'
@@ -80,14 +81,16 @@ class Sidebar extends Component {
             </div>
           </div>
           <div className='createDiscussion'>
-            <button type='button' className='btn btn-success btn-sm'>Create Discussion</button>
+            <Link to='/create' type='button' className='btn btn-success btn-sm' role='button'>
+              Create Discussion
+            </Link>
           </div>
           <ul className='nav sidebar-list-static'>
             <li className='nav-item'>
-              <a className='nav-link sidebar-link active' href='#'>
+              <Link to='/dash' className='nav-link sidebar-link active'>
                 <i className='fa fa-dashcube'></i>
                 <span className='sidebar-list-item'>Dash</span>
-              </a>
+              </Link>
             </li>
             <li className='nav-item'>
               <a className='nav-link sidebar-link' href='#'>
