@@ -23,6 +23,23 @@ html, body {
   left: 0;
 }
 
+.content-wrapper {
+  padding-top: 1em;
+  transition: .3s padding linear;
+}
+
+@media (min-width: 720px) {
+  .content-wrapper {
+    padding-left: 270px;
+  }
+}
+
+@media (max-width: 720px) {
+  .content-wrapper {
+    padding-left: 30px;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }
