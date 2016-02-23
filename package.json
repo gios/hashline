@@ -10,8 +10,7 @@
     "server": "nodemon ./server/index.js",
     "lint": "eslint ./src",
     "clear": "rimraf ./public/index.js ./public/styles.css ./public/img",
-    "generate": "node ./server/apis/src/generate/generate.js",
-    "node-debug": "node-inspector --web-port=7000 ./server/index.js "
+    "generate": "node ./server/apis/src/generate/generate.js"
   },
   "repository": {
     "type": "git",
