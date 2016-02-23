@@ -47,9 +47,9 @@ class Login extends Component {
   }
 }
 
-function inject(state) {
+function inject(state, ownProps) {
   return {
-    pathname: state.routing.location.pathname,
+    pathname: ownProps.location.pathname,
     errorMessage: state.reducers.auth.get('errorMessage')
   }
 }
