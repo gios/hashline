@@ -38,9 +38,9 @@ app.use(jwt({ secret: SHARED_SECRET }).unless({
 // Routes
 require('./apis/src/routes/userRoutes.js')(router, jwt, SHARED_SECRET)
 
-io.on('connection', function(socket){
-  console.log('a user connected')
+io.on('connection', function() {
+  tracer.log('a user connected')
 })
 
 server.listen(process.env.PORT || 5000)
-console.log('Hashline is running on port', process.env.PORT || 5000) // eslint-disable-line no-console
+tracer.info('Hashline is running on port', process.env.PORT || 5000)
