@@ -8,17 +8,20 @@ class createDiscussionForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      isPrivate: false,
+      isLimited: false,
       tags: [ {id: 1, text: 'Apples'} ],
       suggestions: ['Banana', 'Mango', 'Pear', 'Apricot'],
       startDate: moment()
     }
   }
 
-  componentDidMount() {
-    this.setState({
-      isPrivate: this.refs.isPrivate.checked,
-      isLimited: this.refs.isLimited.checked
-    })
+  changePrivate() {
+    this.setState({ isPrivate: !this.state.isPrivate })
+  }
+
+  changeLimited() {
+    this.setState({ isLimited: !this.state.isLimited })
   }
 
   handleChange(date) {
@@ -91,7 +94,7 @@ class createDiscussionForm extends Component {
                 <fieldset className='form-group row'>
                   <div className='checkbox'>
                     <label>
-                      <input type='checkbox' value='' ref='isPrivate'/>
+                      <input type='checkbox' value='' onChange={this.changePrivate.bind(this)}/>
                       Private <small className='text-muted'>use this if you want to set password for this conversation</small>
                     </label>
                   </div>
@@ -107,7 +110,7 @@ class createDiscussionForm extends Component {
                 <fieldset className='form-group row'>
                   <div className='checkbox'>
                     <label>
-                      <input type='checkbox' value='' ref='isLimited'/>
+                      <input type='checkbox' value='' onChange={this.changeLimited.bind(this)}/>
                       Limited <small className='text-muted'>set life cycle for this conversation</small>
                     </label>
                   </div>
