@@ -47,13 +47,13 @@ class createDiscussionForm extends Component {
               <fieldset className='form-group row'>
                 <label htmlFor='inputName' className='col-sm-2 form-control-label'>Name</label>
                 <div className='col-sm-10'>
-                  <input type='text' className='form-control' id='inputName' placeholder='Name'/>
+                  <input type='text' className='form-control' id='inputName' placeholder='Name of conversation'/>
                 </div>
               </fieldset>
               <fieldset className='form-group row'>
                 <label htmlFor='inputDescription' className='col-sm-2 form-control-label'>Description</label>
                 <div className='col-sm-12'>
-                  <textarea className='form-control' id='inputDescription' rows='3'></textarea>
+                  <textarea className='form-control' id='inputDescription' rows='3' placeholder='Describe your conversation'></textarea>
                 </div>
               </fieldset>
               <fieldset className='form-group row'>
@@ -61,6 +61,7 @@ class createDiscussionForm extends Component {
                 <div className='col-sm-12'>
                   <ReactTags.WithContext tags={this.state.tags}
                                          suggestions={this.state.suggestions}
+                                         placeholder='Add moderators'
                                          handleDelete={this.handleDelete.bind(this)}
                                          handleAddition={this.handleAddition.bind(this)}
                                          handleDrag={this.handleDrag.bind(this)}/>

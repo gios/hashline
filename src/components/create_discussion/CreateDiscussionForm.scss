@@ -4,23 +4,10 @@
 
 .ReactTags__tagInput {
   width: 200px;
-  border-radius: 2px;
   display: inline-block;
 
   input {
-    height: 31px;
-    margin: 0;
-    font-size: 12px;
-    width: 100%;
-    border: 1px solid #eee;
-
-    &:focus {
-      height: 31px;
-      margin: 0;
-      font-size: 12px;
-      width: 100%;
-      border: 1px solid #eee;
-    }
+    @extend .form-control;
   }
 }
 
@@ -32,10 +19,11 @@
     background: #eee;
     font-size: 12px;
     display: inline-block;
-    padding: 5px;
+    padding: 8px;
     margin: 0 5px;
     cursor: move;
     border-radius: 2px;
+    vertical-align: bottom;
   }
 
   a.ReactTags__remove {
@@ -50,9 +38,10 @@
 
   ul {
     list-style-type: none;
+    width: 200px;
+    padding: 0;
     box-shadow: .05em .01em .5em rgba(0, 0, 0, .2);
     background: white;
-    width: 200px;
   }
 
   li {
