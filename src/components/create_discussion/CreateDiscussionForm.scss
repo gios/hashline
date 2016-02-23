@@ -61,3 +61,13 @@
     cursor: pointer;
   }
 }
+
+.datepicker__input-container > .datepicker__input,
+.datepicker__input-container > .datepicker__input:focus {
+  box-shadow: none;
+  @extend .form-control;
+}
+
+.create-discussion-block {
+  height: 25em;
+}
