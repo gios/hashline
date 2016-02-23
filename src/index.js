@@ -2,6 +2,7 @@
 import React from 'react' // eslint-disable-line no-unused-vars
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
+import { syncHistoryWithStore } from 'react-router-redux'
 
 // Routing
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
@@ -13,7 +14,7 @@ import Containers from './containers/Index'
 import IndexDash from './components/dash/IndexDash'
 
 // Store
-import config from './store/configureStore'
+import configureStore from './store/configureStore'
 
 // Styles (SCSS)
 import './index.scss'
@@ -25,12 +26,12 @@ window.$ = window.jQuery = $
 window.Tether = Tether
 require('bootstrap')
 
-const store = config.configureStore()
-config.reduxRouterMiddleware.listenForReplays(store)
+const store = configureStore()
+const history = syncHistoryWithStore(browserHistory, store)
 
 render(
   <Provider store={store}>
-    <Router history={browserHistory}>
+    <Router history={history}>
       <Route path='/login' component={Containers.Login}/>
       <Route path='/signup' component={Containers.Login}/>
       <Route path='/' component={Containers.App}>

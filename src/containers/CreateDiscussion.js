@@ -14,7 +14,7 @@ class Login extends Component {
 
 function inject(state) {
   return {
-    pathname: state.routing.location.pathname
+    pathname: state.routing.locationBeforeTransitions.pathname
   }
 }
 
