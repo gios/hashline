@@ -29,7 +29,7 @@ class App extends Component {
 
 function inject(state) {
   return {
-    isAuthenticated: state.reducers.auth.get('isAuthenticated')
+    isAuthenticated: state.auth.get('isAuthenticated')
   }
 }
 

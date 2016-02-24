@@ -11,7 +11,7 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         query: {
-          presets: ['es2015', 'stage-3', 'react']
+          presets: ['es2015', 'stage-2', 'react']
         }
       },
       {

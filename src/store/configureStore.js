@@ -3,12 +3,11 @@ import thunk from 'redux-thunk'
 import { routerMiddleware, routerReducer } from 'react-router-redux'
 import { browserHistory } from 'react-router'
 
-
-import reducers from '../reducers/index'
+import * as reducers from '../reducers/index'
 
 const middleware = routerMiddleware(browserHistory)
 const reducer = combineReducers({
-  reducers,
+  ...reducers,
   routing: routerReducer
 })
 
