@@ -17,11 +17,8 @@ class Sidebar extends Component {
   }
 
   windowSizeAction(el) {
-    let { onSetMobile, isMobileView } = this.props
+    let { onSetMobile } = this.props
     if (window.innerWidth < 721) {
-        if (isMobileView) {
-          return
-        }
         onSetMobile(true)
         el.classList.add('toggle')
       } else {
@@ -76,7 +73,7 @@ class Sidebar extends Component {
           </div>
           <ul className='nav sidebar-list-static'>
             <li className='nav-item'>
-              <Link to='/dash' className='nav-link sidebar-link active'>
+              <Link to='/' className='nav-link sidebar-link active'>
                 <i className='fa fa-dashcube'></i>
                 <span className='sidebar-list-item'>Dash</span>
               </Link>

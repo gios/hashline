@@ -36,7 +36,6 @@ render(
       <Route path='/signup' component={Containers.Login}/>
       <Route path='/' component={Containers.App}>
         <IndexRoute component={IndexDash}/>
-        <Route path='/dash' component={IndexDash}/>
         <Route path='/create' component={Containers.CreateDiscussion}/>
       </Route>
     </Router>
