@@ -1,4 +1,4 @@
-import React, { Component } from 'react' // eslint-disable-line no-unused-vars
+import React, { Component } from 'react'
 import { DOMtoArray } from '../../utils/helpers'
 
 class LoginForm extends Component {

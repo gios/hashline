@@ -1,4 +1,4 @@
-import React, { Component } from 'react' // eslint-disable-line no-unused-vars
+import React, { Component } from 'react'
 import ReactTags from 'react-tag-input'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'

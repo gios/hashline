@@ -1,4 +1,4 @@
-import React, { Component } from 'react' // eslint-disable-line no-unused-vars
+import React, { Component } from 'react'
 import { Link } from 'react-router'
 import moment from 'moment'
 import { throttle } from '../../utils/helpers'
