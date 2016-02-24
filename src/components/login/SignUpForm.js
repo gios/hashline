@@ -82,17 +82,17 @@ class SignUpForm extends Component {
 
   validateEmail(email) {
     var emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return emailRegex.test(email);
+    return emailRegex.test(email)
   }
 
   validateUsername(username) {
     var usernameRegex = /^[a-zA-Z0-9]+$/;
-    return usernameRegex.test(username);
+    return usernameRegex.test(username)
   }
 
   validatePasswords(password, rePassword) {
     if (password !== '' && rePassword !== '') {
-      return password === rePassword;
+      return password === rePassword
     }
   }
 

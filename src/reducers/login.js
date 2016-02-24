@@ -1,6 +1,8 @@
+import { combineReducers } from 'redux'
 import Immutable from 'immutable'
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from '../actions/loginAction'
 import { SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE } from '../actions/signUpAction'
+import { USERNAME_ERROR, EMAIL_ERROR, PASSWORD_ERROR } from '../actions/authErrorsAction'
 import { LOCATION_CHANGE } from 'react-router-redux'
 
 const authState = Immutable.Map({
@@ -8,7 +10,7 @@ const authState = Immutable.Map({
   isAuthenticated: localStorage.getItem('id_token') ? true : false
 })
 
-export function auth(state = authState, action) {
+function auth(state = authState, action) {
   switch (action.type) {
     case SIGNUP_REQUEST:
     case LOGIN_REQUEST:
@@ -39,3 +41,51 @@ export function auth(state = authState, action) {
       return state
   }
 }
+
+const authErrorsState = Immutable.Map({
+  usernameError: {
+    message: 'You entered a wrong username.',
+    show: false
+  },
+  emailError: {
+    message: 'You entered a wrong email adresses.',
+    show: false
+  },
+  passwordError: {
+    message: 'Password length must be greater than 6.',
+    show: false
+  }
+})
+
+function authErrors(state = authErrorsState, action) {
+  switch (action.type) {
+    case USERNAME_ERROR:
+      return state.merge({
+        usernameError: {
+          message: 'You entered a wrong username.',
+          show: action.show
+        }
+      })
+    case EMAIL_ERROR:
+      return state.merge({
+        emailError: {
+          message: 'You entered a wrong email adresses.',
+          show: action.show
+        }
+      })
+    case PASSWORD_ERROR:
+      return state.merge({
+        passwordError: {
+          message: 'Password length must be greater than 6.',
+          show: action.show
+        }
+      })
+    default:
+      return state;
+  }
+}
+
+export let login = combineReducers({
+  auth,
+  authErrors
+})

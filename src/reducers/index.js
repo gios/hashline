@@ -1,1 +1,1 @@
-export { auth } from '../reducers/login'
+export { login } from '../reducers/login'

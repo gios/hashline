@@ -13,14 +13,19 @@ import Navbar from '../components/parts/Navbar'
 class Login extends Component {
 
   render() {
-    let { dispatch, pathname, errorMessage } = this.props
+    let { dispatch, pathname, errorMessage, incorrectUsername, incorrectEmail, incorrectPassword } = this.props
+    let inputErrors = {incorrectUsername, incorrectEmail, incorrectPassword}
     let errorComponent
 
     let loginFromSelector = () => {
       if (pathname === '/login') {
-        return <LoginForm onClickLogin={creds => dispatch(loginUser(creds))}/>
+        return <LoginForm dispatch={dispatch}
+                          inputErrors={inputErrors}
+                          onClickLogin={creds => dispatch(loginUser(creds))}/>
       } else {
-        return <SignUpForm onClickSignUp={creds => dispatch(signUpUser(creds))}/>
+        return <SignUpForm dispatch={dispatch}
+                           inputErrors={inputErrors}
+                           onClickSignUp={creds => dispatch(signUpUser(creds))}/>
       }
     }
 
@@ -50,7 +55,10 @@ class Login extends Component {
 function inject(state, ownProps) {
   return {
     pathname: ownProps.location.pathname,
-    errorMessage: state.auth.get('errorMessage')
+    errorMessage: state.login.auth.get('errorMessage'),
+    incorrectUsername: state.login.authErrors.get('usernameError'),
+    incorrectEmail: state.login.authErrors.get('emailError'),
+    incorrectPassword: state.login.authErrors.get('passwordError')
   }
 }
 

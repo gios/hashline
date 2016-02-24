@@ -1,15 +1,8 @@
 import React, { Component } from 'react'
 import { DOMtoArray } from '../../utils/helpers'
+import { incorrectEmail, incorrectPassword } from '../../actions/authErrorsAction'
 
 class LoginForm extends Component {
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      emailError: 'You entered a wrong email adress.',
-      passwordError: 'Password length must be greater than 6.'
-    }
-  }
 
   componentWillMount() {
     let tooltips = document.querySelectorAll('.tooltip')
@@ -32,21 +25,25 @@ class LoginForm extends Component {
   validateFields(emailInput, passwordInput) {
     let isValidEmail = this.validateEmail(emailInput.value)
     let isValidPassword = this.validatePassword(passwordInput.value)
-
     let loginInputs = document.querySelectorAll('.form-control')
+    let { dispatch } = this.props
 
     if(!isValidEmail) {
+      dispatch(incorrectEmail(true))
       $(emailInput).tooltip('show')
       emailInput.classList.add('input-incorrect')
     } else {
+      dispatch(incorrectEmail(false))
       $(emailInput).tooltip('hide')
       emailInput.classList.remove('input-incorrect')
     }
 
     if(!isValidPassword) {
+      dispatch(incorrectPassword(true))
       $(passwordInput).tooltip('show')
       passwordInput.classList.add('input-incorrect')
     } else {
+      dispatch(incorrectPassword(false))
       $(passwordInput).tooltip('hide')
       passwordInput.classList.remove('input-incorrect')
     }
@@ -56,7 +53,7 @@ class LoginForm extends Component {
 
   validateEmail(email) {
     var emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return emailRegex.test(email);
+    return emailRegex.test(email)
   }
 
   validatePassword(password) {
@@ -64,20 +61,21 @@ class LoginForm extends Component {
   }
 
   render() {
+    let { incorrectEmail, incorrectPassword } = this.props.inputErrors
     return (
       <form onSubmit={this.loginEvent.bind(this)} noValidate>
         <div className='form-group row'>
           <div className='col-xs-12 col-md-8 col-md-offset-2'>
             <input type='email' className='form-control' placeholder='Email' ref='loginEmail'
             data-toggle='tooltip' data-html='true' data-trigger='manual' data-placement='right'
-            data-original-title={this.state.emailError}/>
+            data-original-title={incorrectEmail.message}/>
           </div>
         </div>
         <div className='form-group row'>
           <div className='col-xs-12 col-md-8 col-md-offset-2'>
             <input type='password' className='form-control' placeholder='Password' ref='loginPassword'
             data-toggle='tooltip' data-html='true' data-trigger='manual' data-placement='right'
-            data-original-title={this.state.passwordError}/>
+            data-original-title={incorrectPassword.message}/>
           </div>
         </div>
         <div className='form-group row'>
