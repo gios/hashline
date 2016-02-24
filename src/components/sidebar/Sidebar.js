@@ -3,7 +3,6 @@ import { Link } from 'react-router'
 import moment from 'moment'
 import { throttle } from '../../utils/helpers'
 import io from 'socket.io-client'
-import { toggleSidebar, setMobileSidebar } from '../../actions/sidebarAction'
 let socket = io('http://localhost:5000')
 
 class Sidebar extends Component {
@@ -18,28 +17,28 @@ class Sidebar extends Component {
   }
 
   windowSizeAction(el) {
-    let { dispatch, isMobileView } = this.props
+    let { onSetMobile, isMobileView } = this.props
     if (window.innerWidth < 721) {
         if (isMobileView) {
           return
         }
-        dispatch(setMobileSidebar(true))
+        onSetMobile(true)
         el.classList.add('toggle')
       } else {
-        dispatch(setMobileSidebar(false))
+        onSetMobile(false)
         el.classList.remove('toggle')
       }
   }
 
   toggleSidebar() {
     let sidebarEl = document.querySelector('.navbar-static')
-    let { dispatch, isToggled } = this.props
+    let { onToggle, isToggled } = this.props
 
     if (isToggled) {
-      dispatch(toggleSidebar(false))
+      onToggle(false)
       sidebarEl.classList.remove('toggle')
     } else {
-      dispatch(toggleSidebar(true))
+      onToggle(true)
       sidebarEl.classList.add('toggle')
     }
   }

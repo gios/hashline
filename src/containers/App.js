@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
+import { toggleSidebar, setMobileSidebar } from '../actions/sidebarAction'
 import Sidebar from './../components/sidebar/Sidebar'
 
 class App extends Component {
@@ -17,7 +18,11 @@ class App extends Component {
     let { dispatch, isToggled, isMobileView } = this.props
     return (
       <div>
-        <Sidebar dispatch={dispatch} isToggled={isToggled} isMobileView={isMobileView}/>
+        <Sidebar dispatch={dispatch}
+                 isToggled={isToggled}
+                 isMobileView={isMobileView}
+                 onSetMobile={(value) => dispatch(setMobileSidebar(value))}
+                 onToggle={(value) => dispatch(toggleSidebar(value))}/>
         <div className='content-wrapper'>
           <div className='container-fluid'>
             {this.props.children}
