@@ -3,17 +3,10 @@ import { Link } from 'react-router'
 import moment from 'moment'
 import { throttle } from '../../utils/helpers'
 import io from 'socket.io-client'
+import { toggleSidebar, setMobileSidebar } from '../../actions/sidebarAction'
 let socket = io('http://localhost:5000')
 
 class Sidebar extends Component {
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      isToggled: (window.innerWidth < 721) ? true : false,
-      isMobileView: this.isToggled
-    }
-  }
 
   componentDidMount() {
     let sidebarEl = document.querySelector('.navbar-static')
@@ -25,37 +18,34 @@ class Sidebar extends Component {
   }
 
   windowSizeAction(el) {
+    let { dispatch, isMobileView } = this.props
     if (window.innerWidth < 721) {
-        if (this.state.isMobileView) {
+        if (isMobileView) {
           return
         }
-        this.setState({
-          isToggled: true,
-          isMobileView: true
-        })
+        dispatch(setMobileSidebar(true))
         el.classList.add('toggle')
       } else {
-        this.setState({
-          isToggled: false,
-          isMobileView: false
-        })
+        dispatch(setMobileSidebar(false))
         el.classList.remove('toggle')
       }
   }
 
   toggleSidebar() {
     let sidebarEl = document.querySelector('.navbar-static')
+    let { dispatch, isToggled } = this.props
 
-    if (this.state.isToggled) {
-      this.setState({isToggled: false})
+    if (isToggled) {
+      dispatch(toggleSidebar(false))
       sidebarEl.classList.remove('toggle')
     } else {
-      this.setState({isToggled: true})
+      dispatch(toggleSidebar(true))
       sidebarEl.classList.add('toggle')
     }
   }
 
   render() {
+    let { isMobileView } = this.props
     let toggleSidebarBtn = (
       <div className='toggle-sidebar-button'>
         <i className='fa fa-bars' onClick={this.toggleSidebar.bind(this)}></i>
@@ -72,7 +62,7 @@ class Sidebar extends Component {
     return (
       <div>
         <nav role='navigation' className='navbar navbar-dark navbar-static'>
-          {(this.state.isMobileView) ? toggleSidebarBtn : null}
+          {(isMobileView) ? toggleSidebarBtn : null}
           <div className='navbar-info'>
             <p className='navbar-logo'>Hashline</p>
             <div className='navbar-user-info'>
@@ -184,7 +174,7 @@ class Sidebar extends Component {
             <p>&copy; {moment().format('YYYY')}</p>
           </div>
         </nav>
-        {(this.state.isMobileView) ? toggleSidebarBtnContent : null}
+        {(isMobileView) ? toggleSidebarBtnContent : null}
       </div>
     )
   }

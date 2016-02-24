@@ -14,9 +14,10 @@ class App extends Component {
   }
 
   render() {
+    let { dispatch, isToggled, isMobileView } = this.props
     return (
       <div>
-        <Sidebar/>
+        <Sidebar dispatch={dispatch} isToggled={isToggled} isMobileView={isMobileView}/>
         <div className='content-wrapper'>
           <div className='container-fluid'>
             {this.props.children}
@@ -29,7 +30,9 @@ class App extends Component {
 
 function inject(state) {
   return {
-    isAuthenticated: state.login.auth.get('isAuthenticated')
+    isAuthenticated: state.login.auth.get('isAuthenticated'),
+    isToggled: state.sidebar.get('isToggled'),
+    isMobileView: state.sidebar.get('isMobileView')
   }
 }
 
