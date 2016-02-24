@@ -124,11 +124,11 @@ class createDiscussionForm extends Component {
                   <label className='form-control-label'>Tags <small className='text-muted'>tags help to identify your conversation</small></label>
                   <div className='col-sm-12'>
                     <ReactTags.WithContext tags={this.state.tags}
-                                          suggestions={this.state.suggestions}
-                                          placeholder='Add tags'
-                                          handleDelete={this.handleDelete.bind(this)}
-                                          handleAddition={this.handleAddition.bind(this)}
-                                          handleDrag={this.handleDrag.bind(this)}/>
+                                           suggestions={this.state.suggestions}
+                                           placeholder='Add tags'
+                                           handleDelete={this.handleDelete.bind(this)}
+                                           handleAddition={this.handleAddition.bind(this)}
+                                           handleDrag={this.handleDrag.bind(this)}/>
                   </div>
                 </fieldset>
               </form>
