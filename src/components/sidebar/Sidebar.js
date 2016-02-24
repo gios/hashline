@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { Link } from 'react-router'
 import moment from 'moment'
 import { throttle } from '../../utils/helpers'
-import io from 'socket.io-client'
-let socket = io('http://localhost:5000')
 
 class Sidebar extends Component {
 
