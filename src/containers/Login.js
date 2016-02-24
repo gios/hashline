@@ -50,7 +50,7 @@ class Login extends Component {
 function inject(state, ownProps) {
   return {
     pathname: ownProps.location.pathname,
-    errorMessage: state.reducers.auth.get('errorMessage')
+    errorMessage: state.auth.get('errorMessage')
   }
 }
 

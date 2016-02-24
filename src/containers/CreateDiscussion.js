@@ -12,9 +12,9 @@ class Login extends Component {
   }
 }
 
-function inject(state) {
+function inject(state, ownProps) {
   return {
-    pathname: state.routing.locationBeforeTransitions.pathname
+    pathname: ownProps.location.pathname
   }
 }
 
