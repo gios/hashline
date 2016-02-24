@@ -35,38 +35,38 @@ class SignUpForm extends Component {
 
     if(!isValidUsername) {
       dispatch(incorrectUsername(true))
-      $(usernameInput).tooltip('show')
+      setTimeout(() => $(usernameInput).tooltip('show'))
       usernameInput.classList.add('input-incorrect')
     } else {
       dispatch(incorrectUsername(false))
-      $(usernameInput).tooltip('hide')
+      setTimeout(() => $(usernameInput).tooltip('hide'))
       usernameInput.classList.remove('input-incorrect')
     }
 
     if(!isValidEmail) {
       dispatch(incorrectEmail(true))
-      $(emailInput).tooltip('show')
+      setTimeout(() => $(emailInput).tooltip('show'))
       emailInput.classList.add('input-incorrect')
     } else {
       dispatch(incorrectEmail(false))
-      $(emailInput).tooltip('hide')
+      setTimeout(() => $(emailInput).tooltip('hide'))
       emailInput.classList.remove('input-incorrect')
     }
 
     if(!isValidPassword) {
       dispatch(incorrectPassword(true))
-      $(passwordInput).tooltip('show')
+      setTimeout(() => $(passwordInput).tooltip('show'))
       passwordInput.classList.add('input-incorrect')
       rePasswordInput.classList.add('input-incorrect')
     } else {
       if(!isValidPasswords) {
         dispatch(incorrectPassword(true, 'Your passwords don\'t match, check them.'))
-        $(passwordInput).tooltip('show')
+        setTimeout(() => $(passwordInput).tooltip('show'))
         passwordInput.classList.add('input-incorrect')
         rePasswordInput.classList.add('input-incorrect')
       } else {
         dispatch(incorrectPassword(false))
-        $(passwordInput).tooltip('hide')
+        setTimeout(() => $(passwordInput).tooltip('hide'))
         passwordInput.classList.remove('input-incorrect')
         rePasswordInput.classList.remove('input-incorrect')
       }

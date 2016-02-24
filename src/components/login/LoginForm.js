@@ -30,21 +30,21 @@ class LoginForm extends Component {
 
     if(!isValidEmail) {
       dispatch(incorrectEmail(true))
-      $(emailInput).tooltip('show')
+      setTimeout(() => $(emailInput).tooltip('show'))
       emailInput.classList.add('input-incorrect')
     } else {
       dispatch(incorrectEmail(false))
-      $(emailInput).tooltip('hide')
+      setTimeout(() => $(emailInput).tooltip('hide'))
       emailInput.classList.remove('input-incorrect')
     }
 
     if(!isValidPassword) {
       dispatch(incorrectPassword(true))
-      $(passwordInput).tooltip('show')
+      setTimeout(() => $(passwordInput).tooltip('show'))
       passwordInput.classList.add('input-incorrect')
     } else {
       dispatch(incorrectPassword(false))
-      $(passwordInput).tooltip('hide')
+      setTimeout(() => $(passwordInput).tooltip('hide'))
       passwordInput.classList.remove('input-incorrect')
     }
 
