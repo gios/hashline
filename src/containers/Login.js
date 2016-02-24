@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { loginUser } from '../actions/loginAction'
 import { signUpUser } from '../actions/signUpAction'
+import { incorrectUsername, incorrectEmail, incorrectPassword } from '../actions/authErrorsAction'
 import LoginMenu from '../components/login/LoginMenu'
 import LoginForm from '../components/login/LoginForm'
 import SignUpForm from '../components/login/SignUpForm'
@@ -13,19 +14,24 @@ import Navbar from '../components/parts/Navbar'
 class Login extends Component {
 
   render() {
-    let { dispatch, pathname, errorMessage, incorrectUsername, incorrectEmail, incorrectPassword } = this.props
-    let inputErrors = { incorrectUsername, incorrectEmail, incorrectPassword }
+    let { dispatch, pathname, errorMessage, incorrectUsernameObj, incorrectEmailObj, incorrectPasswordObj } = this.props
+    let inputErrors = { incorrectUsernameObj, incorrectEmailObj, incorrectPasswordObj }
     let errorComponent
 
     let loginFromSelector = () => {
       if (pathname === '/login') {
         return <LoginForm dispatch={dispatch}
                           inputErrors={inputErrors}
-                          onClickLogin={creds => dispatch(loginUser(creds))}/>
+                          onClickLogin={creds => dispatch(loginUser(creds))}
+                          emitEmailError={value => dispatch(incorrectEmail(value))}
+                          emitPasswordError={(value, message) => dispatch(incorrectPassword(value, message))}/>
       } else {
         return <SignUpForm dispatch={dispatch}
                            inputErrors={inputErrors}
-                           onClickSignUp={creds => dispatch(signUpUser(creds))}/>
+                           onClickSignUp={creds => dispatch(signUpUser(creds))}
+                           emitUsernameError={value => dispatch(incorrectUsername(value))}
+                           emitEmailError={value => dispatch(incorrectEmail(value))}
+                           emitPasswordError={(value, message) => dispatch(incorrectPassword(value, message))}/>
       }
     }
 
@@ -56,9 +62,9 @@ function inject(state, ownProps) {
   return {
     pathname: ownProps.location.pathname,
     errorMessage: state.login.auth.get('errorMessage'),
-    incorrectUsername: state.login.authErrors.get('usernameError').toJS(),
-    incorrectEmail: state.login.authErrors.get('emailError').toJS(),
-    incorrectPassword: state.login.authErrors.get('passwordError').toJS()
+    incorrectUsernameObj: state.login.authErrors.get('usernameError').toJS(),
+    incorrectEmailObj: state.login.authErrors.get('emailError').toJS(),
+    incorrectPasswordObj: state.login.authErrors.get('passwordError').toJS()
   }
 }
 

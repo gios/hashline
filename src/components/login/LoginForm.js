@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { DOMtoArray } from '../../utils/helpers'
-import { incorrectEmail, incorrectPassword } from '../../actions/authErrorsAction'
 
 class LoginForm extends Component {
 
@@ -26,24 +25,24 @@ class LoginForm extends Component {
     let isValidEmail = this.validateEmail(emailInput.value)
     let isValidPassword = this.validatePassword(passwordInput.value)
     let loginInputs = document.querySelectorAll('.form-control')
-    let { dispatch } = this.props
+    let { emitEmailError, emitPasswordError } = this.props
 
     if(!isValidEmail) {
-      dispatch(incorrectEmail(true))
+      emitEmailError(true)
       setTimeout(() => $(emailInput).tooltip('show'))
       emailInput.classList.add('input-incorrect')
     } else {
-      dispatch(incorrectEmail(false))
+      emitEmailError(false)
       setTimeout(() => $(emailInput).tooltip('hide'))
       emailInput.classList.remove('input-incorrect')
     }
 
     if(!isValidPassword) {
-      dispatch(incorrectPassword(true))
+      emitPasswordError(true)
       setTimeout(() => $(passwordInput).tooltip('show'))
       passwordInput.classList.add('input-incorrect')
     } else {
-      dispatch(incorrectPassword(false))
+      emitPasswordError(false)
       setTimeout(() => $(passwordInput).tooltip('hide'))
       passwordInput.classList.remove('input-incorrect')
     }
@@ -61,21 +60,21 @@ class LoginForm extends Component {
   }
 
   render() {
-    let { incorrectEmail, incorrectPassword } = this.props.inputErrors
+    let { incorrectEmailObj, incorrectPasswordObj } = this.props.inputErrors
     return (
       <form onSubmit={this.loginEvent.bind(this)} noValidate>
         <div className='form-group row'>
           <div className='col-xs-12 col-md-8 col-md-offset-2'>
             <input type='email' className='form-control' placeholder='Email' ref='loginEmail'
             data-toggle='tooltip' data-html='true' data-trigger='manual' data-placement='right'
-            data-original-title={incorrectEmail.message}/>
+            data-original-title={incorrectEmailObj.message}/>
           </div>
         </div>
         <div className='form-group row'>
           <div className='col-xs-12 col-md-8 col-md-offset-2'>
             <input type='password' className='form-control' placeholder='Password' ref='loginPassword'
             data-toggle='tooltip' data-html='true' data-trigger='manual' data-placement='right'
-            data-original-title={incorrectPassword.message}/>
+            data-original-title={incorrectPasswordObj.message}/>
           </div>
         </div>
         <div className='form-group row'>

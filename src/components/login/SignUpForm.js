@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { DOMtoArray } from '../../utils/helpers'
-import { incorrectUsername, incorrectEmail, incorrectPassword } from '../../actions/authErrorsAction'
 
 class SignUpForm extends Component {
 
@@ -31,41 +30,41 @@ class SignUpForm extends Component {
     let isValidPassword = this.validatePassword(passwordInput.value)
     let isValidPasswords = this.validatePasswords(passwordInput.value, rePasswordInput.value)
     let signUpInputs = document.querySelectorAll('.form-control')
-    let { dispatch } = this.props
+    let { emitUsernameError, emitEmailError, emitPasswordError } = this.props
 
     if(!isValidUsername) {
-      dispatch(incorrectUsername(true))
+      emitUsernameError(true)
       setTimeout(() => $(usernameInput).tooltip('show'))
       usernameInput.classList.add('input-incorrect')
     } else {
-      dispatch(incorrectUsername(false))
+      emitUsernameError(false)
       setTimeout(() => $(usernameInput).tooltip('hide'))
       usernameInput.classList.remove('input-incorrect')
     }
 
     if(!isValidEmail) {
-      dispatch(incorrectEmail(true))
+      emitEmailError(true)
       setTimeout(() => $(emailInput).tooltip('show'))
       emailInput.classList.add('input-incorrect')
     } else {
-      dispatch(incorrectEmail(false))
+      emitEmailError(false)
       setTimeout(() => $(emailInput).tooltip('hide'))
       emailInput.classList.remove('input-incorrect')
     }
 
     if(!isValidPassword) {
-      dispatch(incorrectPassword(true))
+      emitPasswordError(true)
       setTimeout(() => $(passwordInput).tooltip('show'))
       passwordInput.classList.add('input-incorrect')
       rePasswordInput.classList.add('input-incorrect')
     } else {
       if(!isValidPasswords) {
-        dispatch(incorrectPassword(true, 'Your passwords don\'t match, check them.'))
+        emitPasswordError(true, 'Your passwords don\'t match, check them.')
         setTimeout(() => $(passwordInput).tooltip('show'))
         passwordInput.classList.add('input-incorrect')
         rePasswordInput.classList.add('input-incorrect')
       } else {
-        dispatch(incorrectPassword(false))
+        emitPasswordError(false)
         setTimeout(() => $(passwordInput).tooltip('hide'))
         passwordInput.classList.remove('input-incorrect')
         rePasswordInput.classList.remove('input-incorrect')
@@ -96,28 +95,28 @@ class SignUpForm extends Component {
   }
 
   render() {
-    let { incorrectUsername, incorrectEmail, incorrectPassword } = this.props.inputErrors
+    let { incorrectUsernameObj, incorrectEmailObj, incorrectPasswordObj } = this.props.inputErrors
     return (
       <form onSubmit={this.signUpEvent.bind(this)} noValidate>
         <div className='form-group row'>
           <div className='col-xs-12 col-md-8 col-md-offset-2'>
             <input type='text' className='form-control' placeholder='Username' ref='signUpUsername'
             data-toggle='tooltip' data-html='true' data-trigger='manual' data-placement='right'
-            data-original-title={incorrectUsername.message}/>
+            data-original-title={incorrectUsernameObj.message}/>
           </div>
         </div>
         <div className='form-group row'>
           <div className='col-xs-12 col-md-8 col-md-offset-2'>
             <input type='email' className='form-control' placeholder='Email' ref='signUpEmail'
             data-toggle='tooltip' data-html='true' data-trigger='manual' data-placement='right'
-            data-original-title={incorrectEmail.message}/>
+            data-original-title={incorrectEmailObj.message}/>
           </div>
         </div>
         <div className='form-group row'>
           <div className='col-xs-12 col-md-8 col-md-offset-2'>
             <input type='password' className='form-control' placeholder='Password' ref='signUpPassword'
             data-toggle='tooltip' data-html='true' data-trigger='manual' data-placement='right'
-            data-original-title={incorrectPassword.message}/>
+            data-original-title={incorrectPasswordObj.message}/>
           </div>
         </div>
         <div className='form-group row'>
