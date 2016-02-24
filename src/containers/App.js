@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { toggleSidebar, setMobileSidebar, getUserData } from '../actions/sidebarAction'
 import Sidebar from './../components/sidebar/Sidebar'
-import io from 'socket.io-client'
-let socket = io('http://localhost:5000')
+// import io from 'socket.io-client'
+// let socket = io('http://localhost:5000')
 
 class App extends Component {
 
