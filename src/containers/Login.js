@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { replace } from 'react-router-redux'
 import { loginUser } from '../actions/loginAction'
 import { signUpUser } from '../actions/signUpAction'
 import { incorrectUsername, incorrectEmail, incorrectPassword } from '../actions/authErrorsAction'
@@ -14,9 +15,19 @@ import Navbar from '../components/parts/Navbar'
 class Login extends Component {
 
   render() {
-    let { dispatch, pathname, errorMessage, incorrectUsernameObj, incorrectEmailObj, incorrectPasswordObj } = this.props
+    let { dispatch,
+          pathname,
+          errorMessage,
+          isAuthenticated,
+          incorrectUsernameObj,
+          incorrectEmailObj,
+          incorrectPasswordObj } = this.props
     let inputErrors = { incorrectUsernameObj, incorrectEmailObj, incorrectPasswordObj }
     let errorComponent
+
+    if(isAuthenticated) {
+      setTimeout(() => dispatch(replace('/')))
+    }
 
     let loginFromSelector = () => {
       if (pathname === '/login') {
@@ -62,6 +73,7 @@ function inject(state, ownProps) {
   return {
     pathname: ownProps.location.pathname,
     errorMessage: state.login.auth.get('errorMessage'),
+    isAuthenticated: state.login.auth.get('isAuthenticated'),
     incorrectUsernameObj: state.login.authErrors.get('usernameError').toJS(),
     incorrectEmailObj: state.login.authErrors.get('emailError').toJS(),
     incorrectPasswordObj: state.login.authErrors.get('passwordError').toJS()
