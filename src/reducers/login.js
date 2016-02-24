@@ -43,18 +43,18 @@ function auth(state = authState, action) {
 }
 
 const authErrorsState = Immutable.Map({
-  usernameError: {
+  usernameError: Immutable.Map({
     message: 'You entered a wrong username.',
     show: false
-  },
-  emailError: {
+  }),
+  emailError: Immutable.Map({
     message: 'You entered a wrong email adresses.',
     show: false
-  },
-  passwordError: {
+  }),
+  passwordError: Immutable.Map({
     message: 'Password length must be greater than 6.',
     show: false
-  }
+  })
 })
 
 function authErrors(state = authErrorsState, action) {
@@ -62,21 +62,21 @@ function authErrors(state = authErrorsState, action) {
     case USERNAME_ERROR:
       return state.merge({
         usernameError: {
-          message: 'You entered a wrong username.',
+          message: action.message || 'You entered a wrong username.',
           show: action.show
         }
       })
     case EMAIL_ERROR:
       return state.merge({
         emailError: {
-          message: 'You entered a wrong email adresses.',
+          message: action.message || 'You entered a wrong email adresses.',
           show: action.show
         }
       })
     case PASSWORD_ERROR:
       return state.merge({
         passwordError: {
-          message: 'Password length must be greater than 6.',
+          message: action.message || 'Password length must be greater than 6.',
           show: action.show
         }
       })
