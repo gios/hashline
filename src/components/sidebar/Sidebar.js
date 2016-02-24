@@ -5,6 +5,10 @@ import { throttle } from '../../utils/helpers'
 
 class Sidebar extends Component {
 
+  componentWillMount() {
+    this.props.onGetUserData()
+  }
+
   componentDidMount() {
     let sidebarEl = document.querySelector('.navbar-static')
     this.windowSizeAction(sidebarEl)

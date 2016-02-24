@@ -62,4 +62,8 @@ module.exports = function(router, jwt, SHARED_SECRET) {
     let token = jwt.sign(user, SHARED_SECRET, { expiresIn: 60 * 5 });
     this.body = { id_token: token }
   })
+
+  router.get('/api/user', function *() {
+    this.body = {id: 2}
+  })
 }

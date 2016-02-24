@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { toggleSidebar, setMobileSidebar } from '../actions/sidebarAction'
+import { toggleSidebar, setMobileSidebar, getUserData } from '../actions/sidebarAction'
 import Sidebar from './../components/sidebar/Sidebar'
 import io from 'socket.io-client'
 let socket = io('http://localhost:5000')
@@ -24,7 +24,8 @@ class App extends Component {
                  isToggled={isToggled}
                  isMobileView={isMobileView}
                  onSetMobile={(value) => dispatch(setMobileSidebar(value))}
-                 onToggle={(value) => dispatch(toggleSidebar(value))}/>
+                 onToggle={(value) => dispatch(toggleSidebar(value))}
+                 onGetUserData={() => dispatch(getUserData())}/>
         <div className='content-wrapper'>
           <div className='container-fluid'>
             {this.props.children}
