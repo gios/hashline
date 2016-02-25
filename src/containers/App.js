@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
+import { runLogout } from '../actions/loginAction'
 import { toggleSidebar, setMobileSidebar, getUserData } from '../actions/sidebarAction'
 import Sidebar from './../components/sidebar/Sidebar'
 import io from 'socket.io-client'
@@ -23,9 +24,13 @@ class App extends Component {
         <Sidebar dispatch={dispatch}
                  isToggled={isToggled}
                  isMobileView={isMobileView}
-                 onSetMobile={(value) => dispatch(setMobileSidebar(value))}
-                 onToggle={(value) => dispatch(toggleSidebar(value))}
-                 onGetUserData={() => dispatch(getUserData())}/>
+                 onSetMobile={value => dispatch(setMobileSidebar(value))}
+                 onToggle={value => dispatch(toggleSidebar(value))}
+                 onGetUserData={() => dispatch(getUserData())}
+                 onLogout={() => {
+                   dispatch(push('/login'))
+                   dispatch(runLogout())}
+                 }/>
         <div className='content-wrapper'>
           <div className='container-fluid'>
             {this.props.children}

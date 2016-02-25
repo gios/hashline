@@ -43,7 +43,7 @@ class Sidebar extends Component {
   }
 
   logout() {
-    // logout
+    this.props.onLogout()
   }
 
   render() {

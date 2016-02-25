@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import Immutable from 'immutable'
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from '../actions/loginAction'
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, RUN_LOGOUT } from '../actions/loginAction'
 import { SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE } from '../actions/signUpAction'
 import { USERNAME_ERROR, EMAIL_ERROR, PASSWORD_ERROR } from '../actions/authErrorsAction'
 import { LOCATION_CHANGE } from 'react-router-redux'
@@ -33,6 +33,11 @@ function auth(state = authState, action) {
         isFetching: false,
         isAuthenticated: false,
         errorMessage: action.message
+      })
+    case RUN_LOGOUT:
+      idToken.removeToken()
+      return state.merge({
+        isAuthenticated: false
       })
     case LOCATION_CHANGE:
       return state.merge({
