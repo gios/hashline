@@ -63,6 +63,9 @@ class Sidebar extends Component {
           {(isMobileView) ? toggleSidebarBtn : null}
           <div className='navbar-info'>
             <p className='navbar-logo'>Hashline</p>
+            <div className='navbal-logout'>
+              <i className='fa fa-sign-out'></i>
+            </div>
             <div className='navbar-user-info'>
               <div>Oneal</div>
               <div>oneal@gmail.com</div>

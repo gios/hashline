@@ -75,6 +75,17 @@
     font-weight: 700;
   }
 
+  .navbal-logout {
+    position: absolute;
+    margin: .3em;
+    color: #d9d9d9;
+    font-size: 20px;
+
+    & > i {
+      cursor: pointer;
+    }
+  }
+
   .navbar-user-info {
     text-align: center;
     color: #fff;

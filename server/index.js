@@ -28,12 +28,12 @@ app.use(function *(next) {
 })
 app.use(logger())
 app.use(bodyParser())
-app.use(router.routes())
-app.use(router.allowedMethods())
-app.use(serve(__dirname + '/../public'))
 app.use(jwt({ secret: SHARED_SECRET }).unless({
   path: [/^\/authenticate/, /^\/registration/]
 }))
+app.use(router.routes())
+app.use(router.allowedMethods())
+app.use(serve(__dirname + '/../public'))
 
 // Routes
 require('./apis/src/routes/userRoutes.js')(router, jwt, SHARED_SECRET)

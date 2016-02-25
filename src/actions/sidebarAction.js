@@ -22,7 +22,7 @@ export function getUserData() {
     [CALL_API]: {
       endpoint: '/api/user',
       method: 'GET',
-      // headers: { 'Authorization': `Bearer ${localStorage.getItem('id_token')}` },
+      headers: { 'Authorization': `Bearer ${localStorage.getItem('id_token')}` },
       types: ['REQUEST', 'SUCCESS', 'FAILURE']
     }
   }
