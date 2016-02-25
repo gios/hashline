@@ -43,4 +43,4 @@ io.on('connection', function() {
 })
 
 server.listen(process.env.PORT || 5000)
-tracer.log('Hashline is running on port', process.env.PORT || 5000)
+tracer.info('Hashline is running on port', process.env.PORT || 5000)
