@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 import moment from 'moment'
+import Loader from '../parts/Loader'
 import { throttle } from '../../utils/helpers'
 
 class Sidebar extends Component {
@@ -71,12 +72,15 @@ class Sidebar extends Component {
             <div className='navbal-logout'>
               <i className='fa fa-sign-out' ref='logoutElem' data-toggle='tooltip' data-placement='right' title='Logout' onClick={this.logout.bind(this)}></i>
             </div>
+            <div className='navbar-user-info'>
             { !userInfo.isFetching && userInfo.payload &&
-              <div className='navbar-user-info'>
+              <div>
+                <Loader/>
                 <div>{userInfo.payload.username}</div>
                 <div>{userInfo.payload.email}</div>
               </div>
             }
+            </div>
           </div>
           <div className='createDiscussion'>
             <Link to='/create' type='button' className='btn btn-success btn-sm' role='button'>
