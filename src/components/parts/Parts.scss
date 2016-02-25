@@ -17,7 +17,7 @@
 }
 
 .copyright-footer {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, .8);
   text-shadow: 1px 1px 5px #171616;
 }
 
@@ -40,11 +40,11 @@
   position: relative;
   text-indent: -9999em;
   transform: translateZ(0);
-  animation-delay: -0.16s;
+  animation-delay: -.16s;
 
   &:before {
     left: -3.5em;
-    animation-delay: -0.32s;
+    animation-delay: -.32s;
   }
 
   &:after {

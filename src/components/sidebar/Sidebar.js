@@ -50,6 +50,7 @@ class Sidebar extends Component {
 
   render() {
     let { isMobileView, userInfo } = this.props
+    let userInfoRender
     let toggleSidebarBtn = (
       <div className='toggle-sidebar-button'>
         <i className='fa fa-bars' onClick={this.toggleSidebar.bind(this)}></i>
@@ -63,6 +64,17 @@ class Sidebar extends Component {
       </span>
     )
 
+    if(userInfo.isFetching) {
+      userInfoRender = <Loader size={2}/>
+    } else if(userInfo.payload) {
+      userInfoRender = (
+        <div>
+          <div>{userInfo.payload.username}</div>
+          <div>{userInfo.payload.email}</div>
+        </div>
+      )
+    }
+
     return (
       <div>
         <nav role='navigation' className='navbar navbar-dark navbar-static'>
@@ -73,13 +85,7 @@ class Sidebar extends Component {
               <i className='fa fa-sign-out' ref='logoutElem' data-toggle='tooltip' data-placement='right' title='Logout' onClick={this.logout.bind(this)}></i>
             </div>
             <div className='navbar-user-info'>
-            { !userInfo.isFetching && userInfo.payload &&
-              <div>
-                <Loader/>
-                <div>{userInfo.payload.username}</div>
-                <div>{userInfo.payload.email}</div>
-              </div>
-            }
+              {userInfoRender}
             </div>
           </div>
           <div className='createDiscussion'>
