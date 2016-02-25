@@ -31,14 +31,12 @@ class Login extends Component {
 
     let loginFromSelector = () => {
       if (pathname === '/login') {
-        return <LoginForm dispatch={dispatch}
-                          inputErrors={inputErrors}
+        return <LoginForm inputErrors={inputErrors}
                           onClickLogin={creds => dispatch(loginUser(creds))}
                           emitEmailError={value => dispatch(incorrectEmail(value))}
                           emitPasswordError={(value, message) => dispatch(incorrectPassword(value, message))}/>
       } else {
-        return <SignUpForm dispatch={dispatch}
-                           inputErrors={inputErrors}
+        return <SignUpForm inputErrors={inputErrors}
                            onClickSignUp={creds => dispatch(signUpUser(creds))}
                            emitUsernameError={value => dispatch(incorrectUsername(value))}
                            emitEmailError={value => dispatch(incorrectEmail(value))}

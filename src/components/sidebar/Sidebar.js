@@ -48,7 +48,7 @@ class Sidebar extends Component {
   }
 
   render() {
-    let { isMobileView } = this.props
+    let { isMobileView, userInfo } = this.props
     let toggleSidebarBtn = (
       <div className='toggle-sidebar-button'>
         <i className='fa fa-bars' onClick={this.toggleSidebar.bind(this)}></i>
@@ -71,10 +71,12 @@ class Sidebar extends Component {
             <div className='navbal-logout'>
               <i className='fa fa-sign-out' ref='logoutElem' data-toggle='tooltip' data-placement='right' title='Logout' onClick={this.logout.bind(this)}></i>
             </div>
-            <div className='navbar-user-info'>
-              <div>Oneal</div>
-              <div>oneal@gmail.com</div>
-            </div>
+            { !userInfo.isFetching && userInfo.payload &&
+              <div className='navbar-user-info'>
+                <div>{userInfo.payload.username}</div>
+                <div>{userInfo.payload.email}</div>
+              </div>
+            }
           </div>
           <div className='createDiscussion'>
             <Link to='/create' type='button' className='btn btn-success btn-sm' role='button'>

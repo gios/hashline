@@ -18,21 +18,21 @@ class App extends Component {
   }
 
   render() {
-    let { dispatch, isToggled, isMobileView, isAuthenticated } = this.props
+    let { dispatch, isToggled, isMobileView, isAuthenticated, userInfo } = this.props
     return (
       <div>
         { isAuthenticated &&
         <div>
-          <Sidebar dispatch={dispatch}
-                  isToggled={isToggled}
-                  isMobileView={isMobileView}
-                  onSetMobile={value => dispatch(setMobileSidebar(value))}
-                  onToggle={value => dispatch(toggleSidebar(value))}
-                  onGetUserData={() => dispatch(getUserData())}
-                  onLogout={() => {
-                    dispatch(push('/login'))
-                    dispatch(runLogout())}
-                  }/>
+          <Sidebar isToggled={isToggled}
+                   isMobileView={isMobileView}
+                   userInfo={userInfo}
+                   onSetMobile={value => dispatch(setMobileSidebar(value))}
+                   onToggle={value => dispatch(toggleSidebar(value))}
+                   onGetUserData={() => dispatch(getUserData())}
+                   onLogout={() => {
+                     dispatch(push('/login'))
+                     dispatch(runLogout())}
+                   }/>
           <div className='content-wrapper'>
             <div className='container-fluid'>
               {this.props.children}
@@ -48,7 +48,8 @@ function inject(state) {
   return {
     isAuthenticated: state.login.auth.get('isAuthenticated'),
     isToggled: state.sidebar.sidebarView.get('isToggled'),
-    isMobileView: state.sidebar.sidebarView.get('isMobileView')
+    isMobileView: state.sidebar.sidebarView.get('isMobileView'),
+    userInfo: state.sidebar.userInfo.toJS()
   }
 }
 
