@@ -18,8 +18,10 @@ class App extends Component {
   }
 
   render() {
-    let { dispatch, isToggled, isMobileView } = this.props
+    let { dispatch, isToggled, isMobileView, isAuthenticated } = this.props
     return (
+      <div>
+      { isAuthenticated &&
       <div>
         <Sidebar dispatch={dispatch}
                  isToggled={isToggled}
@@ -36,6 +38,7 @@ class App extends Component {
             {this.props.children}
           </div>
         </div>
+      </div> }
       </div>
     )
   }
