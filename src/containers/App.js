@@ -47,8 +47,8 @@ class App extends Component {
 function inject(state) {
   return {
     isAuthenticated: state.login.auth.get('isAuthenticated'),
-    isToggled: state.sidebar.get('isToggled'),
-    isMobileView: state.sidebar.get('isMobileView')
+    isToggled: state.sidebar.sidebarView.get('isToggled'),
+    isMobileView: state.sidebar.sidebarView.get('isMobileView')
   }
 }
 

@@ -11,11 +11,12 @@ class Sidebar extends Component {
 
   componentDidMount() {
     let sidebarEl = document.querySelector('.navbar-static')
+     $(this.refs.logoutElem).tooltip()
     this.windowSizeAction(sidebarEl)
 
     window.addEventListener('resize', throttle(() => {
       this.windowSizeAction(sidebarEl)
-    }))
+    }, 200))
   }
 
   windowSizeAction(el) {
@@ -68,7 +69,7 @@ class Sidebar extends Component {
           <div className='navbar-info'>
             <p className='navbar-logo'>Hashline</p>
             <div className='navbal-logout'>
-              <i className='fa fa-sign-out' onClick={this.logout.bind(this)}></i>
+              <i className='fa fa-sign-out' ref='logoutElem' data-toggle='tooltip' data-placement='right' title='Logout' onClick={this.logout.bind(this)}></i>
             </div>
             <div className='navbar-user-info'>
               <div>Oneal</div>
