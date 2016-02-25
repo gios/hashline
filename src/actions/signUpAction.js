@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch'
+import { idToken } from '../utils/helpers'
 
 export const SIGNUP_REQUEST = 'SIGNUP_REQUEST'
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS'
@@ -56,7 +57,7 @@ export function signUpUser(creds) {
       })
       .then(response => response.json())
       .then(user => {
-        localStorage.setItem('id_token', user.id_token)
+        idToken.setToken(user.id_token)
         dispatch(signUpSuccess(user))
       })
       .catch(err => console.error(err)) // eslint-disable-line no-console

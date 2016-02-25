@@ -1,4 +1,5 @@
 import { CALL_API } from 'redux-api-middleware'
+import { idToken } from '../utils/helpers'
 
 export const TOGGLE_SIDEBAR = 'TOGGLE_SIDEBAR'
 export const MOBILE_SIDEBAR = 'MOBILE_SIDEBAR'
@@ -22,7 +23,7 @@ export function getUserData() {
     [CALL_API]: {
       endpoint: '/api/user',
       method: 'GET',
-      headers: { 'Authorization': `Bearer ${localStorage.getItem('id_token')}` },
+      headers: { 'Authorization': `Bearer ${idToken.getToken()}` },
       types: ['REQUEST', 'SUCCESS', 'FAILURE']
     }
   }

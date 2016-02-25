@@ -42,6 +42,10 @@ class Sidebar extends Component {
     }
   }
 
+  logout() {
+    // logout
+  }
+
   render() {
     let { isMobileView } = this.props
     let toggleSidebarBtn = (
@@ -64,7 +68,7 @@ class Sidebar extends Component {
           <div className='navbar-info'>
             <p className='navbar-logo'>Hashline</p>
             <div className='navbal-logout'>
-              <i className='fa fa-sign-out'></i>
+              <i className='fa fa-sign-out' onClick={this.logout.bind(this)}></i>
             </div>
             <div className='navbar-user-info'>
               <div>Oneal</div>

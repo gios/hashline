@@ -4,10 +4,11 @@ import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from '../actions/loginAct
 import { SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE } from '../actions/signUpAction'
 import { USERNAME_ERROR, EMAIL_ERROR, PASSWORD_ERROR } from '../actions/authErrorsAction'
 import { LOCATION_CHANGE } from 'react-router-redux'
+import { idToken } from '../utils/helpers'
 
 const authState = Immutable.Map({
   isFetching: false,
-  isAuthenticated: localStorage.getItem('id_token') ? true : false
+  isAuthenticated: idToken.hasToken()
 })
 
 function auth(state = authState, action) {
