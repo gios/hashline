@@ -21,24 +21,24 @@ class App extends Component {
     let { dispatch, isToggled, isMobileView, isAuthenticated } = this.props
     return (
       <div>
-      { isAuthenticated &&
-      <div>
-        <Sidebar dispatch={dispatch}
-                 isToggled={isToggled}
-                 isMobileView={isMobileView}
-                 onSetMobile={value => dispatch(setMobileSidebar(value))}
-                 onToggle={value => dispatch(toggleSidebar(value))}
-                 onGetUserData={() => dispatch(getUserData())}
-                 onLogout={() => {
-                   dispatch(push('/login'))
-                   dispatch(runLogout())}
-                 }/>
-        <div className='content-wrapper'>
-          <div className='container-fluid'>
-            {this.props.children}
+        { isAuthenticated &&
+        <div>
+          <Sidebar dispatch={dispatch}
+                  isToggled={isToggled}
+                  isMobileView={isMobileView}
+                  onSetMobile={value => dispatch(setMobileSidebar(value))}
+                  onToggle={value => dispatch(toggleSidebar(value))}
+                  onGetUserData={() => dispatch(getUserData())}
+                  onLogout={() => {
+                    dispatch(push('/login'))
+                    dispatch(runLogout())}
+                  }/>
+          <div className='content-wrapper'>
+            <div className='container-fluid'>
+              {this.props.children}
+            </div>
           </div>
-        </div>
-      </div> }
+        </div> }
       </div>
     )
   }
