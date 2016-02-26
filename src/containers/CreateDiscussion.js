@@ -1,20 +1,23 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import CreateDiscussionForm from './../components/create_discussion/CreateDiscussionForm'
+import { getDiscussionTypes } from '../actions/createDiscussionAction'
+import CreateDiscussionForm from '../components/create_discussion/CreateDiscussionForm'
 
 class Login extends Component {
   render() {
+    let { dispatch, discussionTypes } = this.props
     return (
       <div>
-        <CreateDiscussionForm/>
+        <CreateDiscussionForm discussionTypes={discussionTypes}
+                              onGetDiscussionTypes={() => dispatch(getDiscussionTypes())}/>
       </div>
     )
   }
 }
 
-function inject(state, ownProps) {
+function inject(state) {
   return {
-    pathname: ownProps.location.pathname
+    discussionTypes: state.createDiscussion.discussionTypes.toJS()
   }
 }
 

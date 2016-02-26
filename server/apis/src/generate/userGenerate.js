@@ -13,9 +13,7 @@ exports.init = function() {
         table.string('password')
         table.timestamps()
       })
-      .catch((error) => {
-        logger.error(error)
-      })
+      .then(() => logger.info('USERS table has been created'))
     }
   })
 }

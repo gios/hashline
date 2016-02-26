@@ -16,6 +16,10 @@ class createDiscussionForm extends Component {
     }
   }
 
+  componentWillMount() {
+    this.props.onGetDiscussionTypes()
+  }
+
   changePrivate() {
     this.setState({ isPrivate: !this.state.isPrivate })
   }
@@ -28,14 +32,14 @@ class createDiscussionForm extends Component {
     this.setState({ startDate: date })
   }
 
-  handleDelete(index) {
+  onDeleteTag(index) {
     let tags = this.state.tags
 
     tags.splice(index, 1)
     this.setState({ tags: tags })
   }
 
-  handleAddition(tag) {
+  onAddTag(tag) {
     let tags = this.state.tags
 
     tags.push({
@@ -45,7 +49,7 @@ class createDiscussionForm extends Component {
     this.setState({ tags: tags })
   }
 
-  handleDrag(tag, currPos, newPos) {
+  onDragTag(tag, currPos, newPos) {
     let tags = this.state.tags
 
     tags.splice(currPos, 1)
@@ -54,6 +58,19 @@ class createDiscussionForm extends Component {
   }
 
   render() {
+    let { discussionTypes } = this.props
+    let typesOptions
+
+    if(discussionTypes.payload) {
+      console.log(discussionTypes.payload)
+      typesOptions = discussionTypes.payload.map((item) => {
+        console.log(item)
+        return (
+          <option key={item.id}>{item.name}</option>
+        )
+      })
+    }
+
     return (
       <div>
         <div className='card-group'>
@@ -77,10 +94,7 @@ class createDiscussionForm extends Component {
                   <label htmlFor='inputType' className='col-sm-2 form-control-label'>Type</label>
                   <div className='col-sm-12'>
                     <select className='form-control' id='inputType'>
-                      <option>Post</option>
-                      <option>Gallery</option>
-                      <option>Event</option>
-                      <option>Chat</option>
+                      {typesOptions}
                     </select>
                   </div>
                 </fieldset>
@@ -100,7 +114,7 @@ class createDiscussionForm extends Component {
                   </div>
                 </fieldset>
                 <fieldset className='form-group row'>
-                  <div className='col-sm-10'>
+                  <div className='col-sm-12'>
                     <div className='input-group'>
                       <div className='input-group-addon'>Password</div>
                       <input type='password' className='form-control' disabled={!this.state.isPrivate}/>
@@ -116,7 +130,7 @@ class createDiscussionForm extends Component {
                   </div>
                 </fieldset>
                 <fieldset className='form-group row'>
-                  <div className='col-sm-10'>
+                  <div className='col-sm-12'>
                     <DatePicker selected={this.state.startDate} onChange={this.handleChange.bind(this)} disabled={!this.state.isLimited}/>
                   </div>
                 </fieldset>
@@ -126,9 +140,9 @@ class createDiscussionForm extends Component {
                     <ReactTags.WithContext tags={this.state.tags}
                                            suggestions={this.state.suggestions}
                                            placeholder='Add tags'
-                                           handleDelete={this.handleDelete.bind(this)}
-                                           handleAddition={this.handleAddition.bind(this)}
-                                           handleDrag={this.handleDrag.bind(this)}/>
+                                           handleDelete={this.onDeleteTag.bind(this)}
+                                           handleAddition={this.onAddTag.bind(this)}
+                                           handleDrag={this.onDragTag.bind(this)}/>
                   </div>
                 </fieldset>
               </form>

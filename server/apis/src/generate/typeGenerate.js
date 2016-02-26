@@ -10,14 +10,12 @@ exports.init = function() {
         table.increments()
         table.string('name').unique()
       })
+      .then(() => logger.log('TYPES table has been created'))
       .then(() => {
-        knex('types').insert([
+        return knex('types').insert([
           {name: 'Event'},
           {name: 'Question'}
         ])
-      })
-      .catch((error) => {
-        logger.error(error)
       })
     }
   })

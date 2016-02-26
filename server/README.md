@@ -56,3 +56,11 @@ Realtime discussions
       status: 409
       message: "Username and email should be unique"
   ```
+- Get User Data : /api/user : GET
+  - Output:
+  ```json
+  {
+      "username": "string",
+      "email": "string"
+  }
+  ```

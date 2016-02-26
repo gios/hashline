@@ -4,6 +4,7 @@ module.exports = function(router) {
   const knex = require('../knex.js')
 
   router.get('/api/get_types', function *() {
-    this.body = {}
+    let availableTypes = yield knex('types').select()
+    this.body = availableTypes
   })
 }
