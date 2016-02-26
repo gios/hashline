@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/gios/hashline#readme",
   "dependencies": {
+    "bluebird": "^3.3.3",
     "bootstrap": "^4.0.0-alpha.2",
     "font-awesome": "^4.5.0",
     "immutable": "^3.7.6",

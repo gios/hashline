@@ -37,6 +37,7 @@ app.use(serve(__dirname + '/../public'))
 
 // Routes
 require('./apis/src/routes/userRoutes.js')(router, jwt, SHARED_SECRET)
+require('./apis/src/routes/typeRoutes.js')(router)
 
 io.on('connection', function() {
   tracer.log('a user connected')
