@@ -62,9 +62,7 @@ class createDiscussionForm extends Component {
     let typesOptions
 
     if(discussionTypes.payload) {
-      console.log(discussionTypes.payload)
-      typesOptions = discussionTypes.payload.map((item) => {
-        console.log(item)
+      typesOptions = discussionTypes.payload.types.map((item) => {
         return (
           <option key={item.id}>{item.name}</option>
         )
