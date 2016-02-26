@@ -3,10 +3,11 @@
 const logger = require('tracer').colorConsole()
 const Promise = require('bluebird')
 
-console.log(require('./userGenerate.js').init())
-Promise.all(
+logger.trace('START DATABASE GENERATION...')
+Promise.all([
   require('./userGenerate.js').init(),
   require('./typeGenerate.js').init()
-)
-.then(() => logger.info('GENERATE END'))
+])
+.then(() => logger.trace('DATABASE HAS BEEN GENERATED'))
+.then(() => process.exit())
 .catch((error) => logger.error(error))
