@@ -24,9 +24,26 @@ const discussionGetState = Immutable.Map({
 function toSelectableFormat(data) {
   let iterable = data.types || data.tags || data.limites
   return iterable.map((item) => {
+    let value
+    switch (item.name) {
+      case '1 Hour':
+      case '2 Hours':
+      case '3 Hours':
+      case '6 Hours':
+      case '12 Hours':
+        value = parseInt(item.name.split(' ')[0])
+        break
+      case 'All Day':
+        value = 24
+        break
+      default:
+        value = item.name.toLowerCase()
+        break
+    }
+
     return {
       id: item.id,
-      value: item.name.toLowerCase(),
+      value,
       label: item.name
     }
   })
@@ -72,7 +89,7 @@ const discussionSettingsState = Immutable.Map({
   isPrivate: false,
   isLimited: false,
   selectedType: 'question',
-  selectedLimited: '1 hour',
+  selectedLimited: '1',
   selectedTags: ''
 })
 

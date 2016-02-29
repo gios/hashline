@@ -28,6 +28,10 @@ class createDiscussionForm extends Component {
     this.props.onDiscussionSelectTags(newTag)
   }
 
+  createDiscussion() {
+    console.log(this.props.discussionSettings)
+  }
+
   loadingSelect(type) {
     if(type.isFetching) {
        return true
@@ -95,7 +99,11 @@ class createDiscussionForm extends Component {
                 <fieldset className='form-group row'>
                   <label htmlFor='inputDescription' className='col-sm-2 form-control-label'>Description</label>
                   <div className='col-sm-12'>
-                    <textarea className='form-control' id='inputDescription' rows='3' placeholder='Describe your conversation'></textarea>
+                    <textarea className='form-control'
+                              id='inputDescription'
+                              rows='3'
+                              placeholder='Describe your conversation'
+                              style={{resize: 'none'}}></textarea>
                   </div>
                 </fieldset>
                 <fieldset className='form-group row'>
@@ -150,7 +158,7 @@ class createDiscussionForm extends Component {
             </div>
           </div>
         </div>
-        <button type='button' className='btn btn-success'>Create Discussion</button>
+        <button type='button' className='btn btn-success' onClick={this.createDiscussion.bind(this)}>Create Discussion</button>
       </div>
     )
   }

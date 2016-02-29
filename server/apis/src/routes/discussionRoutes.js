@@ -17,10 +17,10 @@ module.exports = function(router) {
     this.body = {
       limites: [
         {name: '1 Hour'},
-        {name: '2 Hour'},
-        {name: '3 Hour'},
-        {name: '6 Hour'},
-        {name: '12 Hour'},
+        {name: '2 Hours'},
+        {name: '3 Hours'},
+        {name: '6 Hours'},
+        {name: '12 Hours'},
         {name: 'All Day'}
       ]
     }
