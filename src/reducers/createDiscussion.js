@@ -10,7 +10,10 @@ import { REQUEST_DISCUSSION_TYPES,
          SUCCESS_DISCUSSION_LIMITES,
          FAILURE_DISCUSSION_LIMITES,
          DISCUSSION_PRIVATE,
-         DISCUSSION_LIMITED } from '../actions/createDiscussionAction'
+         DISCUSSION_LIMITED,
+         DISCUSSION_SELECT_TYPE,
+         DISCUSSION_SELECT_LIMITED,
+         DISCUSSION_SELECT_TAGS } from '../actions/createDiscussionAction'
 
 const discussionGetState = Immutable.Map({
   isFetching: false,
@@ -82,6 +85,18 @@ function discussionSettings(state = discussionSettingsState, action) {
     case DISCUSSION_LIMITED:
       return state.merge({
         isLimited: action.isLimited
+      })
+    case DISCUSSION_SELECT_TYPE:
+      return state.merge({
+        selectedType: action.selectedType
+      })
+    case DISCUSSION_SELECT_LIMITED:
+      return state.merge({
+        selectedLimited: action.selectedLimited
+      })
+    case DISCUSSION_SELECT_TAGS:
+      return state.merge({
+        selectedTags: action.selectedTags
       })
     default:
       return state

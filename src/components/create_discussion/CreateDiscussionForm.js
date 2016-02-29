@@ -3,15 +3,6 @@ import Select from 'react-select'
 
 class createDiscussionForm extends Component {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      selectedType: 'question',
-      selectedLimited: '1 hour',
-      selectedTags: []
-    }
-  }
-
   componentWillMount() {
     this.props.onGetTags()
     this.props.onGetLimites()
@@ -26,21 +17,15 @@ class createDiscussionForm extends Component {
   }
 
   onSelectType(newType) {
-    this.setState({
-      selectedType: newType
-    })
+    this.props.onDiscussionSelectType(newType)
   }
 
   onSelectLimited(newLimited) {
-    this.setState({
-      selectedLimited: newLimited
-    })
+    this.props.onDiscussionSelectLimited(newLimited)
   }
 
   onSelectTags(newTag) {
-    this.setState({
-      selectedTags: newTag
-    })
+    this.props.onDiscussionSelectTags(newTag)
   }
 
   loadingSelect(type) {
@@ -52,13 +37,13 @@ class createDiscussionForm extends Component {
   }
 
   renderTypeSelect() {
-    let { discussionTypes } = this.props
+    let { discussionTypes, discussionSettings } = this.props
     let isLoading = this.loadingSelect(discussionTypes)
 
     return (
       <Select isLoading={isLoading}
               onChange={this.onSelectType.bind(this)}
-              value={this.state.selectedType}
+              value={discussionSettings.selectedType}
               options={discussionTypes.payload}
               clearable={false}/>
     )
@@ -71,7 +56,7 @@ class createDiscussionForm extends Component {
     return (
       <Select isLoading={isLoading}
               onChange={this.onSelectLimited.bind(this)}
-              value={this.state.selectedLimited}
+              value={discussionSettings.selectedLimited}
               options={discussionLimites.payload}
               clearable={false}
               disabled={!discussionSettings.isLimited}/>
@@ -79,13 +64,13 @@ class createDiscussionForm extends Component {
   }
 
   renderTagSelect() {
-    let { discussionTags } = this.props
+    let { discussionTags, discussionSettings } = this.props
     let isLoading = this.loadingSelect(discussionTags)
 
     return (
       <Select isLoading={isLoading}
               onChange={this.onSelectTags.bind(this)}
-              value={this.state.selectedTags}
+              value={discussionSettings.selectedTags}
               multi={true}
               options={discussionTags.payload}
               allowCreate={true}/>

@@ -16,6 +16,10 @@ export const FAILURE_DISCUSSION_LIMITES = 'FAILURE_DISCUSSION_LIMITES'
 export const DISCUSSION_PRIVATE = 'DISCUSSION_PRIVATE'
 export const DISCUSSION_LIMITED = 'DISCUSSION_LIMITED'
 
+export const DISCUSSION_SELECT_TYPE = 'DISCUSSION_SELECT_TYPE'
+export const DISCUSSION_SELECT_LIMITED = 'DISCUSSION_SELECT_LIMITED'
+export const DISCUSSION_SELECT_TAGS = 'DISCUSSION_SELECT_TAGS'
+
 export function discussionPrivate(isPrivate) {
   return {
     type: DISCUSSION_PRIVATE,
@@ -27,6 +31,27 @@ export function discussionLimited(isLimited) {
   return {
     type: DISCUSSION_LIMITED,
     isLimited
+  }
+}
+
+export function discussionSelectType(type) {
+  return {
+    type: DISCUSSION_SELECT_TYPE,
+    selectedType: type
+  }
+}
+
+export function discussionSelectLimited(limited) {
+  return {
+    type: DISCUSSION_SELECT_LIMITED,
+    selectedLimited: limited
+  }
+}
+
+export function discussionSelectTags(tags) {
+  return {
+    type: DISCUSSION_SELECT_TAGS,
+    selectedTags: tags
   }
 }
 

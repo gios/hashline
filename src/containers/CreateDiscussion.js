@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getDiscussionTags, getDiscussionLimites, discussionPrivate, discussionLimited } from '../actions/createDiscussionAction'
+import { getDiscussionTags,
+         getDiscussionLimites,
+         discussionPrivate,
+         discussionLimited,
+         discussionSelectType,
+         discussionSelectLimited,
+         discussionSelectTags } from '../actions/createDiscussionAction'
 import CreateDiscussionForm from '../components/create_discussion/CreateDiscussionForm'
 
 class Login extends Component {
@@ -20,7 +26,10 @@ class Login extends Component {
                               onGetLimites={() => dispatch(getDiscussionLimites())}
                               onGetTags={() => dispatch(getDiscussionTags())}
                               onDiscussionPrivate={(value) => dispatch(discussionPrivate(value))}
-                              onDiscussionLimited={(value) => dispatch(discussionLimited(value))}/>
+                              onDiscussionLimited={(value) => dispatch(discussionLimited(value))}
+                              onDiscussionSelectType={(value) => dispatch(discussionSelectType(value))}
+                              onDiscussionSelectLimited={(value) => dispatch(discussionSelectLimited(value))}
+                              onDiscussionSelectTags={(value) => dispatch(discussionSelectTags(value))}/>
       </div>
     )
   }
