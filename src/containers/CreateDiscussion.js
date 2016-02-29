@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { getDiscussionTags } from '../actions/createDiscussionAction'
 import CreateDiscussionForm from '../components/create_discussion/CreateDiscussionForm'
 
 class Login extends Component {
   render() {
-    let { discussionTypes } = this.props
+    let { dispatch, discussionTypes, discussionTags } = this.props
     return (
       <div>
-        <CreateDiscussionForm discussionTypes={discussionTypes}/>
+        <CreateDiscussionForm discussionTypes={discussionTypes}
+                              discussionTags={discussionTags}
+                              onGetTags={() => dispatch(getDiscussionTags())}/>
       </div>
     )
   }
@@ -15,7 +18,8 @@ class Login extends Component {
 
 function inject(state) {
   return {
-    discussionTypes: state.createDiscussion.discussionTypes.toJS()
+    discussionTypes: state.createDiscussion.discussionTypes.toJS(),
+    discussionTags: state.createDiscussion.discussionTags.toJS()
   }
 }
 

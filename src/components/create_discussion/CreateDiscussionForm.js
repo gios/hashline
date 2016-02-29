@@ -18,14 +18,12 @@ class createDiscussionForm extends Component {
         {value: '6hour', label: '6 Hour'},
         {value: '12hour', label: '12 Hour'},
         {value: 'allday', label: 'All Day'}
-      ],
-      tagsValues: [
-        {value: 'sport', label: 'Sport'},
-        {value: 'culture', label: 'Culture'},
-        {value: 'ronaldo', label: 'Ronaldo'},
-        {value: 'etc', label: 'Etc'}
       ]
     }
+  }
+
+  componentWillMount() {
+    this.props.onGetTags()
   }
 
   changePrivate() {
@@ -64,7 +62,30 @@ class createDiscussionForm extends Component {
     }
 
     return (
-      <Select isLoading={isLoading} onChange={this.onSelectType.bind(this)} value={this.state.selectedType} options={discussionTypes.payload} clearable={false}/>
+      <Select isLoading={isLoading}
+              onChange={this.onSelectType.bind(this)}
+              value={this.state.selectedType}
+              options={discussionTypes.payload}
+              clearable={false}/>
+    )
+  }
+
+  renderTagSelect() {
+    let { discussionTags } = this.props
+    let isLoading
+    if(discussionTags.isFetching) {
+      isLoading = true
+    } else if(discussionTags.payload) {
+      isLoading = false
+    }
+
+    return (
+      <Select isLoading={isLoading}
+              onChange={this.onSelectTags.bind(this)}
+              value={this.state.selectedTags}
+              multi={true}
+              options={discussionTags.payload}
+              allowCreate={true}/>
     )
   }
 
@@ -137,11 +158,7 @@ class createDiscussionForm extends Component {
                 <fieldset className='form-group row'>
                   <label className='form-control-label'>Tags <small className='text-muted'>tags help to identify your conversation</small></label>
                   <div className='col-sm-12'>
-                    <Select onChange={this.onSelectTags.bind(this)}
-                            value={this.state.selectedTags}
-                            multi={true}
-                            options={this.state.tagsValues}
-                            allowCreate={true}/>
+                    {this.renderTagSelect()}
                   </div>
                 </fieldset>
               </form>

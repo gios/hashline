@@ -10,6 +10,6 @@ module.exports = function(router) {
 
   router.get('/api/discussion/get_tags', function *() {
     let availableTags = yield knex('tags').select()
-    this.body = { types: availableTags }
+    this.body = { tags: availableTags }
   })
 }
