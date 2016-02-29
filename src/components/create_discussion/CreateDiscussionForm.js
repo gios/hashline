@@ -9,6 +9,9 @@ class createDiscussionForm extends Component {
     this.state = {
       isPrivate: false,
       isLimited: false,
+      selectedType: 'question',
+      selectedLimited: '1hour',
+      selectedTags: [],
       limitedValues: [
         {value: '1hour', label: '1 Hour'},
         {value: '2hour', label: '2 Hour'},
@@ -34,24 +37,31 @@ class createDiscussionForm extends Component {
     this.setState({ isLimited: !this.state.isLimited })
   }
 
+  onSelectType(newType) {
+    this.setState({
+      selectedType: newType
+    })
+  }
+
+  onSelectLimited(newLimited) {
+    this.setState({
+      selectedLimited: newLimited
+    })
+  }
+
+  onSelectTags(newTag) {
+    this.setState({
+      selectedTags: newTag
+    })
+  }
+
   renderTypeSelect() {
     let { discussionTypes } = this.props
     if(discussionTypes.isFetching) {
       return <Loader size={2}/>
     } else if(discussionTypes.payload) {
       return (
-        <Select value='Question' options={discussionTypes.payload} clearable={false}/>
-      )
-    }
-  }
-
-  renderLimitedSelect() {
-    let { discussionTypes } = this.props
-    if(discussionTypes.isFetching) {
-      return <Loader size={2}/>
-    } else if(discussionTypes.payload) {
-      return (
-        <Select value='Question' options={discussionTypes.payload} clearable={false}/>
+        <Select onChange={this.onSelectType.bind(this)} value={this.state.selectedType} options={discussionTypes.payload} clearable={false}/>
       )
     }
   }
@@ -115,13 +125,21 @@ class createDiscussionForm extends Component {
                 </fieldset>
                 <fieldset className='form-group row'>
                   <div className='col-sm-12'>
-                    <Select value='1hour' options={this.state.limitedValues} clearable={false} disabled={!this.state.isLimited}/>
+                    <Select onChange={this.onSelectLimited.bind(this)}
+                            value={this.state.selectedLimited}
+                            options={this.state.limitedValues}
+                            clearable={false}
+                            disabled={!this.state.isLimited}/>
                   </div>
                 </fieldset>
                 <fieldset className='form-group row'>
                   <label className='form-control-label'>Tags <small className='text-muted'>tags help to identify your conversation</small></label>
                   <div className='col-sm-12'>
-                    <Select multi={true} options={this.state.tagsValues}/>
+                    <Select onChange={this.onSelectTags.bind(this)}
+                            value={this.state.selectedTags}
+                            multi={true}
+                            options={this.state.tagsValues}
+                            allowCreate={true}/>
                   </div>
                 </fieldset>
               </form>

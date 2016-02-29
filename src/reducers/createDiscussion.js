@@ -44,24 +44,24 @@ function discussionTypes(state = discussionTypesState, action) {
   }
 }
 
-// const discussionSettingsState = Immutable.Map({
-//   isPrivate: false,
-//   isLimited: false,
-//   tags: [],
-//   suggestions: [],
-//   startDate: moment()
-// })
+const discussionSettingsState = Immutable.Map({
+  isPrivate: false,
+  isLimited: false,
+  tags: [],
+  suggestions: [],
+  startDate: moment()
+})
 
-// function discussionSettings(state = discussionSettingsState, action) {
-//   switch (action.type) {
-//     case value:
+function discussionSettings(state = discussionSettingsState, action) {
+  switch (action.type) {
+    case value:
 
-//       break;
+      break;
 
-//     default:
-//       break;
-//   }
-// }
+    default:
+      break;
+  }
+}
 
 export let createDiscussion = combineReducers({
   discussionTypes
