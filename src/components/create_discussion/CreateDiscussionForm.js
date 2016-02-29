@@ -16,15 +16,15 @@ class createDiscussionForm extends Component {
     this.props.onDiscussionLimited(event.target.checked)
   }
 
-  onSelectType(newType) {
+  selectType(newType) {
     this.props.onDiscussionSelectType(newType)
   }
 
-  onSelectLimited(newLimited) {
+  selectLimited(newLimited) {
     this.props.onDiscussionSelectLimited(newLimited)
   }
 
-  onSelectTags(newTag) {
+  selectTags(newTag) {
     this.props.onDiscussionSelectTags(newTag)
   }
 
@@ -42,7 +42,7 @@ class createDiscussionForm extends Component {
 
     return (
       <Select isLoading={isLoading}
-              onChange={this.onSelectType.bind(this)}
+              onChange={this.selectType.bind(this)}
               value={discussionSettings.selectedType}
               options={discussionTypes.payload}
               clearable={false}/>
@@ -55,7 +55,7 @@ class createDiscussionForm extends Component {
 
     return (
       <Select isLoading={isLoading}
-              onChange={this.onSelectLimited.bind(this)}
+              onChange={this.selectLimited.bind(this)}
               value={discussionSettings.selectedLimited}
               options={discussionLimites.payload}
               clearable={false}
@@ -69,7 +69,7 @@ class createDiscussionForm extends Component {
 
     return (
       <Select isLoading={isLoading}
-              onChange={this.onSelectTags.bind(this)}
+              onChange={this.selectTags.bind(this)}
               value={discussionSettings.selectedTags}
               multi={true}
               options={discussionTags.payload}
