@@ -6,8 +6,6 @@ class createDiscussionForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isPrivate: false,
-      isLimited: false,
       selectedType: 'question',
       selectedLimited: '1 hour',
       selectedTags: []
@@ -19,12 +17,12 @@ class createDiscussionForm extends Component {
     this.props.onGetLimites()
   }
 
-  changePrivate() {
-    this.setState({ isPrivate: !this.state.isPrivate })
+  changePrivate(event) {
+    this.props.onDiscussionPrivate(event.target.checked)
   }
 
-  changeLimited() {
-    this.setState({ isLimited: !this.state.isLimited })
+  changeLimited(event) {
+    this.props.onDiscussionLimited(event.target.checked)
   }
 
   onSelectType(newType) {
@@ -67,7 +65,7 @@ class createDiscussionForm extends Component {
   }
 
   renderLimitSelect() {
-    let { discussionLimites } = this.props
+    let { discussionLimites, discussionSettings } = this.props
     let isLoading = this.loadingSelect(discussionLimites)
 
     return (
@@ -76,7 +74,7 @@ class createDiscussionForm extends Component {
               value={this.state.selectedLimited}
               options={discussionLimites.payload}
               clearable={false}
-              disabled={!this.state.isLimited}/>
+              disabled={!discussionSettings.isLimited}/>
     )
   }
 
@@ -95,6 +93,7 @@ class createDiscussionForm extends Component {
   }
 
   render() {
+    let { discussionSettings } = this.props
     return (
       <div>
         <div className='card-group'>
@@ -139,7 +138,7 @@ class createDiscussionForm extends Component {
                   <div className='col-sm-12'>
                     <div className='input-group'>
                       <div className='input-group-addon'>Password</div>
-                      <input type='password' className='form-control' disabled={!this.state.isPrivate}/>
+                      <input type='password' className='form-control' disabled={!discussionSettings.isPrivate}/>
                     </div>
                   </div>
                 </fieldset>

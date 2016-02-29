@@ -8,7 +8,9 @@ import { REQUEST_DISCUSSION_TYPES,
          FAILURE_DISCUSSION_TAGS,
          REQUEST_DISCUSSION_LIMITES,
          SUCCESS_DISCUSSION_LIMITES,
-         FAILURE_DISCUSSION_LIMITES } from '../actions/createDiscussionAction'
+         FAILURE_DISCUSSION_LIMITES,
+         DISCUSSION_PRIVATE,
+         DISCUSSION_LIMITED } from '../actions/createDiscussionAction'
 
 const discussionGetState = Immutable.Map({
   isFetching: false,
@@ -73,6 +75,14 @@ const discussionSettingsState = Immutable.Map({
 
 function discussionSettings(state = discussionSettingsState, action) {
   switch (action.type) {
+    case DISCUSSION_PRIVATE:
+      return state.merge({
+        isPrivate: action.isPrivate
+      })
+    case DISCUSSION_LIMITED:
+      return state.merge({
+        isLimited: action.isLimited
+      })
     default:
       return state
   }

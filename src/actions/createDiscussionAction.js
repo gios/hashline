@@ -13,6 +13,23 @@ export const REQUEST_DISCUSSION_LIMITES = 'REQUEST_DISCUSSION_LIMITES'
 export const SUCCESS_DISCUSSION_LIMITES = 'SUCCESS_DISCUSSION_LIMITES'
 export const FAILURE_DISCUSSION_LIMITES = 'FAILURE_DISCUSSION_LIMITES'
 
+export const DISCUSSION_PRIVATE = 'DISCUSSION_PRIVATE'
+export const DISCUSSION_LIMITED = 'DISCUSSION_LIMITED'
+
+export function discussionPrivate(isPrivate) {
+  return {
+    type: DISCUSSION_PRIVATE,
+    isPrivate
+  }
+}
+
+export function discussionLimited(isLimited) {
+  return {
+    type: DISCUSSION_LIMITED,
+    isLimited
+  }
+}
+
 export function getDiscussionLimites() {
   return {
     [CALL_API]: {
