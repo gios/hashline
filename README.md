@@ -1,4 +1,5 @@
 # Hashline
+![alt tag](https://raw.githubusercontent.com/gios/hashline/main.png)
 Realtime discussions
 
 ## Technologies
