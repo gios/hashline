@@ -16,10 +16,6 @@ class createDiscussionForm extends Component {
     }
   }
 
-  componentWillMount() {
-    this.props.onGetDiscussionTypes()
-  }
-
   changePrivate() {
     this.setState({ isPrivate: !this.state.isPrivate })
   }

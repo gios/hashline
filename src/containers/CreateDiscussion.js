@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getDiscussionTypes } from '../actions/createDiscussionAction'
 import CreateDiscussionForm from '../components/create_discussion/CreateDiscussionForm'
 
 class Login extends Component {
   render() {
-    let { dispatch, discussionTypes } = this.props
+    let { discussionTypes } = this.props
     return (
       <div>
-        <CreateDiscussionForm discussionTypes={discussionTypes}
-                              onGetDiscussionTypes={() => dispatch(getDiscussionTypes())}/>
+        <CreateDiscussionForm discussionTypes={discussionTypes}/>
       </div>
     )
   }

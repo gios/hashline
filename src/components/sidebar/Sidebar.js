@@ -8,6 +8,7 @@ class Sidebar extends Component {
 
   componentWillMount() {
     this.props.onGetUserData()
+    this.props.onGetDiscussionTypes()
   }
 
   componentDidMount() {
@@ -49,8 +50,10 @@ class Sidebar extends Component {
   }
 
   render() {
-    let { isMobileView, userInfo } = this.props
+    let { isMobileView, userInfo, discussionTypes } = this.props
     let userInfoRender
+    let typesOptions
+
     let toggleSidebarBtn = (
       <div className='toggle-sidebar-button'>
         <i className='fa fa-bars' onClick={this.toggleSidebar.bind(this)}></i>
@@ -73,6 +76,19 @@ class Sidebar extends Component {
           <div>{userInfo.payload.email}</div>
         </div>
       )
+    }
+
+    if(discussionTypes.payload) {
+      typesOptions = discussionTypes.payload.types.map((item) => {
+        return (
+          <li className='nav-item'>
+            <a className='nav-link sidebar-link nested' href='#'>
+              <i className='fa fa-chevron-circle-right'></i>
+              <span className='sidebar-list-item'>{item.name}</span>
+            </a>
+          </li>
+        )
+      })
     }
 
     return (
@@ -126,30 +142,7 @@ class Sidebar extends Component {
             </li>
             <div className='collapse' id='typeCollapse'>
               <ul className='nav sidebar-list-static nested'>
-                <li className='nav-item'>
-                  <a className='nav-link sidebar-link nested' href='#'>
-                    <i className='fa fa-chevron-circle-right'></i>
-                    <span className='sidebar-list-item'>Posts</span>
-                  </a>
-                </li>
-                <li className='nav-item'>
-                  <a className='nav-link sidebar-link nested' href='#'>
-                    <i className='fa fa-chevron-circle-right'></i>
-                    <span className='sidebar-list-item'>Galleries</span>
-                  </a>
-                </li>
-                <li className='nav-item'>
-                  <a className='nav-link sidebar-link nested' href='#'>
-                    <i className='fa fa-chevron-circle-right'></i>
-                    <span className='sidebar-list-item'>Events</span>
-                  </a>
-                </li>
-                <li className='nav-item'>
-                  <a className='nav-link sidebar-link nested' href='#'>
-                    <i className='fa fa-chevron-circle-right'></i>
-                    <span className='sidebar-list-item'>Chats</span>
-                  </a>
-                </li>
+                {typesOptions}
               </ul>
             </div>
             <li className='nav-item'>
