@@ -45,14 +45,17 @@ class createDiscussionForm extends Component {
     })
   }
 
+  loadingSelect(type) {
+    if(type.isFetching) {
+       return true
+    } else if(type.payload) {
+       return false
+    }
+  }
+
   renderTypeSelect() {
     let { discussionTypes } = this.props
-    let isLoading
-    if(discussionTypes.isFetching) {
-      isLoading = true
-    } else if(discussionTypes.payload) {
-      isLoading = false
-    }
+    let isLoading = this.loadingSelect(discussionTypes)
 
     return (
       <Select isLoading={isLoading}
@@ -65,12 +68,7 @@ class createDiscussionForm extends Component {
 
   renderLimitSelect() {
     let { discussionLimites } = this.props
-    let isLoading
-    if(discussionLimites.isFetching) {
-      isLoading = true
-    } else if(discussionLimites.payload) {
-      isLoading = false
-    }
+    let isLoading = this.loadingSelect(discussionLimites)
 
     return (
       <Select isLoading={isLoading}
@@ -84,12 +82,7 @@ class createDiscussionForm extends Component {
 
   renderTagSelect() {
     let { discussionTags } = this.props
-    let isLoading
-    if(discussionTags.isFetching) {
-      isLoading = true
-    } else if(discussionTags.payload) {
-      isLoading = false
-    }
+    let isLoading = this.loadingSelect(discussionTags)
 
     return (
       <Select isLoading={isLoading}
