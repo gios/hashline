@@ -73,7 +73,7 @@ const discussionSettingsState = Immutable.Map({
   isLimited: false,
   selectedType: 'question',
   selectedLimited: '1 hour',
-  selectedTags: []
+  selectedTags: ''
 })
 
 function discussionSettings(state = discussionSettingsState, action) {
