@@ -9,21 +9,14 @@ class createDiscussionForm extends Component {
       isPrivate: false,
       isLimited: false,
       selectedType: 'question',
-      selectedLimited: '1hour',
-      selectedTags: [],
-      limitedValues: [
-        {value: '1hour', label: '1 Hour'},
-        {value: '2hour', label: '2 Hour'},
-        {value: '3hour', label: '3 Hour'},
-        {value: '6hour', label: '6 Hour'},
-        {value: '12hour', label: '12 Hour'},
-        {value: 'allday', label: 'All Day'}
-      ]
+      selectedLimited: '1 hour',
+      selectedTags: []
     }
   }
 
   componentWillMount() {
     this.props.onGetTags()
+    this.props.onGetLimites()
   }
 
   changePrivate() {
@@ -67,6 +60,25 @@ class createDiscussionForm extends Component {
               value={this.state.selectedType}
               options={discussionTypes.payload}
               clearable={false}/>
+    )
+  }
+
+  renderLimitSelect() {
+    let { discussionLimites } = this.props
+    let isLoading
+    if(discussionLimites.isFetching) {
+      isLoading = true
+    } else if(discussionLimites.payload) {
+      isLoading = false
+    }
+
+    return (
+      <Select isLoading={isLoading}
+              onChange={this.onSelectLimited.bind(this)}
+              value={this.state.selectedLimited}
+              options={discussionLimites.payload}
+              clearable={false}
+              disabled={!this.state.isLimited}/>
     )
   }
 
@@ -148,11 +160,7 @@ class createDiscussionForm extends Component {
                 </fieldset>
                 <fieldset className='form-group row'>
                   <div className='col-sm-12'>
-                    <Select onChange={this.onSelectLimited.bind(this)}
-                            value={this.state.selectedLimited}
-                            options={this.state.limitedValues}
-                            clearable={false}
-                            disabled={!this.state.isLimited}/>
+                    {this.renderLimitSelect()}
                   </div>
                 </fieldset>
                 <fieldset className='form-group row'>

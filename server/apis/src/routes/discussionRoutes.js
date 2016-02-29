@@ -12,4 +12,17 @@ module.exports = function(router) {
     let availableTags = yield knex('tags').select()
     this.body = { tags: availableTags }
   })
+
+  router.get('/api/discussion/get_limites', function *() {
+    this.body = {
+      limites: [
+        {name: '1 Hour'},
+        {name: '2 Hour'},
+        {name: '3 Hour'},
+        {name: '6 Hour'},
+        {name: '12 Hour'},
+        {name: 'All Day'}
+      ]
+    }
+  })
 }
