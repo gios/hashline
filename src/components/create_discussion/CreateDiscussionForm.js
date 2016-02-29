@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Select from 'react-select'
-import Loader from '../parts/Loader'
 
 class createDiscussionForm extends Component {
 
@@ -57,13 +56,16 @@ class createDiscussionForm extends Component {
 
   renderTypeSelect() {
     let { discussionTypes } = this.props
+    let isLoading
     if(discussionTypes.isFetching) {
-      return <Loader size={2}/>
+      isLoading = true
     } else if(discussionTypes.payload) {
-      return (
-        <Select onChange={this.onSelectType.bind(this)} value={this.state.selectedType} options={discussionTypes.payload} clearable={false}/>
-      )
+      isLoading = false
     }
+
+    return (
+      <Select isLoading={isLoading} onChange={this.onSelectType.bind(this)} value={this.state.selectedType} options={discussionTypes.payload} clearable={false}/>
+    )
   }
 
   render() {
