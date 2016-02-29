@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import ReactTags from 'react-tag-input'
-import DatePicker from 'react-datepicker'
-import moment from 'moment'
+import Select from 'react-select'
+import Loader from '../parts/Loader'
 
 class createDiscussionForm extends Component {
 
@@ -10,9 +9,20 @@ class createDiscussionForm extends Component {
     this.state = {
       isPrivate: false,
       isLimited: false,
-      tags: [ {id: 1, text: 'Apples'} ],
-      suggestions: ['Banana', 'Mango', 'Pear', 'Apricot'],
-      startDate: moment()
+      limitedValues: [
+        {value: '1hour', label: '1 Hour'},
+        {value: '2hour', label: '2 Hour'},
+        {value: '3hour', label: '3 Hour'},
+        {value: '6hour', label: '6 Hour'},
+        {value: '12hour', label: '12 Hour'},
+        {value: 'allday', label: 'All Day'}
+      ],
+      tagsValues: [
+        {value: 'sport', label: 'Sport'},
+        {value: 'culture', label: 'Culture'},
+        {value: 'ronaldo', label: 'Ronaldo'},
+        {value: 'etc', label: 'Etc'}
+      ]
     }
   }
 
@@ -24,47 +34,29 @@ class createDiscussionForm extends Component {
     this.setState({ isLimited: !this.state.isLimited })
   }
 
-  handleChange(date) {
-    this.setState({ startDate: date })
+  renderTypeSelect() {
+    let { discussionTypes } = this.props
+    if(discussionTypes.isFetching) {
+      return <Loader size={2}/>
+    } else if(discussionTypes.payload) {
+      return (
+        <Select value='Question' options={discussionTypes.payload} clearable={false}/>
+      )
+    }
   }
 
-  onDeleteTag(index) {
-    let tags = this.state.tags
-
-    tags.splice(index, 1)
-    this.setState({ tags: tags })
-  }
-
-  onAddTag(tag) {
-    let tags = this.state.tags
-
-    tags.push({
-        id: tags.length + 1,
-        text: tag
-    });
-    this.setState({ tags: tags })
-  }
-
-  onDragTag(tag, currPos, newPos) {
-    let tags = this.state.tags
-
-    tags.splice(currPos, 1)
-    tags.splice(newPos, 0, tag)
-    this.setState({ tags: tags })
+  renderLimitedSelect() {
+    let { discussionTypes } = this.props
+    if(discussionTypes.isFetching) {
+      return <Loader size={2}/>
+    } else if(discussionTypes.payload) {
+      return (
+        <Select value='Question' options={discussionTypes.payload} clearable={false}/>
+      )
+    }
   }
 
   render() {
-    let { discussionTypes } = this.props
-    let typesOptions
-
-    if(discussionTypes.payload) {
-      typesOptions = discussionTypes.payload.types.map((item) => {
-        return (
-          <option key={item.id}>{item.name}</option>
-        )
-      })
-    }
-
     return (
       <div>
         <div className='card-group'>
@@ -87,9 +79,7 @@ class createDiscussionForm extends Component {
                 <fieldset className='form-group row'>
                   <label htmlFor='inputType' className='col-sm-2 form-control-label'>Type</label>
                   <div className='col-sm-12'>
-                    <select className='form-control' id='inputType'>
-                      {typesOptions}
-                    </select>
+                    {this.renderTypeSelect()}
                   </div>
                 </fieldset>
               </form>
@@ -125,18 +115,13 @@ class createDiscussionForm extends Component {
                 </fieldset>
                 <fieldset className='form-group row'>
                   <div className='col-sm-12'>
-                    <DatePicker selected={this.state.startDate} onChange={this.handleChange.bind(this)} disabled={!this.state.isLimited}/>
+                    <Select value='1hour' options={this.state.limitedValues} clearable={false} disabled={!this.state.isLimited}/>
                   </div>
                 </fieldset>
                 <fieldset className='form-group row'>
                   <label className='form-control-label'>Tags <small className='text-muted'>tags help to identify your conversation</small></label>
                   <div className='col-sm-12'>
-                    <ReactTags.WithContext tags={this.state.tags}
-                                           suggestions={this.state.suggestions}
-                                           placeholder='Add tags'
-                                           handleDelete={this.onDeleteTag.bind(this)}
-                                           handleAddition={this.onAddTag.bind(this)}
-                                           handleDrag={this.onDragTag.bind(this)}/>
+                    <Select multi={true} options={this.state.tagsValues}/>
                   </div>
                 </fieldset>
               </form>

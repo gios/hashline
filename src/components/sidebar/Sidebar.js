@@ -79,12 +79,12 @@ class Sidebar extends Component {
     }
 
     if(discussionTypes.payload) {
-      typesOptions = discussionTypes.payload.types.map((item) => {
+      typesOptions = discussionTypes.payload.map((item) => {
         return (
           <li key={item.id} className='nav-item'>
             <a className='nav-link sidebar-link nested' href='#'>
               <i className='fa fa-chevron-circle-right'></i>
-              <span className='sidebar-list-item'>{item.name}</span>
+              <span className='sidebar-list-item'>{item.label}</span>
             </a>
           </li>
         )
