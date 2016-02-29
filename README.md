@@ -1,5 +1,5 @@
 # Hashline
-![alt tag](https://raw.githubusercontent.com/gios/hashline/main.png)
+![alt tag](https://github.com/gios/hashline/blob/master/main.png)
 Realtime discussions
 
 ## Technologies
