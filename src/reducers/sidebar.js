@@ -1,12 +1,13 @@
 import { combineReducers } from 'redux'
 import Immutable from 'immutable'
+import { MOBILE_MAX_WIDTH } from '../constants'
 import { TOGGLE_SIDEBAR,
          MOBILE_SIDEBAR,
          REQUEST_USER_INFO,
          SUCCESS_USER_INFO,
          FAILURE_USER_INFO } from '../actions/sidebarAction'
 
-let currentMode = (window.innerWidth < 721) ? true : false
+let currentMode = (window.innerWidth < MOBILE_MAX_WIDTH) ? true : false
 const sidebarState = Immutable.Map({
   isToggled: currentMode,
   isMobileView: currentMode

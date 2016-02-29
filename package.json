@@ -1,6 +1,6 @@
 {
   "name": "hashline",
-  "version": "0.1.1-alpha",
+  "version": "0.2.12-alpha",
   "description": "Realtime discussions",
   "main": "index.js",
   "scripts": {

@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import moment from 'moment'
 import Loader from '../parts/Loader'
 import { throttle } from '../../utils/helpers'
+import { MOBILE_MAX_WIDTH, VERSION } from '../../constants'
 
 class Sidebar extends Component {
 
@@ -23,7 +24,7 @@ class Sidebar extends Component {
 
   windowSizeAction(el) {
     let { onSetMobile } = this.props
-    if (window.innerWidth < 721) {
+    if (window.innerWidth < MOBILE_MAX_WIDTH) {
         onSetMobile(true)
         el.classList.add('toggle')
       } else {
@@ -181,7 +182,7 @@ class Sidebar extends Component {
             </li>
           </ul>
           <div className='navbar-footer'>
-            <span className='label label-success text-xs-center'>Alpha v0.1.1</span>
+            <span className='label label-success text-xs-center'>Alpha v{VERSION}</span>
             <p>&copy; {moment().format('YYYY')}</p>
           </div>
         </nav>
