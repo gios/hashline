@@ -12,6 +12,7 @@ import CreateDiscussionForm from '../components/create_discussion/CreateDiscussi
 class Login extends Component {
   render() {
     let { dispatch,
+          userInfo,
           discussionTypes,
           discussionTags,
           discussionLimites,
@@ -23,6 +24,7 @@ class Login extends Component {
                               discussionTags={discussionTags}
                               discussionLimites={discussionLimites}
                               discussionSettings={discussionSettings}
+                              userInfo={userInfo}
                               onGetLimites={() => dispatch(getDiscussionLimites())}
                               onGetTags={() => dispatch(getDiscussionTags())}
                               onDiscussionPrivate={(value) => dispatch(discussionPrivate(value))}
@@ -40,7 +42,8 @@ function inject(state) {
     discussionTypes: state.createDiscussion.discussionTypes.toJS(),
     discussionTags: state.createDiscussion.discussionTags.toJS(),
     discussionLimites: state.createDiscussion.discussionLimites.toJS(),
-    discussionSettings: state.createDiscussion.discussionSettings.toJS()
+    discussionSettings: state.createDiscussion.discussionSettings.toJS(),
+    userInfo: state.sidebar.userInfo.toJS()
   }
 }
 

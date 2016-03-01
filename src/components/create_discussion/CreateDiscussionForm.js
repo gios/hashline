@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import moment from 'moment'
 import Select from 'react-select'
 import { DOMtoArray } from '../../utils/helpers'
 
@@ -32,10 +33,28 @@ class createDiscussionForm extends Component {
   createDiscussion() {
     let nameInput = this.refs.discussionName
     let descriptionInput = this.refs.discussionDescription
+    let passwordInput = this.refs.discussionPassword
     let tagsInput = document.querySelector('.tagsSelector .Select-control')
 
     if(this.validateFields(nameInput, descriptionInput) && this.validateTags(tagsInput)) {
-      console.log(this.props.discussionSettings)
+      console.log(this.parseCreateDiscussion(nameInput, descriptionInput, passwordInput))
+    }
+  }
+
+  parseCreateDiscussion(nameInput, descriptionInput, passwordInput) {
+    let { discussionTypes } = this.props
+    let { email } = this.props.userInfo.payload
+    let { selectedType, selectedLimited, selectedTags, isPrivate, isLimited } = this.props.discussionSettings
+    return {
+      name: nameInput.value,
+      description: descriptionInput.value,
+      typeId: discussionTypes.payload.filter((item) => item.value === selectedType)[0].id,
+      isPrivate,
+      password: passwordInput.value,
+      isLimited,
+      limitedTime: moment().add(selectedLimited, 'h').unix(),
+      tags: selectedTags,
+      creator: email
     }
   }
 
@@ -198,7 +217,7 @@ class createDiscussionForm extends Component {
                   <div className='col-sm-12'>
                     <div className='input-group'>
                       <div className='input-group-addon'>Password</div>
-                      <input type='password' className='form-control' disabled={!discussionSettings.isPrivate}/>
+                      <input type='password' className='form-control' ref='discussionPassword' disabled={!discussionSettings.isPrivate}/>
                     </div>
                   </div>
                 </fieldset>
