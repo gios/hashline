@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Select from 'react-select'
+import { DOMtoArray } from '../../utils/helpers'
 
 class createDiscussionForm extends Component {
 
@@ -33,7 +34,7 @@ class createDiscussionForm extends Component {
     let descriptionInput = this.refs.discussionDescription
     let tagsInput = document.querySelector('.tagsSelector .Select-control')
 
-    if(this.validateFields(nameInput, descriptionInput, tagsInput)) {
+    if(this.validateFields(nameInput, descriptionInput) && this.validateTags(tagsInput)) {
       console.log(this.props.discussionSettings)
     }
   }
@@ -50,10 +51,10 @@ class createDiscussionForm extends Component {
     return false
   }
 
-  validateFields(nameInput, descriptionInput, tagsInput) {
+  validateFields(nameInput, descriptionInput) {
     let isValidName = this.validateName(nameInput.value)
     let isValidDescription = this.validateDescription(descriptionInput.value)
-    this.validateTags(tagsInput)
+    let discussionInputs = document.querySelectorAll('.form-control')
 
     if(!isValidName) {
       setTimeout(() => $(nameInput).tooltip('show'))
@@ -70,6 +71,8 @@ class createDiscussionForm extends Component {
       setTimeout(() => $(descriptionInput).tooltip('hide'))
       descriptionInput.classList.remove('input-incorrect')
     }
+
+    return DOMtoArray(discussionInputs).every(elem => !elem.classList.contains('input-incorrect'))
   }
 
   validateName(value) {
