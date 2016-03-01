@@ -29,7 +29,41 @@ class createDiscussionForm extends Component {
   }
 
   createDiscussion() {
-    console.log(this.props.discussionSettings)
+    let nameInput = this.refs.discussionName
+    let descriptionInput = this.refs.discussionDescription
+
+    if(this.validateFields(nameInput, descriptionInput)) {
+      console.log(this.props.discussionSettings)
+    }
+  }
+
+  validateFields(nameInput, descriptionInput) {
+    let isValidName = this.validateName(nameInput.value)
+    let isValidDescription = this.validateDescription(descriptionInput.value)
+
+    if(!isValidName) {
+      setTimeout(() => $(nameInput).tooltip('show'))
+      nameInput.classList.add('input-incorrect')
+    } else {
+      setTimeout(() => $(nameInput).tooltip('hide'))
+      nameInput.classList.remove('input-incorrect')
+    }
+
+    if(!isValidDescription) {
+      setTimeout(() => $(descriptionInput).tooltip('show'))
+      descriptionInput.classList.add('input-incorrect')
+    } else {
+      setTimeout(() => $(descriptionInput).tooltip('hide'))
+      descriptionInput.classList.remove('input-incorrect')
+    }
+  }
+
+  validateName(value) {
+    return (value.length >= 6) ? true : false
+  }
+
+  validateDescription(value) {
+    return (value.length >= 50) ? true : false
   }
 
   loadingSelect(type) {
@@ -93,7 +127,16 @@ class createDiscussionForm extends Component {
                 <fieldset className='form-group row'>
                   <label htmlFor='inputName' className='col-sm-2 form-control-label'>Name</label>
                   <div className='col-sm-10'>
-                    <input type='text' className='form-control' id='inputName' placeholder='Name of conversation'/>
+                    <input type='text'
+                           className='form-control'
+                           id='inputName'
+                           placeholder='Name of conversation'
+                           maxLength='100'
+                           data-toggle='tooltip'
+                           data-trigger='manual'
+                           data-placement='right'
+                           data-original-title='Name shoud be more than 6 symbols'
+                           ref='discussionName'/>
                   </div>
                 </fieldset>
                 <fieldset className='form-group row'>
@@ -103,6 +146,12 @@ class createDiscussionForm extends Component {
                               id='inputDescription'
                               rows='3'
                               placeholder='Describe your conversation'
+                              maxLength='250'
+                              data-toggle='tooltip'
+                              data-trigger='manual'
+                              data-placement='right'
+                              data-original-title='Description shoud be more than 50 symbols'
+                              ref='discussionDescription'
                               style={{resize: 'none'}}></textarea>
                   </div>
                 </fieldset>
