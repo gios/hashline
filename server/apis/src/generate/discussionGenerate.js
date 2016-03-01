@@ -8,6 +8,7 @@ exports.initTypes = function() {
     if(!exists) {
       return knex.schema.createTable('types', (table) => {
         table.increments()
+        table.integer('discussion_id').unsigned().references('discussions.id')
         table.string('name').unique()
       })
       .then(() => logger.log('TYPES table has been created'))
@@ -26,6 +27,7 @@ exports.initTags = function() {
     if(!exists) {
       return knex.schema.createTable('tags', (table) => {
         table.increments()
+        table.integer('discussion_id').unsigned().references('discussions.id')
         table.string('name').unique()
         table.timestamps()
       })
@@ -39,6 +41,26 @@ exports.initTags = function() {
           {name: 'Cities'}
         ])
       })
+    }
+  })
+}
+
+exports.initDiscussions = function() {
+  return knex.schema.hasTable('discussions').then((exists) => {
+    if(!exists) {
+      return knex.schema.createTable('discussions', (table) => {
+        table.increments()
+        table.string('name').unique()
+        table.string('description')
+        table.integer('type_id').unsigned().references('types.id')
+        table.integer('tags_id').unsigned().references('tags.id')
+        table.boolean('isPrivate')
+        table.boolean('isLimited')
+        table.string('password')
+        table.time('limitedTime')
+        table.timestamps()
+      })
+      .then(() => logger.log('DISCUSSIONS table has been created'))
     }
   })
 }
