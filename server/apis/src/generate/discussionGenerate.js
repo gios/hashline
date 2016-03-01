@@ -8,7 +8,6 @@ exports.initTypes = function() {
     if(!exists) {
       return knex.schema.createTable('types', (table) => {
         table.increments()
-        table.integer('discussion_id').unsigned().references('discussions.id')
         table.string('name').unique()
       })
       .then(() => logger.log('TYPES table has been created'))
@@ -54,6 +53,7 @@ exports.initDiscussions = function() {
         table.string('description')
         table.integer('type_id').unsigned().references('types.id')
         table.integer('tags_id').unsigned().references('tags.id')
+        table.integer('user_id').unsigned().references('users.id')
         table.boolean('isPrivate')
         table.boolean('isLimited')
         table.string('password')

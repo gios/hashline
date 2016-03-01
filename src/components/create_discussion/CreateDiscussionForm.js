@@ -54,7 +54,7 @@ class createDiscussionForm extends Component {
       isLimited,
       limitedTime: moment().add(selectedLimited, 'h').unix(),
       tags: selectedTags,
-      creator: email
+      owner: email
     }
   }
 
