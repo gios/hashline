@@ -31,15 +31,29 @@ class createDiscussionForm extends Component {
   createDiscussion() {
     let nameInput = this.refs.discussionName
     let descriptionInput = this.refs.discussionDescription
+    let tagsInput = document.querySelector('.tagsSelector .Select-control')
 
-    if(this.validateFields(nameInput, descriptionInput)) {
+    if(this.validateFields(nameInput, descriptionInput, tagsInput)) {
       console.log(this.props.discussionSettings)
     }
   }
 
-  validateFields(nameInput, descriptionInput) {
+  validateTags(tagsInput) {
+    let { selectedTags } = this.props.discussionSettings
+
+    if(selectedTags.split(',').length >= 2) {
+      tagsInput.classList.remove('input-incorrect')
+      return true
+    }
+
+    tagsInput.classList.add('input-incorrect')
+    return false
+  }
+
+  validateFields(nameInput, descriptionInput, tagsInput) {
     let isValidName = this.validateName(nameInput.value)
     let isValidDescription = this.validateDescription(descriptionInput.value)
+    this.validateTags(tagsInput)
 
     if(!isValidName) {
       setTimeout(() => $(nameInput).tooltip('show'))
@@ -108,6 +122,7 @@ class createDiscussionForm extends Component {
     return (
       <Select isLoading={isLoading}
               onChange={this.selectTags.bind(this)}
+              className='tagsSelector'
               value={discussionSettings.selectedTags}
               multi={true}
               options={discussionTags.payload}
@@ -135,7 +150,7 @@ class createDiscussionForm extends Component {
                            data-toggle='tooltip'
                            data-trigger='manual'
                            data-placement='right'
-                           data-original-title='Name shoud be more than 6 symbols'
+                           data-original-title='Name should be more than 6 symbols'
                            ref='discussionName'/>
                   </div>
                 </fieldset>
@@ -150,7 +165,7 @@ class createDiscussionForm extends Component {
                               data-toggle='tooltip'
                               data-trigger='manual'
                               data-placement='right'
-                              data-original-title='Description shoud be more than 50 symbols'
+                              data-original-title='Description should be more than 50 symbols'
                               ref='discussionDescription'
                               style={{resize: 'none'}}></textarea>
                   </div>
