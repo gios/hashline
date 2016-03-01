@@ -9,8 +9,7 @@
     "deploy": "npm run clear && webpack -p --progress --config ./build/prod.config.js",
     "server": "nodemon ./server/index.js",
     "lint": "eslint ./src ./server",
-    "clear": "rimraf ./public/index.js ./public/styles.css ./public/img",
-    "generate": "node ./server/apis/src/generate/generate.js"
+    "clear": "rimraf ./public/index.js ./public/styles.css ./public/img"
   },
   "repository": {
     "type": "git",
@@ -23,7 +22,6 @@
   },
   "homepage": "https://github.com/gios/hashline#readme",
   "dependencies": {
-    "bluebird": "^3.3.3",
     "bootstrap": "^4.0.0-alpha.2",
     "font-awesome": "^4.5.0",
     "immutable": "^3.7.6",

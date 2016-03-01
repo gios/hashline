@@ -1,7 +1,7 @@
 module.exports = function(router, jwt, SHARED_SECRET) {
   'use strict';
 
-  const knex = require('../knex.js')
+  const knex = require('../knexConfig.js')
   const userMethods = require('../methods/userMethods.js')
 
   router.post('/authenticate', function *() {

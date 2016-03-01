@@ -1,7 +1,7 @@
 module.exports = function(router) {
   'use strict';
 
-  const knex = require('../knex.js')
+  const knex = require('../knexConfig.js')
 
   router.get('/api/discussion/get_types', function *() {
     let availableTypes = yield knex('types').select()
