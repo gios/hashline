@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import Select from 'react-select'
-import { DOMtoArray } from '../../utils/helpers'
+import { DOMtoArray, capitalize } from '../../utils/helpers'
 
 class createDiscussionForm extends Component {
 
@@ -37,7 +37,7 @@ class createDiscussionForm extends Component {
     let tagsInput = document.querySelector('.tagsSelector .Select-control')
 
     if(this.validateFields(nameInput, descriptionInput) && this.validateTags(tagsInput)) {
-      console.log(this.parseCreateDiscussion(nameInput, descriptionInput, passwordInput))
+      this.props.onCreateDiscussion(this.parseCreateDiscussion(nameInput, descriptionInput, passwordInput))
     }
   }
 
@@ -45,6 +45,7 @@ class createDiscussionForm extends Component {
     let { discussionTypes } = this.props
     let { email } = this.props.userInfo.payload
     let { selectedType, selectedLimited, selectedTags, isPrivate, isLimited } = this.props.discussionSettings
+
     return {
       name: nameInput.value,
       description: descriptionInput.value,
@@ -53,7 +54,7 @@ class createDiscussionForm extends Component {
       password: passwordInput.value,
       isLimited,
       limitedTime: moment().add(selectedLimited, 'h').unix(),
-      tags: selectedTags,
+      tags: selectedTags.split(',').map((item) => capitalize(item)),
       owner: email
     }
   }

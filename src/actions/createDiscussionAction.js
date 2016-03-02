@@ -20,6 +20,10 @@ export const DISCUSSION_SELECT_TYPE = 'DISCUSSION_SELECT_TYPE'
 export const DISCUSSION_SELECT_LIMITED = 'DISCUSSION_SELECT_LIMITED'
 export const DISCUSSION_SELECT_TAGS = 'DISCUSSION_SELECT_TAGS'
 
+export const REQUEST_DISCUSSION_CREATE = 'REQUEST_DISCUSSION_CREATE'
+export const SUCCESS_DISCUSSION_CREATE = 'SUCCESS_DISCUSSION_CREATE'
+export const FAILURE_DISCUSSION_CREATE = 'FAILURE_DISCUSSION_CREATE'
+
 export function discussionPrivate(isPrivate) {
   return {
     type: DISCUSSION_PRIVATE,
@@ -84,6 +88,21 @@ export function getDiscussionTags() {
       method: 'GET',
       headers: { 'Authorization': `Bearer ${idToken.getToken()}` },
       types: ['REQUEST_DISCUSSION_TAGS', 'SUCCESS_DISCUSSION_TAGS', 'FAILURE_DISCUSSION_TAGS']
+    }
+  }
+}
+
+export function createDiscussion(data) {
+  return {
+    [CALL_API]: {
+      endpoint: '/api/discussion',
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${idToken.getToken()}`,
+        'Content-Type': 'application/json'
+      },
+      types: ['REQUEST_DISCUSSION_CREATE', 'SUCCESS_DISCUSSION_CREATE', 'FAILURE_DISCUSSION_CREATE'],
+      body: JSON.stringify(data)
     }
   }
 }

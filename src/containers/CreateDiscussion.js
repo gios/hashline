@@ -6,7 +6,8 @@ import { getDiscussionTags,
          discussionLimited,
          discussionSelectType,
          discussionSelectLimited,
-         discussionSelectTags } from '../actions/createDiscussionAction'
+         discussionSelectTags,
+         createDiscussion } from '../actions/createDiscussionAction'
 import CreateDiscussionForm from '../components/create_discussion/CreateDiscussionForm'
 
 class Login extends Component {
@@ -31,7 +32,8 @@ class Login extends Component {
                               onDiscussionLimited={(value) => dispatch(discussionLimited(value))}
                               onDiscussionSelectType={(value) => dispatch(discussionSelectType(value))}
                               onDiscussionSelectLimited={(value) => dispatch(discussionSelectLimited(value))}
-                              onDiscussionSelectTags={(value) => dispatch(discussionSelectTags(value))}/>
+                              onDiscussionSelectTags={(value) => dispatch(discussionSelectTags(value))}
+                              onCreateDiscussion={(data) => dispatch(createDiscussion(data))}/>
       </div>
     )
   }

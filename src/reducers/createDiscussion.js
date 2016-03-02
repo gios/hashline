@@ -13,7 +13,10 @@ import { REQUEST_DISCUSSION_TYPES,
          DISCUSSION_LIMITED,
          DISCUSSION_SELECT_TYPE,
          DISCUSSION_SELECT_LIMITED,
-         DISCUSSION_SELECT_TAGS } from '../actions/createDiscussionAction'
+         DISCUSSION_SELECT_TAGS,
+         REQUEST_DISCUSSION_CREATE,
+         SUCCESS_DISCUSSION_CREATE,
+         FAILURE_DISCUSSION_CREATE } from '../actions/createDiscussionAction'
 
 const discussionGetState = Immutable.Map({
   isFetching: false,
@@ -49,7 +52,7 @@ function toSelectableFormat(data) {
   })
 }
 
-function discussionInit(state, action, ...types) {
+function discussionInit(state, action, iterable, ...types) {
   switch (action.type) {
     case types[0]:
       return state.merge({
@@ -60,7 +63,7 @@ function discussionInit(state, action, ...types) {
     case types[1]:
       return state.merge({
         isFetching: false,
-        payload: toSelectableFormat(action.payload),
+        payload: (iterable) ? toSelectableFormat(action.payload) : action.payload,
         error: false
       })
     case types[2]:
@@ -74,15 +77,19 @@ function discussionInit(state, action, ...types) {
   }
 }
 function discussionTypes(state = discussionGetState, action) {
-  return discussionInit(state, action, REQUEST_DISCUSSION_TYPES, SUCCESS_DISCUSSION_TYPES, FAILURE_DISCUSSION_TYPES)
+  return discussionInit(state, action, true, REQUEST_DISCUSSION_TYPES, SUCCESS_DISCUSSION_TYPES, FAILURE_DISCUSSION_TYPES)
 }
 
 function discussionLimites(state = discussionGetState, action) {
-  return discussionInit(state, action, REQUEST_DISCUSSION_LIMITES, SUCCESS_DISCUSSION_LIMITES, FAILURE_DISCUSSION_LIMITES)
+  return discussionInit(state, action, true, REQUEST_DISCUSSION_LIMITES, SUCCESS_DISCUSSION_LIMITES, FAILURE_DISCUSSION_LIMITES)
 }
 
 function discussionTags(state = discussionGetState, action) {
-  return discussionInit(state, action, REQUEST_DISCUSSION_TAGS, SUCCESS_DISCUSSION_TAGS, FAILURE_DISCUSSION_TAGS)
+  return discussionInit(state, action, true, REQUEST_DISCUSSION_TAGS, SUCCESS_DISCUSSION_TAGS, FAILURE_DISCUSSION_TAGS)
+}
+
+function discussionCreate(state = discussionGetState, action) {
+  return discussionInit(state, action, false, REQUEST_DISCUSSION_CREATE, SUCCESS_DISCUSSION_CREATE, FAILURE_DISCUSSION_CREATE)
 }
 
 const discussionSettingsState = Immutable.Map({
@@ -124,5 +131,6 @@ export let createDiscussion = combineReducers({
   discussionTypes,
   discussionLimites,
   discussionTags,
-  discussionSettings
+  discussionSettings,
+  discussionCreate
 })
