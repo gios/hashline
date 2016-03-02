@@ -10,6 +10,19 @@ class createDiscussionForm extends Component {
     this.props.onGetLimites()
   }
 
+  componentWillReceiveProps() {
+    let { reset } = this.props.discussionSettings
+    let nameInput = this.refs.discussionName
+    let descriptionInput = this.refs.discussionDescription
+    let passwordInput = this.refs.discussionPassword
+
+    if(reset) {
+      nameInput.value = ''
+      descriptionInput.value = ''
+      passwordInput.value = ''
+    }
+  }
+
   changePrivate(event) {
     this.props.onDiscussionPrivate(event.target.checked)
   }
@@ -209,7 +222,7 @@ class createDiscussionForm extends Component {
                 <fieldset className='form-group row'>
                   <div className='checkbox'>
                     <label>
-                      <input type='checkbox' value='' onChange={this.changePrivate.bind(this)}/>
+                      <input type='checkbox' value='' onChange={this.changePrivate.bind(this)} checked={this.props.discussionSettings.isPrivate}/>
                       Private <small className='text-muted'>use this if you want to set password for this conversation</small>
                     </label>
                   </div>
@@ -225,7 +238,7 @@ class createDiscussionForm extends Component {
                 <fieldset className='form-group row'>
                   <div className='checkbox'>
                     <label>
-                      <input type='checkbox' value='' onChange={this.changeLimited.bind(this)}/>
+                      <input type='checkbox' value='' onChange={this.changeLimited.bind(this)} checked={this.props.discussionSettings.isLimited}/>
                       Limited <small className='text-muted'>set life cycle for this conversation</small>
                     </label>
                   </div>
