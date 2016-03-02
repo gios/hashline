@@ -28,7 +28,7 @@ module.exports = function(router) {
 
   router.post('/api/discussion', function *() {
     let name = this.request.body.name
-    let description = this.request.body.name
+    let description = this.request.body.description
     let typeId = this.request.body.typeId
     let isPrivate = this.request.body.isPrivate
     let password = this.request.body.password
