@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import Select from 'react-select'
-import { DOMtoArray, capitalize } from '../../utils/helpers'
+import { DOMtoArray } from '../../utils/helpers'
 
 class createDiscussionForm extends Component {
 
@@ -54,7 +54,7 @@ class createDiscussionForm extends Component {
       password: passwordInput.value,
       isLimited,
       limitedTime: moment().add(selectedLimited, 'h').unix(),
-      tags: selectedTags.split(',').map((item) => capitalize(item)),
+      tags: selectedTags.split(','),
       owner: email
     }
   }

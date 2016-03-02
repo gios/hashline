@@ -12,11 +12,11 @@ exports.up = function(knex, Promise) {
         .then(() => logger.log('TAGS table has been created'))
         .then(() => {
           return knex('tags').insert([
-            {name: 'Sport'},
-            {name: 'Perfomance'},
-            {name: 'Design'},
-            {name: 'Entertainment'},
-            {name: 'Cities'}
+            {name: 'sport'},
+            {name: 'perfomance'},
+            {name: 'design'},
+            {name: 'entertainment'},
+            {name: 'cities'}
           ])
         })
       }
