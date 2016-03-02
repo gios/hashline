@@ -52,16 +52,22 @@ module.exports = function(router) {
       password,
       isLimited,
       limitedTime,
-      user_id: findUser.id
+      user_id: findUser.id,
+      created_at: Date.now(),
+      updated_at: Date.now()
     })
 
     let findTags = yield knex('tags').whereIn('name', tags).select('id', 'name')
     let findTagsArray = findTags.map((item) => item.name)
     let createTags = tags.filter((name) => findTagsArray.indexOf(name) === -1)
 
-    if(createTags) {
+    if(createTags.length) {
       yield knex('tags').insert(createTags.map((name) => {
-        return {name}
+        return {
+          name,
+          created_at: Date.now(),
+          updated_at: Date.now()
+        }
       }))
     }
 
