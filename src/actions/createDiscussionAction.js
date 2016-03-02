@@ -27,7 +27,8 @@ export const FAILURE_DISCUSSION_CREATE = 'FAILURE_DISCUSSION_CREATE'
 
 export function resetDiscussionSettings() {
   return {
-    type: RESET_DISCUSSION_SETTINGS
+    type: RESET_DISCUSSION_SETTINGS,
+    reset: true
   }
 }
 

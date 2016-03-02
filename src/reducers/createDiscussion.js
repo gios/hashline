@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import Immutable from 'immutable'
+import { LOCATION_CHANGE } from 'react-router-redux'
 import { REQUEST_DISCUSSION_TYPES,
          SUCCESS_DISCUSSION_TYPES,
          FAILURE_DISCUSSION_TYPES,
@@ -98,7 +99,8 @@ const discussionSettingsState = Immutable.Map({
   isLimited: false,
   selectedType: 'question',
   selectedLimited: '1',
-  selectedTags: ''
+  selectedTags: '',
+  reset: false
 })
 
 function discussionSettings(state = discussionSettingsState, action) {
@@ -124,6 +126,11 @@ function discussionSettings(state = discussionSettingsState, action) {
         selectedTags: action.selectedTags
       })
     case RESET_DISCUSSION_SETTINGS:
+      state = discussionSettingsState
+      return state.merge({
+        reset: action.reset
+      })
+    case LOCATION_CHANGE:
       return state = discussionSettingsState
     default:
       return state
