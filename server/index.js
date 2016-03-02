@@ -18,6 +18,7 @@ app.use(function *(next) {
   } catch (err) {
     this.status = err.status || 500
     this.body = err.message || 'Internal server error'
+
     if (400 < this.status && this.status < 500) {
       tracer.warn(err)
     } else {

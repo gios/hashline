@@ -5,6 +5,14 @@ export const LOGIN_REQUEST = 'LOGIN_REQUEST'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAILURE = 'LOGIN_FAILURE'
 export const RUN_LOGOUT = 'RUN_LOGOUT'
+export const IS_LOGGED_OUT = 'IS_LOGGED_OUT'
+
+export function loggedOut() {
+  return {
+    type: IS_LOGGED_OUT,
+    loggedOut: true
+  }
+}
 
 function requestLogin(creds) {
   return {
