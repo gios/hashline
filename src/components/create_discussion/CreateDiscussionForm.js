@@ -10,6 +10,11 @@ class createDiscussionForm extends Component {
     this.props.onGetLimites()
   }
 
+  componentWillUnmount() {
+    let tooltips = document.querySelectorAll('.tooltip')
+    DOMtoArray(tooltips).map(elem => elem.remove())
+  }
+
   componentWillReceiveProps() {
     let { reset } = this.props.discussionSettings
     let nameInput = this.refs.discussionName
