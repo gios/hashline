@@ -6,7 +6,6 @@ exports.up = function(knex, Promise) {
       if(!exists) {
         return knex.schema.createTable('tags', (table) => {
           table.increments()
-          table.integer('discussion_id').unsigned().references('discussions.id')
           table.string('name').unique()
           table.timestamps()
         })
