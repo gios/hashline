@@ -4,6 +4,7 @@ import { getDiscussionTags,
          getDiscussionLimites,
          discussionPrivate,
          discussionLimited,
+         resetDiscussionSettings,
          discussionSelectType,
          discussionSelectLimited,
          discussionSelectTags,
@@ -33,7 +34,11 @@ class Login extends Component {
                               onDiscussionSelectType={(value) => dispatch(discussionSelectType(value))}
                               onDiscussionSelectLimited={(value) => dispatch(discussionSelectLimited(value))}
                               onDiscussionSelectTags={(value) => dispatch(discussionSelectTags(value))}
-                              onCreateDiscussion={(data) => dispatch(createDiscussion(data))}/>
+                              onCreateDiscussion={(data) => {
+                                  dispatch(createDiscussion(data))
+                                  dispatch(resetDiscussionSettings())
+                                }
+                              }/>
       </div>
     )
   }

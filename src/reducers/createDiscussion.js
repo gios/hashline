@@ -16,7 +16,8 @@ import { REQUEST_DISCUSSION_TYPES,
          DISCUSSION_SELECT_TAGS,
          REQUEST_DISCUSSION_CREATE,
          SUCCESS_DISCUSSION_CREATE,
-         FAILURE_DISCUSSION_CREATE } from '../actions/createDiscussionAction'
+         FAILURE_DISCUSSION_CREATE,
+         RESET_DISCUSSION_SETTINGS } from '../actions/createDiscussionAction'
 
 const discussionGetState = Immutable.Map({
   isFetching: false,
@@ -122,6 +123,8 @@ function discussionSettings(state = discussionSettingsState, action) {
       return state.merge({
         selectedTags: action.selectedTags
       })
+    case RESET_DISCUSSION_SETTINGS:
+      return state = discussionSettingsState
     default:
       return state
   }
