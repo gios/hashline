@@ -72,14 +72,13 @@ module.exports = function(router) {
     }
 
     let getTags = yield knex('tags').whereIn('name', tags)
-    let insertTags = getTags.map((item) => {
+    yield knex('discussions_tags').insert(getTags.map((item) => {
       return {
         discussion_id: discussionId[0],
         tag_id: item.id
       }
-    })
+    }))
 
-    yield knex('discussions_tags').insert(insertTags)
     this.body = discussionId[0]
   })
 }
