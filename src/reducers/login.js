@@ -38,7 +38,8 @@ function auth(state = authState, action) {
     case RUN_LOGOUT:
       idToken.removeToken()
       return state.merge({
-        isAuthenticated: false
+        isAuthenticated: false,
+        loggedOut: false
       })
     case IS_LOGGED_OUT:
       return state.merge({
