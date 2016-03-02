@@ -56,18 +56,17 @@ module.exports = function(router) {
     })
 
     let findTags = yield knex('tags').whereIn('name', tags).select('id', 'name')
-    // let createTags = tags.filter((name) => {
-    //   for (let i = 0; i < findTags.length; i++) {
-    //     if(name !== findTags[i].name) {
-    //       return true
-    //     }
-    //   }
-    // })
-    // console.log(createTags)
-    // let a = yield knex('tags').whereNotIn('name', tags)
-    // console.log(a)
+    let findTagsArray = findTags.map((item) => item.name)
+    let createTags = tags.filter((name) => findTagsArray.indexOf(name) === -1)
 
-    let insertTags = findTags.map((item) => {
+    if(createTags) {
+      yield knex('tags').insert(createTags.map((name) => {
+        return {name}
+      }))
+    }
+
+    let getTags = yield knex('tags').whereIn('name', tags)
+    let insertTags = getTags.map((item) => {
       return {
         discussion_id: discussionId[0],
         tag_id: item.id
