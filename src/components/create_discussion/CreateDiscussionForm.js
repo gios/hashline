@@ -30,16 +30,16 @@ class createDiscussionForm extends Component {
   }
 
   componentWillReceiveProps() {
-    let { reset } = this.props.discussionSettings
-    let nameInput = this.refs.discussionName
-    let descriptionInput = this.refs.discussionDescription
-    let passwordInput = this.refs.discussionPassword
+    console.log(this.props.discussionCreate)
+    // let nameInput = this.refs.discussionName
+    // let descriptionInput = this.refs.discussionDescription
+    // let passwordInput = this.refs.discussionPassword
 
-    if(reset) {
-      nameInput.value = ''
-      descriptionInput.value = ''
-      passwordInput.value = ''
-    }
+    // if(reset) {
+    //   nameInput.value = ''
+    //   descriptionInput.value = ''
+    //   passwordInput.value = ''
+    // }
   }
 
   changePrivate(event) {

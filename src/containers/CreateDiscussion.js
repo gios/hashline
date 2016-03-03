@@ -4,7 +4,6 @@ import { getDiscussionTags,
          getDiscussionLimites,
          discussionPrivate,
          discussionLimited,
-         resetDiscussionSettings,
          discussionSelectType,
          discussionSelectLimited,
          discussionSelectTags,
@@ -18,7 +17,8 @@ class Login extends Component {
           discussionTypes,
           discussionTags,
           discussionLimites,
-          discussionSettings } = this.props
+          discussionSettings,
+          discussionCreate } = this.props
 
     return (
       <div>
@@ -26,6 +26,7 @@ class Login extends Component {
                               discussionTags={discussionTags}
                               discussionLimites={discussionLimites}
                               discussionSettings={discussionSettings}
+                              discussionCreate={discussionCreate}
                               userInfo={userInfo}
                               onGetLimites={() => dispatch(getDiscussionLimites())}
                               onGetTags={() => dispatch(getDiscussionTags())}
@@ -34,11 +35,7 @@ class Login extends Component {
                               onDiscussionSelectType={(value) => dispatch(discussionSelectType(value))}
                               onDiscussionSelectLimited={(value) => dispatch(discussionSelectLimited(value))}
                               onDiscussionSelectTags={(value) => dispatch(discussionSelectTags(value))}
-                              onCreateDiscussion={(data) => {
-                                  dispatch(createDiscussion(data))
-                                  dispatch(resetDiscussionSettings())
-                                }
-                              }/>
+                              onCreateDiscussion={(data) => dispatch(createDiscussion(data))}/>
       </div>
     )
   }
@@ -50,6 +47,7 @@ function inject(state) {
     discussionTags: state.createDiscussion.discussionTags.toJS(),
     discussionLimites: state.createDiscussion.discussionLimites.toJS(),
     discussionSettings: state.createDiscussion.discussionSettings.toJS(),
+    discussionCreate: state.createDiscussion.discussionCreate.toJS(),
     userInfo: state.sidebar.userInfo.toJS()
   }
 }

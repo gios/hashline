@@ -17,8 +17,7 @@ import { REQUEST_DISCUSSION_TYPES,
          DISCUSSION_SELECT_TAGS,
          REQUEST_DISCUSSION_CREATE,
          SUCCESS_DISCUSSION_CREATE,
-         FAILURE_DISCUSSION_CREATE,
-         RESET_DISCUSSION_SETTINGS } from '../actions/createDiscussionAction'
+         FAILURE_DISCUSSION_CREATE } from '../actions/createDiscussionAction'
 
 const discussionGetState = Immutable.Map({
   isFetching: false,
@@ -125,6 +124,7 @@ function discussionSettings(state = discussionSettingsState, action) {
         selectedTags: action.selectedTags
       })
     case SUCCESS_DISCUSSION_CREATE:
+    case FAILURE_DISCUSSION_CREATE:
     case LOCATION_CHANGE:
       return state = discussionSettingsState
     default:
