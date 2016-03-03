@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { runLogout } from '../actions/loginAction'
 import { toggleSidebar, setMobileSidebar, getUserData } from '../actions/sidebarAction'
-import { getDiscussionTypes } from '../actions/createDiscussionAction'
+import { getSidebarTypes } from '../actions/sidebarAction'
 import Sidebar from './../components/sidebar/Sidebar'
 import LoggedOutMessage from './../components/helpers/LoggedOutMessage'
 import io from 'socket.io-client'
@@ -26,7 +26,7 @@ class App extends Component {
           isAuthenticated,
           loggedOut,
           userInfo,
-          discussionTypes } = this.props
+          sidebarTypes } = this.props
     return (
       <div>
         { loggedOut && <LoggedOutMessage/>}
@@ -35,11 +35,11 @@ class App extends Component {
           <Sidebar isToggled={isToggled}
                    isMobileView={isMobileView}
                    userInfo={userInfo}
-                   discussionTypes={discussionTypes}
+                   sidebarTypes={sidebarTypes}
                    onSetMobile={value => dispatch(setMobileSidebar(value))}
                    onToggle={value => dispatch(toggleSidebar(value))}
                    onGetUserData={() => dispatch(getUserData())}
-                   onGetDiscussionTypes={() => dispatch(getDiscussionTypes())}
+                   onGetSidebarTypes={() => dispatch(getSidebarTypes())}
                    onLogout={() => {
                      dispatch(push('/login'))
                      dispatch(runLogout())}
@@ -62,7 +62,7 @@ function inject(state) {
     isToggled: state.sidebar.sidebarView.get('isToggled'),
     isMobileView: state.sidebar.sidebarView.get('isMobileView'),
     userInfo: state.sidebar.userInfo.toJS(),
-    discussionTypes: state.createDiscussion.discussionTypes.toJS()
+    sidebarTypes: state.sidebar.sidebarTypes.toJS()
   }
 }
 

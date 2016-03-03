@@ -5,7 +5,10 @@ import { TOGGLE_SIDEBAR,
          MOBILE_SIDEBAR,
          REQUEST_USER_INFO,
          SUCCESS_USER_INFO,
-         FAILURE_USER_INFO } from '../actions/sidebarAction'
+         FAILURE_USER_INFO,
+         REQUEST_SIDEBAR_TYPES,
+         SUCCESS_SIDEBAR_TYPES,
+         FAILURE_SIDEBAR_TYPES} from '../actions/sidebarAction'
 
 let currentMode = (window.innerWidth < MOBILE_MAX_WIDTH) ? true : false
 const sidebarState = Immutable.Map({
@@ -29,30 +32,30 @@ function sidebarView(state = sidebarState, action) {
   }
 }
 
-const userInfoState = Immutable.Map({
+const sidebarGetState = Immutable.Map({
   isFetching: false,
   payload: null,
   error: false
 })
 
-function userInfo(state = userInfoState, action) {
+function sidebarGetInit(state, action, ...types) {
   switch (action.type) {
-    case REQUEST_USER_INFO:
+    case types[0]:
       return state.merge({
         isFetching: true,
         payload: null,
         error: false
       })
-    case SUCCESS_USER_INFO:
+    case types[1]:
       return state.merge({
         isFetching: false,
         payload: action.payload,
         error: false
       })
-    case FAILURE_USER_INFO:
+    case types[2]:
       return state.merge({
         isFetching: false,
-        payload: action.payload,
+        payload: action.payload.response,
         error: true
       })
     default:
@@ -60,7 +63,16 @@ function userInfo(state = userInfoState, action) {
   }
 }
 
+function userInfo(state = sidebarGetState, action) {
+  return sidebarGetInit(state, action, REQUEST_USER_INFO, SUCCESS_USER_INFO, FAILURE_USER_INFO)
+}
+
+function sidebarTypes(state = sidebarGetState, action) {
+  return sidebarGetInit(state, action, REQUEST_SIDEBAR_TYPES, SUCCESS_SIDEBAR_TYPES, FAILURE_SIDEBAR_TYPES)
+}
+
 export let sidebar = combineReducers({
   sidebarView,
+  sidebarTypes,
   userInfo
 })

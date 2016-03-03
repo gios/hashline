@@ -82,6 +82,7 @@ function discussionInit(state, action, iterable, ...types) {
       return state
   }
 }
+
 function discussionTypes(state = discussionGetState, action) {
   return discussionInit(state, action, true, REQUEST_DISCUSSION_TYPES, SUCCESS_DISCUSSION_TYPES, FAILURE_DISCUSSION_TYPES)
 }
