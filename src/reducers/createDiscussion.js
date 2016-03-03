@@ -76,6 +76,8 @@ function discussionInit(state, action, iterable, ...types) {
         payload: action.payload.response,
         error: true
       })
+    case LOCATION_CHANGE:
+      return state = discussionGetState
     default:
       return state
   }

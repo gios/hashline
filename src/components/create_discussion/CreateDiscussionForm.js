@@ -19,7 +19,22 @@ class createDiscussionForm extends Component {
     })
   }
 
+  componentWillReceiveProps() {
+    // let { payload, error } = newProps.discussionCreate
+
+    // if(payload || error) {
+    //   this.setState({
+    //     notifications: this.state.notifications.concat([{
+    //       id: this.state.notifications.length + 1,
+    //       type: (error) ? 'error' : 'success',
+    //       message: payload.message
+    //     }])
+    //   })
+    // }
+  }
+
   componentWillMount() {
+    this.props.onGetTypes()
     this.props.onGetTags()
     this.props.onGetLimites()
   }

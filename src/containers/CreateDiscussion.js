@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getDiscussionTags,
+import { getDiscussionTypes,
+         getDiscussionTags,
          getDiscussionLimites,
          discussionInputName,
          discussionInputDescription,
@@ -31,6 +32,7 @@ class Login extends Component {
                               discussionSettings={discussionSettings}
                               discussionCreate={discussionCreate}
                               userInfo={userInfo}
+                              onGetTypes={() => dispatch(getDiscussionTypes())}
                               onGetLimites={() => dispatch(getDiscussionLimites())}
                               onGetTags={() => dispatch(getDiscussionTags())}
                               onDiscussionName={(value) => dispatch(discussionInputName(value))}
