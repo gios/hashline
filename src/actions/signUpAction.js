@@ -49,7 +49,7 @@ export function signUpUser(creds) {
         if (response.ok) {
           return Promise.resolve(response)
         } else {
-          response.text().then((err) => {
+          response.json().then((err) => {
             dispatch(signUpError(err))
           })
           return Promise.reject(new Error(response.statusText))

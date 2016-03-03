@@ -70,7 +70,7 @@ function discussionInit(state, action, iterable, ...types) {
     case types[2]:
       return state.merge({
         isFetching: false,
-        payload: action.payload,
+        payload: action.payload.response,
         error: true
       })
     default:

@@ -45,7 +45,7 @@ class Login extends Component {
     }
 
     if (errorMessage) {
-      errorComponent = <ErrorMessage message={errorMessage}/>
+      errorComponent = <ErrorMessage message={errorMessage.get('message')}/>
     }
 
     return (
