@@ -17,7 +17,7 @@ export function notification(state = notificationState, action) {
         }
       )
     case DISMISS_NOTIFICATION:
-      return state.delete(action.id - 1)
+      return state.filter((item) => item.id !== action.id)
     default:
       return state
   }
