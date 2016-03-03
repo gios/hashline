@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getDiscussionTags,
          getDiscussionLimites,
+         discussionInputName,
+         discussionInputDescription,
+         discussionInputPassword,
          discussionPrivate,
          discussionLimited,
          discussionSelectType,
@@ -30,6 +33,9 @@ class Login extends Component {
                               userInfo={userInfo}
                               onGetLimites={() => dispatch(getDiscussionLimites())}
                               onGetTags={() => dispatch(getDiscussionTags())}
+                              onDiscussionName={(value) => dispatch(discussionInputName(value))}
+                              onDiscussionDescription={(value) => dispatch(discussionInputDescription(value))}
+                              onDiscussionPassword={(value) => dispatch(discussionInputPassword(value))}
                               onDiscussionPrivate={(value) => dispatch(discussionPrivate(value))}
                               onDiscussionLimited={(value) => dispatch(discussionLimited(value))}
                               onDiscussionSelectType={(value) => dispatch(discussionSelectType(value))}

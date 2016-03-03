@@ -20,9 +20,34 @@ export const DISCUSSION_SELECT_TYPE = 'DISCUSSION_SELECT_TYPE'
 export const DISCUSSION_SELECT_LIMITED = 'DISCUSSION_SELECT_LIMITED'
 export const DISCUSSION_SELECT_TAGS = 'DISCUSSION_SELECT_TAGS'
 
+export const DISCUSSION_INPUT_NAME = 'DISCUSSION_INPUT_NAME'
+export const DISCUSSION_INPUT_DESCRIPTION = 'DISCUSSION_INPUT_DESCRIPTION'
+export const DISCUSSION_INPUT_PASSWORD = 'DISCUSSION_INPUT_PASSWORD'
+
 export const REQUEST_DISCUSSION_CREATE = 'REQUEST_DISCUSSION_CREATE'
 export const SUCCESS_DISCUSSION_CREATE = 'SUCCESS_DISCUSSION_CREATE'
 export const FAILURE_DISCUSSION_CREATE = 'FAILURE_DISCUSSION_CREATE'
+
+export function discussionInputName(name) {
+  return {
+    type: DISCUSSION_INPUT_NAME,
+    name
+  }
+}
+
+export function discussionInputDescription(description) {
+  return {
+    type: DISCUSSION_INPUT_DESCRIPTION,
+    description
+  }
+}
+
+export function discussionInputPassword(password) {
+  return {
+    type: DISCUSSION_INPUT_PASSWORD,
+    password
+  }
+}
 
 export function discussionPrivate(isPrivate) {
   return {

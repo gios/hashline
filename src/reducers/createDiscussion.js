@@ -17,7 +17,10 @@ import { REQUEST_DISCUSSION_TYPES,
          DISCUSSION_SELECT_TAGS,
          REQUEST_DISCUSSION_CREATE,
          SUCCESS_DISCUSSION_CREATE,
-         FAILURE_DISCUSSION_CREATE } from '../actions/createDiscussionAction'
+         FAILURE_DISCUSSION_CREATE,
+         DISCUSSION_INPUT_NAME,
+         DISCUSSION_INPUT_DESCRIPTION,
+         DISCUSSION_INPUT_PASSWORD } from '../actions/createDiscussionAction'
 
 const discussionGetState = Immutable.Map({
   isFetching: false,
@@ -94,6 +97,9 @@ function discussionCreate(state = discussionGetState, action) {
 }
 
 const discussionSettingsState = Immutable.Map({
+  name: '',
+  description: '',
+  password: '',
   isPrivate: false,
   isLimited: false,
   selectedType: 'question',
@@ -122,6 +128,18 @@ function discussionSettings(state = discussionSettingsState, action) {
     case DISCUSSION_SELECT_TAGS:
       return state.merge({
         selectedTags: action.selectedTags
+      })
+    case DISCUSSION_INPUT_NAME:
+      return state.merge({
+        name: action.name
+      })
+    case DISCUSSION_INPUT_DESCRIPTION:
+      return state.merge({
+        description: action.description
+      })
+    case DISCUSSION_INPUT_PASSWORD:
+      return state.merge({
+        password: action.password
       })
     case SUCCESS_DISCUSSION_CREATE:
     case FAILURE_DISCUSSION_CREATE:

@@ -29,17 +29,19 @@ class createDiscussionForm extends Component {
     DOMtoArray(tooltips).map(elem => elem.remove())
   }
 
-  componentWillReceiveProps() {
-    console.log(this.props.discussionCreate)
-    // let nameInput = this.refs.discussionName
-    // let descriptionInput = this.refs.discussionDescription
-    // let passwordInput = this.refs.discussionPassword
+  changeName(event) {
+    let value = event.target.value
+    this.props.onDiscussionName(value)
+  }
 
-    // if(reset) {
-    //   nameInput.value = ''
-    //   descriptionInput.value = ''
-    //   passwordInput.value = ''
-    // }
+  changeDescription(event) {
+    let value = event.target.value
+    this.props.onDiscussionDescription(value)
+  }
+
+  changePassword(event) {
+    let value = event.target.value
+    this.props.onDiscussionPassword(value)
   }
 
   changePrivate(event) {
@@ -65,25 +67,31 @@ class createDiscussionForm extends Component {
   createDiscussion() {
     let nameInput = this.refs.discussionName
     let descriptionInput = this.refs.discussionDescription
-    let passwordInput = this.refs.discussionPassword
     let tagsInput = document.querySelector('.tagsSelector .Select-control')
 
     if(this.validateFields(nameInput, descriptionInput) && this.validateTags(tagsInput)) {
-      this.props.onCreateDiscussion(this.parseCreateDiscussion(nameInput, descriptionInput, passwordInput))
+      this.props.onCreateDiscussion(this.parseCreateDiscussion())
     }
   }
 
-  parseCreateDiscussion(nameInput, descriptionInput, passwordInput) {
+  parseCreateDiscussion() {
     let { discussionTypes } = this.props
     let { email } = this.props.userInfo.payload
-    let { selectedType, selectedLimited, selectedTags, isPrivate, isLimited } = this.props.discussionSettings
+    let { name,
+          description,
+          password,
+          selectedType,
+          selectedLimited,
+          selectedTags,
+          isPrivate,
+          isLimited } = this.props.discussionSettings
 
     return {
-      name: nameInput.value,
-      description: descriptionInput.value,
+      name,
+      description,
       typeId: discussionTypes.payload.filter((item) => item.value === selectedType)[0].id,
       isPrivate,
-      password: passwordInput.value,
+      password,
       isLimited,
       limitedTime: moment().add(selectedLimited, 'h').unix(),
       tags: selectedTags.split(','),
@@ -198,7 +206,9 @@ class createDiscussionForm extends Component {
                 <fieldset className='form-group row'>
                   <label htmlFor='inputName' className='col-sm-2 form-control-label'>Name</label>
                   <div className='col-sm-10'>
-                    <input type='text'
+                    <input onChange={this.changeName.bind(this)}
+                           value={discussionSettings.name}
+                           type='text'
                            className='form-control'
                            id='inputName'
                            placeholder='Name of conversation'
@@ -213,7 +223,9 @@ class createDiscussionForm extends Component {
                 <fieldset className='form-group row'>
                   <label htmlFor='inputDescription' className='col-sm-2 form-control-label'>Description</label>
                   <div className='col-sm-12'>
-                    <textarea className='form-control'
+                    <textarea onChange={this.changeDescription.bind(this)}
+                              value={discussionSettings.description}
+                              className='form-control'
                               id='inputDescription'
                               rows='3'
                               placeholder='Describe your conversation'
@@ -251,7 +263,11 @@ class createDiscussionForm extends Component {
                   <div className='col-sm-12'>
                     <div className='input-group'>
                       <div className='input-group-addon'>Password</div>
-                      <input type='password' className='form-control' ref='discussionPassword' disabled={!discussionSettings.isPrivate}/>
+                      <input onChange={this.changePassword.bind(this)}
+                             value={discussionSettings.password}
+                             type='password'
+                             className='form-control'
+                             disabled={!discussionSettings.isPrivate}/>
                     </div>
                   </div>
                 </fieldset>
