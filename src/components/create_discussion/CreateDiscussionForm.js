@@ -6,6 +6,19 @@ import { DOMtoArray } from '../../utils/helpers'
 
 class createDiscussionForm extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      notifications: []
+    }
+  }
+
+  notificationHide(notification) {
+    this.setState({
+      notifications: this.state.notifications.filter(n => n.id !== notification.id)
+    })
+  }
+
   componentWillMount() {
     this.props.onGetTags()
     this.props.onGetLimites()
@@ -174,26 +187,9 @@ class createDiscussionForm extends Component {
 
   render() {
     let { discussionSettings } = this.props
-    let notifications = [
-      {
-        id: 1,
-        title: 'Title',
-        message: 'Message'
-      },
-      {
-        id: 2,
-        title: 'Title',
-        message: 'Message'
-      }
-    ]
-
-    let handleRequestHide = (notification) => {
-      notifications = notifications.filter(n => n.id !== notification.id);
-    }
-
     return (
       <div>
-      <Notifications notifications={notifications} onRequestHide={handleRequestHide}/>
+      <Notifications notifications={this.state.notifications} onRequestHide={this.notificationHide.bind(this)}/>
         <div className='card-group'>
           <div className='card col-xs-12 col-sm-12 col-md-12 col-lg-6 create-discussion-block'>
             <div className='card-block'>

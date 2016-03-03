@@ -79,6 +79,9 @@ module.exports = function(router) {
       }
     }))
 
-    this.body = discussionId[0]
+    this.body = {
+      id: discussionId[0],
+      message: 'Discussion has been created'
+    }
   })
 }
