@@ -99,8 +99,7 @@ const discussionSettingsState = Immutable.Map({
   isLimited: false,
   selectedType: 'question',
   selectedLimited: '1',
-  selectedTags: '',
-  reset: false
+  selectedTags: ''
 })
 
 function discussionSettings(state = discussionSettingsState, action) {
@@ -126,12 +125,6 @@ function discussionSettings(state = discussionSettingsState, action) {
         selectedTags: action.selectedTags
       })
     case SUCCESS_DISCUSSION_CREATE:
-      return state = discussionSettingsState
-    case RESET_DISCUSSION_SETTINGS:
-      state = discussionSettingsState
-      return state.merge({
-        reset: action.reset
-      })
     case LOCATION_CHANGE:
       return state = discussionSettingsState
     default:
