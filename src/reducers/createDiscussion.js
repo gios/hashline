@@ -125,6 +125,8 @@ function discussionSettings(state = discussionSettingsState, action) {
       return state.merge({
         selectedTags: action.selectedTags
       })
+    case SUCCESS_DISCUSSION_CREATE:
+      return state = discussionSettingsState
     case RESET_DISCUSSION_SETTINGS:
       state = discussionSettingsState
       return state.merge({
