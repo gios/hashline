@@ -19,7 +19,7 @@ class createDiscussionForm extends Component {
     })
   }
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps(newProps) {
     // let { payload, error } = newProps.discussionCreate
 
     // if(payload || error) {
