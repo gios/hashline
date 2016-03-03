@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import Select from 'react-select'
+import Notifications from 'react-notifications'
 import { DOMtoArray } from '../../utils/helpers'
 
 class createDiscussionForm extends Component {
@@ -173,8 +174,26 @@ class createDiscussionForm extends Component {
 
   render() {
     let { discussionSettings } = this.props
+    let notifications = [
+      {
+        id: 1,
+        title: 'Title',
+        message: 'Message'
+      },
+      {
+        id: 2,
+        title: 'Title',
+        message: 'Message'
+      }
+    ]
+
+    let handleRequestHide = (notification) => {
+      notifications = notifications.filter(n => n.id !== notification.id);
+    }
+
     return (
       <div>
+      <Notifications notifications={notifications} onRequestHide={handleRequestHide}/>
         <div className='card-group'>
           <div className='card col-xs-12 col-sm-12 col-md-12 col-lg-6 create-discussion-block'>
             <div className='card-block'>
