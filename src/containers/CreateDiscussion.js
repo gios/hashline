@@ -12,6 +12,7 @@ import { getDiscussionTypes,
          discussionSelectLimited,
          discussionSelectTags,
          createDiscussion } from '../actions/createDiscussionAction'
+import { triggerNotification } from '../actions/notificationAction'
 import CreateDiscussionForm from '../components/create_discussion/CreateDiscussionForm'
 
 class Login extends Component {
@@ -35,6 +36,7 @@ class Login extends Component {
                               onGetTypes={() => dispatch(getDiscussionTypes())}
                               onGetLimites={() => dispatch(getDiscussionLimites())}
                               onGetTags={() => dispatch(getDiscussionTags())}
+                              onAddNotification={(message, messageType, ...rest) => dispatch(triggerNotification(message, messageType, rest))}
                               onDiscussionName={(value) => dispatch(discussionInputName(value))}
                               onDiscussionDescription={(value) => dispatch(discussionInputDescription(value))}
                               onDiscussionPassword={(value) => dispatch(discussionInputPassword(value))}

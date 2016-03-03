@@ -1,37 +1,9 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import Select from 'react-select'
-import Notifications from 'react-notifications'
 import { DOMtoArray } from '../../utils/helpers'
 
 class createDiscussionForm extends Component {
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      notifications: []
-    }
-  }
-
-  notificationHide(notification) {
-    this.setState({
-      notifications: this.state.notifications.filter(n => n.id !== notification.id)
-    })
-  }
-
-  componentWillReceiveProps(newProps) {
-    // let { payload, error } = newProps.discussionCreate
-
-    // if(payload || error) {
-    //   this.setState({
-    //     notifications: this.state.notifications.concat([{
-    //       id: this.state.notifications.length + 1,
-    //       type: (error) ? 'error' : 'success',
-    //       message: payload.message
-    //     }])
-    //   })
-    // }
-  }
 
   componentWillMount() {
     this.props.onGetTypes()
@@ -69,6 +41,7 @@ class createDiscussionForm extends Component {
 
   selectType(newType) {
     this.props.onDiscussionSelectType(newType)
+    this.props.onAddNotification('payload.message', 'success')
   }
 
   selectLimited(newLimited) {
@@ -212,7 +185,6 @@ class createDiscussionForm extends Component {
     let { discussionSettings } = this.props
     return (
       <div>
-      <Notifications notifications={this.state.notifications} onRequestHide={this.notificationHide.bind(this)}/>
         <div className='card-group'>
           <div className='card col-xs-12 col-sm-12 col-md-12 col-lg-6 create-discussion-block'>
             <div className='card-block'>
