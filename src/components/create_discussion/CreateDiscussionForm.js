@@ -41,7 +41,6 @@ class createDiscussionForm extends Component {
 
   selectType(newType) {
     this.props.onDiscussionSelectType(newType)
-    this.props.onAddNotification('payload.message', 'success')
   }
 
   selectLimited(newLimited) {

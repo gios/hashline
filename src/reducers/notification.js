@@ -9,11 +9,11 @@ export function notification(state = notificationState, action) {
       return state.push(
         {
           message: action.message,
-          messageType: action.messageType || 'info',
-          id: action.id || state.size + 1,
-          title: action.title || '',
-          timeOut: action.timeout || 0,
-          onClick: action.onClick || null
+          messageType: action.messageType,
+          id: state.size + 1,
+          title: action.title,
+          timeOut: action.timeOut,
+          onClick: action.onClick
         }
       )
     case DISMISS_NOTIFICATION:

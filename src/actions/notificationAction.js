@@ -1,15 +1,14 @@
 export const TRIGGER_NOTIFICATION = 'TRIGGER_NOTIFICATION'
 export const DISMISS_NOTIFICATION = 'DISMISS_NOTIFICATION'
 
-export function triggerNotification(message, messageType, rest) {
+export function triggerNotification(message, messageType, title = '', timeOut = 0, onClick = null) {
   return {
     type: TRIGGER_NOTIFICATION,
     message,
     messageType,
-    id: rest[0],
-    title: rest[1],
-    timeOut: rest[2],
-    onClick: rest[3]
+    title,
+    timeOut,
+    onClick
   }
 }
 

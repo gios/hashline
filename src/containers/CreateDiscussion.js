@@ -16,6 +16,17 @@ import { triggerNotification } from '../actions/notificationAction'
 import CreateDiscussionForm from '../components/create_discussion/CreateDiscussionForm'
 
 class Login extends Component {
+
+  notificationStutus(status) {
+    let { dispatch, discussionCreate } = this.props
+
+    if(!status) {
+      dispatch(triggerNotification(discussionCreate.payload.message, 'success'))
+    } else if(status.error) {
+      dispatch(triggerNotification(status.payload.response.message, 'error'))
+    }
+  }
+
   render() {
     let { dispatch,
           userInfo,
@@ -36,7 +47,6 @@ class Login extends Component {
                               onGetTypes={() => dispatch(getDiscussionTypes())}
                               onGetLimites={() => dispatch(getDiscussionLimites())}
                               onGetTags={() => dispatch(getDiscussionTags())}
-                              onAddNotification={(message, messageType, ...rest) => dispatch(triggerNotification(message, messageType, rest))}
                               onDiscussionName={(value) => dispatch(discussionInputName(value))}
                               onDiscussionDescription={(value) => dispatch(discussionInputDescription(value))}
                               onDiscussionPassword={(value) => dispatch(discussionInputPassword(value))}
@@ -45,7 +55,11 @@ class Login extends Component {
                               onDiscussionSelectType={(value) => dispatch(discussionSelectType(value))}
                               onDiscussionSelectLimited={(value) => dispatch(discussionSelectLimited(value))}
                               onDiscussionSelectTags={(value) => dispatch(discussionSelectTags(value))}
-                              onCreateDiscussion={(data) => dispatch(createDiscussion(data))}/>
+                              onCreateDiscussion={(data) => {
+                                dispatch(createDiscussion(data))
+                                  .then((status) => this.notificationStutus(status))
+                                }
+                              }/>
       </div>
     )
   }
