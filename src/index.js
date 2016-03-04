@@ -37,6 +37,7 @@ render(
       <Route path='/' component={Containers.App}>
         <IndexRoute component={IndexDash}/>
         <Route path='/create' component={Containers.CreateDiscussion}/>
+        <Route path='/mydiscussions' component={Containers.MyDiscussions}/>
       </Route>
     </Router>
   </Provider>,
