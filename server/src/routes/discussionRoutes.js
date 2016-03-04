@@ -1,4 +1,4 @@
-module.exports = function(router) {
+module.exports = function(router, jwt, SHARED_SECRET) {
   'use strict';
 
   const knex = require('../knexConfig.js')
@@ -83,5 +83,27 @@ module.exports = function(router) {
       id: discussionId[0],
       message: 'Discussion has been created'
     }
+  })
+
+  router.get('/api/discussion', function *() {
+    let token = this.request.header.authorization.split(' ')[1]
+    let userInfo = yield jwt.verify(token, SHARED_SECRET)
+
+    let data = yield knex('discussions')
+                    .select('discussions.name',
+                            'discussions.description',
+                            'types.name as type_name',
+                            'users.email as user_email',
+                            'discussions.isPrivate',
+                            'discussions.isLimited',
+                            'discussions.password',
+                            'discussions.limitedTime',
+                            'tags.name as tag_name')
+                            .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
+                            .innerJoin('tags', 'tags.id', 'discussions_tags.tag_id')
+                            .innerJoin('types', 'discussions.type_id', 'types.id')
+                            .innerJoin('users', 'discussions.user_id', 'users.id')
+                            .where('user_email', userInfo.email)
+    this.body = data
   })
 }
