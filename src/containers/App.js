@@ -33,11 +33,12 @@ class App extends Component {
           isAuthenticated,
           loggedOut,
           userInfo,
+          notifications,
           sidebarTypes } = this.props
 
     return (
       <div>
-        <Notifications notifications={this.props.notifications} onRequestHide={this.notificationHide.bind(this)}/>
+        <Notifications notifications={notifications} onRequestHide={this.notificationHide.bind(this)}/>
         { loggedOut && <LoggedOutMessage/>}
         { isAuthenticated &&
         <div>
