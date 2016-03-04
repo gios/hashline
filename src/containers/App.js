@@ -36,9 +36,14 @@ class App extends Component {
           notifications,
           sidebarTypes } = this.props
 
+    let notificationsData = notifications.map((item) => {
+      item['type'] = item['messageType']
+      return item
+    })
+
     return (
       <div>
-        <Notifications notifications={notifications} onRequestHide={this.notificationHide.bind(this)}/>
+        <Notifications notifications={notificationsData} onRequestHide={this.notificationHide.bind(this)}/>
         { loggedOut && <LoggedOutMessage/>}
         { isAuthenticated &&
         <div>
