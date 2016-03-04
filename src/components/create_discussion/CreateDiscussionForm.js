@@ -252,6 +252,7 @@ class createDiscussionForm extends Component {
                       <input onChange={this.changePassword.bind(this)}
                              value={discussionSettings.password}
                              type='password'
+                             maxLength='16'
                              className='form-control'
                              disabled={!discussionSettings.isPrivate}/>
                     </div>
