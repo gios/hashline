@@ -35,7 +35,7 @@ module.exports = {
       },
       {
         test: /\.(eot|woff|woff2|ttf|svg)$/,
-        loader: 'url-loader?limit=8192'
+        loader: 'file?hash=sha512&digest=hex&name=fonts/[name].[ext]'
       }
     ]
   },
