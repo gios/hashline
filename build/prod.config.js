@@ -28,14 +28,14 @@ module.exports = {
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loaders: [
-            'file?hash=sha512&digest=hex&name=img/[name].[ext]',
-            'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
+          'file?name=img/[name].[ext]',
+          'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
         ],
         exclude: /node_modules/
       },
       {
         test: /\.(eot|woff|woff2|ttf|svg)$/,
-        loader: 'file?hash=sha512&digest=hex&name=fonts/[name].[ext]'
+        loader: 'file?name=fonts/[name].[ext]'
       }
     ]
   },
