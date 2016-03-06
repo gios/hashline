@@ -85,11 +85,18 @@ module.exports = function(router, jwt, SHARED_SECRET) {
     }
   })
 
-  router.get('/api/discussion', function *() {
+  router.get('/api/discussions', function *() {
     let token = this.request.header.authorization.split(' ')[1]
     let userInfo = yield jwt.verify(token, SHARED_SECRET)
 
-    let data = yield knex('discussions')
+    let discussionsTags = yield knex('discussions')
+                    .select('discussions.name', 'users.email as user_email', 'tags.name as tag_name')
+                    .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
+                    .innerJoin('tags', 'tags.id', 'discussions_tags.tag_id')
+                    .innerJoin('users', 'discussions.user_id', 'users.id')
+                    .where('user_email', userInfo.email)
+
+    let discussionsData = yield knex('discussions')
                     .select('discussions.name',
                             'discussions.description',
                             'types.name as type_name',
@@ -97,13 +104,22 @@ module.exports = function(router, jwt, SHARED_SECRET) {
                             'discussions.isPrivate',
                             'discussions.isLimited',
                             'discussions.password',
-                            'discussions.limitedTime',
-                            'tags.name as tag_name')
-                            .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
-                            .innerJoin('tags', 'tags.id', 'discussions_tags.tag_id')
-                            .innerJoin('types', 'discussions.type_id', 'types.id')
-                            .innerJoin('users', 'discussions.user_id', 'users.id')
-                            .where('user_email', userInfo.email)
-    this.body = data
+                            'discussions.limitedTime')
+                    .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
+                    .innerJoin('types', 'discussions.type_id', 'types.id')
+                    .innerJoin('users', 'discussions.user_id', 'users.id')
+                    .where('user_email', userInfo.email)
+                    .groupBy('discussions.name')
+
+    for (let indexData = 0; indexData < discussionsData.length; indexData++) {
+      discussionsData[indexData].tags = []
+      for (let indexTag = 0; indexTag < discussionsTags.length; indexTag++) {
+        if (discussionsData[indexData].name === discussionsTags[indexTag].name) {
+          discussionsData[indexData].tags.push(discussionsTags[indexTag].tag_name)
+        }
+      }
+    }
+
+    this.body = discussionsData
   })
 }
