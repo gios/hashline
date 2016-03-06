@@ -7,7 +7,6 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: './public',
-    publicPath: '/',
     filename: 'index.js'
   },
   module: {
