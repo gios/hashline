@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 
-class IndexDash extends Component {
+class DiscussionCard extends Component {
 
   render() {
     return (
       <div className='col-md-12'>
+        <div className='col-md-6'>Create discussion</div>
         <div className='col-md-6'>Feed</div>
         <div className='col-md-6'>Trending</div>
       </div>
@@ -12,4 +13,4 @@ class IndexDash extends Component {
   }
 }
 
-export default IndexDash
+export default DiscussionCard

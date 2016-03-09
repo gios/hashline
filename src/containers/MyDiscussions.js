@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getDiscussions } from '../actions/myDiscussionsAction'
+import MyDiscussionsBlock from '../components/my_discussions/MyDiscussionsBlock'
 
 class MyDiscussions extends Component {
 
   render() {
-    let { dispatch } = this.props
+    let { dispatch, discussions } = this.props
 
     return (
       <div>
-        Hello!
-        <button onClick={() => dispatch(getDiscussions())}>Hello</button>
+        <MyDiscussionsBlock discussions={discussions}
+                            onLoadDiscussions={() => dispatch(getDiscussions())}/>
       </div>
     )
   }
@@ -18,7 +19,7 @@ class MyDiscussions extends Component {
 
 function inject(state) {
   return {
-    state
+    discussions: state.myDiscussions.getDiscussions.toJS()
   }
 }
 

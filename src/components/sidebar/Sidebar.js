@@ -169,12 +169,6 @@ class Sidebar extends Component {
             </li>
             <li className='nav-item'>
               <a className='nav-link sidebar-link' href='#'>
-                <i className='fa fa-tags'></i>
-                <span className='sidebar-list-item'>My Tags</span>
-              </a>
-            </li>
-            <li className='nav-item'>
-              <a className='nav-link sidebar-link' href='#'>
                 <i className='fa fa-bell-o'></i>
                 <span className='label label-default label-pill pull-xs-right'>14</span>
                 <span className='sidebar-list-item'>Notification</span>
