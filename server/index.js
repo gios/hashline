@@ -8,6 +8,7 @@ const serve = require('koa-static')
 const bodyParser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const jwt = require('koa-jwt')
+const helmet = require('koa-helmet')
 const tracer = require('tracer').colorConsole()
 
 const SHARED_SECRET = 'hashline'
@@ -27,7 +28,9 @@ app.use(function *(next) {
     this.app.emit('error', err, this)
   }
 })
+
 app.use(logger())
+app.use(helmet())
 app.use(bodyParser())
 app.use(serve(__dirname + '/../public'))
 app.use(jwt({ secret: SHARED_SECRET }).unless({
