@@ -17,12 +17,12 @@ const tracer = require('tracer').colorConsole()
 const SHARED_SECRET = 'hashline'
 
 app.use(function *(next) {
-  yield send(this, path.resolve(__dirname, '/../public/', 'index.html'))
   try {
     yield next
   } catch (err) {
     this.status = err.status || 500
     this.body = { code: this.status, message: err.message || 'Internal server error' }
+    yield send(this, path.resolve(__dirname, '/../public/', 'index.html'))
 
     if (400 < this.status && this.status < 500) {
       tracer.warn(err)
