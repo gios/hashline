@@ -18,13 +18,13 @@ import CreateDiscussionForm from '../components/create_discussion/CreateDiscussi
 class Login extends Component {
 
   notificationStutus(status) {
-    let { dispatch, discussionCreate } = this.props
+    let { dispatch } = this.props
 
-    if(!status) {
-      dispatch(triggerNotification(discussionCreate.payload.message, 'success'))
-    } else if(status.error) {
+    if(status.error) {
       dispatch(triggerNotification(status.payload.response.message, 'error'))
+      return
     }
+    dispatch(triggerNotification(status.payload.message, 'success'))
   }
 
   render() {

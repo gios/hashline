@@ -81,7 +81,7 @@ module.exports = function(router, jwt, SHARED_SECRET) {
 
     this.body = {
       id: discussionId[0],
-      message: 'Discussion has been created'
+      message: `Discussion ${name} has been created`
     }
   })
 
