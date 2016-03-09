@@ -1,5 +1,6 @@
 'use strict';
 
+const path = require('path')
 const app = require('koa')()
 const server = require('http').createServer(app.callback())
 const io = require('socket.io')(server)
@@ -10,13 +11,15 @@ const logger = require('koa-logger')
 const jwt = require('koa-jwt')
 const helmet = require('koa-helmet')
 const favicon = require('koa-favicon')
+const send = require('koa-send')
 const tracer = require('tracer').colorConsole()
 
 const SHARED_SECRET = 'hashline'
 
 app.use(function *(next) {
+  yield send(this, path.resolve(__dirname, '/../public/', 'index.html'))
   try {
-    yield next;
+    yield next
   } catch (err) {
     this.status = err.status || 500
     this.body = { code: this.status, message: err.message || 'Internal server error' }
