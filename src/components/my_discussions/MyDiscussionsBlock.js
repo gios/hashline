@@ -24,10 +24,8 @@ class MyDiscussionsBlock extends Component {
 
   render() {
     return (
-      <div>
-        <ul>
-          {this.renderMyDiscussions()}
-        </ul>
+      <div className='card-group'>
+        {this.renderMyDiscussions()}
       </div>
     )
   }

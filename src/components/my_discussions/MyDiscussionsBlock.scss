@@ -1,0 +1,18 @@
+.my-discussion-card {
+  word-wrap: break-word;
+  height: 23em;
+
+  & > .card-title {
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    word-wrap: initial;
+  }
+
+  & > .my-discussion-labels .label:not(:first-child) {
+    margin-left: 1em;
+  }
+
+  & > .tag-labels .label:not(:first-child) {
+    margin-left: .5em;
+  }
+}

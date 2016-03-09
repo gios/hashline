@@ -104,7 +104,6 @@ module.exports = function(router, jwt, SHARED_SECRET) {
                             'users.email as user_email',
                             'discussions.isPrivate',
                             'discussions.isLimited',
-                            'discussions.password',
                             'discussions.limitedTime')
                     .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
                     .innerJoin('types', 'discussions.type_id', 'types.id')
