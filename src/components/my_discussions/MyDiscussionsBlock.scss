@@ -15,4 +15,9 @@
   & > .tag-labels .label:not(:first-child) {
     margin-left: .5em;
   }
+
+  & > .discussion-join-btn {
+    position: absolute;
+    right: 0;
+  }
 }
