@@ -97,7 +97,8 @@ module.exports = function(router, jwt, SHARED_SECRET) {
                     .where('user_email', userInfo.email)
 
     let discussionsData = yield knex('discussions')
-                    .select('discussions.name',
+                    .select('discussions.id',
+                            'discussions.name',
                             'discussions.description',
                             'types.name as type_name',
                             'users.email as user_email',

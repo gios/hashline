@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Loader from '../parts/Loader'
+import DiscussionCard from './DiscussionCard'
 
 class MyDiscussionsBlock extends Component {
 
@@ -13,9 +14,9 @@ class MyDiscussionsBlock extends Component {
     if(discussions.isFetching) {
       return <Loader size={4} color='red'/>
     } else if(discussions.payload) {
-      return discussions.payload.map((item) => {
+      return discussions.payload.map((discussion) => {
         return (
-          <li>{item.name}</li>
+          <DiscussionCard key={discussion.id} discussion={discussion}/>
         )
       })
     }
