@@ -64,14 +64,7 @@ class createDiscussionForm extends Component {
   parseCreateDiscussion() {
     let { discussionTypes } = this.props
     let { email } = this.props.userInfo.payload
-    let { name,
-          description,
-          password,
-          selectedType,
-          selectedLimited,
-          selectedTags,
-          isPrivate,
-          isLimited } = this.props.discussionSettings
+    let { name, description, password, selectedType, selectedLimited, selectedTags, isPrivate, isLimited } = this.props.discussionSettings
 
     return {
       name,
