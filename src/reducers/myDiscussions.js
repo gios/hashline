@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux'
 import Immutable from 'immutable'
-import { LOCATION_CHANGE } from 'react-router-redux'
 import { REQUEST_GET_DISCUSSIONS, SUCCESS_GET_DISCUSSIONS, FAILURE_GET_DISCUSSIONS } from '../actions/myDiscussionsAction'
 
 const discussionsGetState = Immutable.Map({
@@ -29,8 +28,6 @@ function getDiscussions(state = discussionsGetState, action) {
         payload: action.payload.response,
         error: true
       })
-    case LOCATION_CHANGE:
-      return state = discussionsGetState
     default:
       return state
   }

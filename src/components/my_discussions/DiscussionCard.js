@@ -3,12 +3,16 @@ import moment from 'moment'
 
 class DiscussionCard extends Component {
 
+  joinToDiscussion() {
+    this.props.onJoinDiscussion(1)
+  }
+
   render() {
     let { name, description, isLimited, isPrivate, limitedTime, tags, type_name } = this.props.discussion
 
     return (
         <div className='card card-block col-xs-12 col-sm-12 col-md-12 col-lg-6 my-discussion-card'>
-          <button type='button' className='btn btn-success discussion-join-btn m-x-1'>Join</button>
+          <button onClick={this.joinToDiscussion.bind(this)}  type='button' className='btn btn-success discussion-join-btn m-x-1'>Join</button>
           <h4 className='card-title'>{name}</h4>
           <div className='my-discussion-labels'>
             {(isPrivate) ? <span className='label label-warning'>Private</span> : <span className='label label-primary'>Public</span>}

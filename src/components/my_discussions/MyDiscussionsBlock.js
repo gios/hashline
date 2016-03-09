@@ -9,14 +9,14 @@ class MyDiscussionsBlock extends Component {
   }
 
   renderMyDiscussions() {
-    let { discussions } = this.props
+    let { discussions, onJoinDiscussion } = this.props
 
     if(discussions.isFetching) {
       return <Loader size={4} color='red'/>
     } else if(discussions.payload) {
       return discussions.payload.map((discussion) => {
         return (
-          <DiscussionCard key={discussion.id} discussion={discussion}/>
+          <DiscussionCard onJoinDiscussion={onJoinDiscussion} key={discussion.id} discussion={discussion}/>
         )
       })
     }
