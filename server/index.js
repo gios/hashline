@@ -9,6 +9,7 @@ const bodyParser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const jwt = require('koa-jwt')
 const helmet = require('koa-helmet')
+const favicon = require('koa-favicon')
 const tracer = require('tracer').colorConsole()
 
 const SHARED_SECRET = 'hashline'
@@ -33,6 +34,7 @@ app.use(logger())
 app.use(helmet())
 app.use(bodyParser())
 app.use(serve(__dirname + '/../public'))
+app.use(favicon(__dirname + '/../public/favicon.ico'))
 app.use(jwt({ secret: SHARED_SECRET }).unless({
   path: [/^\/authenticate/, /^\/registration/]
 }))
