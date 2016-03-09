@@ -46,6 +46,11 @@ class Sidebar extends Component {
     }
   }
 
+  routeSelector(route) {
+    let { activeRoute } = this.props
+    return (activeRoute === route) ? 'nav-link sidebar-link active' : 'nav-link sidebar-link'
+  }
+
   logout() {
     this.props.onLogout()
   }
@@ -112,7 +117,7 @@ class Sidebar extends Component {
           </div>
           <ul className='nav sidebar-list-static'>
             <li className='nav-item'>
-              <Link to='/' className='nav-link sidebar-link active'>
+              <Link to='/' className={this.routeSelector('/')}>
                 <i className='fa fa-dashcube'></i>
                 <span className='sidebar-list-item'>Dash</span>
               </Link>
@@ -162,7 +167,7 @@ class Sidebar extends Component {
               </a>
             </li>
             <li className='nav-item'>
-              <Link to='/mydiscussions' className='nav-link sidebar-link'>
+              <Link to='/mydiscussions' className={this.routeSelector('/mydiscussions')}>
                 <i className='fa fa-commenting-o'></i>
                 <span className='sidebar-list-item'>My Discussions</span>
               </Link>

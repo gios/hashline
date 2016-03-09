@@ -34,6 +34,7 @@ class App extends Component {
           loggedOut,
           userInfo,
           notifications,
+          activeRoute,
           sidebarTypes } = this.props
 
     let notificationsData = notifications.map((item) => {
@@ -51,6 +52,7 @@ class App extends Component {
                    isMobileView={isMobileView}
                    userInfo={userInfo}
                    sidebarTypes={sidebarTypes}
+                   activeRoute={activeRoute}
                    onSetMobile={value => dispatch(setMobileSidebar(value))}
                    onToggle={value => dispatch(toggleSidebar(value))}
                    onGetUserData={() => dispatch(getUserData())}
@@ -70,7 +72,7 @@ class App extends Component {
   }
 }
 
-function inject(state) {
+function inject(state, routing) {
   return {
     isAuthenticated: state.login.auth.get('isAuthenticated'),
     loggedOut: state.login.auth.get('loggedOut'),
@@ -78,7 +80,8 @@ function inject(state) {
     isMobileView: state.sidebar.sidebarView.get('isMobileView'),
     userInfo: state.sidebar.userInfo.toJS(),
     sidebarTypes: state.sidebar.sidebarTypes.toJS(),
-    notifications: state.notification.toJS()
+    notifications: state.notification.toJS(),
+    activeRoute: routing.location.pathname
   }
 }
 
