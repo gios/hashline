@@ -6,15 +6,15 @@ class Discussion extends Component {
   render() {
     return (
       <div>
-        DISCUSSION ROUTER
+        DISCUSSION ROUTER {this.props.discussionId}
       </div>
     )
   }
 }
 
-function inject(state) {
+function inject(state, routing) {
   return {
-    state
+    discussionId: routing.params.id
   }
 }
 

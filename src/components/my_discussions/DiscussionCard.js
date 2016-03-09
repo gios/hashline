@@ -4,7 +4,8 @@ import moment from 'moment'
 class DiscussionCard extends Component {
 
   joinToDiscussion() {
-    this.props.onJoinDiscussion(1)
+    let { id } = this.props.discussion
+    this.props.onJoinDiscussion(id)
   }
 
   render() {
