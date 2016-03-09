@@ -46,7 +46,7 @@ class App extends Component {
       <div>
         <Notifications notifications={notificationsData} onRequestHide={this.notificationHide.bind(this)}/>
         { loggedOut && <LoggedOutMessage/>}
-        { isAuthenticated &&
+        { (isAuthenticated) ?
         <div>
           <Sidebar isToggled={isToggled}
                    isMobileView={isMobileView}
@@ -66,7 +66,7 @@ class App extends Component {
               {this.props.children}
             </div>
           </div>
-        </div> }
+        </div> : this.props.children}
       </div>
     )
   }

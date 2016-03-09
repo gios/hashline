@@ -32,10 +32,10 @@ const history = syncHistoryWithStore(browserHistory, store)
 render(
   <Provider store={store}>
     <Router history={history}>
-      <Route path='/login' component={Containers.Login}/>
-      <Route path='/signup' component={Containers.Login}/>
       <Route path='/' component={Containers.App}>
         <IndexRoute component={IndexDash}/>
+        <Route path='/login' component={Containers.Login}/>
+        <Route path='/signup' component={Containers.Login}/>
         <Route path='/create' component={Containers.CreateDiscussion}/>
         <Route path='/mydiscussions' component={Containers.MyDiscussions}/>
         <Route path='/discussion' component={Containers.Discussion}>
