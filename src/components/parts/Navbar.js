@@ -20,10 +20,10 @@ class Navbar extends Component {
       <nav className='navbar navbar-dark'>
         <ul className='nav navbar-nav pull-xs-right'>
           <li className='nav-item'>
-            <a onClick={this.getFeatures.bind(this)} className='nav-link' href='#'>Features</a>
+            <a onClick={this.getFeatures.bind(this)} className='nav-link' href='javascript:void(0)'>Features</a>
           </li>
           <li className='nav-item'>
-            <a onClick={this.getAbout.bind(this)} className='nav-link' href='#'>About</a>
+            <a onClick={this.getAbout.bind(this)} className='nav-link' href='javascript:void(0)'>About</a>
           </li>
         </ul>
       </nav>

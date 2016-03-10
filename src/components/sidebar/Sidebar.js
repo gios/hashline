@@ -88,7 +88,7 @@ class Sidebar extends Component {
       typesOptions = sidebarTypes.payload.types.map((item) => {
         return (
           <li key={item.id} className='nav-item'>
-            <a className='nav-link sidebar-link nested' href='#'>
+            <a className='nav-link sidebar-link nested' href='javascript:void(0)'>
               <i className='fa fa-chevron-circle-right'></i>
               <span className='sidebar-list-item'>{item.name}</span>
             </a>
@@ -123,19 +123,19 @@ class Sidebar extends Component {
               </Link>
             </li>
             <li className='nav-item'>
-              <a className='nav-link sidebar-link' href='#'>
+              <a className='nav-link sidebar-link' href='javascript:void(0)'>
                 <i className='fa fa-fire'></i>
                 <span className='sidebar-list-item'>Trending</span>
               </a>
             </li>
             <li className='nav-item'>
-              <a className='nav-link sidebar-link' href='#'>
+              <a className='nav-link sidebar-link' href='javascript:void(0)'>
                 <i className='fa fa-clock-o'></i>
                 <span className='sidebar-list-item'>Recent</span>
               </a>
             </li>
             <li className='nav-item'>
-              <a className='nav-link sidebar-link' href='#'>
+              <a className='nav-link sidebar-link' href='javascript:void(0)'>
                 <i className='fa fa-comments'></i>
                 <span className='sidebar-list-item'>Most discussed</span>
               </a>
@@ -152,7 +152,7 @@ class Sidebar extends Component {
               </ul>
             </div>
             <li className='nav-item'>
-              <a className='nav-link sidebar-link' href='#'>
+              <a className='nav-link sidebar-link' href='javascript:void(0)'>
                 <i className='fa fa-hourglass-start'></i>
                 <span className='sidebar-list-item'>Limited</span>
               </a>
@@ -161,7 +161,7 @@ class Sidebar extends Component {
               <a className='nav-link sidebar-link deactivate'></a>
             </li>
             <li className='nav-item'>
-              <a className='nav-link sidebar-link' href='#'>
+              <a className='nav-link sidebar-link' href='javascript:void(0)'>
                 <i className='fa fa-rss'></i>
                 <span className='sidebar-list-item'>Feed</span>
               </a>
@@ -173,7 +173,7 @@ class Sidebar extends Component {
               </Link>
             </li>
             <li className='nav-item'>
-              <a className='nav-link sidebar-link' href='#'>
+              <a className='nav-link sidebar-link' href='javascript:void(0)'>
                 <i className='fa fa-bell-o'></i>
                 <span className='label label-default label-pill pull-xs-right'>14</span>
                 <span className='sidebar-list-item'>Notification</span>
