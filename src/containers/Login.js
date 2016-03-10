@@ -38,7 +38,7 @@ class Login extends Component {
     }
 
     let loginFromSelector = () => {
-      if (pathname === '/login') {
+      if (pathname === 'login') {
         return <LoginForm inputErrors={inputErrors}
                           onClickLogin={creds => dispatch(loginUser(creds))}
                           emitEmailError={value => dispatch(incorrectEmail(value))}
