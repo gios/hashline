@@ -167,7 +167,7 @@ class Sidebar extends Component {
               </a>
             </li>
             <li className='nav-item'>
-              <Link to='/mydiscussions' className={this.routeSelector('/mydiscussions')}>
+              <Link to='/mydiscussions' className={this.routeSelector('mydiscussions')}>
                 <i className='fa fa-commenting-o'></i>
                 <span className='sidebar-list-item'>My Discussions</span>
               </Link>
