@@ -29,7 +29,7 @@ class MyDiscussionsBlock extends Component {
       }
       return discussions.payload.map((discussion) => {
         return (
-          <DiscussionCard onJoinDiscussion={onJoinDiscussion} key={discussion.id} discussion={discussion}/>
+          <DiscussionCard onJoinDiscussion={onJoinDiscussion} key={discussion.id} discussion={discussion} closed={discussion.closed}/>
         )
       })
     }

@@ -2,6 +2,7 @@ module.exports = function(router, jwt, SHARED_SECRET) {
   'use strict';
 
   const knex = require('../knexConfig.js')
+  const moment = require('moment')
 
   router.get('/api/discussion/get_types', function *() {
     let availableTypes = yield knex('types').select()
@@ -53,6 +54,7 @@ module.exports = function(router, jwt, SHARED_SECRET) {
       isLimited,
       limitedTime,
       user_id: findUser.id,
+      closed: false,
       created_at: Date.now(),
       updated_at: Date.now()
     })
@@ -104,7 +106,8 @@ module.exports = function(router, jwt, SHARED_SECRET) {
                             'users.email as user_email',
                             'discussions.isPrivate',
                             'discussions.isLimited',
-                            'discussions.limitedTime')
+                            'discussions.limitedTime',
+                            'discussions.closed')
                     .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
                     .innerJoin('types', 'discussions.type_id', 'types.id')
                     .innerJoin('users', 'discussions.user_id', 'users.id')
@@ -117,6 +120,13 @@ module.exports = function(router, jwt, SHARED_SECRET) {
         if (discussionsData[indexData].name === discussionsTags[indexTag].name) {
           discussionsData[indexData].tags.push(discussionsTags[indexTag].tag_name)
         }
+      }
+    }
+
+    for (var index = 0; index < discussionsData.length; index++) {
+      let diffLimited = moment.duration(moment.unix(discussionsData[index].limitedTime).diff(moment())).as('seconds')
+      if(diffLimited < 0) {
+        yield knex('discussions').where('id', discussionsData[index].id).update({ closed: true })
       }
     }
 
