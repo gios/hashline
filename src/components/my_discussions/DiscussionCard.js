@@ -5,6 +5,12 @@ class DiscussionCard extends Component {
 
   componentDidMount() {
     this.limitedInterval = setInterval(this.updateLimitedTime.bind(this), 1000)
+    $(this.refs.joinButton).popover({
+      title: 'Password',
+      content: `<input type='password' class='form-control'></input>`,
+      html: true,
+      placement: 'left'
+    })
   }
 
   componentWillUnmount() {
@@ -16,8 +22,12 @@ class DiscussionCard extends Component {
   }
 
   joinToDiscussion() {
-    let { id } = this.props.discussion
-    this.props.onJoinDiscussion(id)
+    let { id, isPrivate } = this.props.discussion
+    if(isPrivate) {
+      $(this.refs.joinButton).popover('show')
+    } else {
+      this.props.onJoinDiscussion(id)
+    }
   }
 
   formatExpired() {
@@ -42,7 +52,10 @@ class DiscussionCard extends Component {
         <div className='card card-block col-xs-12 col-sm-12 col-md-12 col-lg-6 my-discussion-card'>
           {(closed)
             ? <button type='button' className='btn btn-danger discussion-join-btn m-x-1 disabled'>Closed</button>
-            : <button onClick={this.joinToDiscussion.bind(this)} type='button' className='btn btn-success discussion-join-btn m-x-1'>Join</button>
+            : <button onClick={this.joinToDiscussion.bind(this)}
+                      type='button'
+                      className='btn btn-success discussion-join-btn m-x-1'
+                      ref='joinButton'>Join</button>
           }
           <h4 className='card-title'>{name}</h4>
           <div className='my-discussion-labels'>
