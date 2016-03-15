@@ -7,7 +7,7 @@ class DiscussionCard extends Component {
     this.limitedInterval = setInterval(this.updateLimitedTime.bind(this), 1000)
     $(this.refs.joinButton).popover({
       title: 'Password',
-      content: `<input type='password' class='form-control'></input>`,
+      content: `<input type='password' class='form-control discussion-password'></input>`,
       html: true,
       placement: 'left'
     })
@@ -24,6 +24,13 @@ class DiscussionCard extends Component {
   joinToDiscussion() {
     let { id, isPrivate } = this.props.discussion
     if(isPrivate) {
+      setTimeout(() => {
+        $('.discussion-password').on('keypress', (e) => {
+          if(e.keyCode === 13) {
+            console.log($(e.target).val())
+          }
+        })
+      }, 100)
       $(this.refs.joinButton).popover('show')
     } else {
       this.props.onJoinDiscussion(id)
