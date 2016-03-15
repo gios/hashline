@@ -34,7 +34,7 @@ class DiscussionCard extends Component {
             {(isPrivate) ? <span className='label label-warning'>Private</span> : <span className='label label-primary'>Public</span>}
             {(isLimited) ? <span className='label label-info'>Limited</span> : null}
           </div>
-          <p className='card-text'><small className='text-muted'>Description: </small>{description}</p>
+          <p className='card-text'><small className='text-muted'>Description: </small><br/>{description}</p>
           <p className='card-text'><small className='text-muted'>Time to expiry: </small>{expiredTime}</p>
           <p className='card-text'><small className='text-muted'>Type: </small>{type_name}</p>
           <p className='card-text tag-labels'><small className='text-muted'>Tags: </small>{tags.map((tag, index) => {
