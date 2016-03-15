@@ -14,6 +14,7 @@ class DiscussionCard extends Component {
   }
 
   componentWillUnmount() {
+    $(this.refs.joinButton).popover('dispose')
     clearInterval(this.limitedInterval)
   }
 
