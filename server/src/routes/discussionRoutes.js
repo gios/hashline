@@ -2,6 +2,7 @@ module.exports = function(router, jwt, SHARED_SECRET) {
   'use strict';
 
   const knex = require('../knexConfig.js')
+  const userMethods = require('../methods/userMethods.js')
   const moment = require('moment')
 
   router.get('/api/discussion/get_types', function *() {
@@ -50,7 +51,7 @@ module.exports = function(router, jwt, SHARED_SECRET) {
       description,
       type_id: typeId,
       isPrivate,
-      password,
+      password: userMethods.cryptoPassword(password),
       isLimited,
       limitedTime,
       user_id: findUser.id,
@@ -85,6 +86,21 @@ module.exports = function(router, jwt, SHARED_SECRET) {
       id: discussionId[0],
       message: `Discussion ${name} has been created`
     }
+  })
+
+  router.post('/api/discussion/:id', function *() {
+    let id = this.request.id
+    let password = this.request.password
+    let foundDiscussion = yield knex('discussions')
+      .where('id', id)
+      .first()
+
+    let isCorrectPassword = (userMethods.encryptoPassword(foundDiscussion.password) === password ? true : false)
+
+    if(!isCorrectPassword) {
+      this.throw('Password of this discussion not correct', 404)
+    }
+    this.body = foundDiscussion
   })
 
   router.get('/api/discussions', function *() {
