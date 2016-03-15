@@ -13,7 +13,7 @@ exports.up = function(knex, Promise) {
           table.boolean('isPrivate')
           table.boolean('isLimited')
           table.string('password')
-          table.time('limitedTime')
+          table.integer('limitedTime')
           table.timestamps()
         })
         .then(() => logger.log('DISCUSSIONS table has been created'))

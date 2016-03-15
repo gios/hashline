@@ -73,7 +73,7 @@ class createDiscussionForm extends Component {
       isPrivate,
       password,
       isLimited,
-      limitedTime: moment().add(selectedLimited, 'h').unix(),
+      limitedTime: selectedLimited,
       tags: selectedTags.split(','),
       owner: email
     }
