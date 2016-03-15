@@ -10,13 +10,7 @@ class DiscussionCard extends Component {
 
   render() {
     let { name, description, isLimited, isPrivate, limitedTime, tags, type_name } = this.props.discussion
-    let getExpiredDuration = moment.duration(moment.unix(limitedTime).diff(moment()))
-    let expiredFormat = {
-      hours: getExpiredDuration.hours(),
-      minutes: (getExpiredDuration.minutes() < 10) ? '0' + getExpiredDuration.minutes(): getExpiredDuration.minutes(),
-      seconds: (getExpiredDuration.seconds() < 10) ? '0' + getExpiredDuration.seconds(): getExpiredDuration.seconds()
-    }
-    let expiredTime = `${expiredFormat.hours}:${expiredFormat.minutes}:${expiredFormat.seconds}`
+    let expiredTime = moment().add(limitedTime, 'h').format('D MMM HH:mm:ss')
 
     return (
         <div className='card card-block col-xs-12 col-sm-12 col-md-12 col-lg-6 my-discussion-card'>
@@ -27,7 +21,7 @@ class DiscussionCard extends Component {
             {(isLimited) ? <span className='label label-info'>Limited</span> : null}
           </div>
           <p className='card-text'><small className='text-muted'>Description: </small>{description}</p>
-          <p className='card-text'><small className='text-muted'>Time to expiry: </small>{expiredTime}</p>
+          <p className='card-text'><small className='text-muted'>Expire in: </small>{expiredTime}</p>
           <p className='card-text'><small className='text-muted'>Type: </small>{type_name}</p>
           <p className='card-text tag-labels'><small className='text-muted'>Tags: </small>{tags.map((tag, index) => {
             return <span key={index} className='label label-default'>{tag}</span>
