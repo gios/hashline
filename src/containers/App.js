@@ -8,8 +8,6 @@ import { dismissNotification } from '../actions/notificationAction'
 import { getSidebarTypes } from '../actions/sidebarAction'
 import Sidebar from './../components/sidebar/Sidebar'
 import LoggedOutMessage from './../components/helpers/LoggedOutMessage'
-import io from 'socket.io-client'
-let socket = io('http://localhost:5000')
 
 class App extends Component {
 

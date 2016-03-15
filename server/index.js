@@ -48,7 +48,8 @@ app.use(router.allowedMethods())
 require('./src/routes/userRoutes.js')(router, jwt, SHARED_SECRET)
 require('./src/routes/discussionRoutes.js')(router, jwt, SHARED_SECRET)
 
-io.on('connection', function() {
+io.on('connection', function(socket) {
+  require('./src/sockets/discussions')(io, socket)
   tracer.log('a user connected')
 })
 

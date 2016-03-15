@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { getDiscussions } from '../actions/myDiscussionsAction'
 import MyDiscussionsBlock from '../components/my_discussions/MyDiscussionsBlock'
 import { push } from 'react-router-redux'
+import io from 'socket.io-client'
+let socket = io('http://localhost:5000')
 
 class MyDiscussions extends Component {
 
