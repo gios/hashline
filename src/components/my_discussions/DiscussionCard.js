@@ -3,6 +3,14 @@ import moment from 'moment'
 
 class DiscussionCard extends Component {
 
+  componentDidMount() {
+    this.limitedInterval = setInterval(this.forceUpdate.bind(this), 1000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.limitedInterval)
+  }
+
   joinToDiscussion() {
     let { id } = this.props.discussion
     this.props.onJoinDiscussion(id)
