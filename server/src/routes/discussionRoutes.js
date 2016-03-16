@@ -88,7 +88,7 @@ module.exports = function(router, jwt, SHARED_SECRET) {
     }
   })
 
-  router.post('/api/discussion/:id', function *() {
+  router.get('/api/discussion/:id', function *() {
     let id = this.request.id
     let password = this.request.password
     let foundDiscussion = yield knex('discussions')
@@ -130,28 +130,24 @@ module.exports = function(router, jwt, SHARED_SECRET) {
                     .where('user_email', userInfo.email)
                     .groupBy('discussions.name')
 
-    for (let indexData = 0; indexData < discussionsData.length; indexData++) {
-      discussionsData[indexData].tags = []
-      for (let indexTag = 0; indexTag < discussionsTags.length; indexTag++) {
-        if (discussionsData[indexData].name === discussionsTags[indexTag].name) {
-          discussionsData[indexData].tags.push(discussionsTags[indexTag].tag_name)
+    for (let indexData of discussionsData) {
+      indexData.tags = []
+      let diffLimited = moment.duration(moment.unix(indexData.limitedTime).diff(moment()))
+
+      for (let indexTag of discussionsTags) {
+        if (indexData.name === indexTag.name) {
+          indexData.tags.push(indexTag.tag_name)
         }
       }
-    }
 
-    for (let index = 0; index < discussionsData.length; index++) {
-      let diffLimited = moment.duration(moment.unix(discussionsData[index].limitedTime).diff(moment())).as('seconds')
+      if(indexData.isLimited) {
+        if(diffLimited.as('seconds') < 0) {
+          yield knex('discussions').where('id', indexData.id).update({ closed: true })
+        }
 
-      if(diffLimited < 0) {
-        yield knex('discussions').where('id', discussionsData[index].id).update({ closed: true })
-      }
-    }
-
-    for (let index = 0; index < discussionsData.length; index++) {
-      let diffLimited = moment.duration(moment.unix(discussionsData[index].limitedTime).diff(moment())).as('days')
-
-      if(diffLimited < -7) {
-        yield knex('discussions').where('id', discussionsData[index].id).del()
+        if(diffLimited.as('days') < -7) {
+          yield knex('discussions').where('id', indexData.id).del()
+        }
       }
     }
 
