@@ -139,10 +139,19 @@ module.exports = function(router, jwt, SHARED_SECRET) {
       }
     }
 
-    for (var index = 0; index < discussionsData.length; index++) {
+    for (let index = 0; index < discussionsData.length; index++) {
       let diffLimited = moment.duration(moment.unix(discussionsData[index].limitedTime).diff(moment())).as('seconds')
+
       if(diffLimited < 0) {
         yield knex('discussions').where('id', discussionsData[index].id).update({ closed: true })
+      }
+    }
+
+    for (let index = 0; index < discussionsData.length; index++) {
+      let diffLimited = moment.duration(moment.unix(discussionsData[index].limitedTime).diff(moment())).as('days')
+
+      if(diffLimited < -7) {
+        yield knex('discussions').where('id', discussionsData[index].id).del()
       }
     }
 
