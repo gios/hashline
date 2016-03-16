@@ -95,10 +95,12 @@ module.exports = function(router, jwt, SHARED_SECRET) {
       .where('id', id)
       .first()
 
-    let isCorrectPassword = (userMethods.encryptoPassword(foundDiscussion.password) === password ? true : false)
+    if(foundDiscussion.isPrivate) {
+      let isCorrectPassword = (userMethods.encryptoPassword(foundDiscussion.password) === password ? true : false)
 
-    if(!isCorrectPassword) {
-      this.throw('Password of this discussion not correct', 404)
+      if(!isCorrectPassword) {
+        this.throw('Password of this discussion not correct', 404)
+      }
     }
     this.body = foundDiscussion
   })

@@ -8,8 +8,8 @@ export const FAILURE_GET_DISCUSSION = 'FAILURE_GET_DISCUSSION'
 export function getDiscussion(data) {
   return {
     [CALL_API]: {
-      endpoint: '/api/discussion',
-      method: 'POST',
+      endpoint: `/api/discussion/${data.id}`,
+      method: 'GET',
       headers: {
         'Authorization': `Bearer ${idToken.getToken()}`,
         'Content-Type': 'application/json'
