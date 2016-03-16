@@ -11,6 +11,13 @@ class DiscussionCard extends Component {
       html: true,
       placement: 'left'
     })
+
+    $(this.refs.closeButton).popover({
+      title: 'Expired',
+      content: `This discussion expired. She will be deleted during week.`,
+      placement: 'left',
+      trigger: 'hover'
+    })
   }
 
   componentWillUnmount() {
@@ -59,7 +66,9 @@ class DiscussionCard extends Component {
     return (
         <div className='card card-block col-xs-12 col-sm-12 col-md-12 col-lg-6 my-discussion-card'>
           {(closed)
-            ? <button type='button' className='btn btn-danger discussion-join-btn m-x-1 disabled'>Closed</button>
+            ? <button type='button'
+                      className='btn btn-danger discussion-join-btn m-x-1 disabled'
+                      ref='closeButton'>Closed</button>
             : <button onClick={this.joinToDiscussion.bind(this)}
                       type='button'
                       className='btn btn-success discussion-join-btn m-x-1'
