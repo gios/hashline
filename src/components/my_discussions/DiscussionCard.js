@@ -14,7 +14,7 @@ class DiscussionCard extends Component {
 
     $(this.refs.closeButton).popover({
       title: 'Expired',
-      content: `This discussion expired. She will be deleted during week.`,
+      content: `This discussion expired. It will be deleted during week.`,
       placement: 'left',
       trigger: 'hover'
     })
