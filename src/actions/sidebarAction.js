@@ -31,7 +31,7 @@ export function getUserData() {
       endpoint: '/api/user',
       method: 'GET',
       headers: { 'Authorization': `Bearer ${idToken.getToken()}` },
-      types: ['REQUEST_USER_INFO', 'SUCCESS_USER_INFO', 'FAILURE_USER_INFO']
+      types: [REQUEST_USER_INFO, SUCCESS_USER_INFO, FAILURE_USER_INFO]
     }
   }
 }
@@ -42,7 +42,7 @@ export function getSidebarTypes() {
       endpoint: '/api/discussion/get_types',
       method: 'GET',
       headers: { 'Authorization': `Bearer ${idToken.getToken()}` },
-      types: ['REQUEST_SIDEBAR_TYPES', 'SUCCESS_SIDEBAR_TYPES', 'FAILURE_SIDEBAR_TYPES']
+      types: [REQUEST_SIDEBAR_TYPES, SUCCESS_SIDEBAR_TYPES, FAILURE_SIDEBAR_TYPES]
     }
   }
 }

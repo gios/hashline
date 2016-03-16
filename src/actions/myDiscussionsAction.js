@@ -13,7 +13,7 @@ export function getDiscussions() {
       headers: {
         'Authorization': `Bearer ${idToken.getToken()}`
       },
-      types: ['REQUEST_GET_DISCUSSIONS', 'SUCCESS_GET_DISCUSSIONS', 'FAILURE_GET_DISCUSSIONS']
+      types: [REQUEST_GET_DISCUSSIONS, SUCCESS_GET_DISCUSSIONS, FAILURE_GET_DISCUSSIONS]
     }
   }
 }
