@@ -5,17 +5,17 @@ module.exports = function(router, jwt, SHARED_SECRET) {
   const userMethods = require('../methods/userMethods.js')
   const moment = require('moment')
 
-  router.get('/api/discussion/get_types', function *() {
+  router.get('/api/discussions/get_types', function *() {
     let availableTypes = yield knex('types').select()
     this.body = { types: availableTypes }
   })
 
-  router.get('/api/discussion/get_tags', function *() {
+  router.get('/api/discussions/get_tags', function *() {
     let availableTags = yield knex('tags').select()
     this.body = { tags: availableTags }
   })
 
-  router.get('/api/discussion/get_limites', function *() {
+  router.get('/api/discussions/get_limites', function *() {
     this.body = {
       limites: [
         {name: '1 Hour'},

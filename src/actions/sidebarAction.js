@@ -39,7 +39,7 @@ export function getUserData() {
 export function getSidebarTypes() {
   return {
     [CALL_API]: {
-      endpoint: '/api/discussion/get_types',
+      endpoint: '/api/discussions/get_types',
       method: 'GET',
       headers: { 'Authorization': `Bearer ${idToken.getToken()}` },
       types: [REQUEST_SIDEBAR_TYPES, SUCCESS_SIDEBAR_TYPES, FAILURE_SIDEBAR_TYPES]
