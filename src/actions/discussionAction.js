@@ -9,8 +9,8 @@ export function getDiscussion(id, password) {
   console.log(id, password, { id, password })
   return {
     [CALL_API]: {
-      endpoint: `/api/discussion/${id}`,
-      method: 'GET',
+      endpoint: `/api/discussion_info/${id}`,
+      method: 'POST',
       headers: {
         'Authorization': `Bearer ${idToken.getToken()}`,
         'Content-Type': 'application/json'
