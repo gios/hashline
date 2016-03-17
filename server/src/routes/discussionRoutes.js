@@ -89,9 +89,8 @@ module.exports = function(router, jwt, SHARED_SECRET) {
   })
 
   router.post('/api/discussion_info/:id', function *() {
-    let id = this.request.id
-    let password = this.request.password
-    console.log(this.request)
+    let id = this.request.body.id
+    let password = this.request.body.password
     let foundDiscussion = yield knex('discussions')
       .where('id', id)
       .first()
