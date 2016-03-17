@@ -1,10 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getDiscussions } from '../actions/myDiscussionsAction'
+import { getDiscussion } from '../actions/discussionAction'
+import { getMyDiscussions } from '../actions/myDiscussionsAction'
 import MyDiscussionsBlock from '../components/my_discussions/MyDiscussionsBlock'
 import { push } from 'react-router-redux'
 
 class MyDiscussions extends Component {
+
+  onJoinDiscussion({ id, password = '' }) {
+    let { dispatch } = this.props
+
+    dispatch(getDiscussion(id, password))
+
+    // dispatch(push(`/discussion/${data.id}`))
+  }
 
   render() {
     let { dispatch, discussions } = this.props
@@ -12,8 +21,8 @@ class MyDiscussions extends Component {
     return (
       <div>
         <MyDiscussionsBlock discussions={discussions}
-                            onJoinDiscussion={(id) => dispatch(push(`/discussion/${id}`))}
-                            onLoadDiscussions={() => dispatch(getDiscussions())}/>
+                            onJoinDiscussion={this.onJoinDiscussion.bind(this)}
+                            onLoadDiscussions={() => dispatch(getMyDiscussions())}/>
       </div>
     )
   }
@@ -21,7 +30,7 @@ class MyDiscussions extends Component {
 
 function inject(state) {
   return {
-    discussions: state.myDiscussions.getDiscussions.toJS()
+    discussions: state.myDiscussions.getMyDiscussions.toJS()
   }
 }
 

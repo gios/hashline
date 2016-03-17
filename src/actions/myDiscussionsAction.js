@@ -5,7 +5,7 @@ export const REQUEST_GET_DISCUSSIONS = 'REQUEST_GET_DISCUSSIONS'
 export const SUCCESS_GET_DISCUSSIONS = 'SUCCESS_GET_DISCUSSIONS'
 export const FAILURE_GET_DISCUSSIONS = 'FAILURE_GET_DISCUSSIONS'
 
-export function getDiscussions() {
+export function getMyDiscussions() {
   return {
     [CALL_API]: {
       endpoint: '/api/discussions',

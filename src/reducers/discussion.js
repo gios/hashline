@@ -1,28 +1,28 @@
 import { combineReducers } from 'redux'
 import Immutable from 'immutable'
-import { REQUEST_GET_DISCUSSIONS, SUCCESS_GET_DISCUSSIONS, FAILURE_GET_DISCUSSIONS } from '../actions/myDiscussionsAction'
+import { REQUEST_GET_DISCUSSION, SUCCESS_GET_DISCUSSION, FAILURE_GET_DISCUSSION } from '../actions/discussionAction'
 
-const discussionsGetState = Immutable.Map({
+const discussionGetState = Immutable.Map({
   isFetching: false,
   payload: null,
   error: false
 })
 
-function getMyDiscussions(state = discussionsGetState, action) {
+function discussionInfo(state = discussionGetState, action) {
   switch (action.type) {
-    case REQUEST_GET_DISCUSSIONS:
+    case REQUEST_GET_DISCUSSION:
       return state.merge({
         isFetching: true,
         payload: null,
         error: false
       })
-    case SUCCESS_GET_DISCUSSIONS:
+    case SUCCESS_GET_DISCUSSION:
       return state.merge({
         isFetching: false,
         payload: action.payload,
         error: false
       })
-    case FAILURE_GET_DISCUSSIONS:
+    case FAILURE_GET_DISCUSSION:
       return state.merge({
         isFetching: false,
         payload: action.payload.response,
@@ -33,6 +33,6 @@ function getMyDiscussions(state = discussionsGetState, action) {
   }
 }
 
-export let myDiscussions = combineReducers({
-  getMyDiscussions
+export let discussion = combineReducers({
+  discussionInfo
 })

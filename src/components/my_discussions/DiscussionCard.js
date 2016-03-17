@@ -35,13 +35,14 @@ class DiscussionCard extends Component {
       setTimeout(() => {
         $('.discussion-password').on('keypress', (e) => {
           if(e.keyCode === 13) {
-            console.log($(e.target).val())
+            let password = $(e.target).val()
+            this.props.onJoinDiscussion({ id, password })
           }
         })
       }, 100)
       $(this.refs.joinButton).popover('show')
     } else {
-      this.props.onJoinDiscussion(id)
+      this.props.onJoinDiscussion({ id })
     }
   }
 
