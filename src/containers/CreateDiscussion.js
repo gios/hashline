@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 import { getDiscussionTypes,
          getDiscussionTags,
          getDiscussionLimites,
@@ -24,7 +25,7 @@ class Login extends Component {
       dispatch(triggerNotification(status.payload.response.message, 'error'))
       return
     }
-    dispatch(triggerNotification(status.payload.message, 'success'))
+    dispatch(triggerNotification(status.payload.message, 'success', '', () => dispatch(push('/mydiscussions'))))
   }
 
   render() {

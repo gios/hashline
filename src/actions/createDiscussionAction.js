@@ -87,10 +87,10 @@ export function discussionSelectTags(tags) {
 export function getDiscussionLimites() {
   return {
     [CALL_API]: {
-      endpoint: '/api/discussion/get_limites',
+      endpoint: '/api/discussions/get_limites',
       method: 'GET',
       headers: { 'Authorization': `Bearer ${idToken.getToken()}` },
-      types: ['REQUEST_DISCUSSION_LIMITES', 'SUCCESS_DISCUSSION_LIMITES', 'FAILURE_DISCUSSION_LIMITES']
+      types: [REQUEST_DISCUSSION_LIMITES, SUCCESS_DISCUSSION_LIMITES, FAILURE_DISCUSSION_LIMITES]
     }
   }
 }
@@ -98,10 +98,10 @@ export function getDiscussionLimites() {
 export function getDiscussionTypes() {
   return {
     [CALL_API]: {
-      endpoint: '/api/discussion/get_types',
+      endpoint: '/api/discussions/get_types',
       method: 'GET',
       headers: { 'Authorization': `Bearer ${idToken.getToken()}` },
-      types: ['REQUEST_DISCUSSION_TYPES', 'SUCCESS_DISCUSSION_TYPES', 'FAILURE_DISCUSSION_TYPES']
+      types: [REQUEST_DISCUSSION_TYPES, SUCCESS_DISCUSSION_TYPES, FAILURE_DISCUSSION_TYPES]
     }
   }
 }
@@ -109,10 +109,10 @@ export function getDiscussionTypes() {
 export function getDiscussionTags() {
   return {
     [CALL_API]: {
-      endpoint: '/api/discussion/get_tags',
+      endpoint: '/api/discussions/get_tags',
       method: 'GET',
       headers: { 'Authorization': `Bearer ${idToken.getToken()}` },
-      types: ['REQUEST_DISCUSSION_TAGS', 'SUCCESS_DISCUSSION_TAGS', 'FAILURE_DISCUSSION_TAGS']
+      types: [REQUEST_DISCUSSION_TAGS, SUCCESS_DISCUSSION_TAGS, FAILURE_DISCUSSION_TAGS]
     }
   }
 }
@@ -126,7 +126,7 @@ export function createDiscussion(data) {
         'Authorization': `Bearer ${idToken.getToken()}`,
         'Content-Type': 'application/json'
       },
-      types: ['REQUEST_DISCUSSION_CREATE', 'SUCCESS_DISCUSSION_CREATE', 'FAILURE_DISCUSSION_CREATE'],
+      types: [REQUEST_DISCUSSION_CREATE, SUCCESS_DISCUSSION_CREATE, FAILURE_DISCUSSION_CREATE],
       body: JSON.stringify(data)
     }
   }

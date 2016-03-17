@@ -14,6 +14,7 @@ exports.up = function(knex, Promise) {
           table.boolean('isLimited')
           table.string('password')
           table.time('limitedTime')
+          table.boolean('closed')
           table.timestamps()
         })
         .then(() => logger.log('DISCUSSIONS table has been created'))

@@ -2,18 +2,20 @@ module.exports = function(router, jwt, SHARED_SECRET) {
   'use strict';
 
   const knex = require('../knexConfig.js')
+  const userMethods = require('../methods/userMethods.js')
+  const moment = require('moment')
 
-  router.get('/api/discussion/get_types', function *() {
+  router.get('/api/discussions/get_types', function *() {
     let availableTypes = yield knex('types').select()
     this.body = { types: availableTypes }
   })
 
-  router.get('/api/discussion/get_tags', function *() {
+  router.get('/api/discussions/get_tags', function *() {
     let availableTags = yield knex('tags').select()
     this.body = { tags: availableTags }
   })
 
-  router.get('/api/discussion/get_limites', function *() {
+  router.get('/api/discussions/get_limites', function *() {
     this.body = {
       limites: [
         {name: '1 Hour'},
@@ -49,10 +51,11 @@ module.exports = function(router, jwt, SHARED_SECRET) {
       description,
       type_id: typeId,
       isPrivate,
-      password,
+      password: userMethods.cryptoPassword(password),
       isLimited,
       limitedTime,
       user_id: findUser.id,
+      closed: false,
       created_at: Date.now(),
       updated_at: Date.now()
     })
@@ -85,6 +88,23 @@ module.exports = function(router, jwt, SHARED_SECRET) {
     }
   })
 
+  router.post('/api/discussion_info/:id', function *() {
+    let id = this.request.body.id
+    let password = this.request.body.password
+    let foundDiscussion = yield knex('discussions')
+      .where('id', id)
+      .first()
+
+    if(foundDiscussion.isPrivate) {
+      let isCorrectPassword = (userMethods.encryptoPassword(foundDiscussion.password) === password ? true : false)
+
+      if(!isCorrectPassword) {
+        this.throw('Password of this discussion not correct', 404)
+      }
+    }
+    this.body = foundDiscussion
+  })
+
   router.get('/api/discussions', function *() {
     let token = this.request.header.authorization.split(' ')[1]
     let userInfo = yield jwt.verify(token, SHARED_SECRET)
@@ -104,18 +124,31 @@ module.exports = function(router, jwt, SHARED_SECRET) {
                             'users.email as user_email',
                             'discussions.isPrivate',
                             'discussions.isLimited',
-                            'discussions.limitedTime')
+                            'discussions.limitedTime',
+                            'discussions.closed')
                     .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
                     .innerJoin('types', 'discussions.type_id', 'types.id')
                     .innerJoin('users', 'discussions.user_id', 'users.id')
                     .where('user_email', userInfo.email)
                     .groupBy('discussions.name')
 
-    for (let indexData = 0; indexData < discussionsData.length; indexData++) {
-      discussionsData[indexData].tags = []
-      for (let indexTag = 0; indexTag < discussionsTags.length; indexTag++) {
-        if (discussionsData[indexData].name === discussionsTags[indexTag].name) {
-          discussionsData[indexData].tags.push(discussionsTags[indexTag].tag_name)
+    for (let indexData of discussionsData) {
+      indexData.tags = []
+      let diffLimited = moment.duration(moment.unix(indexData.limitedTime).diff(moment()))
+
+      for (let indexTag of discussionsTags) {
+        if (indexData.name === indexTag.name) {
+          indexData.tags.push(indexTag.tag_name)
+        }
+      }
+
+      if(indexData.isLimited) {
+        if(diffLimited.as('seconds') < 0) {
+          yield knex('discussions').where('id', indexData.id).update({ closed: true })
+        }
+
+        if(diffLimited.as('days') < -7) {
+          yield knex('discussions').where('id', indexData.id).del()
         }
       }
     }

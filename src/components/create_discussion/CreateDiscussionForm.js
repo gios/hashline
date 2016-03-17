@@ -71,9 +71,9 @@ class createDiscussionForm extends Component {
       description,
       typeId: discussionTypes.payload.filter((item) => item.value === selectedType)[0].id,
       isPrivate,
-      password,
+      password: (isPrivate) ? password : null,
       isLimited,
-      limitedTime: moment().add(selectedLimited, 'h').unix(),
+      limitedTime: (isLimited) ? moment().add(selectedLimited, 'h').unix() : null,
       tags: selectedTags.split(','),
       owner: email
     }
