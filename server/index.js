@@ -1,5 +1,6 @@
 'use strict';
 
+const path = require('path')
 const app = require('koa')()
 const server = require('http').createServer(app.callback())
 const io = require('socket.io')(server)
@@ -10,9 +11,16 @@ const logger = require('koa-logger')
 const jwt = require('koa-jwt')
 const helmet = require('koa-helmet')
 const favicon = require('koa-favicon')
+const send = require('koa-send')
+const routes = require('./src/routes')
 const tracer = require('tracer').colorConsole()
 
 const SHARED_SECRET = 'hashline'
+
+app.use(function *(next) {
+  yield send(this, path.resolve(__dirname, '/../public/', 'index.html'))
+  yield next
+})
 
 app.use(function *(next) {
   try {
@@ -36,14 +44,14 @@ app.use(bodyParser())
 app.use(serve(__dirname + '/../public'))
 app.use(favicon(__dirname + '/../public/favicon.ico'))
 app.use(jwt({ secret: SHARED_SECRET }).unless({
-  path: [/^\/authenticate/, /^\/registration/]
+  path: routes
 }))
 app.use(router.routes())
 app.use(router.allowedMethods())
 
 // Routes
-require('./src/routes/userRoutes.js')(router, jwt, SHARED_SECRET)
-require('./src/routes/discussionRoutes.js')(router, jwt, SHARED_SECRET)
+require('./src/routes/userRoutes')(router, jwt, SHARED_SECRET)
+require('./src/routes/discussionRoutes')(router, jwt, SHARED_SECRET)
 
 io.on('connection', function(socket) {
   require('./src/sockets/discussions')(io, socket)

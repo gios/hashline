@@ -2,7 +2,7 @@ module.exports = function(io, socket) {
   'use strict';
 
   const moment = require('moment')
-  const knex = require('../knexConfig.js')
+  const knex = require('../knexConfig')
 
   socket.on('refresh_expired', (data) => {
     knex('discussions')

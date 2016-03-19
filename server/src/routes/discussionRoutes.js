@@ -1,8 +1,8 @@
 module.exports = function(router, jwt, SHARED_SECRET) {
   'use strict';
 
-  const knex = require('../knexConfig.js')
-  const userMethods = require('../methods/userMethods.js')
+  const knex = require('../knexConfig')
+  const userMethods = require('../methods/userMethods')
   const moment = require('moment')
 
   router.get('/api/discussions/get_types', function *() {
