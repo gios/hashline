@@ -6,7 +6,6 @@ export const SUCCESS_GET_DISCUSSION = 'SUCCESS_GET_DISCUSSION'
 export const FAILURE_GET_DISCUSSION = 'FAILURE_GET_DISCUSSION'
 
 export function getDiscussion(id, password) {
-  console.log(id, password, { id, password })
   return {
     [CALL_API]: {
       endpoint: `/api/discussion_info/${id}`,

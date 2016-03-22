@@ -143,7 +143,6 @@ function discussionSettings(state = discussionSettingsState, action) {
         password: action.password
       })
     case SUCCESS_DISCUSSION_CREATE:
-    case FAILURE_DISCUSSION_CREATE:
     case LOCATION_CHANGE:
       return state = discussionSettingsState
     default:
