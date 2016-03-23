@@ -26,7 +26,7 @@ module.exports = function(router, jwt, SHARED_SECRET) {
     .where('id', foundUserPassword.id)
     .first('username', 'email', 'id')
 
-    let token = jwt.sign(foundUser, SHARED_SECRET)
+    let token = jwt.sign(foundUser, SHARED_SECRET, { expiresIn: '10h' })
     this.body = { id_token: token }
   })
 
@@ -59,7 +59,7 @@ module.exports = function(router, jwt, SHARED_SECRET) {
     .where('id', userId[0])
     .first('username', 'email', 'id')
 
-    let token = jwt.sign(user, SHARED_SECRET)
+    let token = jwt.sign(user, SHARED_SECRET, { expiresIn: '10h' })
     this.body = { id_token: token }
   })
 
