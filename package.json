@@ -4,7 +4,7 @@
   "description": "Realtime discussions",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 0",
     "start": "webpack-dev-server -d --progress --open --colors --config ./build/dev.config.js",
     "deploy": "npm run clear && webpack -p --progress --display-error-details --config ./build/prod.config.js",
     "server": "nodemon ./server/index.js",
