@@ -64,8 +64,7 @@ module.exports = function(router, jwt, SHARED_SECRET) {
   })
 
   router.get('/api/user', function *() {
-    let token = this.request.header.authorization.split(' ')[1]
-    let userInfo = yield jwt.verify(token, SHARED_SECRET)
+    let userInfo = this.state.user
     this.body = {
       username: userInfo.username,
       email: userInfo.email

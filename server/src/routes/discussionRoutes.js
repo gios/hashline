@@ -106,8 +106,7 @@ module.exports = function(router, jwt, SHARED_SECRET) {
   })
 
   router.get('/api/discussions', function *() {
-    let token = this.request.header.authorization.split(' ')[1]
-    let userInfo = yield jwt.verify(token, SHARED_SECRET)
+    let userInfo = this.state.user
 
     let discussionsTags = yield knex('discussions')
                     .select('discussions.name', 'users.email as user_email', 'tags.name as tag_name')
