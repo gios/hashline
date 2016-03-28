@@ -12,3 +12,4 @@
 * Koa
 * Bootstrap
 * Socket.io
+* Knex
