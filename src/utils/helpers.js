@@ -6,6 +6,7 @@ export function DOMtoArray(obj) {
   }
   return array;
 }
+
 export function throttle(fn, threshhold, scope) {
   threshhold || (threshhold = 250)
   let last
