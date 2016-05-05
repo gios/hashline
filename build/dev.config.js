@@ -36,6 +36,7 @@ module.exports = {
   devServer: {
     publicPath: '/assets',
     filename: 'bundle.js',
+    historyApiFallback: true,
     port: 8080,
     host: '0.0.0.0',
     proxy: {
