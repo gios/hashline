@@ -73,7 +73,7 @@ class createDiscussionForm extends Component {
       isPrivate,
       password: (isPrivate) ? password : null,
       isLimited,
-      limitedTime: (isLimited) ? moment().add(selectedLimited, 'h').unix() : null,
+      limitedTime: (isLimited) ? moment().add(selectedLimited.value, 'h').format() : null,
       tags: selectedTags.map(item => item.value),
       owner: email
     }

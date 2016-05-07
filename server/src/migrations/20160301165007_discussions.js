@@ -13,7 +13,7 @@ exports.up = function(knex, Promise) {
           table.boolean('is_private')
           table.boolean('is_limited')
           table.string('password')
-          table.time('limited_time')
+          table.timestamp('limited_time')
           table.boolean('closed')
           table.timestamp('created_at').defaultTo(knex.fn.now())
           table.timestamp('updated_at').defaultTo(knex.fn.now())

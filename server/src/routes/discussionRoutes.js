@@ -144,7 +144,7 @@ module.exports = function(router) {
 
     for (let indexData of discussionsData) {
       indexData.tags = []
-      let diffLimited = moment.duration(moment.unix(indexData.limited_time).diff(moment()))
+      let diffLimited = moment.duration(moment(indexData.limited_time).diff(moment()))
 
       for (let indexTag of discussionsTags) {
         if (indexData.name === indexTag.name) {
