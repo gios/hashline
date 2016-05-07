@@ -46,14 +46,16 @@ module.exports = function(router) {
       this.throw('Name of discussion should be unique', 409)
     }
 
-    let discussionId = yield knex('discussions').insert({
+    let discussionId = yield knex('discussions')
+    .returning('id')
+    .insert({
       name,
       description,
       type_id: typeId,
-      isPrivate,
+      is_private: isPrivate,
       password: password ? userMethods.cryptoPassword(password) : null,
-      isLimited,
-      limitedTime,
+      is_limited: isLimited,
+      limited_time: limitedTime,
       user_id: findUser.id,
       closed: false,
       created_at: new Date(),
@@ -109,31 +111,40 @@ module.exports = function(router) {
     let userInfo = this.state.user
 
     let discussionsTags = yield knex('discussions')
-                    .select('discussions.name', 'users.email as user_email', 'tags.name as tag_name')
+                    .select('discussions.name', 'users.email', 'tags.name')
                     .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
                     .innerJoin('tags', 'tags.id', 'discussions_tags.tag_id')
                     .innerJoin('users', 'discussions.user_id', 'users.id')
-                    .where('user_email', userInfo.email)
+                    .groupBy('discussions.name', 'users.email', 'tags.name')
+                    .where('users.email', userInfo.email)
 
     let discussionsData = yield knex('discussions')
                     .select('discussions.id',
                             'discussions.name',
                             'discussions.description',
-                            'types.name as type_name',
-                            'users.email as user_email',
-                            'discussions.isPrivate',
-                            'discussions.isLimited',
-                            'discussions.limitedTime',
+                            'types.name',
+                            'users.email',
+                            'discussions.is_private',
+                            'discussions.is_limited',
+                            'discussions.limited_time',
                             'discussions.closed')
                     .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
                     .innerJoin('types', 'discussions.type_id', 'types.id')
                     .innerJoin('users', 'discussions.user_id', 'users.id')
-                    .where('user_email', userInfo.email)
-                    .groupBy('discussions.name')
+                    .groupBy('discussions.id',
+                             'discussions.name',
+                             'discussions.description',
+                             'types.name',
+                             'users.email',
+                             'discussions.is_private',
+                             'discussions.is_limited',
+                             'discussions.limited_time',
+                             'discussions.closed')
+                    .where('users.email', userInfo.email)
 
     for (let indexData of discussionsData) {
       indexData.tags = []
-      let diffLimited = moment.duration(moment.unix(indexData.limitedTime).diff(moment()))
+      let diffLimited = moment.duration(moment.unix(indexData.limited_time).diff(moment()))
 
       for (let indexTag of discussionsTags) {
         if (indexData.name === indexTag.name) {
@@ -141,7 +152,7 @@ module.exports = function(router) {
         }
       }
 
-      if(indexData.isLimited) {
+      if(indexData.is_limited) {
         if(diffLimited.as('seconds') < 0) {
           yield knex('discussions').where('id', indexData.id).update({ closed: true })
         }

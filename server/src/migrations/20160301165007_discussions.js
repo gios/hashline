@@ -10,10 +10,10 @@ exports.up = function(knex, Promise) {
           table.string('description')
           table.integer('type_id').unsigned().references('types.id')
           table.integer('user_id').unsigned().references('users.id')
-          table.boolean('isPrivate')
-          table.boolean('isLimited')
+          table.boolean('is_private')
+          table.boolean('is_limited')
           table.string('password')
-          table.time('limitedTime')
+          table.time('limited_time')
           table.boolean('closed')
           table.timestamp('created_at').defaultTo(knex.fn.now())
           table.timestamp('updated_at').defaultTo(knex.fn.now())
@@ -28,7 +28,7 @@ exports.up = function(knex, Promise) {
           table.integer('discussion_id').unsigned().references('discussions.id')
           table.integer('tag_id').unsigned().references('tags.id')
         })
-        .then(() => logger.log('DISCUSSIONS_TAGS table has been created'))
+        .then(() => logger.info('DISCUSSIONS_TAGS table has been created'))
       }
     })
   ])
@@ -37,6 +37,6 @@ exports.up = function(knex, Promise) {
 exports.down = function(knex, Promise) {
   return Promise.all([
     knex.schema.dropTable('discussions')
-    .dropTable('discussions_tags')
+               .dropTable('discussions_tags')
   ])
 }
