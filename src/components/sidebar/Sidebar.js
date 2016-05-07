@@ -14,7 +14,6 @@ class Sidebar extends Component {
 
   componentDidMount() {
     let sidebarEl = document.querySelector('.navbar-static')
-    $(this.refs.logoutElem).tooltip()
     this.windowSizeAction(sidebarEl)
 
     window.addEventListener('resize', throttle(() => {
@@ -107,9 +106,6 @@ class Sidebar extends Component {
           {(isMobileView) ? toggleSidebarBtn : null}
           <div className='navbar-info'>
             <p className='navbar-logo'>Hashline</p>
-            <div className='navbal-logout'>
-              <i className='fa fa-share-square' ref='logoutElem' data-toggle='tooltip' data-placement='right' title='Logout' onClick={this.logout.bind(this)}></i>
-            </div>
             <div className='navbar-user-info'>
               {userInfoRender}
             </div>
@@ -181,6 +177,15 @@ class Sidebar extends Component {
                 <i className='fa fa-bell-o'></i>
                 <span className='label label-default label-pill pull-xs-right'>14</span>
                 <span className='sidebar-list-item'>Notification</span>
+              </a>
+            </li>
+            <li className='nav-item'>
+              <a className='nav-link sidebar-link deactivate'></a>
+            </li>
+            <li className='nav-item'>
+              <a className='nav-link sidebar-link' href='javascript:void(0)' onClick={this.logout.bind(this)}>
+                <i className='fa fa-sign-out'></i>
+                <span className='sidebar-list-item'>Logout</span>
               </a>
             </li>
           </ul>
