@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class IndexDash extends Component {
+class IndexDashMain extends Component {
 
   render() {
     return (
@@ -12,4 +12,4 @@ class IndexDash extends Component {
   }
 }
 
-export default IndexDash
+export default IndexDashMain
