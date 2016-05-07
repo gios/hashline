@@ -1,20 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import Notifications from 'react-notifications'
+import { NotificationContainer } from 'react-notifications'
 import { runLogout } from '../actions/loginAction'
 import { toggleSidebar, setMobileSidebar, getUserData } from '../actions/sidebarAction'
-import { dismissNotification } from '../actions/notificationAction'
 import { getSidebarTypes } from '../actions/sidebarAction'
 import Sidebar from './../components/sidebar/Sidebar'
 import LoggedOutMessage from './../components/helpers/LoggedOutMessage'
 
 class App extends Component {
-
-  notificationHide(notification) {
-    let { dispatch } = this.props
-    dispatch(dismissNotification(notification))
-  }
 
   componentWillMount() {
     let { dispatch, isAuthenticated } = this.props
@@ -31,18 +25,12 @@ class App extends Component {
           isAuthenticated,
           loggedOut,
           userInfo,
-          notifications,
           activeRoute,
           sidebarTypes } = this.props
 
-    let notificationsData = notifications.map((item) => {
-      item['type'] = item['messageType']
-      return item
-    })
-
     return (
       <div>
-        <Notifications notifications={notificationsData} onRequestHide={this.notificationHide.bind(this)}/>
+        <NotificationContainer/>
         { loggedOut && <LoggedOutMessage/>}
         { (isAuthenticated) ?
         <div>
@@ -78,7 +66,6 @@ function inject(state, routing) {
     isMobileView: state.sidebar.sidebarView.get('isMobileView'),
     userInfo: state.sidebar.userInfo.toJS(),
     sidebarTypes: state.sidebar.sidebarTypes.toJS(),
-    notifications: state.notification.toJS(),
     activeRoute: routing.location.pathname
   }
 }

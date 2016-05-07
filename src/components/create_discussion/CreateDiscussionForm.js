@@ -74,7 +74,7 @@ class createDiscussionForm extends Component {
       password: (isPrivate) ? password : null,
       isLimited,
       limitedTime: (isLimited) ? moment().add(selectedLimited, 'h').unix() : null,
-      tags: selectedTags.split(','),
+      tags: selectedTags,
       owner: email
     }
   }
@@ -82,7 +82,7 @@ class createDiscussionForm extends Component {
   validateTags(tagsInput) {
     let { selectedTags } = this.props.discussionSettings
 
-    if(selectedTags.split(',').length >= 2) {
+    if(selectedTags.length >= 2) {
       tagsInput.classList.remove('input-incorrect')
       return true
     }

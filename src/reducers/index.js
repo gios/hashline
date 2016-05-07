@@ -1,6 +1,5 @@
 export { login } from '../reducers/login'
 export { sidebar } from '../reducers/sidebar'
 export { createDiscussion } from '../reducers/createDiscussion'
-export { notification } from '../reducers/notification'
 export { myDiscussions } from '../reducers/myDiscussions'
 export { discussion } from '../reducers/discussion'

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { getDiscussion } from '../actions/discussionAction'
 import { getMyDiscussions } from '../actions/myDiscussionsAction'
 import MyDiscussionsBlock from '../components/my_discussions/MyDiscussionsBlock'
-import { triggerNotification } from '../actions/notificationAction'
+import { NotificationManager } from 'react-notifications'
 import { push } from 'react-router-redux'
 
 class MyDiscussions extends Component {
@@ -13,7 +13,7 @@ class MyDiscussions extends Component {
 
     dispatch(getDiscussion(id, password)).then((status) => {
       if(status.error) {
-        dispatch(triggerNotification(status.payload.response.message, 'error'))
+        NotificationManager.error(status.payload.response.message, 'error')
         return
       }
       dispatch(push(`/discussion/${id}`))

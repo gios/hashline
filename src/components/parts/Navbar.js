@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
+import { NotificationManager } from 'react-notifications'
 
 class Navbar extends Component {
 
   getFeatures() {
-    this.props.onNotifyFeatures(`There are many features like Realtime discussions,
+    NotificationManager.info(`There are many features like Realtime discussions,
                                  limited chats,
                                  tags oriented conversations and more.
-                                 Everything build with JS and Node.js`, 'info', 'Features')
+                                 Everything build with JS and Node.js`, 'Features')
   }
 
   getAbout() {
-    this.props.onNotifyAbout(`I am a Front-End Developer, Active Github User and Great Person :)`,
-                             'info',
+    NotificationManager.info(`I am a Front-End Developer, Active Github User and Great Person :)`,
                              'Pavlo Blazhchuk')
   }
 

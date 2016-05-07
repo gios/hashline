@@ -13,7 +13,7 @@ import { getDiscussionTypes,
          discussionSelectLimited,
          discussionSelectTags,
          createDiscussion } from '../actions/createDiscussionAction'
-import { triggerNotification } from '../actions/notificationAction'
+import { NotificationManager } from 'react-notifications'
 import CreateDiscussionForm from '../components/create_discussion/CreateDiscussionForm'
 
 class Login extends Component {
@@ -22,10 +22,10 @@ class Login extends Component {
     let { dispatch } = this.props
 
     if(status.error) {
-      dispatch(triggerNotification(status.payload.response.message, 'error'))
+      NotificationManager.error(status.payload.response.message, 'error')
       return
     }
-    dispatch(triggerNotification(status.payload.message, 'success', '', () => dispatch(push('/mydiscussions'))))
+    NotificationManager.success(status.payload.message, 'success', 0, () => dispatch(push('/mydiscussions')))
   }
 
   render() {
