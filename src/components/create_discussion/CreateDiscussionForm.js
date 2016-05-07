@@ -208,7 +208,7 @@ class createDiscussionForm extends Component {
                               id='inputDescription'
                               rows='3'
                               placeholder='Describe your conversation'
-                              maxLength='200'
+                              maxLength='150'
                               data-toggle='tooltip'
                               data-trigger='manual'
                               data-placement='right'
