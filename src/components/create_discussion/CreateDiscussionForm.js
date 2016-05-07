@@ -69,7 +69,7 @@ class createDiscussionForm extends Component {
     return {
       name,
       description,
-      typeId: discussionTypes.payload.filter((item) => item.value === selectedType)[0].id,
+      typeId: discussionTypes.payload.filter((item) => item.value === selectedType.value)[0].id,
       isPrivate,
       password: (isPrivate) ? password : null,
       isLimited,
