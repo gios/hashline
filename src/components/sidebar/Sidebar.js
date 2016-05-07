@@ -50,6 +50,10 @@ class Sidebar extends Component {
     let { activeRoute } = this.props
     return (activeRoute === route) ? 'nav-link sidebar-link active' : 'nav-link sidebar-link'
   }
+  triggerRoute() {
+    let { isMobileView } = this.props
+    isMobileView && this.toggleSidebar()
+  }
 
   logout() {
     this.props.onLogout()
@@ -111,13 +115,13 @@ class Sidebar extends Component {
             </div>
           </div>
           <div className='createDiscussion'>
-            <Link to='/create' type='button' className='btn btn-success btn-sm' role='button'>
+            <Link to='/create' type='button' className='btn btn-success btn-sm' role='button' onClick={this.triggerRoute.bind(this)}>
               Create Discussion
             </Link>
           </div>
           <ul className='nav sidebar-list-static'>
             <li className='nav-item'>
-              <Link to='/' className={this.routeSelector('/')}>
+              <Link to='/' className={this.routeSelector('/')} onClick={this.triggerRoute.bind(this)}>
                 <i className='fa fa-dashcube'></i>
                 <span className='sidebar-list-item'>Dash</span>
               </Link>
@@ -167,7 +171,7 @@ class Sidebar extends Component {
               </a>
             </li>
             <li className='nav-item'>
-              <Link to='/mydiscussions' className={this.routeSelector('mydiscussions')}>
+              <Link to='/mydiscussions' className={this.routeSelector('mydiscussions')} onClick={this.triggerRoute.bind(this)}>
                 <i className='fa fa-commenting-o'></i>
                 <span className='sidebar-list-item'>My Discussions</span>
               </Link>
