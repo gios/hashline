@@ -51,7 +51,7 @@ module.exports = function(router, jwt, SHARED_SECRET) {
       description,
       type_id: typeId,
       isPrivate,
-      password: userMethods.cryptoPassword(password),
+      password: password ? userMethods.cryptoPassword(password) : null,
       isLimited,
       limitedTime,
       user_id: findUser.id,
