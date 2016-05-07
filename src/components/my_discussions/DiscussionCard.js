@@ -47,8 +47,8 @@ class DiscussionCard extends Component {
   }
 
   formatExpired() {
-    let { limitedTime } = this.props.discussion
-    let getExpiredDuration = moment.duration(moment.unix(limitedTime).diff(moment()))
+    let { limited_time } = this.props.discussion
+    let getExpiredDuration = moment.duration(moment(limited_time).diff(moment().utcOffset()))
 
     if(getExpiredDuration.as('seconds') < 1) {
       return false
@@ -62,7 +62,8 @@ class DiscussionCard extends Component {
   }
 
   render() {
-    let { name, description, isLimited, isPrivate, tags, type_name, closed } = this.props.discussion
+    let { name, description, is_limited, is_private, tags, type_name, closed } = this.props.discussion
+
     return (
         <div className='card card-block col-xs-12 col-sm-12 col-md-12 col-lg-6 my-discussion-card'>
           {(closed)
@@ -76,11 +77,11 @@ class DiscussionCard extends Component {
           }
           <h4 className='card-title'>{name}</h4>
           <div className='my-discussion-labels'>
-            {(isPrivate) ? <span className='label label-warning'>Private</span> : <span className='label label-primary'>Public</span>}
-            {(isLimited) ? <span className='label label-info'>Limited</span> : null}
+            {(is_private) ? <span className='label label-warning'>Private</span> : <span className='label label-primary'>Public</span>}
+            {(is_limited) ? <span className='label label-info'>Limited</span> : null}
           </div>
           <p className='card-text'><small className='text-muted'>Description: </small><br/>{description}</p>
-          {(isLimited && !!this.formatExpired())
+          {(is_limited && !!this.formatExpired())
             ? <p className='card-text'><small className='text-muted'>Time to expiry: </small>{this.formatExpired()}</p>
             : null}
           <p className='card-text'><small className='text-muted'>Type: </small>{type_name}</p>

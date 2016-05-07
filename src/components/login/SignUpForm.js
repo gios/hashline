@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import moment from 'moment'
 import { DOMtoArray } from '../../utils/helpers'
 
 class SignUpForm extends Component {
@@ -19,7 +20,8 @@ class SignUpForm extends Component {
       this.props.onClickSignUp({
         username: usernameInput.value.trim(),
         email: emailInput.value.trim(),
-        password: passwordInput.value.trim()
+        password: passwordInput.value.trim(),
+        gmt: moment().utcOffset()
       })
     }
   }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import moment from 'moment'
 import { DOMtoArray } from '../../utils/helpers'
 
 class LoginForm extends Component {
@@ -16,7 +17,8 @@ class LoginForm extends Component {
     if (this.validateFields(emailInput, passwordInput)) {
       this.props.onClickLogin({
         email: emailInput.value.trim(),
-        password: passwordInput.value.trim()
+        password: passwordInput.value.trim(),
+        gmt: moment().utcOffset()
       })
     }
   }

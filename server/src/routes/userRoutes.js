@@ -7,6 +7,7 @@ module.exports = function(router, jwt, SHARED_SECRET) {
   router.post('/authenticate', function *() {
     let email = this.request.body.email
     let password = this.request.body.password
+    let gmt = this.request.body.gmt
 
     let foundUserPassword = yield knex('users')
     .where('email', email)
@@ -26,6 +27,7 @@ module.exports = function(router, jwt, SHARED_SECRET) {
     .where('id', foundUserPassword.id)
     .first('username', 'email', 'id')
 
+    foundUser.gmt = gmt
     let token = jwt.sign(foundUser, SHARED_SECRET, { expiresIn: '10h' })
     this.body = { id_token: token }
   })
@@ -35,6 +37,7 @@ module.exports = function(router, jwt, SHARED_SECRET) {
     let email = this.request.body.email
     let password = this.request.body.password
     let passwordHash = userMethods.cryptoPassword(password)
+    let gmt = this.request.body.gmt
 
     let usernameExist = yield knex('users').first('id').where('username', username)
     let emailExist = yield knex('users').first('id').where('email', email)
@@ -61,6 +64,7 @@ module.exports = function(router, jwt, SHARED_SECRET) {
     .where('id', userId[0])
     .first('username', 'email', 'id')
 
+    user.gmt = gmt
     let token = jwt.sign(user, SHARED_SECRET, { expiresIn: '10h' })
     this.body = { id_token: token }
   })
