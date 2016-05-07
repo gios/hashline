@@ -7,6 +7,7 @@ import { toggleSidebar, setMobileSidebar, getUserData } from '../actions/sidebar
 import { getSidebarTypes } from '../actions/sidebarAction'
 import Sidebar from './../components/sidebar/Sidebar'
 import LoggedOutMessage from './../components/helpers/LoggedOutMessage'
+import Swipeable from 'react-swipeable'
 
 class App extends Component {
 
@@ -16,6 +17,10 @@ class App extends Component {
     if (!isAuthenticated) {
       dispatch(push('/login'))
     }
+  }
+
+  sidebarMobileTrigger() {
+    console.log('OPEN SIDEBAR')
   }
 
   render() {
@@ -47,11 +52,13 @@ class App extends Component {
                      dispatch(push('/login'))
                      dispatch(runLogout())}
                    }/>
-          <div className='content-wrapper'>
-            <div className='container-fluid'>
-              {this.props.children}
+          <Swipeable onSwipedRight={this.sidebarMobileTrigger.bind(this)}>
+            <div className='content-wrapper'>
+              <div className='container-fluid'>
+                {this.props.children}
+              </div>
             </div>
-          </div>
+          </Swipeable>
         </div> : this.props.children}
       </div>
     )
