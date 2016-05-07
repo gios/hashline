@@ -19,6 +19,8 @@ import configureStore from './store/configureStore'
 // Styles (SCSS)
 import './index.scss'
 
+import { idToken } from '../utils/helpers'
+
 // Bootstrap, jQuery, Tether
 import $ from 'jquery'
 import Tether from 'tether'
@@ -29,10 +31,19 @@ require('bootstrap')
 const store = configureStore()
 const history = syncHistoryWithStore(browserHistory, store)
 
+function requireAuth(nextState, replace) {
+  if (!idToken.hasToken()) {
+    replace({
+      pathname: '/login',
+      state: { nextPathname: nextState.location.pathname }
+    })
+  }
+}
+
 render(
   <Provider store={store}>
     <Router history={history}>
-      <Route path='/' component={Containers.App}>
+      <Route path='/' component={Containers.App} onEnter={requireAuth}>
         <IndexRoute component={IndexDash}/>
         <Route path='login' component={Containers.Login}/>
         <Route path='signup' component={Containers.Login}/>
