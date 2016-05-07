@@ -11,7 +11,8 @@
     "server-prod": "node ./server/index.js",
     "lint": "eslint ./src ./server",
     "clear": "rimraf ./public/index.js ./public/styles.css ./public/img ./public/fonts",
-    "migrate": "knex migrate:latest --knexfile server/src/knexfile.js"
+    "migrate:latest": "knex migrate:latest --knexfile server/src/knexfile.js",
+    "migrate:rollback": "knex migrate:rollback --knexfile server/src/knexfile.js"
   },
   "repository": {
     "type": "git",
@@ -40,6 +41,7 @@
     "koa-send": "^3.1.1",
     "koa-static": "^2.0.0",
     "moment": "^2.11.2",
+    "pg": "^4.5.5",
     "react": "^15.0.2",
     "react-addons-css-transition-group": "^15.0.2",
     "react-dnd": "^2.1.4",
@@ -54,7 +56,6 @@
     "redux-api-middleware": "^1.0.2",
     "socket.io": "^1.4.6",
     "socket.io-client": "^1.4.6",
-    "sqlite3": "^3.1.3",
     "tether": "^1.3.2",
     "tracer": "^0.8.3"
   },

@@ -15,9 +15,10 @@ exports.up = function(knex, Promise) {
           table.string('password')
           table.time('limitedTime')
           table.boolean('closed')
-          table.timestamps()
+          table.timestamp('created_at').defaultTo(knex.fn.now())
+          table.timestamp('updated_at').defaultTo(knex.fn.now())
         })
-        .then(() => logger.log('DISCUSSIONS table has been created'))
+        .then(() => logger.info('DISCUSSIONS table has been created'))
       }
     }),
 

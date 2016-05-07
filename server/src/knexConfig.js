@@ -1,17 +1,15 @@
-'use strict';
+'use strict'
 
-const path = require('path')
-const DBName = path.join(__dirname, 'base.db')
+let db_host = 'ec2-54-228-219-2.eu-west-1.compute.amazonaws.com'
+let db_user = 'ixoffqgydmoaqu'
+let db_password = '47P01rIDSSJo1W6BmZe9c_UZFM'
+let db_name = 'd25e1jaeqc1d62'
 
-let knex = require('knex')({
-  client: 'sqlite3',
-  connection: {
-    filename: DBName
-  },
-  pool: {
-    min: 0,
-    max: 1
-  }
+const DATABASE_URL = `postgres://${db_user}:${db_password}@${db_host}:5432/${db_name}?ssl=true`
+
+let pg = require('knex')({
+  client: 'pg',
+  connection: DATABASE_URL
 })
 
-module.exports = knex
+module.exports = pg

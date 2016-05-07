@@ -9,7 +9,8 @@ exports.up = function(knex, Promise) {
           table.string('username').unique()
           table.string('email').unique()
           table.string('password')
-          table.timestamps()
+          table.timestamp('created_at').defaultTo(knex.fn.now())
+          table.timestamp('updated_at').defaultTo(knex.fn.now())
         })
         .then(() => logger.info('USERS table has been created'))
       }

@@ -7,9 +7,10 @@ exports.up = function(knex, Promise) {
         return knex.schema.createTable('tags', (table) => {
           table.increments()
           table.string('name').unique()
-          table.timestamps()
+          table.timestamp('created_at').defaultTo(knex.fn.now())
+          table.timestamp('updated_at').defaultTo(knex.fn.now())
         })
-        .then(() => logger.log('TAGS table has been created'))
+        .then(() => logger.info('TAGS table has been created'))
         .then(() => {
           return knex('tags').insert([
             {name: 'sport'},

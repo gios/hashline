@@ -8,7 +8,7 @@ exports.up = function(knex, Promise) {
           table.increments()
           table.string('name').unique()
         })
-        .then(() => logger.log('TYPES table has been created'))
+        .then(() => logger.info('TYPES table has been created'))
         .then(() => {
           return knex('types').insert([
             {name: 'Event'},
