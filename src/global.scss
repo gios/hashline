@@ -28,13 +28,13 @@ html, body {
   transition: .3s padding linear;
 }
 
-@media (min-width: 720px) {
+@media (min-width: 1375px) {
   .content-wrapper {
     padding-left: 270px;
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 1375px) {
   .content-wrapper {
     padding-left: 30px;
   }
