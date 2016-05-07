@@ -111,36 +111,36 @@ module.exports = function(router) {
     let userInfo = this.state.user
 
     let discussionsTags = yield knex('discussions')
-                    .select('discussions.name', 'users.email', 'tags.name')
-                    .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
-                    .innerJoin('tags', 'tags.id', 'discussions_tags.tag_id')
-                    .innerJoin('users', 'discussions.user_id', 'users.id')
-                    .groupBy('discussions.name', 'users.email', 'tags.name')
-                    .where('users.email', userInfo.email)
+    .select('discussions.name', 'users.email AS user_email', 'tags.name AS tag_name')
+    .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
+    .innerJoin('tags', 'tags.id', 'discussions_tags.tag_id')
+    .innerJoin('users', 'discussions.user_id', 'users.id')
+    .groupBy('discussions.name', 'users.email', 'tags.name')
+    .where('users.email', userInfo.email)
 
     let discussionsData = yield knex('discussions')
-                    .select('discussions.id',
-                            'discussions.name',
-                            'discussions.description',
-                            'types.name',
-                            'users.email',
-                            'discussions.is_private',
-                            'discussions.is_limited',
-                            'discussions.limited_time',
-                            'discussions.closed')
-                    .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
-                    .innerJoin('types', 'discussions.type_id', 'types.id')
-                    .innerJoin('users', 'discussions.user_id', 'users.id')
-                    .groupBy('discussions.id',
-                             'discussions.name',
-                             'discussions.description',
-                             'types.name',
-                             'users.email',
-                             'discussions.is_private',
-                             'discussions.is_limited',
-                             'discussions.limited_time',
-                             'discussions.closed')
-                    .where('users.email', userInfo.email)
+    .select('discussions.id',
+            'discussions.name',
+            'discussions.description',
+            'types.name AS type_name',
+            'users.email AS user_email',
+            'discussions.is_private',
+            'discussions.is_limited',
+            'discussions.limited_time',
+            'discussions.closed')
+    .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
+    .innerJoin('types', 'discussions.type_id', 'types.id')
+    .innerJoin('users', 'discussions.user_id', 'users.id')
+    .groupBy('discussions.id',
+             'discussions.name',
+             'discussions.description',
+             'types.name',
+             'users.email',
+             'discussions.is_private',
+             'discussions.is_limited',
+             'discussions.limited_time',
+             'discussions.closed')
+    .where('users.email', userInfo.email)
 
     for (let indexData of discussionsData) {
       indexData.tags = []
