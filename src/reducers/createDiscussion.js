@@ -103,7 +103,11 @@ const discussionSettingsState = Immutable.Map({
   password: '',
   isPrivate: false,
   isLimited: false,
-  selectedType: 'question',
+  selectedType: {
+    id: 2,
+    value: 'question',
+    label: 'Question'
+  },
   selectedLimited: '1',
   selectedTags: ''
 })

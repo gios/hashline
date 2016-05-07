@@ -138,7 +138,7 @@ class createDiscussionForm extends Component {
     return (
       <Select isLoading={isLoading}
               onChange={this.selectType.bind(this)}
-              value={discussionSettings.selectedType}
+              value={discussionSettings.selectedType.value}
               options={discussionTypes.payload}
               clearable={false}/>
     )
