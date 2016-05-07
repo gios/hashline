@@ -49,6 +49,7 @@ class Sidebar extends Component {
     let { activeRoute } = this.props
     return (activeRoute === route) ? 'nav-link sidebar-link active' : 'nav-link sidebar-link'
   }
+
   triggerRoute() {
     let { isMobileView } = this.props
     isMobileView && this.toggleSidebar()
