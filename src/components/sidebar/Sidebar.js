@@ -191,7 +191,7 @@ class Sidebar extends Component {
             </li>
           </ul>
           <div className='navbar-footer'>
-            <span className='label label-success text-xs-center'>Alpha v{VERSION}</span>
+            <span className='label label-success text-xs-center'>{VERSION}</span>
             <p>&copy; {moment().format('YYYY')}</p>
           </div>
         </nav>
