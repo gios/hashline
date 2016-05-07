@@ -140,6 +140,7 @@ class createDiscussionForm extends Component {
               onChange={this.selectType.bind(this)}
               value={discussionSettings.selectedType.value}
               options={discussionTypes.payload}
+              searchable={false}
               clearable={false}/>
     )
   }
