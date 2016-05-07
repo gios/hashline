@@ -53,7 +53,8 @@ class App extends Component {
                      dispatch(push('/login'))
                      dispatch(runLogout())}
                    }/>
-          <Swipeable onSwipedRight={this.sidebarMobileTrigger.bind(this)}>
+          <Swipeable onSwipedRight={this.sidebarMobileTrigger.bind(this)}
+                     onSwipedLeft={this.sidebarMobileTrigger.bind(this)}>
             <div className='content-wrapper'>
               <div className='container-fluid'>
                 {this.props.children}
