@@ -274,7 +274,7 @@ class createDiscussionForm extends Component {
             </div>
           </div>
         </div>
-        <button type='button' className='btn btn-success' onClick={this.createDiscussion.bind(this)}>Create Discussion</button>
+        <button type='button' className='btn btn-success m-y-1' onClick={this.createDiscussion.bind(this)}>Create Discussion</button>
       </div>
     )
   }
