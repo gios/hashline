@@ -20,7 +20,7 @@ class App extends Component {
   }
 
   sidebarMobileTrigger() {
-    console.log('OPEN SIDEBAR')
+    this.refs.sidebar.toggleSidebar()
   }
 
   render() {
@@ -39,7 +39,8 @@ class App extends Component {
         { loggedOut && <LoggedOutMessage/>}
         { (isAuthenticated) ?
         <div>
-          <Sidebar isToggled={isToggled}
+          <Sidebar ref='sidebar'
+                   isToggled={isToggled}
                    isMobileView={isMobileView}
                    userInfo={userInfo}
                    sidebarTypes={sidebarTypes}
