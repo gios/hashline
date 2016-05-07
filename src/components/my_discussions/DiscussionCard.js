@@ -48,7 +48,7 @@ class DiscussionCard extends Component {
 
   formatExpired() {
     let { limited_time } = this.props.discussion
-    let getExpiredDuration = moment.duration(moment(limited_time).diff(moment().utcOffset()))
+    let getExpiredDuration = moment.duration(moment(limited_time).diff(moment()))
 
     if(getExpiredDuration.as('seconds') < 1) {
       return false
