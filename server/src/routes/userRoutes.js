@@ -47,12 +47,14 @@ module.exports = function(router, jwt, SHARED_SECRET) {
       this.throw('Email should be unique', 409)
     }
 
-    let userId = yield knex('users').insert({
+    let userId = yield knex('users')
+    .returning('id')
+    .insert({
       username,
       email,
       password: passwordHash,
-      created_at: Date.now(),
-      updated_at: Date.now()
+      created_at: new Date(),
+      updated_at: new Date()
     })
 
     let user = yield knex('users')

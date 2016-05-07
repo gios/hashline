@@ -56,8 +56,8 @@ module.exports = function(router) {
       limitedTime,
       user_id: findUser.id,
       closed: false,
-      created_at: Date.now(),
-      updated_at: Date.now()
+      created_at: new Date(),
+      updated_at: new Date()
     })
 
     let findTags = yield knex('tags').whereIn('name', tags).select('id', 'name')
@@ -68,8 +68,8 @@ module.exports = function(router) {
       yield knex('tags').insert(createTags.map((name) => {
         return {
           name,
-          created_at: Date.now(),
-          updated_at: Date.now()
+          created_at: new Date(),
+          updated_at: new Date()
         }
       }))
     }
