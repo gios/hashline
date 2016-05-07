@@ -1,4 +1,4 @@
-module.exports = function(router, jwt, SHARED_SECRET) {
+module.exports = function(router) {
   'use strict';
 
   const knex = require('../knexConfig')
