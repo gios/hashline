@@ -13,7 +13,7 @@ class MyDiscussions extends Component {
 
     dispatch(getDiscussion(parseInt(id), password)).then((status) => {
       if(status.error) {
-        NotificationManager.error(status.payload.response.message, 'error')
+        NotificationManager.error(status.payload.response.message)
         return
       }
       dispatch(push(`/discussion/${id}`))
