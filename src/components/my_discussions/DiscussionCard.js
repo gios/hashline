@@ -4,7 +4,7 @@ import moment from 'moment'
 class DiscussionCard extends Component {
 
   componentDidMount() {
-    this.limitedInterval = setInterval(this.updateLimitedTime.bind(this), 1000)
+    this.limitedInterval = setInterval(this.forceUpdate.bind(this), 1000)
     $(this.refs.joinButton).popover({
       title: 'Password',
       content: `<input type='password' class='form-control discussion-password'></input>`,
@@ -24,10 +24,6 @@ class DiscussionCard extends Component {
   componentWillUnmount() {
     $(this.refs.joinButton).popover('dispose')
     clearInterval(this.limitedInterval)
-  }
-
-  updateLimitedTime() {
-    this.forceUpdate()
   }
 
   joinToDiscussion() {

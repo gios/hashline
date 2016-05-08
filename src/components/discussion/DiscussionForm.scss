@@ -1,0 +1,11 @@
+.chat-discussion-description, .chat-info-description {
+  word-wrap: break-word;
+}
+
+.my-discussion-labels .label:not(:first-child) {
+  margin-left: 1em;
+}
+
+.tag-labels .label:not(:first-child) {
+  margin-left: .5em;
+}
