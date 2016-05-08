@@ -94,10 +94,10 @@ module.exports = function(router) {
     let id = this.request.body.id
     let password = this.request.body.password
     let foundDiscussion = yield knex('discussions')
-      .where('id', id)
-      .first()
+    .where('id', id)
+    .first()
 
-    if(foundDiscussion.isPrivate) {
+    if(foundDiscussion.is_private) {
       let isCorrectPassword = (userMethods.encryptoPassword(foundDiscussion.password) === password ? true : false)
 
       if(!isCorrectPassword) {
