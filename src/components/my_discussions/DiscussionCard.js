@@ -34,6 +34,10 @@ class DiscussionCard extends Component {
     let { id, is_private } = this.props.discussion
     if(is_private) {
       setTimeout(() => {
+        $('.discussion-password').trigger('focus')
+        $('.discussion-password').on('blur', () => {
+          $(this.refs.joinButton).popover('hide')
+        })
         $('.discussion-password').on('keypress', (e) => {
           if(e.keyCode === 13) {
             let password = $(e.target).val()
