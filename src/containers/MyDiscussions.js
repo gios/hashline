@@ -11,7 +11,7 @@ class MyDiscussions extends Component {
   onJoinDiscussion({ id, password = '' }) {
     let { dispatch } = this.props
 
-    dispatch(getDiscussion(id, password)).then((status) => {
+    dispatch(getDiscussion(parseInt(id), password)).then((status) => {
       if(status.error) {
         NotificationManager.error(status.payload.response.message, 'error')
         return
