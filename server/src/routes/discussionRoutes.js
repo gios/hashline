@@ -127,14 +127,13 @@ module.exports = function(router) {
     .groupBy('discussions.name', 'tags.name')
     .where('discussions.id', id)
 
-    if(foundDiscussion.is_private && foundDiscussion.password) {
-      let isCorrectPassword = userMethods.encryptoPassword(foundDiscussion.password) === password ? true : false
+    if(foundDiscussion.is_private) {
+      let foundDiscussionPassword = yield knex('discussions').select('password').where('discussions.id', id).first()
+      let isCorrectPassword = userMethods.encryptoPassword(foundDiscussionPassword.password) === password ? true : false
 
       if(!isCorrectPassword) {
         this.throw('Password of this discussion not correct', 404)
       }
-    } else {
-      this.throw('Password of this discussion not correct', 404)
     }
 
     foundDiscussion.tags = []
