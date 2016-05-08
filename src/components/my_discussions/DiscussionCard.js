@@ -9,6 +9,7 @@ class DiscussionCard extends Component {
       title: 'Password',
       content: `<input type='password' class='form-control discussion-password'></input>`,
       html: true,
+      trigger: 'manual',
       placement: 'left'
     })
 
@@ -30,8 +31,8 @@ class DiscussionCard extends Component {
   }
 
   joinToDiscussion() {
-    let { id, isPrivate } = this.props.discussion
-    if(isPrivate) {
+    let { id, is_private } = this.props.discussion
+    if(is_private) {
       setTimeout(() => {
         $('.discussion-password').on('keypress', (e) => {
           if(e.keyCode === 13) {
