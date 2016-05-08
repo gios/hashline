@@ -22,10 +22,10 @@ class Login extends Component {
     let { dispatch } = this.props
 
     if(status.error) {
-      NotificationManager.error(status.payload.response.message, 'error')
+      NotificationManager.error(status.payload.response.message)
       return
     }
-    NotificationManager.success(status.payload.message, 'success', 0, () => dispatch(push('/mydiscussions')))
+    NotificationManager.success(status.payload.message, 'Success', 0, () => dispatch(push('/mydiscussions')))
   }
 
   render() {
