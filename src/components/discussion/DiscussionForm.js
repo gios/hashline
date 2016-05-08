@@ -3,8 +3,10 @@ import React, { Component } from 'react'
 class DiscussionForm extends Component {
 
   componentWillMount() {
-    let { discussionId } = this.props
-    this.props.onJoinDiscussion({ id: discussionId })
+    let { discussionId, discussion } = this.props
+    if(!discussion.payload) {
+      this.props.onJoinDiscussion({ id: discussionId })
+    }
   }
 
   render() {

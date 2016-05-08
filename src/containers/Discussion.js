@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
 import { NotificationManager } from 'react-notifications'
 import { getDiscussion } from '../actions/discussionAction'
 import DiscussionForm from '../components/discussion/DiscussionForm'
@@ -15,15 +14,15 @@ class Discussion extends Component {
         NotificationManager.error(status.payload.response.message, 'error')
         return
       }
-      dispatch(push(`/discussion/${id}`))
     })
   }
 
   render() {
-    let { discussionId } = this.props
+    let { discussionId, discussion } = this.props
     return (
       <div>
         <DiscussionForm discussionId={discussionId}
+                        discussion={discussion}
                         onJoinDiscussion={this.onJoinDiscussion.bind(this)}/>
       </div>
     )
@@ -32,7 +31,8 @@ class Discussion extends Component {
 
 function inject(state, routing) {
   return {
-    discussionId: routing.params.id
+    discussionId: routing.params.id,
+    discussion: state.discussion.discussionInfo.toJS()
   }
 }
 
