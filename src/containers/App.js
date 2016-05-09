@@ -36,7 +36,10 @@ class App extends Component {
     return (
       <div>
         <NotificationContainer/>
-        { loggedOut && <LoggedOutMessage/>}
+        { loggedOut && <LoggedOutMessage onLogout={() => {
+          dispatch(push('/login'))
+          dispatch(runLogout())}
+        }/>}
         { (isAuthenticated) ?
         <div>
           <Sidebar ref='sidebar'

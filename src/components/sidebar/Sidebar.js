@@ -89,7 +89,7 @@ class Sidebar extends Component {
     }
 
     if(sidebarTypes.payload) {
-      typesOptions = sidebarTypes.payload.types.map((item) => {
+      typesOptions = sidebarTypes.payload.types && sidebarTypes.payload.types.map((item) => {
         return (
           <li key={item.id} className='nav-item'>
             <a className='nav-link sidebar-link nested' href='javascript:void(0)'>

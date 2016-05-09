@@ -6,6 +6,9 @@ class LoggedOutMessage extends Component {
     return (
       <div className='logged-out-message'>
         You have been logged out of the Hashline
+        <button type='button'
+                className='btn btn-warning btn-sm pull-xs-right'
+                onClick={this.props.onLogout.bind(this)}>Logout</button>
       </div>
     )
   }

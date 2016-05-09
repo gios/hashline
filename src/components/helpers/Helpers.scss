@@ -10,8 +10,10 @@
   text-align: center;
   z-index: 999;
   background-color: rgba(92, 184, 92, .7);
+  color: #000;
   width: 100%;
-  padding: 0.3em;
+  padding: .4em;
+  line-height: 2em;
   font-weight: bold;
   animation-name: anim-log-out;
   animation-duration: 1s;
