@@ -81,7 +81,7 @@ class DiscussionForm extends Component {
             <strong>Time to expiry:</strong>
             {(discussion.payload.is_limited && !!this.formatExpired(discussion.payload.limited_time))
               ? <div className='pull-xs-right'>{this.formatExpired(discussion.payload.limited_time)}</div>
-              : null}
+              : <div className='pull-xs-right'>None</div>}
           </li>
         </ul>
       )
