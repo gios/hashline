@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { NotificationManager } from 'react-notifications'
 import { getDiscussion } from '../actions/discussionAction'
 import DiscussionForm from '../components/discussion/DiscussionForm'
+import DiscussionPasswordModal from '../components/discussion/DiscussionPasswordModal'
 
 class Discussion extends Component {
 
@@ -10,9 +11,11 @@ class Discussion extends Component {
     let { dispatch } = this.props
 
     dispatch(getDiscussion(parseInt(id), password)).then((status) => {
-      if(status.error) {
+      if(status.error && status.payload.status === 412) {
         NotificationManager.error(status.payload.response.message)
-        return
+        $('#discussion-password').modal('show')
+      } else if(status.error) {
+        NotificationManager.error(status.payload.response.message)
       }
     })
   }
@@ -24,6 +27,8 @@ class Discussion extends Component {
         <DiscussionForm discussionId={discussionId}
                         discussion={discussion}
                         onJoinDiscussion={this.onJoinDiscussion.bind(this)}/>
+        <DiscussionPasswordModal discussionId={discussionId}
+                                 onJoinDiscussion={this.onJoinDiscussion.bind(this)}/>
       </div>
     )
   }

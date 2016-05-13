@@ -136,7 +136,7 @@ module.exports = function(router) {
       let isCorrectPassword = userMethods.encryptoPassword(foundDiscussionPassword.password) === password ? true : false
 
       if(!isCorrectPassword) {
-        this.throw('Password of this discussion not correct', 404)
+        this.throw('Password of this discussion not correct', 412)
       }
     }
 
