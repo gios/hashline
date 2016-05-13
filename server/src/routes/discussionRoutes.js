@@ -127,6 +127,10 @@ module.exports = function(router) {
     .groupBy('discussions.name', 'tags.name')
     .where('discussions.id', id)
 
+    if(!foundDiscussion) {
+      this.throw('This discussion doesn\'t exist', 404)
+    }
+
     if(foundDiscussion.is_private) {
       let foundDiscussionPassword = yield knex('discussions').select('password').where('discussions.id', id).first()
       let isCorrectPassword = userMethods.encryptoPassword(foundDiscussionPassword.password) === password ? true : false
