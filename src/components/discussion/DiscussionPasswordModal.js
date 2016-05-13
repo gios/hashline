@@ -23,7 +23,7 @@ class DiscussionPasswordModal extends Component {
             <form onSubmit={this.discussionPasswordSubmit.bind(this)}>
               <div className='modal-body'>
                 <small className='text-muted'>This discussion is protected , please enter appropriate password.</small>
-                <input type='password' className='form-control' placeholder='Password'></input>
+                <input type='password' className='form-control' placeholder='Password' ref='passwordRef'></input>
               </div>
               <div className='modal-footer'>
                 <button type='button' className='btn btn-secondary' data-dismiss='modal'>Close</button>
