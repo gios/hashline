@@ -20,6 +20,10 @@ class Discussion extends Component {
     })
   }
 
+  componentWillUnmount() {
+    $('#discussion-password').modal('hide')
+  }
+
   render() {
     let { discussionId, discussion } = this.props
     return (
