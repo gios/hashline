@@ -215,6 +215,7 @@ module.exports = function(router) {
         }
 
         if(diffLimited.as('days') < -7) {
+          // TODO: fix remove discussion
           yield knex('discussions').where('id', indexData.id).del()
         }
       }
