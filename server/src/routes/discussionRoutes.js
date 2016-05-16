@@ -156,6 +156,7 @@ module.exports = function(router) {
       }
 
       if(diffLimited.as('days') < -7) {
+        yield knex('discussions_tags').where('discussion_id', foundDiscussion.id).del()
         yield knex('discussions').where('id', foundDiscussion.id).del()
         this.throw('This discussion not found', 404)
       }
@@ -215,7 +216,7 @@ module.exports = function(router) {
         }
 
         if(diffLimited.as('days') < -7) {
-          // TODO: fix remove discussion
+          yield knex('discussions_tags').where('discussion_id', indexData.id).del()
           yield knex('discussions').where('id', indexData.id).del()
         }
       }
