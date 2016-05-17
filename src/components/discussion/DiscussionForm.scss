@@ -9,3 +9,13 @@
 .tag-labels .label:not(:first-child) {
   margin-left: .5em;
 }
+
+.online-users-chat {
+  color: #373a3c;
+
+  &:focus, &:hover {
+    outline: none;
+    text-decoration: none;
+    color: #373a3c;
+  }
+}

@@ -53,9 +53,8 @@ app.use(router.allowedMethods())
 require('./src/routes/userRoutes')(router, jwt, SHARED_SECRET)
 require('./src/routes/discussionRoutes')(router, jwt, SHARED_SECRET)
 
-io.on('connection', function(socket) {
+io.on('connection', (socket) => {
   require('./src/sockets/discussions')(io, socket)
-  tracer.log('a user connected')
 })
 
 server.listen(process.env.PORT || 5000)

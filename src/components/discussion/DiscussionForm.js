@@ -1,11 +1,17 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import Loader from '../parts/Loader'
+import io from 'socket.io-client'
+let socket = io('http://localhost:5000')
 
 class DiscussionForm extends Component {
 
   componentWillMount() {
     let { discussionId, discussion } = this.props
+    socket.emit('user-connected', discussionId)
+    socket.on('user-connected', (value) => {
+      console.log("VALUE", value)
+    })
     if(!discussion.payload) {
       this.props.onJoinDiscussion({ id: discussionId })
     }
@@ -17,6 +23,11 @@ class DiscussionForm extends Component {
 
   componentWillUnmount() {
     clearInterval(this.limitedInterval)
+  }
+
+  sendMessage(e) {
+    e.preventDefault()
+    console.log('submit')
   }
 
   formatExpired(limitedTime) {
@@ -42,6 +53,20 @@ class DiscussionForm extends Component {
     } else if(discussion.payload) {
       discussionInfo = (
         <ul className='list-group'>
+          <a className='online-users-chat' data-toggle='collapse' href='#online-users' aria-expanded='false' aria-controls='online-users'>
+            <li className='list-group-item m-b-1'>
+              <strong>Connected Users:</strong>
+              <span className='label label-default label-pill pull-xs-right'>14</span>
+            </li>
+          </a>
+          <div className='collapse' id='online-users'>
+            <div className='card card-block'>
+              Anim pariatur cliche reprehenderit,
+              enim eiusmod high life accusamus terry richardson ad squid.
+              Nihil anim keffiyeh helvetica,
+              craft beer labore wes anderson cred nesciunt sapiente ea proident.
+            </div>
+          </div>
           <li className='list-group-item'>
             <strong>Name:</strong>
             <div className='pull-xs-right'>{discussion.payload.name}</div>
@@ -90,7 +115,7 @@ class DiscussionForm extends Component {
     return (
       <div>
         <div className='col-sm-8'>
-          <form>
+          <form onSubmit={this.sendMessage.bind(this)}>
             <fieldset className='form-group'>
               <ul className='list-unstyled'>
                 <li>
