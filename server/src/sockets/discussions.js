@@ -1,7 +1,14 @@
 module.exports = function(io, socket) {
   'use strict'
 
-  socket.on('user-connected', () => {
-    io.emit('user-connected', 'haha')
+  const knex = require('../knexConfig')
+
+  socket.on('user-connected', (params) => {
+    knex('users').select('username', 'email')
+    .where('email', params.userEmail)
+    .first()
+    .then((user) => {
+      io.emit('user-connected', user)
+    })
   })
 }

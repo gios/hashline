@@ -25,10 +25,11 @@ class Discussion extends Component {
   }
 
   render() {
-    let { discussionId, discussion } = this.props
+    let { discussionId, discussion, user } = this.props
     return (
       <div>
-        <DiscussionForm discussionId={discussionId}
+        <DiscussionForm user={user}
+                        discussionId={discussionId}
                         discussion={discussion}
                         onJoinDiscussion={this.onJoinDiscussion.bind(this)}/>
         <DiscussionPasswordModal discussionId={discussionId}
@@ -41,7 +42,8 @@ class Discussion extends Component {
 function inject(state, routing) {
   return {
     discussionId: routing.params.id,
-    discussion: state.discussion.discussionInfo.toJS()
+    discussion: state.discussion.discussionInfo.toJS(),
+    user: state.sidebar.userInfo.toJS()
   }
 }
 

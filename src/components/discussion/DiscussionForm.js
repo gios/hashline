@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import Loader from '../parts/Loader'
+import { NotificationManager } from 'react-notifications'
 import io from 'socket.io-client'
 let socket = io('http://localhost:5000')
 
@@ -8,10 +9,6 @@ class DiscussionForm extends Component {
 
   componentWillMount() {
     let { discussionId, discussion } = this.props
-    socket.emit('user-connected', discussionId)
-    socket.on('user-connected', (value) => {
-      console.log("VALUE", value)
-    })
     if(!discussion.payload) {
       this.props.onJoinDiscussion({ id: discussionId })
     }
@@ -23,6 +20,16 @@ class DiscussionForm extends Component {
 
   componentWillUnmount() {
     clearInterval(this.limitedInterval)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    let { user, discussionId } = nextProps
+    if(user.payload) {
+      socket.emit('user-connected', { discussionId, userEmail: user.payload.email })
+      socket.on('user-connected', (user) => {
+        NotificationManager.info(`User ${user.username} is connected`)
+      })
+    }
   }
 
   sendMessage(e) {
