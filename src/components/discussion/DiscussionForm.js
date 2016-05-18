@@ -24,6 +24,7 @@ class DiscussionForm extends Component {
 
   componentWillReceiveProps(nextProps) {
     let { user, discussionId } = nextProps
+
     if(user.payload) {
       socket.emit('user-connected', { discussionId, userEmail: user.payload.email })
       socket.on('user-connected', (user) => {
