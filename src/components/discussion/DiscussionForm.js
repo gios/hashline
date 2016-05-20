@@ -9,9 +9,9 @@ class DiscussionForm extends Component {
   componentWillMount() {
     let { discussionId, discussion, user } = this.props
 
-    if(user.payload) {
-      socket.emit('user-connected', { discussionId, userEmail: user.payload.email })
-    }
+    // if(user.payload) {
+      socket.emit('user-connected', { discussionId, userEmail: "hello@gmail.com" })
+    // }
 
     if(!discussion.payload) {
       this.props.onJoinDiscussion({ id: discussionId })

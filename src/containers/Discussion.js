@@ -30,6 +30,7 @@ class Discussion extends Component {
 
   componentWillUnmount() {
     $('#discussion-password').modal('hide')
+    socket.removeListener('user-connected')
   }
 
   render() {
