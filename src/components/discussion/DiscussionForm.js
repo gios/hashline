@@ -11,6 +11,8 @@ class DiscussionForm extends Component {
 
     if(user.payload) {
       socket.emit('user-connected', { discussionId, userEmail: user.payload.email })
+    } else {
+      console.log("NEED TO GET usersInfo")
     }
 
     if(!discussion.payload) {
