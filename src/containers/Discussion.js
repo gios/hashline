@@ -4,8 +4,16 @@ import { NotificationManager } from 'react-notifications'
 import { getDiscussion } from '../actions/discussionAction'
 import DiscussionForm from '../components/discussion/DiscussionForm'
 import DiscussionPasswordModal from '../components/discussion/DiscussionPasswordModal'
+import io from 'socket.io-client'
+let socket = io('http://localhost:5000')
 
 class Discussion extends Component {
+
+  componentWillMount() {
+    socket.on('user-connected', (user) => {
+      NotificationManager.info(`User ${user.username} is connected`)
+    })
+  }
 
   onJoinDiscussion({ id, password = '' }) {
     let { dispatch } = this.props
