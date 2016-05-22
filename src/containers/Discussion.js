@@ -10,6 +10,7 @@ let socket = io('http://localhost:5000')
 class Discussion extends Component {
 
   componentWillMount() {
+    socket.removeListener('user-disconnected')
     socket.on('user-connected', (user) => {
       NotificationManager.info(`User ${user.username} is connected`)
     })
