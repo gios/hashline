@@ -13,6 +13,10 @@ class Discussion extends Component {
     socket.on('user-connected', (user) => {
       NotificationManager.info(`User ${user.username} is connected`)
     })
+
+    socket.on('user-disconnected', (user) => {
+      NotificationManager.info(`User ${user.username} has been disconnected`)
+    })
   }
 
   onJoinDiscussion({ id, password = '' }) {

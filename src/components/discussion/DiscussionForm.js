@@ -23,8 +23,11 @@ class DiscussionForm extends Component {
   }
 
   componentWillUnmount() {
+    let { discussionId, user } = this.props
     clearInterval(this.limitedInterval)
+    socket.emit('user-disconnected', { discussionId, userEmail: user.payload.email })
     socket.removeListener('user-connected')
+    socket.removeListener('user-disconnected')
   }
 
   sendMessage(e) {
