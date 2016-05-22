@@ -37,10 +37,10 @@ class Discussion extends Component {
     let { discussionId, discussion, user } = this.props
     return (
       <div>
-        <DiscussionForm user={user}
-                        discussionId={discussionId}
-                        discussion={discussion}
-                        onJoinDiscussion={this.onJoinDiscussion.bind(this)}/>
+        {user.payload && <DiscussionForm user={user}
+                                         discussionId={discussionId}
+                                         discussion={discussion}
+                                         onJoinDiscussion={this.onJoinDiscussion.bind(this)}/>}
         <DiscussionPasswordModal discussionId={discussionId}
                                  onJoinDiscussion={this.onJoinDiscussion.bind(this)}/>
       </div>
