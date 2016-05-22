@@ -19,7 +19,6 @@ module.exports = function(io, socket) {
       })
       .catch((err) => {
         logger.error(err)
-        io.emit('user-disconnected', { username: user.username, email: user.email })
       })
     })
   })
@@ -45,7 +44,6 @@ module.exports = function(io, socket) {
   })
 
   socket.on('disconnect', () => {
-    // TODO fired event disconnected
-    // io.emit('user-disconnected', { username: user.username, email: user.email })
+    // TODO delete user from connected_discussion_users
   })
 }
