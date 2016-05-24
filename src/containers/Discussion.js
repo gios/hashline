@@ -42,7 +42,8 @@ class Discussion extends Component {
     let { discussionId, discussion, user } = this.props
     return (
       <div>
-        {user.payload && <DiscussionForm user={user}
+        {user.payload && <DiscussionForm socket={socket}
+                                         user={user}
                                          discussionId={discussionId}
                                          discussion={discussion}
                                          onJoinDiscussion={this.onJoinDiscussion.bind(this)}/>}

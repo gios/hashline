@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import Loader from '../parts/Loader'
-import io from 'socket.io-client'
-let socket = io('http://localhost:5000')
 
 class DiscussionForm extends Component {
 
   componentWillMount() {
-    let { discussionId, discussion, user } = this.props
+    let { discussionId, discussion, user, socket } = this.props
 
     if(user.payload) {
       socket.emit('user-connected', { discussionId, userEmail: user.payload.email })
@@ -23,7 +21,7 @@ class DiscussionForm extends Component {
   }
 
   componentWillUnmount() {
-    let { discussionId, user } = this.props
+    let { discussionId, user, socket } = this.props
     clearInterval(this.limitedInterval)
     socket.emit('user-disconnected', { discussionId, userEmail: user.payload.email })
     socket.removeListener('user-connected')
