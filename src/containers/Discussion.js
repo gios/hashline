@@ -10,8 +10,8 @@ let socket = io('http://localhost:5000')
 class Discussion extends Component {
 
   componentWillMount() {
-    socket.on('receive-discussion', (id) => {
-      NotificationManager.info(`User ${id} is connected`)
+    socket.on('receive-discussion', (data) => {
+      NotificationManager.info(`User ${data.username} is connected`)
     })
   }
 

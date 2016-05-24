@@ -8,7 +8,7 @@ class DiscussionForm extends Component {
     let { discussionId, discussion, user, socket } = this.props
 
     if(user.payload) {
-      socket.emit('connected-to-discussion', { discussionId, userEmail: user.payload.email })
+      socket.emit('connected-to-discussion', user.payload.username)
     }
 
     if(!discussion.payload) {

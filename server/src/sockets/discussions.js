@@ -4,8 +4,8 @@ module.exports = function(io, socket) {
   const knex = require('../knexConfig')
   const logger = require('tracer').colorConsole()
 
-  socket.on('connected-to-discussion', () => {
-    socket.emit('receive-discussion', socket.id)
+  socket.on('connected-to-discussion', (username) => {
+    socket.emit('receive-discussion', { username, socketId: socket.id })
   })
 
   socket.on('join-discussion', (params) => {
