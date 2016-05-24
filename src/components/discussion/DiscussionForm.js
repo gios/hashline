@@ -8,7 +8,7 @@ class DiscussionForm extends Component {
     let { discussionId, discussion, user, socket } = this.props
 
     if(user.payload) {
-      socket.emit('connected-to-discussion', user.payload.username)
+      socket.emit('join discussion', { discussionId, username: user.payload.username })
     }
 
     if(!discussion.payload) {
@@ -23,7 +23,7 @@ class DiscussionForm extends Component {
   componentWillUnmount() {
     let { socket } = this.props
     clearInterval(this.limitedInterval)
-    socket.removeListener('connected-to-discussion')
+    socket.removeListener('join discussion')
   }
 
   sendMessage(e) {
