@@ -8,7 +8,7 @@ class DiscussionForm extends Component {
     let { discussionId, discussion, user, socket } = this.props
 
     if(user.payload) {
-      socket.emit('user-connected', { discussionId, userEmail: user.payload.email })
+      socket.emit('connected-to-discussion', { discussionId, userEmail: user.payload.email })
     }
 
     if(!discussion.payload) {
@@ -21,11 +21,9 @@ class DiscussionForm extends Component {
   }
 
   componentWillUnmount() {
-    let { discussionId, user, socket } = this.props
+    let { socket } = this.props
     clearInterval(this.limitedInterval)
-    socket.emit('user-disconnected', { discussionId, userEmail: user.payload.email })
-    socket.removeListener('user-connected')
-    socket.removeListener('user-disconnected')
+    socket.removeListener('connected-to-discussion')
   }
 
   sendMessage(e) {

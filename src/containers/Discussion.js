@@ -10,13 +10,8 @@ let socket = io('http://localhost:5000')
 class Discussion extends Component {
 
   componentWillMount() {
-    socket.removeListener('user-disconnected')
-    socket.on('user-connected', (user) => {
-      NotificationManager.info(`User ${user.username} is connected`)
-    })
-
-    socket.on('user-disconnected', (user) => {
-      NotificationManager.info(`User ${user.username} has been disconnected`)
+    socket.on('receive-discussion', (id) => {
+      NotificationManager.info(`User ${id} is connected`)
     })
   }
 
@@ -35,7 +30,7 @@ class Discussion extends Component {
 
   componentWillUnmount() {
     $('#discussion-password').modal('hide')
-    socket.removeListener('user-connected')
+    socket.removeListener('receive-discussion')
   }
 
   render() {

@@ -4,44 +4,56 @@ module.exports = function(io, socket) {
   const knex = require('../knexConfig')
   const logger = require('tracer').colorConsole()
 
-  socket.on('user-connected', (params) => {
-    knex('users').select('id', 'username', 'email')
-    .where('email', params.userEmail)
-    .first()
-    .then((user) => {
-      knex('connected_discussion_users')
-      .insert({
-        discussion_id: params.discussionId,
-        user_id: user.id
-      })
-      .then(() => {
-        io.emit('user-connected', { username: user.username, email: user.email })
-      })
-      .catch((err) => {
-        logger.error(err)
-      })
-    })
+  socket.on('connected-to-discussion', () => {
+    socket.emit('receive-discussion', socket.id)
   })
 
-  socket.on('user-disconnected', (params) => {
-    knex('users').select('id', 'username', 'email')
-    .where('email', params.userEmail)
-    .first()
-    .then((user) => {
-      knex('connected_discussion_users')
-      .where({
-        discussion_id: params.discussionId,
-        user_id: user.id
-      })
-      .del()
-      .then(() => {
-        io.emit('user-disconnected', { username: user.username, email: user.email })
-      })
-      .catch((err) => {
-        logger.error(err)
-      })
-    })
+  socket.on('join-discussion', (params) => {
+    socket.join(params.discussionId)
   })
+
+  socket.on('leave-discussion', (discussion) => {
+    socket.leave(discussion)
+  })
+
+  // socket.on('user-connected', (params) => {
+  //   knex('users').select('id', 'username', 'email')
+  //   .where('email', params.userEmail)
+  //   .first()
+  //   .then((user) => {
+  //     knex('connected_discussion_users')
+  //     .insert({
+  //       discussion_id: params.discussionId,
+  //       user_id: user.id
+  //     })
+  //     .then(() => {
+  //       io.emit('user-connected', { username: user.username, email: user.email })
+  //     })
+  //     .catch((err) => {
+  //       logger.error(err)
+  //     })
+  //   })
+  // })
+
+  // socket.on('user-disconnected', (params) => {
+  //   knex('users').select('id', 'username', 'email')
+  //   .where('email', params.userEmail)
+  //   .first()
+  //   .then((user) => {
+  //     knex('connected_discussion_users')
+  //     .where({
+  //       discussion_id: params.discussionId,
+  //       user_id: user.id
+  //     })
+  //     .del()
+  //     .then(() => {
+  //       io.emit('user-disconnected', { username: user.username, email: user.email })
+  //     })
+  //     .catch((err) => {
+  //       logger.error(err)
+  //     })
+  //   })
+  // })
 
   socket.on('disconnect', () => {
     console.log('USER DISCONNECTED')
