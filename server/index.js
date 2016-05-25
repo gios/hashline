@@ -49,7 +49,6 @@ app.use(jwt({ secret: SHARED_SECRET }).unless({
 app.use(router.routes())
 app.use(router.allowedMethods())
 
-// Routes
 require('./src/routes/userRoutes')(router, jwt, SHARED_SECRET)
 require('./src/routes/discussionRoutes')(router, jwt, SHARED_SECRET)
 
