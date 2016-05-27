@@ -13,3 +13,4 @@
 * Bootstrap
 * Socket.io
 * Knex
+* PostgreSQL
