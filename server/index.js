@@ -43,9 +43,7 @@ app.use(helmet())
 app.use(bodyParser())
 app.use(serve(__dirname + '/../public'))
 app.use(favicon(__dirname + '/../public/favicon.ico'))
-app.use(jwt({ secret: SHARED_SECRET }).unless({
-  path: routes
-}))
+app.use(jwt({ secret: SHARED_SECRET }).unless({ path: routes }))
 app.use(router.routes())
 app.use(router.allowedMethods())
 
