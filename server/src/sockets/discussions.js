@@ -12,8 +12,8 @@ module.exports = function(io, socket) {
     socket.join(params.discussionId).emit('connected to discussion', params.username)
   })
 
-  socket.on('leave discussion', (discussion) => {
-    socket.leave(discussion)
+  socket.on('leave discussion', (params) => {
+    socket.leave(params.discussionId).emit('disconnected from discussion', params.username)
   })
 
   // socket.on('user-connected', (params) => {
