@@ -63,7 +63,7 @@ class DiscussionCard extends Component {
   }
 
   render() {
-    let { name, description, is_limited, is_private, tags, type_name, closed } = this.props.discussion
+    let { name, description, is_limited, is_private, tags, type_name, closed, username } = this.props.discussion
 
     return (
         <div className='card card-block col-xs-12 col-sm-12 col-md-12 col-lg-6 my-discussion-card'>
@@ -85,7 +85,8 @@ class DiscussionCard extends Component {
           {(is_limited && !!this.formatExpired())
             ? <p className='card-text'><small className='text-muted'>Time to expiry: </small>{this.formatExpired()}</p>
             : null}
-          <p className='card-text'><small className='text-muted'>Type: </small>{type_name}</p>
+          <p className='card-text column-size'><small className='text-muted'>Type: </small>{type_name}</p>
+          <p className='card-text column-size m-l-1'><small className='text-muted'>Creator: </small>{username}</p>
           <p className='card-text tag-labels'><small className='text-muted'>Tags: </small>{tags.map((tag, index) => {
             return <span key={index} className='label label-default'>{tag}</span>
           })}</p>
