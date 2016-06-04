@@ -72,7 +72,7 @@ class DiscussionForm extends Component {
           </div>
           <li className='list-group-item'>
             <strong>Name:</strong>
-            <div className='pull-xs-right'>{discussion.payload.name}</div>
+            <div className='chat-info-description'>{discussion.payload.name}</div>
           </li>
           <li className='list-group-item'>
             <strong>Description:</strong>
