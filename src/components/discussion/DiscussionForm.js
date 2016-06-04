@@ -30,7 +30,7 @@ class DiscussionForm extends Component {
 
   sendMessage(e) {
     e.preventDefault()
-    console.log('submit')
+    console.log("SEND MESSAGE")
   }
 
   formatExpired(limitedTime) {
