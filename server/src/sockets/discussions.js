@@ -56,7 +56,7 @@ module.exports = function(io, socket) {
   // })
 
   socket.on('disconnect', () => {
-    console.log('USER DISCONNECTED')
+    logger.info('USER DISCONNECTED')
     // TODO delete user from connected_discussion_users
   })
 }

@@ -51,7 +51,7 @@ require('./src/routes/userRoutes')(router, jwt, SHARED_SECRET)
 require('./src/routes/discussionRoutes')(router, jwt, SHARED_SECRET)
 
 io.on('connection', (socket) => {
-  console.log('USER CONNECTED')
+  tracer.info('USER CONNECTED')
   require('./src/sockets/discussions')(io, socket)
 })
 
