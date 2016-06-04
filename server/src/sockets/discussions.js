@@ -3,16 +3,21 @@ module.exports = function(io, socket) {
 
   const knex = require('../knexConfig')
   const logger = require('tracer').colorConsole()
+  let connectedUsers = []
 
   // socket.on('connected-to-discussion', (username) => {
   //   socket.emit('receive-discussion', { username, socketId: socket.id })
   // })
 
   socket.on('join discussion', (params) => {
+    connectedUsers.push(params.username)
+    console.log("JOIN", connectedUsers)
     socket.join(params.discussionId).emit('connected to discussion', params.username)
   })
 
   socket.on('leave discussion', (params) => {
+    connectedUsers.splice(connectedUsers.indexOf(params.username), 1)
+    console.log("LEAVE", connectedUsers)
     socket.leave(params.discussionId).emit('disconnected from discussion', params.username)
   })
 
