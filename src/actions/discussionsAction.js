@@ -5,15 +5,17 @@ export const REQUEST_GET_DISCUSSIONS = 'REQUEST_GET_DISCUSSIONS'
 export const SUCCESS_GET_DISCUSSIONS = 'SUCCESS_GET_DISCUSSIONS'
 export const FAILURE_GET_DISCUSSIONS = 'FAILURE_GET_DISCUSSIONS'
 
-export function getMyDiscussions() {
+export function getDiscussions(all_discussions) {
   return {
     [CALL_API]: {
       endpoint: '/api/discussions',
-      method: 'GET',
+      method: 'POST',
       headers: {
-        'Authorization': `Bearer ${idToken.getToken()}`
+        'Authorization': `Bearer ${idToken.getToken()}`,
+        'Content-Type': 'application/json'
       },
-      types: [REQUEST_GET_DISCUSSIONS, SUCCESS_GET_DISCUSSIONS, FAILURE_GET_DISCUSSIONS]
+      types: [REQUEST_GET_DISCUSSIONS, SUCCESS_GET_DISCUSSIONS, FAILURE_GET_DISCUSSIONS],
+      body: JSON.stringify({ all_discussions })
     }
   }
 }

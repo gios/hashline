@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import Immutable from 'immutable'
-import { REQUEST_GET_DISCUSSIONS, SUCCESS_GET_DISCUSSIONS, FAILURE_GET_DISCUSSIONS } from '../actions/myDiscussionsAction'
+import { REQUEST_GET_DISCUSSIONS, SUCCESS_GET_DISCUSSIONS, FAILURE_GET_DISCUSSIONS } from '../actions/discussionsAction'
 
 const discussionsGetState = Immutable.Map({
   isFetching: false,
@@ -8,7 +8,7 @@ const discussionsGetState = Immutable.Map({
   error: false
 })
 
-function getMyDiscussions(state = discussionsGetState, action) {
+function getDiscussions(state = discussionsGetState, action) {
   switch (action.type) {
     case REQUEST_GET_DISCUSSIONS:
       return state.merge({
@@ -33,6 +33,6 @@ function getMyDiscussions(state = discussionsGetState, action) {
   }
 }
 
-export let myDiscussions = combineReducers({
-  getMyDiscussions
+export let discussions = combineReducers({
+  getDiscussions
 })

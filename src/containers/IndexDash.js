@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import IndexDashMain from '../components/dash/IndexDashMain'
+import { getDiscussion } from '../actions/discussionAction'
+import { getDiscussions } from '../actions/discussionsAction'
+import DiscussionsBlock from '../components/my_discussions/DiscussionsBlock'
+import { NotificationManager } from 'react-notifications'
 import { push } from 'react-router-redux'
 
 class IndexDash extends Component {
@@ -13,10 +16,27 @@ class IndexDash extends Component {
     }
   }
 
+  onJoinDiscussion({ id, password = '' }) {
+    let { dispatch } = this.props
+
+    dispatch(getDiscussion(parseInt(id), password)).then((status) => {
+      if(status.error) {
+        NotificationManager.error(status.payload.response.message)
+        return
+      }
+      dispatch(push(`/discussion/${id}`))
+    })
+  }
+
   render() {
+    let { dispatch, discussions } = this.props
+
     return (
       <div>
-        <IndexDashMain/>
+        <DiscussionsBlock discussions={discussions}
+                          allDiscussions={true}
+                          onJoinDiscussion={this.onJoinDiscussion.bind(this)}
+                          onLoadDiscussions={(isAll) => dispatch(getDiscussions(isAll))}/>
       </div>
     )
   }
@@ -24,7 +44,8 @@ class IndexDash extends Component {
 
 function inject(state) {
   return {
-    isAuthenticated: state.login.auth.get('isAuthenticated')
+    isAuthenticated: state.login.auth.get('isAuthenticated'),
+    discussions: state.discussions.getDiscussions.toJS()
   }
 }
 

@@ -4,13 +4,13 @@ import NoDiscussionCards from './NoDiscussionCards'
 import { Link } from 'react-router'
 import DiscussionCard from './DiscussionCard'
 
-class MyDiscussionsBlock extends Component {
+class DiscussionsBlock extends Component {
 
   componentWillMount() {
-    this.props.onLoadDiscussions()
+    this.props.onLoadDiscussions(this.props.allDiscussions)
   }
 
-  renderMyDiscussions() {
+  renderDiscussions() {
     let { discussions, onJoinDiscussion } = this.props
 
     if(discussions.isFetching) {
@@ -38,10 +38,10 @@ class MyDiscussionsBlock extends Component {
   render() {
     return (
       <div className='card-group'>
-        {this.renderMyDiscussions()}
+        {this.renderDiscussions()}
       </div>
     )
   }
 }
 
-export default MyDiscussionsBlock
+export default DiscussionsBlock

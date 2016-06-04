@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getDiscussion } from '../actions/discussionAction'
-import { getMyDiscussions } from '../actions/myDiscussionsAction'
-import MyDiscussionsBlock from '../components/my_discussions/MyDiscussionsBlock'
+import { getDiscussions } from '../actions/discussionsAction'
+import DiscussionsBlock from '../components/my_discussions/DiscussionsBlock'
 import { NotificationManager } from 'react-notifications'
 import { push } from 'react-router-redux'
 
@@ -25,9 +25,10 @@ class MyDiscussions extends Component {
 
     return (
       <div>
-        <MyDiscussionsBlock discussions={discussions}
-                            onJoinDiscussion={this.onJoinDiscussion.bind(this)}
-                            onLoadDiscussions={() => dispatch(getMyDiscussions())}/>
+        <DiscussionsBlock discussions={discussions}
+                          allDiscussions={false}
+                          onJoinDiscussion={this.onJoinDiscussion.bind(this)}
+                          onLoadDiscussions={(isAll) => dispatch(getDiscussions(isAll))}/>
       </div>
     )
   }
@@ -35,7 +36,7 @@ class MyDiscussions extends Component {
 
 function inject(state) {
   return {
-    discussions: state.myDiscussions.getMyDiscussions.toJS()
+    discussions: state.discussions.getDiscussions.toJS()
   }
 }
 
