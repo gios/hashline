@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux'
 import Immutable from 'immutable'
-import { REQUEST_GET_DISCUSSION, SUCCESS_GET_DISCUSSION, FAILURE_GET_DISCUSSION } from '../actions/discussionAction'
+import { REQUEST_GET_DISCUSSION, SUCCESS_GET_DISCUSSION, FAILURE_GET_DISCUSSION, GET_CONNECTED_USERS } from '../actions/discussionAction'
 
 const discussionGetState = Immutable.Map({
   isFetching: false,
   payload: null,
-  error: false
+  error: false,
+  connectedUsers: 0
 })
 
 function discussionInfo(state = discussionGetState, action) {
@@ -27,6 +28,10 @@ function discussionInfo(state = discussionGetState, action) {
         isFetching: false,
         payload: action.payload.response,
         error: true
+      })
+    case GET_CONNECTED_USERS:
+      return state.merge({
+        connectedUsers: action.connectedUsers
       })
     default:
       return state

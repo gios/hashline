@@ -4,6 +4,14 @@ import { idToken } from '../utils/helpers'
 export const REQUEST_GET_DISCUSSION = 'REQUEST_GET_DISCUSSION'
 export const SUCCESS_GET_DISCUSSION = 'SUCCESS_GET_DISCUSSION'
 export const FAILURE_GET_DISCUSSION = 'FAILURE_GET_DISCUSSION'
+export const GET_CONNECTED_USERS = 'GET_CONNECTED_USERS'
+
+export function getConnectedUsers(connectedUsers) {
+  return {
+    type: GET_CONNECTED_USERS,
+    connectedUsers
+  }
+}
 
 export function getDiscussion(id, password) {
   return {

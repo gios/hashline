@@ -9,6 +9,7 @@ class DiscussionForm extends Component {
 
     if(user.payload) {
       socket.emit('join discussion', { discussionId, username: user.payload.username })
+      socket.emit('connected users', discussionId)
     }
 
     if(!discussion.payload) {
@@ -26,6 +27,7 @@ class DiscussionForm extends Component {
     socket.emit('leave discussion', { discussionId, username: user.payload.username })
     socket.removeListener('leave discussion')
     socket.removeListener('join discussion')
+    socket.removeListener('connected users')
   }
 
   sendMessage(e) {
@@ -56,20 +58,10 @@ class DiscussionForm extends Component {
     } else if(discussion.payload) {
       discussionInfo = (
         <ul className='list-group'>
-          <a className='online-users-chat' data-toggle='collapse' href='#online-users' aria-expanded='false' aria-controls='online-users'>
-            <li className='list-group-item m-b-1'>
-              <strong>Connected Users:</strong>
-              <span className='label label-default label-pill pull-xs-right'>14</span>
-            </li>
-          </a>
-          <div className='collapse' id='online-users'>
-            <div className='card card-block'>
-              Anim pariatur cliche reprehenderit,
-              enim eiusmod high life accusamus terry richardson ad squid.
-              Nihil anim keffiyeh helvetica,
-              craft beer labore wes anderson cred nesciunt sapiente ea proident.
-            </div>
-          </div>
+          <li className='list-group-item m-b-1'>
+            <strong>Connected Users:</strong>
+            <span className='label label-default label-pill pull-xs-right'>{discussion.connectedUsers}</span>
+          </li>
           <li className='list-group-item'>
             <strong>Name:</strong>
             <div className='chat-info-description'>{discussion.payload.name}</div>

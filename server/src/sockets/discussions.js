@@ -6,12 +6,16 @@ module.exports = function(io, socket) {
 
   socket.on('join discussion', (params) => {
     socket.join(params.discussionId)
-    io.to(params.discussionId).emit('join discussion', params.username)
+    socket.broadcast.to(params.discussionId).emit('join discussion', params.username)
   })
 
   socket.on('leave discussion', (params) => {
     socket.leave(params.discussionId)
-    io.to(params.discussionId).emit('leave discussion', params.username)
+    socket.broadcast.to(params.discussionId).emit('leave discussion', params.username)
+  })
+
+  socket.on('connected users', (discussionId) => {
+    socket.emit('connected users', io.sockets.adapter.rooms[discussionId].length)
   })
 
   // socket.on('user-connected', (params) => {

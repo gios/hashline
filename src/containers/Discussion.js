@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { NotificationManager } from 'react-notifications'
-import { getDiscussion } from '../actions/discussionAction'
+import { getDiscussion, getConnectedUsers } from '../actions/discussionAction'
 import DiscussionForm from '../components/discussion/DiscussionForm'
 import DiscussionPasswordModal from '../components/discussion/DiscussionPasswordModal'
 import io from 'socket.io-client'
@@ -10,13 +10,21 @@ let socket = io('http://localhost:5000')
 class Discussion extends Component {
 
   componentWillMount() {
+    let { dispatch, discussionId } = this.props
+
     socket.removeListener('leave discussion')
     socket.on('join discussion', (username) => {
+      socket.emit('connected users', discussionId)
       NotificationManager.info(`User ${username} is connected`)
     })
 
     socket.on('leave discussion', (username) => {
+      socket.emit('connected users', discussionId)
       NotificationManager.info(`User ${username} is disconnected`)
+    })
+
+    socket.on('connected users', (connectedUsers) => {
+      dispatch(getConnectedUsers(connectedUsers))
     })
   }
 
@@ -36,6 +44,7 @@ class Discussion extends Component {
   componentWillUnmount() {
     $('#discussion-password').modal('hide')
     socket.removeListener('join discussion')
+    socket.removeListener('connected users')
   }
 
   render() {
