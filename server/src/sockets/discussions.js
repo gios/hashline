@@ -14,7 +14,7 @@ module.exports = function(io, socket) {
     return usersInRoom || []
   }
 
-  socket.on('join discussion', (params) => {
+  socket.on('join discussion', params => {
     socket.username = params.username
     socket.email = params.email
     socket.discussionId = params.discussionId
@@ -22,12 +22,12 @@ module.exports = function(io, socket) {
     socket.broadcast.to(params.discussionId).emit('join discussion', params.username)
   })
 
-  socket.on('leave discussion', (params) => {
+  socket.on('leave discussion', params => {
     socket.leave(params.discussionId)
     socket.broadcast.to(params.discussionId).emit('leave discussion', params.username)
   })
 
-  socket.on('connected users', (discussionId) => {
+  socket.on('connected users', discussionId => {
     io.emit('connected users', {
       users: getUserInRoom(discussionId),
       length: getUserInRoom(discussionId).length
