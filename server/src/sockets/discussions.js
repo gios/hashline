@@ -7,9 +7,9 @@ module.exports = function(io, socket) {
   function getUserInRoom(roomId) {
     let usersInRoom = io.sockets.adapter.rooms[roomId] && Object.keys(io.sockets.adapter.rooms[roomId].sockets)
 
-    .map((socketId) => {
+    .map((socketId, index) => {
       let user = io.sockets.connected[socketId]
-      return { username: user.username, email: user.email }
+      return { index, username: user.username, email: user.email }
     })
     return usersInRoom || []
   }

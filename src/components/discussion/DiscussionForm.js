@@ -55,7 +55,7 @@ class DiscussionForm extends Component {
 
     if(discussion.isFetching) {
       discussionInfo = <Loader size={2}/>
-    } else if(discussion.payload) {
+    } else if(discussion.payload && discussion.connectedUsers) {
       discussionInfo = (
         <ul className='list-group'>
         <a className='online-users-chat' data-toggle='collapse' href='#online-users' aria-expanded='false' aria-controls='online-users'>
@@ -69,7 +69,7 @@ class DiscussionForm extends Component {
               <ul className='list-group'>
                   {discussion.connectedUsers.users.map(user => {
                     return (
-                      <li className='list-group-item'>
+                      <li key={user.index} className='list-group-item'>
                         <span className='label label-default pull-xs-right chat-user-label'>{user.email}</span>
                         {user.username}
                       </li>

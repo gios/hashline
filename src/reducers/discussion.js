@@ -6,7 +6,7 @@ const discussionGetState = Immutable.Map({
   isFetching: false,
   payload: null,
   error: false,
-  connectedUsers: {}
+  connectedUsers: null
 })
 
 function discussionInfo(state = discussionGetState, action) {
