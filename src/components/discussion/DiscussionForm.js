@@ -8,7 +8,7 @@ class DiscussionForm extends Component {
     let { discussionId, discussion, user, socket } = this.props
 
     if(user.payload) {
-      socket.emit('join discussion', { discussionId, username: user.payload.username })
+      socket.emit('join discussion', { discussionId, username: user.payload.username, email: user.payload.email })
       socket.emit('connected users', discussionId)
     }
 
@@ -58,10 +58,26 @@ class DiscussionForm extends Component {
     } else if(discussion.payload) {
       discussionInfo = (
         <ul className='list-group'>
-          <li className='list-group-item m-b-1'>
-            <strong>Connected Users:</strong>
-            <span className='label label-default label-pill pull-xs-right'>{discussion.connectedUsers}</span>
-          </li>
+        <a className='online-users-chat' data-toggle='collapse' href='#online-users' aria-expanded='false' aria-controls='online-users'>
+            <li className='list-group-item m-b-1'>
+              <strong>Connected Users:</strong>
+              <span className='label label-default label-pill pull-xs-right'>{discussion.connectedUsers.length}</span>
+            </li>
+          </a>
+          <div className='collapse' id='online-users'>
+            <div className='card card-block'>
+              <ul className='list-group'>
+                  {discussion.connectedUsers.users.map(user => {
+                    return (
+                      <li className='list-group-item'>
+                        <span className='label label-default pull-xs-right chat-user-label'>{user.email}</span>
+                        {user.username}
+                      </li>
+                    )
+                  })}
+              </ul>
+            </div>
+          </div>
           <li className='list-group-item'>
             <strong>Name:</strong>
             <div className='chat-info-description'>{discussion.payload.name}</div>
