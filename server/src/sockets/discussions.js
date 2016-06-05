@@ -35,66 +35,27 @@ module.exports = function(io, socket) {
   })
 
   socket.on('chat message', (message, discussionId, user) => {
-    console.log(message, discussionId, user)
-    // knex('users').select('id', 'username', 'email')
-    // .where('email', user.email)
-    // .first()
-    // .then((user) => {
-    //   knex('messages')
-    //   .insert({
-    //     discussion_id: discussionId,
-    //     user_id: user.id
-    //   })
-    //   .then(() => {
-    //     socket.broadcast.to(discussionId).emit('message', { user, message })
-    //   })
-    //   .catch((err) => {
-    //     logger.error(err)
-    //   })
-    // })
-    // .catch((err) => {
-    //   logger.error(err)
-    // })
+    knex('users').select('id', 'username', 'email')
+    .where('email', user.email)
+    .first()
+    .then((user) => {
+      knex('messages')
+      .insert({
+        discussion_id: discussionId,
+        user_id: user.id,
+        message
+      })
+      .then(() => {
+        io.sockets.to(discussionId).emit('chat message', user.username, message)
+      })
+      .catch((err) => {
+        logger.error(err)
+      })
+    })
+    .catch((err) => {
+      logger.error(err)
+    })
   })
-
-  // socket.on('user-connected', (params) => {
-  //   knex('users').select('id', 'username', 'email')
-  //   .where('email', params.userEmail)
-  //   .first()
-  //   .then((user) => {
-  //     knex('connected_discussion_users')
-  //     .insert({
-  //       discussion_id: params.discussionId,
-  //       user_id: user.id
-  //     })
-  //     .then(() => {
-  //       io.emit('user-connected', { username: user.username, email: user.email })
-  //     })
-  //     .catch((err) => {
-  //       logger.error(err)
-  //     })
-  //   })
-  // })
-
-  // socket.on('user-disconnected', (params) => {
-  //   knex('users').select('id', 'username', 'email')
-  //   .where('email', params.userEmail)
-  //   .first()
-  //   .then((user) => {
-  //     knex('connected_discussion_users')
-  //     .where({
-  //       discussion_id: params.discussionId,
-  //       user_id: user.id
-  //     })
-  //     .del()
-  //     .then(() => {
-  //       io.emit('user-disconnected', { username: user.username, email: user.email })
-  //     })
-  //     .catch((err) => {
-  //       logger.error(err)
-  //     })
-  //   })
-  // })
 
   socket.on('disconnect', () => {
     io.emit('connected users', {

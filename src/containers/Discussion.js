@@ -27,7 +27,7 @@ class Discussion extends Component {
       dispatch(getConnectedUsers(connectedUsers))
     })
 
-    socket.on('message', (user, message) => {
+    socket.on('chat message', (user, message) => {
       console.log(user, message)
     })
   }
