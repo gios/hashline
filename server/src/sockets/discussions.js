@@ -57,6 +57,8 @@ module.exports = function(io, socket) {
   })
 
   socket.on('disconnect', () => {
+    socket.leave(socket.discussionId)
+    socket.broadcast.to(socket.discussionId).emit('leave discussion', socket.username)
     io.emit('connected users', {
       users: getUserInRoom(socket.discussionId),
       length: getUserInRoom(socket.discussionId).length
