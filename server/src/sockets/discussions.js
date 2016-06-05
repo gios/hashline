@@ -1,7 +1,7 @@
 module.exports = function(io, socket) {
   'use strict'
 
-  // const knex = require('../knexConfig')
+  const knex = require('../knexConfig')
   const logger = require('tracer').colorConsole()
 
   function getUserInRoom(roomId) {
@@ -32,6 +32,29 @@ module.exports = function(io, socket) {
       users: getUserInRoom(discussionId),
       length: getUserInRoom(discussionId).length
     })
+  })
+
+  socket.on('chat message', (message, discussionId, user) => {
+    console.log(message, discussionId, user)
+    // knex('users').select('id', 'username', 'email')
+    // .where('email', user.email)
+    // .first()
+    // .then((user) => {
+    //   knex('messages')
+    //   .insert({
+    //     discussion_id: discussionId,
+    //     user_id: user.id
+    //   })
+    //   .then(() => {
+    //     socket.broadcast.to(discussionId).emit('message', { user, message })
+    //   })
+    //   .catch((err) => {
+    //     logger.error(err)
+    //   })
+    // })
+    // .catch((err) => {
+    //   logger.error(err)
+    // })
   })
 
   // socket.on('user-connected', (params) => {

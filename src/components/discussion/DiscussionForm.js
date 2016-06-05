@@ -30,9 +30,16 @@ class DiscussionForm extends Component {
     socket.removeListener('connected users')
   }
 
+  changeChatMessage(e) {
+    this.props.setChatMessage(e.target.value)
+  }
+
   sendMessage(e) {
+    let message = this.refs.addMessage.value
+    let { socket, discussionId, user, setChatMessage } = this.props
     e.preventDefault()
-    console.log("SEND MESSAGE")
+    socket.emit('chat message', message, discussionId, user.payload)
+    setChatMessage('')
   }
 
   formatExpired(limitedTime) {
@@ -143,12 +150,17 @@ class DiscussionForm extends Component {
                 <li>Hello!</li>
                 <li>Hello!</li>
               </ul>
-              <input type='text' className='form-control' id='add-message' placeholder='Write something'/>
+              <input type='text'
+                     className='form-control'
+                     ref='addMessage'
+                     placeholder='Write something'
+                     onChange={this.changeChatMessage.bind(this)}
+                     value={discussion.chatMessage}/>
             </fieldset>
           </form>
         </div>
         <div className='col-sm-4'>
-        {discussionInfo}
+          {discussionInfo}
         </div>
       </div>
     )

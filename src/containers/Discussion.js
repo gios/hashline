@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { NotificationManager } from 'react-notifications'
-import { getDiscussion, getConnectedUsers } from '../actions/discussionAction'
+import { getDiscussion, getConnectedUsers, setChatMessage } from '../actions/discussionAction'
 import DiscussionForm from '../components/discussion/DiscussionForm'
 import DiscussionPasswordModal from '../components/discussion/DiscussionPasswordModal'
 import io from 'socket.io-client'
@@ -26,6 +26,10 @@ class Discussion extends Component {
     socket.on('connected users', (connectedUsers) => {
       dispatch(getConnectedUsers(connectedUsers))
     })
+
+    socket.on('message', (user, message) => {
+      console.log(user, message)
+    })
   }
 
   onJoinDiscussion({ id, password = '' }) {
@@ -48,13 +52,14 @@ class Discussion extends Component {
   }
 
   render() {
-    let { discussionId, discussion, user } = this.props
+    let { dispatch, discussionId, discussion, user } = this.props
     return (
       <div>
         {user.payload && <DiscussionForm socket={socket}
                                          user={user}
                                          discussionId={discussionId}
                                          discussion={discussion}
+                                         setChatMessage={message => dispatch(setChatMessage(message))}
                                          onJoinDiscussion={this.onJoinDiscussion.bind(this)}/>}
         <DiscussionPasswordModal discussionId={discussionId}
                                  onJoinDiscussion={this.onJoinDiscussion.bind(this)}/>
