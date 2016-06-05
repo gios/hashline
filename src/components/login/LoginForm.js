@@ -63,6 +63,7 @@ class LoginForm extends Component {
 
   render() {
     let { incorrectEmailObj, incorrectPasswordObj } = this.props.inputErrors
+    let { auth } = this.props
     return (
       <form onSubmit={this.loginEvent.bind(this)} noValidate>
         <div className='form-group row'>
@@ -81,7 +82,7 @@ class LoginForm extends Component {
         </div>
         <div className='form-group row'>
           <div className='col-xs-12 col-md-8 col-md-offset-2'>
-            <button type='submit' className='btn btn-success col-xs-12 col-md-12'>Login</button>
+            <button type='submit' className='btn btn-success col-xs-12 col-md-12' disabled={auth.isFetching ? true : false}>Login</button>
           </div>
         </div>
         <div className='form-group row'>

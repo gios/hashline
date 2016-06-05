@@ -17,6 +17,7 @@ class Login extends Component {
 
   render() {
     let { dispatch,
+          auth,
           pathname,
           errorMessage,
           isAuthenticated,
@@ -34,11 +35,13 @@ class Login extends Component {
     let loginFromSelector = () => {
       if (pathname === 'login') {
         return <LoginForm inputErrors={inputErrors}
+                          auth={auth}
                           onClickLogin={creds => dispatch(loginUser(creds))}
                           emitEmailError={value => dispatch(incorrectEmail(value))}
                           emitPasswordError={(value, message) => dispatch(incorrectPassword(value, message))}/>
       } else {
         return <SignUpForm inputErrors={inputErrors}
+                           auth={auth}
                            onClickSignUp={creds => dispatch(signUpUser(creds))}
                            emitUsernameError={value => dispatch(incorrectUsername(value))}
                            emitEmailError={value => dispatch(incorrectEmail(value))}
@@ -73,6 +76,7 @@ class Login extends Component {
 function inject(state, ownProps) {
   return {
     pathname: ownProps.location.pathname,
+    auth: state.login.auth.toJS(),
     errorMessage: state.login.auth.get('errorMessage'),
     isAuthenticated: state.login.auth.get('isAuthenticated'),
     incorrectUsernameObj: state.login.authErrors.get('usernameError').toJS(),
