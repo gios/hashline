@@ -3,7 +3,7 @@
 const path = require('path')
 const app = require('koa')()
 const server = require('http').createServer(app.callback())
-const io = require('socket.io')(server)
+const io = require('socket.io')(server, { path: '/api/chat' })
 const router = require('koa-router')()
 const serve = require('koa-static')
 const bodyParser = require('koa-bodyparser')

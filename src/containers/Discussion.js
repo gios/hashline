@@ -8,7 +8,7 @@ import { getDiscussion,
 import DiscussionForm from '../components/discussion/DiscussionForm'
 import DiscussionPasswordModal from '../components/discussion/DiscussionPasswordModal'
 import io from 'socket.io-client'
-let socket = io('http://localhost:5000')
+let socket = io('', { path: '/api/chat' })
 
 class Discussion extends Component {
 
