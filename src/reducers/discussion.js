@@ -5,14 +5,16 @@ import {
   SUCCESS_GET_DISCUSSION,
   FAILURE_GET_DISCUSSION,
   GET_CONNECTED_USERS,
-  SET_CHAT_MESSAGE } from '../actions/discussionAction'
+  SET_CHAT_MESSAGE,
+  SET_MESSAGE_ARCHIVE } from '../actions/discussionAction'
 
 const discussionGetState = Immutable.Map({
   isFetching: false,
   payload: null,
   error: false,
   connectedUsers: null,
-  chatMessage: ''
+  chatMessage: '',
+  messageArchive: Immutable.List.of()
 })
 
 function discussionInfo(state = discussionGetState, action) {
@@ -42,6 +44,10 @@ function discussionInfo(state = discussionGetState, action) {
     case SET_CHAT_MESSAGE:
       return state.merge({
         chatMessage: action.chatMessage
+      })
+    case SET_MESSAGE_ARCHIVE:
+      return state.merge({
+        messageArchive: state.get('messageArchive').push(action.messageArchive)
       })
     default:
       return state

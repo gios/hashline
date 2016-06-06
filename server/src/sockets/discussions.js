@@ -34,26 +34,28 @@ module.exports = function(io, socket) {
   })
 
   socket.on('chat message', (message, discussionId, user) => {
-    knex('users').select('id', 'username', 'email')
-    .where('email', user.email)
-    .first()
-    .then((user) => {
-      knex('messages')
-      .insert({
-        discussion_id: discussionId,
-        user_id: user.id,
-        message
-      })
-      .then(() => {
-        io.sockets.to(discussionId).emit('chat message', user.username, message)
-      })
-      .catch((err) => {
-        logger.error(err)
-      })
-    })
-    .catch((err) => {
-      logger.error(err)
-    })
+    io.sockets.to(discussionId).emit('chat message', user.username, message)
+    // SAVE TO DB (IMAGE HISTORY)
+    // knex('users').select('id', 'username', 'email')
+    // .where('email', user.email)
+    // .first()
+    // .then((user) => {
+    //   knex('messages')
+    //   .insert({
+    //     discussion_id: discussionId,
+    //     user_id: user.id,
+    //     message
+    //   })
+    //   .then(() => {
+    //     io.sockets.to(discussionId).emit('chat message', user.username, message)
+    //   })
+    //   .catch((err) => {
+    //     logger.error(err)
+    //   })
+    // })
+    // .catch((err) => {
+    //   logger.error(err)
+    // })
   })
 
   socket.on('disconnect', () => {

@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { NotificationManager } from 'react-notifications'
-import { getDiscussion, getConnectedUsers, setChatMessage } from '../actions/discussionAction'
+import { getDiscussion,
+         getConnectedUsers,
+         setChatMessage,
+         setMessageArchive } from '../actions/discussionAction'
 import DiscussionForm from '../components/discussion/DiscussionForm'
 import DiscussionPasswordModal from '../components/discussion/DiscussionPasswordModal'
 import io from 'socket.io-client'
@@ -28,7 +31,7 @@ class Discussion extends Component {
     })
 
     socket.on('chat message', (user, message) => {
-      console.log(user, message)
+      dispatch(setMessageArchive({ user, message }))
     })
   }
 
@@ -52,13 +55,13 @@ class Discussion extends Component {
   }
 
   render() {
-    let { dispatch, discussionId, discussion, user } = this.props
+    let { dispatch, discussionId, discussionInfo, user } = this.props
     return (
       <div>
         {user.payload && <DiscussionForm socket={socket}
                                          user={user}
                                          discussionId={discussionId}
-                                         discussion={discussion}
+                                         discussionInfo={discussionInfo}
                                          setChatMessage={message => dispatch(setChatMessage(message))}
                                          onJoinDiscussion={this.onJoinDiscussion.bind(this)}/>}
         <DiscussionPasswordModal discussionId={discussionId}
@@ -71,7 +74,7 @@ class Discussion extends Component {
 function inject(state, routing) {
   return {
     discussionId: routing.params.id,
-    discussion: state.discussion.discussionInfo.toJS(),
+    discussionInfo: state.discussion.discussionInfo.toJS(),
     user: state.sidebar.userInfo.toJS()
   }
 }
