@@ -52,6 +52,7 @@ class Discussion extends Component {
     $('#discussion-password').modal('hide')
     socket.removeListener('join discussion')
     socket.removeListener('connected users')
+    socket.removeListener('chat message')
   }
 
   render() {
