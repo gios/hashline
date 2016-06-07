@@ -6,6 +6,14 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAILURE = 'LOGIN_FAILURE'
 export const RUN_LOGOUT = 'RUN_LOGOUT'
 export const IS_LOGGED_OUT = 'IS_LOGGED_OUT'
+export const NEXT_PATHNAME = 'NEXT_PATHNAME'
+
+export function setNextPathname(nextPathname) {
+  return {
+    type: NEXT_PATHNAME,
+    nextPathname
+  }
+}
 
 export function loggedOut() {
   return {

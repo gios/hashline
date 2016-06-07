@@ -19,6 +19,7 @@ class Login extends Component {
     let { dispatch,
           auth,
           pathname,
+          nextPathname,
           errorMessage,
           isAuthenticated,
           incorrectUsernameObj,
@@ -29,7 +30,7 @@ class Login extends Component {
     let errorComponent
 
     if(isAuthenticated) {
-      setTimeout(() => dispatch(replace('/')))
+      setTimeout(() => dispatch(replace(nextPathname) || replace('/')))
     }
 
     let loginFromSelector = () => {
@@ -79,6 +80,7 @@ function inject(state, ownProps) {
     auth: state.login.auth.toJS(),
     errorMessage: state.login.auth.get('errorMessage'),
     isAuthenticated: state.login.auth.get('isAuthenticated'),
+    nextPathname: state.login.auth.get('nextPathname'),
     incorrectUsernameObj: state.login.authErrors.get('usernameError').toJS(),
     incorrectEmailObj: state.login.authErrors.get('emailError').toJS(),
     incorrectPasswordObj: state.login.authErrors.get('passwordError').toJS()

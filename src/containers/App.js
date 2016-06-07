@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
+import { push, replace } from 'react-router-redux'
 import { NotificationContainer } from 'react-notifications'
-import { runLogout } from '../actions/loginAction'
+import { runLogout, setNextPathname } from '../actions/loginAction'
 import { toggleSidebar, setMobileSidebar, getUserData } from '../actions/sidebarAction'
 import { getSidebarTypes } from '../actions/sidebarAction'
 import Sidebar from './../components/sidebar/Sidebar'
@@ -12,10 +12,14 @@ import Swipeable from 'react-swipeable'
 class App extends Component {
 
   componentWillMount() {
-    let { dispatch, isAuthenticated } = this.props
+    let { dispatch, isAuthenticated, activeRoute } = this.props
 
     if (!isAuthenticated) {
-      dispatch(push('/login'))
+      dispatch(replace('/login'))
+
+      if(activeRoute !== 'login') {
+        dispatch(setNextPathname(activeRoute))
+      }
     }
   }
 
