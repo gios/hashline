@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Loader from '../parts/Loader'
 import NoDiscussionsCard from './NoDiscussionsCard'
 import { Link } from 'react-router'
-import DiscussionCard from './DiscussionCard'
+import DiscussionCard from '../discussion/DiscussionCard'
 
 class DiscussionsBlock extends Component {
 
