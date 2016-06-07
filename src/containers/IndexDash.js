@@ -29,14 +29,15 @@ class IndexDash extends Component {
   }
 
   render() {
-    let { dispatch, discussions } = this.props
+    let { dispatch, discussions, isAuthenticated } = this.props
 
     return (
       <div>
-        <DiscussionsBlock discussions={discussions}
-                          allDiscussions={true}
-                          onJoinDiscussion={this.onJoinDiscussion.bind(this)}
-                          onLoadDiscussions={(isAll) => dispatch(getDiscussions(isAll))}/>
+        {isAuthenticated &&
+          <DiscussionsBlock discussions={discussions}
+                            allDiscussions={true}
+                            onJoinDiscussion={this.onJoinDiscussion.bind(this)}
+                            onLoadDiscussions={(isAll) => dispatch(getDiscussions(isAll))}/>}
       </div>
     )
   }
