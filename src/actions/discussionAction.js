@@ -7,6 +7,7 @@ export const FAILURE_GET_DISCUSSION = 'FAILURE_GET_DISCUSSION'
 export const GET_CONNECTED_USERS = 'GET_CONNECTED_USERS'
 export const SET_CHAT_MESSAGE = 'SET_CHAT_MESSAGE'
 export const SET_MESSAGE_ARCHIVE = 'SET_MESSAGE_ARCHIVE'
+export const CLEAR_MESSAGE_ARCHIVE = 'CLEAR_MESSAGE_ARCHIVE'
 
 export function getConnectedUsers(connectedUsers) {
   return {
@@ -26,6 +27,12 @@ export function setMessageArchive(messageArchive) {
   return {
     type: SET_MESSAGE_ARCHIVE,
     messageArchive
+  }
+}
+
+export function clearMessageArchive() {
+  return {
+    type: CLEAR_MESSAGE_ARCHIVE
   }
 }
 

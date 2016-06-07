@@ -6,7 +6,8 @@ import {
   FAILURE_GET_DISCUSSION,
   GET_CONNECTED_USERS,
   SET_CHAT_MESSAGE,
-  SET_MESSAGE_ARCHIVE } from '../actions/discussionAction'
+  SET_MESSAGE_ARCHIVE,
+  CLEAR_MESSAGE_ARCHIVE } from '../actions/discussionAction'
 
 const discussionGetState = Immutable.Map({
   isFetching: false,
@@ -48,6 +49,10 @@ function discussionInfo(state = discussionGetState, action) {
     case SET_MESSAGE_ARCHIVE:
       return state.merge({
         messageArchive: state.get('messageArchive').push(action.messageArchive)
+      })
+    case CLEAR_MESSAGE_ARCHIVE:
+      return state.merge({
+        messageArchive: state.get('messageArchive').clear()
       })
     default:
       return state
