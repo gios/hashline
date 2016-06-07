@@ -9,29 +9,33 @@ import { getDiscussion,
 import DiscussionForm from '../components/discussion/DiscussionForm'
 import DiscussionPasswordModal from '../components/discussion/DiscussionPasswordModal'
 import io from 'socket.io-client'
-let socket = io('', { path: '/api/chat' })
 
 class Discussion extends Component {
+
+  constructor(props) {
+    super(props)
+    this.socket = props.isAuthenticated && io('', { path: '/api/chat' })
+  }
 
   componentWillMount() {
     let { dispatch, discussionId } = this.props
 
-    socket.removeListener('leave discussion')
-    socket.on('join discussion', (username) => {
-      socket.emit('connected users', discussionId)
+    this.socket.removeListener('leave discussion')
+    this.socket.on('join discussion', (username) => {
+      this.socket.emit('connected users', discussionId)
       NotificationManager.info(`User ${username} is connected`)
     })
 
-    socket.on('leave discussion', (username) => {
-      socket.emit('connected users', discussionId)
+    this.socket.on('leave discussion', (username) => {
+      this.socket.emit('connected users', discussionId)
       NotificationManager.info(`User ${username} is disconnected`)
     })
 
-    socket.on('connected users', (connectedUsers) => {
+    this.socket.on('connected users', (connectedUsers) => {
       dispatch(getConnectedUsers(connectedUsers))
     })
 
-    socket.on('chat message', (user, message) => {
+    this.socket.on('chat message', (user, message) => {
       dispatch(setMessageArchive({ user, message }))
     })
   }
@@ -51,16 +55,16 @@ class Discussion extends Component {
 
   componentWillUnmount() {
     $('#discussion-password').modal('hide')
-    socket.removeListener('join discussion')
-    socket.removeListener('connected users')
-    socket.removeListener('chat message')
+    this.socket.removeListener('join discussion')
+    this.socket.removeListener('connected users')
+    this.socket.removeListener('chat message')
   }
 
   render() {
     let { dispatch, discussionId, discussionInfo, user } = this.props
     return (
       <div>
-        {user.payload && <DiscussionForm socket={socket}
+        {user.payload && <DiscussionForm socket={this.socket}
                                          clearMessageArchive={() => dispatch(clearMessageArchive())}
                                          user={user}
                                          discussionId={discussionId}
@@ -78,7 +82,8 @@ function inject(state, routing) {
   return {
     discussionId: routing.params.id,
     discussionInfo: state.discussion.discussionInfo.toJS(),
-    user: state.sidebar.userInfo.toJS()
+    user: state.sidebar.userInfo.toJS(),
+    isAuthenticated: state.login.auth.get('isAuthenticated')
   }
 }
 
