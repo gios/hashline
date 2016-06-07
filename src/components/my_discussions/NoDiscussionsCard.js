@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class NoDiscussionCards extends Component {
+class NoDiscussionsCard extends Component {
 
   render() {
     return (
@@ -11,4 +11,4 @@ class NoDiscussionCards extends Component {
   }
 }
 
-export default NoDiscussionCards
+export default NoDiscussionsCard
