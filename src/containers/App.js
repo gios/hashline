@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { push, replace } from 'react-router-redux'
 import { NotificationContainer } from 'react-notifications'
 import { runLogout, setNextPathname } from '../actions/loginAction'
-import { toggleSidebar, setMobileSidebar, getUserData } from '../actions/sidebarAction'
+import { toggleSidebar, setMobileSidebar, getUserData, setClientHeight, setClientWidth } from '../actions/sidebarAction'
 import { getSidebarTypes } from '../actions/sidebarAction'
 import Sidebar from './../components/sidebar/Sidebar'
 import LoggedOutMessage from './../components/helpers/LoggedOutMessage'
@@ -52,6 +52,8 @@ class App extends Component {
                    userInfo={userInfo}
                    sidebarTypes={sidebarTypes}
                    activeRoute={activeRoute}
+                   setClientHeight={height => dispatch(setClientHeight(height))}
+                   setClientWidth={width => dispatch(setClientWidth(width))}
                    onSetMobile={value => dispatch(setMobileSidebar(value))}
                    onToggle={value => dispatch(toggleSidebar(value))}
                    onGetUserData={() => dispatch(getUserData())}

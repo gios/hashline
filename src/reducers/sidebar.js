@@ -8,12 +8,16 @@ import { TOGGLE_SIDEBAR,
          FAILURE_USER_INFO,
          REQUEST_SIDEBAR_TYPES,
          SUCCESS_SIDEBAR_TYPES,
-         FAILURE_SIDEBAR_TYPES} from '../actions/sidebarAction'
+         FAILURE_SIDEBAR_TYPES,
+         CLIENT_HEIGHT,
+         CLIENT_WIDTH } from '../actions/sidebarAction'
 
 let currentMode = (window.innerWidth < MOBILE_MAX_WIDTH) ? true : false
 const sidebarState = Immutable.Map({
   isToggled: currentMode,
-  isMobileView: currentMode
+  isMobileView: currentMode,
+  clientHeight: 0,
+  clientWidth: 0
 })
 
 function sidebarView(state = sidebarState, action) {
@@ -26,6 +30,14 @@ function sidebarView(state = sidebarState, action) {
       return state.merge({
         isToggled: action.mobile,
         isMobileView: action.mobile
+      })
+    case CLIENT_HEIGHT:
+      return state.merge({
+        clientHeight: action.clientHeight
+      })
+    case CLIENT_WIDTH:
+      return state.merge({
+        clientWidth: action.clientWidth
       })
     default:
       return state

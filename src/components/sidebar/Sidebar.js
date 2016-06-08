@@ -8,8 +8,11 @@ import { MOBILE_MAX_WIDTH, VERSION } from '../../constants'
 class Sidebar extends Component {
 
   componentWillMount() {
-    this.props.onGetUserData()
-    this.props.onGetSidebarTypes()
+    let { setClientHeight, setClientWidth, onGetUserData, onGetSidebarTypes } = this.props
+    onGetUserData()
+    onGetSidebarTypes()
+    setClientHeight(screen.height)
+    setClientWidth(screen.width)
   }
 
   componentDidMount() {
