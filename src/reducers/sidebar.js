@@ -39,20 +39,21 @@ const sidebarGetState = Immutable.Map({
 })
 
 function sidebarGetInit(state, action, ...types) {
+  let [REQUEST, SUCCESS, FAILURE] = types
   switch (action.type) {
-    case types[0]:
+    case REQUEST:
       return state.merge({
         isFetching: true,
         payload: null,
         error: false
       })
-    case types[1]:
+    case SUCCESS:
       return state.merge({
         isFetching: false,
         payload: action.payload,
         error: false
       })
-    case types[2]:
+    case FAILURE:
       return state.merge({
         isFetching: false,
         payload: action.payload.response,
