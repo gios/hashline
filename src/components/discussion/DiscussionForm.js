@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
+import { ENTER_KEYCODE } from '../../constants'
 import Loader from '../parts/Loader'
 
 class DiscussionForm extends Component {
@@ -36,11 +37,13 @@ class DiscussionForm extends Component {
   }
 
   sendMessage(e) {
-    let message = this.refs.addMessage.value
-    let { socket, discussionId, user, setChatMessage } = this.props
-    e.preventDefault()
-    socket.emit('chat message', message, discussionId, user.payload)
-    setChatMessage('')
+    if(!e.which || e.which === ENTER_KEYCODE) {
+      let message = this.refs.addMessage.value
+      let { socket, discussionId, user, setChatMessage } = this.props
+      e.preventDefault()
+      socket.emit('chat message', message, discussionId, user.payload)
+      setChatMessage('')
+    }
   }
 
   formatExpired(limitedTime) {
@@ -134,24 +137,33 @@ class DiscussionForm extends Component {
     return (
       <div>
         <div className='col-sm-8'>
-          <form onSubmit={this.sendMessage.bind(this)}>
+          <form>
             <fieldset className='form-group'>
-              <ul className='list-unstyled'>
-                {discussionInfo.messageArchive.map((item, index) => {
-                  return (
-                    <li key={index}>
-                      <dt className='col-sm-3'>{item.user}</dt>
-                      <dd className='col-sm-9 chat-discussion-description'>{item.message}</dd>
-                    </li>
-                  )
-                })}
-              </ul>
-              <input type='text'
-                     className='form-control'
-                     ref='addMessage'
-                     placeholder='Write something'
-                     onChange={this.changeChatMessage.bind(this)}
-                     value={discussionInfo.chatMessage}/>
+              <div className='card'>
+                <div className='card-block chat-area'>
+                  <ul className='list-unstyled'>
+                    {discussionInfo.messageArchive.map((item, index) => {
+                      return (
+                        <li key={index}>
+                          <dt className='col-sm-3'>{item.user}</dt>
+                          <dd className='col-sm-9 chat-discussion-description'>{item.message}</dd>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                </div>
+              </div>
+              <textarea cols='40'
+                        rows='3'
+                        className='form-control chat-message'
+                        ref='addMessage'
+                        placeholder='Write something'
+                        onKeyPress={this.sendMessage.bind(this)}
+                        onChange={this.changeChatMessage.bind(this)}
+                        value={discussionInfo.chatMessage}></textarea>
+              <button type='button'
+                      className='btn btn-primary pull-xs-right m-t-1'
+                      onClick={this.sendMessage.bind(this)}>Send</button>
             </fieldset>
           </form>
         </div>
