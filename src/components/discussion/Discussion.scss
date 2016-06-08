@@ -25,7 +25,13 @@
 }
 
 .chat-area {
-  display: inline;
+  & > .card {
+    min-height: 20em;
+  }
+
+  & > .card-block {
+    display: inline;
+  }
 }
 
 .chat-message {

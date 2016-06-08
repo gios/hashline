@@ -61,10 +61,11 @@ class Discussion extends Component {
   }
 
   render() {
-    let { dispatch, discussionId, discussionInfo, user } = this.props
+    let { dispatch, discussionId, discussionInfo, user, clientHeight } = this.props
     return (
       <div>
         {user.payload && <DiscussionForm socket={this.socket}
+                                         clientHeight={clientHeight}
                                          clearMessageArchive={() => dispatch(clearMessageArchive())}
                                          user={user}
                                          discussionId={discussionId}
@@ -83,7 +84,8 @@ function inject(state, routing) {
     discussionId: routing.params.id,
     discussionInfo: state.discussion.discussionInfo.toJS(),
     user: state.sidebar.userInfo.toJS(),
-    isAuthenticated: state.login.auth.get('isAuthenticated')
+    isAuthenticated: state.login.auth.get('isAuthenticated'),
+    clientHeight: state.sidebar.sidebarView.get('clientHeight')
   }
 }
 

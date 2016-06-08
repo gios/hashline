@@ -11,8 +11,8 @@ class Sidebar extends Component {
     let { setClientHeight, setClientWidth, onGetUserData, onGetSidebarTypes } = this.props
     onGetUserData()
     onGetSidebarTypes()
-    setClientHeight(screen.height)
-    setClientWidth(screen.width)
+    setClientHeight(window.innerHeight || document.body.clientHeight)
+    setClientWidth(window.innerWidth || document.body.clientWidth)
   }
 
   componentDidMount() {
@@ -21,6 +21,8 @@ class Sidebar extends Component {
 
     window.addEventListener('resize', throttle(() => {
       this.windowSizeAction(sidebarEl)
+      this.props.setClientHeight(window.innerHeight || document.body.clientHeight)
+      this.props.setClientWidth(window.innerWidth || document.body.clientWidth)
     }, 200))
   }
 

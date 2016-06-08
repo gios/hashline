@@ -61,7 +61,7 @@ class DiscussionForm extends Component {
   }
 
   render() {
-    let { discussionInfo } = this.props
+    let { discussionInfo, clientHeight } = this.props
     let discussionInfoRender
 
     if(discussionInfo.isFetching) {
@@ -138,9 +138,9 @@ class DiscussionForm extends Component {
       <div>
         <div className='col-sm-8'>
           <form>
-            <fieldset className='form-group'>
-              <div className='card'>
-                <div className='card-block chat-area'>
+            <fieldset className='form-group chat-area'>
+              <div className='card' style={{ height: `${clientHeight - 200}px` }}>
+                <div className='card-block'>
                   <ul className='list-unstyled'>
                     {discussionInfo.messageArchive.map((item, index) => {
                       return (
