@@ -5,7 +5,8 @@ import { getDiscussion,
          getConnectedUsers,
          setChatMessage,
          setMessageArchive,
-         clearMessageArchive } from '../actions/discussionAction'
+         clearMessageArchive,
+         getDiscussionMessages } from '../actions/discussionAction'
 import DiscussionForm from '../components/discussion/DiscussionForm'
 import DiscussionPasswordModal from '../components/discussion/DiscussionPasswordModal'
 import io from 'socket.io-client'
@@ -70,6 +71,7 @@ class Discussion extends Component {
                                          user={user}
                                          discussionId={discussionId}
                                          discussionInfo={discussionInfo}
+                                         getDiscussionMessages={(discussionId, start, end) => dispatch(getDiscussionMessages(discussionId, start, end))}
                                          setChatMessage={message => dispatch(setChatMessage(message))}
                                          onJoinDiscussion={this.onJoinDiscussion.bind(this)}/>}
         <DiscussionPasswordModal discussionId={discussionId}

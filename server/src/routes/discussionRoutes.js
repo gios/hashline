@@ -95,13 +95,14 @@ module.exports = function(router) {
     let start = this.request.body.start
     let end = this.request.body.end
 
-    let discussionMessages = yield knex('messages').select('users.username, message')
+    let discussionMessages = yield knex('messages').select('users.username', 'messages.message')
     .innerJoin('users', 'messages.user_id', 'users.id')
-    .groupBy('users.username, message')
-    .where('discussion_id', discussionId)
+    .groupBy('users.username', 'messages.message')
+    .where('messages.discussion_id', discussionId)
     .limit(end - start)
     .offset(start)
-    console.log(discussionMessages)
+
+    this.body = discussionMessages
   })
 
   router.post('/api/discussion_info/:id', function *() {

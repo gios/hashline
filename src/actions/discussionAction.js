@@ -4,6 +4,11 @@ import { idToken } from '../utils/helpers'
 export const REQUEST_GET_DISCUSSION = 'REQUEST_GET_DISCUSSION'
 export const SUCCESS_GET_DISCUSSION = 'SUCCESS_GET_DISCUSSION'
 export const FAILURE_GET_DISCUSSION = 'FAILURE_GET_DISCUSSION'
+
+export const REQUEST_GET_DISCUSSION_MESSAGES = 'REQUEST_GET_DISCUSSION_MESSAGES'
+export const SUCCESS_GET_DISCUSSION_MESSAGES = 'SUCCESS_GET_DISCUSSION_MESSAGES'
+export const FAILURE_GET_DISCUSSION_MESSAGES = 'FAILURE_GET_DISCUSSION_MESSAGES'
+
 export const GET_CONNECTED_USERS = 'GET_CONNECTED_USERS'
 export const SET_CHAT_MESSAGE = 'SET_CHAT_MESSAGE'
 export const SET_MESSAGE_ARCHIVE = 'SET_MESSAGE_ARCHIVE'
@@ -47,6 +52,21 @@ export function getDiscussion(id, password) {
       },
       types: [REQUEST_GET_DISCUSSION, SUCCESS_GET_DISCUSSION, FAILURE_GET_DISCUSSION],
       body: JSON.stringify({ id, password })
+    }
+  }
+}
+
+export function getDiscussionMessages(discussionId, start, end) {
+  return {
+    [CALL_API]: {
+      endpoint: `/api/discussion_info/messages`,
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${idToken.getToken()}`,
+        'Content-Type': 'application/json'
+      },
+      types: [REQUEST_GET_DISCUSSION_MESSAGES, SUCCESS_GET_DISCUSSION_MESSAGES, FAILURE_GET_DISCUSSION_MESSAGES],
+      body: JSON.stringify({ discussionId, start, end })
     }
   }
 }

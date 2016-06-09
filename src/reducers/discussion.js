@@ -4,6 +4,9 @@ import {
   REQUEST_GET_DISCUSSION,
   SUCCESS_GET_DISCUSSION,
   FAILURE_GET_DISCUSSION,
+  REQUEST_GET_DISCUSSION_MESSAGES,
+  SUCCESS_GET_DISCUSSION_MESSAGES,
+  FAILURE_GET_DISCUSSION_MESSAGES,
   GET_CONNECTED_USERS,
   SET_CHAT_MESSAGE,
   SET_MESSAGE_ARCHIVE,
@@ -59,6 +62,38 @@ function discussionInfo(state = discussionGetState, action) {
   }
 }
 
+const discussionMessagesState = Immutable.Map({
+  isFetching: false,
+  payload: null,
+  error: false
+})
+
+function discussionMessages(state = discussionMessagesState, action) {
+  switch (action.type) {
+    case REQUEST_GET_DISCUSSION_MESSAGES:
+      return state.merge({
+        isFetching: true,
+        payload: null,
+        error: false
+      })
+    case SUCCESS_GET_DISCUSSION_MESSAGES:
+      return state.merge({
+        isFetching: false,
+        payload: action.payload,
+        error: false
+      })
+    case FAILURE_GET_DISCUSSION_MESSAGES:
+      return state.merge({
+        isFetching: false,
+        payload: action.payload.response,
+        error: true
+      })
+    default:
+      return state
+  }
+}
+
 export let discussion = combineReducers({
-  discussionInfo
+  discussionInfo,
+  discussionMessages
 })
