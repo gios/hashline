@@ -90,6 +90,20 @@ module.exports = function(router) {
     }
   })
 
+  router.post('/api/discussion_info/messages', function *() {
+    let discussionId = this.request.body.discussionId
+    let start = this.request.body.start
+    let end = this.request.body.end
+
+    let discussionMessages = yield knex('messages').select('users.username, message')
+    .innerJoin('users', 'messages.user_id', 'users.id')
+    .groupBy('users.username, message')
+    .where('discussion_id', discussionId)
+    .limit(end - start)
+    .offset(start)
+    console.log(discussionMessages)
+  })
+
   router.post('/api/discussion_info/:id', function *() {
     let userInfo = this.state.user
     let id = this.request.body.id
