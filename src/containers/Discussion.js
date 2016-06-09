@@ -36,8 +36,8 @@ class Discussion extends Component {
       dispatch(getConnectedUsers(connectedUsers))
     })
 
-    this.socket.on('chat message', (user, message) => {
-      dispatch(setMessageArchive({ user, message }))
+    this.socket.on('chat message', (username, message) => {
+      dispatch(setMessageArchive({ username, message }))
     })
   }
 

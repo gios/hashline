@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
+import { NotificationManager } from 'react-notifications'
 import { ENTER_KEYCODE } from '../../constants'
 import Loader from '../parts/Loader'
 
@@ -12,7 +13,13 @@ class DiscussionForm extends Component {
       socket.emit('join discussion', { discussionId, username: user.payload.username, email: user.payload.email })
       socket.emit('connected users', discussionId)
       this.props.onJoinDiscussion({ id: discussionId })
-      this.props.getDiscussionMessages(discussionId, 0, 10)
+      this.props.getDiscussionMessages(discussionId, 0, 10).then(status => {
+        if(status.error) {
+          NotificationManager.error(status.payload.response.message)
+          return
+        }
+        console.log(status.payload)
+      })
     }
   }
 
@@ -143,7 +150,7 @@ class DiscussionForm extends Component {
                     {discussionInfo.messageArchive.map((item, index) => {
                       return (
                         <li key={index}>
-                          <dt className='col-sm-3'>{item.user}</dt>
+                          <dt className='col-sm-3'>{item.username}</dt>
                           <dd className='col-sm-9 chat-discussion-description'>{item.message}</dd>
                         </li>
                       )

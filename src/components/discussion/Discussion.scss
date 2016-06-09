@@ -27,6 +27,7 @@
 .chat-area {
   & > .card {
     min-height: 20em;
+    overflow-y: auto;
   }
 
   & > .card-block {
