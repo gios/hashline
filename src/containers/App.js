@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push, replace } from 'react-router-redux'
+import { NotificationManager } from 'react-notifications'
 import { NotificationContainer } from 'react-notifications'
 import { runLogout, setNextPathname } from '../actions/loginAction'
 import { toggleSidebar, setMobileSidebar, getUserData, setClientHeight, setClientWidth } from '../actions/sidebarAction'
@@ -56,8 +57,12 @@ class App extends Component {
                    setClientWidth={width => dispatch(setClientWidth(width))}
                    onSetMobile={value => dispatch(setMobileSidebar(value))}
                    onToggle={value => dispatch(toggleSidebar(value))}
-                   onGetUserData={() => dispatch(getUserData())}
-                   onGetSidebarTypes={() => dispatch(getSidebarTypes())}
+                   onGetUserData={() => dispatch(getUserData()).then(status => {
+                     status.error && NotificationManager.error(status.payload.response.message)
+                   })}
+                   onGetSidebarTypes={() => dispatch(getSidebarTypes()).then(status => {
+                     status.error && NotificationManager.error(status.payload.response.message)
+                   })}
                    onLogout={() => {
                      dispatch(push('/login'))
                      dispatch(runLogout())}

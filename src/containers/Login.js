@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { replace } from 'react-router-redux'
+import { NotificationManager } from 'react-notifications'
 import { loginUser } from '../actions/loginAction'
 import { signUpUser } from '../actions/signUpAction'
 import { incorrectUsername, incorrectEmail, incorrectPassword } from '../actions/authErrorsAction'
@@ -37,13 +38,17 @@ class Login extends Component {
       if (pathname === 'login') {
         return <LoginForm inputErrors={inputErrors}
                           auth={auth}
-                          onClickLogin={creds => dispatch(loginUser(creds))}
+                          onClickLogin={creds => dispatch(loginUser(creds)).then(status => {
+                            status.error && NotificationManager.error(status.payload.response.message)
+                          })}
                           emitEmailError={value => dispatch(incorrectEmail(value))}
                           emitPasswordError={(value, message) => dispatch(incorrectPassword(value, message))}/>
       } else {
         return <SignUpForm inputErrors={inputErrors}
                            auth={auth}
-                           onClickSignUp={creds => dispatch(signUpUser(creds))}
+                           onClickSignUp={creds => dispatch(signUpUser(creds)).then(status => {
+                             status.error && NotificationManager.error(status.payload.response.message)
+                           })}
                            emitUsernameError={value => dispatch(incorrectUsername(value))}
                            emitEmailError={value => dispatch(incorrectEmail(value))}
                            emitPasswordError={(value, message) => dispatch(incorrectPassword(value, message))}/>

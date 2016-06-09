@@ -37,7 +37,9 @@ class IndexDash extends Component {
           <DiscussionsBlock discussions={discussions}
                             allDiscussions={true}
                             onJoinDiscussion={this.onJoinDiscussion.bind(this)}
-                            onLoadDiscussions={(isAll) => dispatch(getDiscussions(isAll))}/>}
+                            onLoadDiscussions={isAll => dispatch(getDiscussions(isAll)).then(status => {
+                              status.error && NotificationManager.error(status.payload.response.message)
+                            })}/>}
       </div>
     )
   }

@@ -45,9 +45,15 @@ class Login extends Component {
                               discussionSettings={discussionSettings}
                               discussionCreate={discussionCreate}
                               userInfo={userInfo}
-                              onGetTypes={() => dispatch(getDiscussionTypes())}
-                              onGetLimites={() => dispatch(getDiscussionLimites())}
-                              onGetTags={() => dispatch(getDiscussionTags())}
+                              onGetTypes={() => dispatch(getDiscussionTypes()).then(status => {
+                                status.error && NotificationManager.error(status.payload.response.message)
+                              })}
+                              onGetLimites={() => dispatch(getDiscussionLimites()).then(status => {
+                                status.error && NotificationManager.error(status.payload.response.message)
+                              })}
+                              onGetTags={() => dispatch(getDiscussionTags()).then(status => {
+                                status.error && NotificationManager.error(status.payload.response.message)
+                              })}
                               onDiscussionName={(value) => dispatch(discussionInputName(value))}
                               onDiscussionDescription={(value) => dispatch(discussionInputDescription(value))}
                               onDiscussionPassword={(value) => dispatch(discussionInputPassword(value))}
