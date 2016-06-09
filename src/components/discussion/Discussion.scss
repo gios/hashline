@@ -33,6 +33,14 @@
   & > .card-block {
     display: inline;
   }
+
+  .chat-messages-area {
+    font-size: .8em;
+  }
+
+  .message-item {
+    word-break: break-word;
+  }
 }
 
 .chat-message {

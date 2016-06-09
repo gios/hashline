@@ -16,7 +16,7 @@ class DiscussionForm extends Component {
 
     if(!discussionInfo.payload) {
       this.props.onJoinDiscussion({ id: discussionId })
-      this.props.getDiscussionMessages(discussionId, 0, 10).then(status => {
+      this.props.getDiscussionMessages(discussionId, 0, 100).then(status => {
         if(status.error) {
           NotificationManager.error(status.payload.response.message)
           return
@@ -149,16 +149,23 @@ class DiscussionForm extends Component {
             <fieldset className='form-group chat-area'>
               <div className='card' style={{ height: `${clientHeight - 200}px` }}>
                 <div className='card-block'>
-                  <ul className='list-unstyled'>
-                    {discussionMessages.messageArchive.map((item, index) => {
-                      return (
-                        <li key={index}>
-                          <dt className='col-sm-3'>{item.username}</dt>
-                          <dd className='col-sm-9 chat-discussion-description'>{item.message}</dd>
-                        </li>
-                      )
-                    })}
-                  </ul>
+                  <div className='table-responsive'>
+                    <table className='table'>
+                      <tbody className='chat-messages-area'>
+                        {discussionMessages.messageArchive.map((item, index) => {
+                          return (
+                            <tr key={index}>
+                              <td>{moment(item.created_at).format('H:mm:ss')}</td>
+                              <th scope="row">{item.username}</th>
+                              <td>
+                                <div className='message-item'>{item.message}</div>
+                              </td>
+                            </tr>
+                          )
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
               <textarea cols='40'
