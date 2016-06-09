@@ -72,6 +72,7 @@ class Discussion extends Component {
                                          discussionId={discussionId}
                                          discussionInfo={discussionInfo}
                                          discussionMessages={discussionMessages}
+                                         setMessageArchive={data => dispatch(setMessageArchive(data))}
                                          getDiscussionMessages={(discussionId, start, end) => dispatch(getDiscussionMessages(discussionId, start, end))}
                                          setChatMessage={message => dispatch(setChatMessage(message))}
                                          onJoinDiscussion={this.onJoinDiscussion.bind(this)}/>}

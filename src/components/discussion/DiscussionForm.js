@@ -21,7 +21,7 @@ class DiscussionForm extends Component {
           NotificationManager.error(status.payload.response.message)
           return
         }
-        console.log(status.payload)
+        this.props.setMessageArchive(status.payload)
       })
     }
   }
