@@ -45,10 +45,11 @@ class DiscussionForm extends Component {
   }
 
   sendMessage(e) {
+    e.preventDefault()
+
     if(!e.which || e.which === ENTER_KEYCODE) {
       let message = this.refs.addMessage.value
       let { socket, discussionId, user, setChatMessage } = this.props
-      e.preventDefault()
       socket.emit('chat message', message, discussionId, user.payload)
       setChatMessage('')
     }

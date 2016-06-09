@@ -1,5 +1,6 @@
 {
     "jshint.enable": false,
     "editor.tabSize": 2,
-    "editor.renderWhitespace": true
+    "editor.renderWhitespace": true,
+    "files.trimTrailingWhitespace": true
 }
