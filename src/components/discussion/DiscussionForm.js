@@ -45,9 +45,8 @@ class DiscussionForm extends Component {
   }
 
   sendMessage(e) {
-    e.preventDefault()
-
     if(!e.which || e.which === ENTER_KEYCODE) {
+      e.preventDefault()
       let message = this.refs.addMessage.value
       let { socket, discussionId, user, setChatMessage } = this.props
       socket.emit('chat message', message, discussionId, user.payload)
@@ -70,7 +69,7 @@ class DiscussionForm extends Component {
   }
 
   render() {
-    let { discussionInfo, clientHeight } = this.props
+    let { discussionInfo, clientHeight, discussionMessages } = this.props
     let discussionInfoRender
 
     if(discussionInfo.isFetching) {
@@ -151,7 +150,7 @@ class DiscussionForm extends Component {
               <div className='card' style={{ height: `${clientHeight - 200}px` }}>
                 <div className='card-block'>
                   <ul className='list-unstyled'>
-                    {discussionInfo.messageArchive.map((item, index) => {
+                    {discussionMessages.messageArchive.map((item, index) => {
                       return (
                         <li key={index}>
                           <dt className='col-sm-3'>{item.username}</dt>
@@ -169,7 +168,7 @@ class DiscussionForm extends Component {
                         placeholder='Write something'
                         onKeyPress={this.sendMessage.bind(this)}
                         onChange={this.changeChatMessage.bind(this)}
-                        value={discussionInfo.chatMessage}></textarea>
+                        value={discussionMessages.chatMessage}></textarea>
               <button type='button'
                       className='btn btn-primary pull-xs-right m-t-1'
                       onClick={this.sendMessage.bind(this)}>Send</button>

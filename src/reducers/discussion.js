@@ -12,16 +12,14 @@ import {
   SET_MESSAGE_ARCHIVE,
   CLEAR_MESSAGE_ARCHIVE } from '../actions/discussionAction'
 
-const discussionGetState = Immutable.Map({
+const discussionInfoState = Immutable.Map({
   isFetching: false,
   payload: null,
   error: false,
-  connectedUsers: null,
-  chatMessage: '',
-  messageArchive: Immutable.List.of()
+  connectedUsers: null
 })
 
-function discussionInfo(state = discussionGetState, action) {
+function discussionInfo(state = discussionInfoState, action) {
   switch (action.type) {
     case REQUEST_GET_DISCUSSION:
       return state.merge({
@@ -45,18 +43,6 @@ function discussionInfo(state = discussionGetState, action) {
       return state.merge({
         connectedUsers: action.connectedUsers
       })
-    case SET_CHAT_MESSAGE:
-      return state.merge({
-        chatMessage: action.chatMessage
-      })
-    case SET_MESSAGE_ARCHIVE:
-      return state.merge({
-        messageArchive: state.get('messageArchive').push(action.messageArchive)
-      })
-    case CLEAR_MESSAGE_ARCHIVE:
-      return state.merge({
-        messageArchive: state.get('messageArchive').clear()
-      })
     default:
       return state
   }
@@ -65,7 +51,9 @@ function discussionInfo(state = discussionGetState, action) {
 const discussionMessagesState = Immutable.Map({
   isFetching: false,
   payload: null,
-  error: false
+  error: false,
+  chatMessage: '',
+  messageArchive: Immutable.List.of()
 })
 
 function discussionMessages(state = discussionMessagesState, action) {
@@ -87,6 +75,18 @@ function discussionMessages(state = discussionMessagesState, action) {
         isFetching: false,
         payload: action.payload.response,
         error: true
+      })
+    case SET_CHAT_MESSAGE:
+      return state.merge({
+        chatMessage: action.chatMessage
+      })
+    case SET_MESSAGE_ARCHIVE:
+      return state.merge({
+        messageArchive: state.get('messageArchive').push(action.messageArchive)
+      })
+    case CLEAR_MESSAGE_ARCHIVE:
+      return state.merge({
+        messageArchive: state.get('messageArchive').clear()
       })
     default:
       return state
