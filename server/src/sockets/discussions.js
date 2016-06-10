@@ -37,21 +37,27 @@ module.exports = function(io, socket) {
     knex('users').select('id', 'username', 'email')
     .where('email', user.email)
     .first()
-    .then((user) => {
+    .then(user => {
       knex('messages')
+      .returning('id')
       .insert({
         discussion_id: discussionId,
         user_id: user.id,
         message
       })
-      .then(() => {
-        io.sockets.to(discussionId).emit('chat message', user.username, message)
+      .then(message_id => {
+        knex('messages').select('created_at', 'message')
+        .where('id', message_id[0])
+        .first()
+        .then(message => {
+          io.sockets.to(discussionId).emit('chat message', message.created_at, user.username, message.message)
+        })
       })
-      .catch((err) => {
+      .catch(err => {
         logger.error(err)
       })
     })
-    .catch((err) => {
+    .catch(err => {
       logger.error(err)
     })
   })
