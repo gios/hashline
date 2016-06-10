@@ -9,6 +9,14 @@ class DiscussionForm extends Component {
   componentWillMount() {
     let { discussionId, discussionInfo, user, socket } = this.props
 
+    this.props.getDiscussionMessages(discussionId, 0, 100).then(status => {
+      if(status.error) {
+        NotificationManager.error(status.payload.response.message)
+        return
+      }
+      this.props.setMessageArchive(status.payload)
+    })
+
     if(user.payload) {
       socket.emit('join discussion', { discussionId, username: user.payload.username, email: user.payload.email })
       socket.emit('connected users', discussionId)
@@ -16,13 +24,6 @@ class DiscussionForm extends Component {
 
     if(!discussionInfo.payload) {
       this.props.onJoinDiscussion({ id: discussionId })
-      this.props.getDiscussionMessages(discussionId, 0, 100).then(status => {
-        if(status.error) {
-          NotificationManager.error(status.payload.response.message)
-          return
-        }
-        this.props.setMessageArchive(status.payload)
-      })
     }
   }
 
