@@ -156,8 +156,12 @@ class DiscussionForm extends Component {
                         {discussionMessages.messageArchive.map((item, index) => {
                           return (
                             <tr key={index}>
-                              <td>{moment(item.created_at).format('H:mm:ss')}</td>
-                              <th scope="row">{item.username}</th>
+                              <td className='message-time'>
+                                <div>{moment(item.created_at).format('H:mm:ss')}</div>
+                              </td>
+                              <th scope='row' className='message-username'>
+                                <div>{item.username}</div>
+                              </th>
                               <td>
                                 <div className='message-item'>{item.message}</div>
                               </td>
