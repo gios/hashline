@@ -8,7 +8,7 @@ exports.up = function(knex, Promise) {
           table.increments()
           table.integer('discussion_id').unsigned().references('discussions.id')
           table.integer('user_id').unsigned().references('users.id')
-          table.string('message')
+          table.text('message')
           table.timestamp('created_at').defaultTo(knex.fn.now())
           table.timestamp('updated_at').defaultTo(knex.fn.now())
         })
