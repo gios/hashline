@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import { NotificationManager } from 'react-notifications'
+import DiscussionExpiredTimer from './DiscussionExpiredTimer'
 import { ENTER_KEYCODE } from '../../constants'
 import Loader from '../parts/Loader'
 
@@ -28,12 +29,15 @@ class DiscussionForm extends Component {
   }
 
   componentDidMount() {
-    this.limitedInterval = setInterval(this.forceUpdate.bind(this), 1000)
+    let chatContainer = this.refs.chatContainer
+    let scrollTop = chatContainer.scrollTop
+    let diffLength = chatContainer.scrollHeight - chatContainer.clientHeight
+    let reteRelation = scrollTop / diffLength
+    chatContainer.scrollTop = diffLength - scrollTop
   }
 
   componentWillUnmount() {
     let { socket, discussionId, user, clearMessageArchive } = this.props
-    clearInterval(this.limitedInterval)
     clearMessageArchive()
     socket.emit('leave discussion', { discussionId, username: user.payload.username })
     socket.removeListener('leave discussion')
@@ -45,6 +49,10 @@ class DiscussionForm extends Component {
     this.props.setChatMessage(e.target.value)
   }
 
+  scrollLoader() {
+    console.log("SCROLL EVENT")
+  }
+
   sendMessage(e) {
     if(!e.which || e.which === ENTER_KEYCODE) {
       e.preventDefault()
@@ -53,20 +61,6 @@ class DiscussionForm extends Component {
       socket.emit('chat message', message, discussionId, user.payload)
       setChatMessage('')
     }
-  }
-
-  formatExpired(limitedTime) {
-    let getExpiredDuration = moment.duration(moment(limitedTime).diff(moment()))
-
-    if(getExpiredDuration.as('seconds') < 1) {
-      return false
-    }
-    let expiredFormat = {
-      hours: getExpiredDuration.hours(),
-      minutes: (getExpiredDuration.minutes() < 10) ? '0' + getExpiredDuration.minutes(): getExpiredDuration.minutes(),
-      seconds: (getExpiredDuration.seconds() < 10) ? '0' + getExpiredDuration.seconds(): getExpiredDuration.seconds()
-    }
-    return `${expiredFormat.hours}:${expiredFormat.minutes}:${expiredFormat.seconds}`
   }
 
   render() {
@@ -133,12 +127,7 @@ class DiscussionForm extends Component {
               })}
             </div>
           </li>
-          <li className='list-group-item'>
-            <strong>Time to expiry:</strong>
-            {(discussionInfo.payload.is_limited && !!this.formatExpired(discussionInfo.payload.limited_time))
-              ? <div className='pull-xs-right'>{this.formatExpired(discussionInfo.payload.limited_time)}</div>
-              : <div className='pull-xs-right'>None</div>}
-          </li>
+          <DiscussionExpiredTimer discussionInfo={discussionInfo}/>
         </ul>
       )
     }
@@ -148,7 +137,10 @@ class DiscussionForm extends Component {
         <div className='col-sm-8'>
           <form>
             <fieldset className='form-group chat-area'>
-              <div className='card' style={{ height: `${clientHeight - 200}px` }}>
+              <div className='card'
+                   style={{ height: `${clientHeight - 200}px` }}
+                   ref='chatContainer'
+                   onScroll={this.scrollLoader.bind(this)}>
                 <div className='card-block'>
                   <div className='table-responsive'>
                     <table className='table'>
