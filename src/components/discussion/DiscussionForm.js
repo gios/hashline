@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import moment from 'moment'
 import { NotificationManager } from 'react-notifications'
 import DiscussionExpiredTimer from './DiscussionExpiredTimer'
+import DiscussionChatMessages from './DiscussionChatMessages'
 import { ENTER_KEYCODE } from '../../constants'
 import Loader from '../parts/Loader'
 
@@ -28,14 +28,6 @@ class DiscussionForm extends Component {
     }
   }
 
-  componentDidMount() {
-    let chatContainer = this.refs.chatContainer
-    let scrollTop = chatContainer.scrollTop
-    let diffLength = chatContainer.scrollHeight - chatContainer.clientHeight
-    let reteRelation = scrollTop / diffLength
-    chatContainer.scrollTop = diffLength - scrollTop
-  }
-
   componentWillUnmount() {
     let { socket, discussionId, user, clearMessageArchive } = this.props
     clearMessageArchive()
@@ -47,10 +39,6 @@ class DiscussionForm extends Component {
 
   changeChatMessage(e) {
     this.props.setChatMessage(e.target.value)
-  }
-
-  scrollLoader() {
-    console.log("SCROLL EVENT")
   }
 
   sendMessage(e) {
@@ -137,34 +125,9 @@ class DiscussionForm extends Component {
         <div className='col-sm-8'>
           <form>
             <fieldset className='form-group chat-area'>
-              <div className='card'
-                   style={{ height: `${clientHeight - 200}px` }}
-                   ref='chatContainer'
-                   onScroll={this.scrollLoader.bind(this)}>
-                <div className='card-block'>
-                  <div className='table-responsive'>
-                    <table className='table'>
-                      <tbody className='chat-messages-area'>
-                        {discussionMessages.messageArchive.map((item, index) => {
-                          return (
-                            <tr key={index}>
-                              <td className='message-time'>
-                                <div>{moment(item.created_at).format('H:mm:ss')}</div>
-                              </td>
-                              <th scope='row' className='message-username'>
-                                <div>{item.username}</div>
-                              </th>
-                              <td>
-                                <div className='message-item'>{item.message}</div>
-                              </td>
-                            </tr>
-                          )
-                        })}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
+              <DiscussionChatMessages clientHeight={clientHeight}
+                                      discussionMessages={discussionMessages}
+                                      setScrollToBottom={this.props.setScrollToBottom}/>
               <textarea cols='40'
                         rows='3'
                         className='form-control chat-message'

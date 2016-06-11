@@ -6,7 +6,8 @@ import { getDiscussion,
          setChatMessage,
          setMessageArchive,
          clearMessageArchive,
-         getDiscussionMessages } from '../actions/discussionAction'
+         getDiscussionMessages,
+         setScrollToBottom } from '../actions/discussionAction'
 import DiscussionForm from '../components/discussion/DiscussionForm'
 import DiscussionPasswordModal from '../components/discussion/DiscussionPasswordModal'
 import io from 'socket.io-client'
@@ -72,6 +73,7 @@ class Discussion extends Component {
                                          discussionId={discussionId}
                                          discussionInfo={discussionInfo}
                                          discussionMessages={discussionMessages}
+                                         setScrollToBottom={state => dispatch(setScrollToBottom(state))}
                                          setMessageArchive={data => dispatch(setMessageArchive(data))}
                                          getDiscussionMessages={(discussionId, start, end) => dispatch(getDiscussionMessages(discussionId, start, end))}
                                          setChatMessage={message => dispatch(setChatMessage(message))}

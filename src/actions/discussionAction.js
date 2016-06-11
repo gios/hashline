@@ -14,6 +14,15 @@ export const SET_CHAT_MESSAGE = 'SET_CHAT_MESSAGE'
 export const SET_MESSAGE_ARCHIVE = 'SET_MESSAGE_ARCHIVE'
 export const CLEAR_MESSAGE_ARCHIVE = 'CLEAR_MESSAGE_ARCHIVE'
 
+export const SCROLL_TO_BOTTOM = 'SCROLL_TO_BOTTOM'
+
+export function setScrollToBottom(scrollToBottom) {
+  return {
+    type: SCROLL_TO_BOTTOM,
+    scrollToBottom
+  }
+}
+
 export function getConnectedUsers(connectedUsers) {
   return {
     type: GET_CONNECTED_USERS,
