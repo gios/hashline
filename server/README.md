@@ -11,6 +11,8 @@ Realtime discussions
 * Koa
 * Bootstrap
 * Socket.io
+* Knex
+* PostgreSQL
 
 ## API List
 - Authenticate : /authenticate : POST
