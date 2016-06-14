@@ -41,6 +41,12 @@ class DiscussionChatMessages extends Component {
           <Loader size={2}/>
         </td>
       </tr>
+    } else if(!discussionMessages.isFetching && !discussionMessages.messageArchive.length) {
+      messageBlock = <div className='no-messages text-xs-center'>
+        This discussion doesn't have any messages.<br/>
+        Type something below.<br/>
+        <i className='fa fa-arrow-down text-xs-center fa-lg' aria-hidden='true'></i>
+      </div>
     } else if(discussionMessages.messageArchive) {
       messageBlock = discussionMessages.messageArchive.map((item, index) => {
         return (
