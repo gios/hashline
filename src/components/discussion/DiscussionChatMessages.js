@@ -3,23 +3,23 @@ import Loader from '../parts/Loader'
 import moment from 'moment'
 
 class DiscussionChatMessages extends Component {
-
+  // SCROLL TO BOTTOM IMPLEMENT
   componentDidMount() {
     this.props.setScrollToBottom(true)
   }
 
   componentWillUpdate(nextProps) {
-    if(nextProps.discussionMessages.scrollToBottom && nextProps.discussionMessages.messageArchive.length) {
+    console.log(nextProps.discussionMessages.scrollToBottom, nextProps.discussionMessages.messageArchive.length, !nextProps.discussionMessages.isFetching)
+    if(nextProps.discussionMessages.scrollToBottom
+       && nextProps.discussionMessages.messageArchive.length
+       && !nextProps.discussionMessages.isFetching) {
       let chatContainer = this.refs.chatContainer
       let scrollTop = chatContainer.scrollTop
       let diffLength = chatContainer.scrollHeight - chatContainer.clientHeight
-
-      if(diffLength - scrollTop) {
-        this.props.setScrollToBottom(false)
-      }
       chatContainer.scrollTop = diffLength - scrollTop
     }
   }
+  // END
 
   scrollLoader() {
     let chatContainer = this.refs.chatContainer
