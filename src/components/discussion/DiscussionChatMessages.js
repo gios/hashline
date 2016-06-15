@@ -19,6 +19,14 @@ class DiscussionChatMessages extends Component {
     }
   }
 
+  scrollLoadMessages() {
+    let chatScroll = this.refs.chatScroll
+
+    if(!chatScroll.getValues().top) {
+      console.log("END")
+    }
+  }
+
   render() {
     let { clientHeight, discussionMessages } = this.props
     let messageBlock
@@ -59,7 +67,9 @@ class DiscussionChatMessages extends Component {
 
     return (
       <div className='card' ref='chatContainer'>
-        <Scrollbars ref='chatScroll' style={{height: `${clientHeight - 200}px`}}>
+        <Scrollbars ref='chatScroll'
+                    style={{height: `${clientHeight - 200}px`}}
+                    onScroll={this.scrollLoadMessages.bind(this)}>
           <div className='card-block'>
             <div className='table-responsive'>
               <table className='table'>
