@@ -49,7 +49,6 @@ class DiscussionForm extends Component {
       let { socket, discussionId, user, setChatMessage } = this.props
       socket.emit('chat message', message, discussionId, user.payload)
       setChatMessage('')
-      this.props.setScrollToBottom(true)
     }
   }
 

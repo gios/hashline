@@ -39,6 +39,7 @@ class Discussion extends Component {
 
     this.socket.on('chat message', (created_at, username, message) => {
       dispatch(setMessageArchive({ created_at, username, message }))
+      dispatch(setScrollToBottom(true))
     })
   }
 
