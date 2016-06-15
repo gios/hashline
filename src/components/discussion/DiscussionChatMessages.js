@@ -4,15 +4,19 @@ import Loader from '../parts/Loader'
 import moment from 'moment'
 
 class DiscussionChatMessages extends Component {
-  // SCROLL TO BOTTOM IMPLEMENT
 
   componentDidMount() {
     this.props.setScrollToBottom(true)
   }
 
-  go(e) {
-    e.preventDefault()
-    this.refs.chatScroll.scrollToBottom()
+  componentWillUnmount() {
+    this.props.setScrollToBottom(false)
+  }
+
+  componentWillUpdate(nextProps) {
+    if(nextProps.discussionMessages.scrollToBottom) {
+      setTimeout(() => this.refs.chatScroll.scrollToBottom())
+    }
   }
 
   render() {
@@ -66,7 +70,6 @@ class DiscussionChatMessages extends Component {
             </div>
           </div>
         </Scrollbars>
-        <button onClick={this.go.bind(this)}>HA</button>
       </div>
     )
   }
