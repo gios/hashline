@@ -39,6 +39,7 @@ class DiscussionForm extends Component {
 
   changeChatMessage(e) {
     this.props.setChatMessage(e.target.value)
+    this.props.setScrollToBottom(false)
   }
 
   sendMessage(e) {
@@ -48,6 +49,7 @@ class DiscussionForm extends Component {
       let { socket, discussionId, user, setChatMessage } = this.props
       socket.emit('chat message', message, discussionId, user.payload)
       setChatMessage('')
+      this.props.setScrollToBottom(true)
     }
   }
 
