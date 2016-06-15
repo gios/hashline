@@ -25,9 +25,16 @@
 }
 
 .chat-area {
+  .card-block {
+    padding: 1rem;
+  }
+
+  .table {
+    margin-bottom: 0;
+  }
+
   & > .card {
     min-height: 20em;
-    overflow-y: auto;
   }
 
   & > .card-block {

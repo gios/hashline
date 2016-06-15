@@ -1,34 +1,18 @@
 import React, { Component } from 'react'
+import { Scrollbars } from 'react-custom-scrollbars'
 import Loader from '../parts/Loader'
 import moment from 'moment'
 
 class DiscussionChatMessages extends Component {
   // SCROLL TO BOTTOM IMPLEMENT
+
   componentDidMount() {
     this.props.setScrollToBottom(true)
   }
 
-  componentWillUpdate(nextProps) {
-    console.log(nextProps.discussionMessages.scrollToBottom, nextProps.discussionMessages.messageArchive.length, !nextProps.discussionMessages.isFetching)
-    if(nextProps.discussionMessages.scrollToBottom
-       && nextProps.discussionMessages.messageArchive.length
-       && !nextProps.discussionMessages.isFetching) {
-      let chatContainer = this.refs.chatContainer
-      let scrollTop = chatContainer.scrollTop
-      let diffLength = chatContainer.scrollHeight - chatContainer.clientHeight
-      chatContainer.scrollTop = diffLength - scrollTop
-    }
-  }
-  // END
-
-  scrollLoader() {
-    let chatContainer = this.refs.chatContainer
-    let scrollTop = chatContainer.scrollTop
-    let diffLength = chatContainer.scrollHeight - chatContainer.clientHeight
-    let reteRelation = scrollTop / diffLength
-    if(!reteRelation) {
-      console.log("END")
-    }
+  go(e) {
+    e.preventDefault()
+    this.refs.chatScroll.scrollToBottom()
   }
 
   render() {
@@ -42,12 +26,16 @@ class DiscussionChatMessages extends Component {
         </td>
       </tr>
     } else if(!discussionMessages.isFetching && !discussionMessages.messageArchive.length) {
-      messageBlock = <div className='no-messages text-xs-center'>
-        This discussion doesn't have any messages.<br/>
-        Type something below.<br/>
-        <i className='fa fa-arrow-down text-xs-center fa-lg' aria-hidden='true'></i>
-      </div>
-    } else if(discussionMessages.messageArchive) {
+      messageBlock = <tr>
+        <td>
+          <div className='no-messages text-xs-center'>
+            This discussion doesn't have any messages.<br/>
+            Type something below.<br/>
+            <i className='fa fa-arrow-down text-xs-center fa-lg' aria-hidden='true'></i>
+          </div>
+        </td>
+      </tr>
+    } else if(discussionMessages.messageArchive.length) {
       messageBlock = discussionMessages.messageArchive.map((item, index) => {
         return (
           <tr key={index}>
@@ -66,19 +54,19 @@ class DiscussionChatMessages extends Component {
     }
 
     return (
-      <div className='card'
-        style={{height: `${clientHeight - 200}px`}}
-        ref='chatContainer'
-        onScroll={this.scrollLoader.bind(this)}>
-        <div className='card-block'>
-          <div className='table-responsive'>
-            <table className='table'>
-              <tbody className='chat-messages-area'>
-                {messageBlock}
-              </tbody>
-            </table>
+      <div className='card' ref='chatContainer'>
+        <Scrollbars ref='chatScroll' style={{height: `${clientHeight - 200}px`}}>
+          <div className='card-block'>
+            <div className='table-responsive'>
+              <table className='table'>
+                <tbody className='chat-messages-area'>
+                  {messageBlock}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
+        </Scrollbars>
+        <button onClick={this.go.bind(this)}>HA</button>
       </div>
     )
   }
