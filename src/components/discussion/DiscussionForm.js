@@ -30,7 +30,7 @@ class DiscussionForm extends Component {
         return
       }
 
-      if(status.payload <= MESSAGE_INTERVAL) {
+      if(status.payload.length < MESSAGE_INTERVAL) {
         setLoadDisableMessages(true)
       } else {
         setLoadDisableMessages(false)
