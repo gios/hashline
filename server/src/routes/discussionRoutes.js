@@ -98,8 +98,8 @@ module.exports = function(router) {
     let discussionMessages = yield knex('messages').select('users.username', 'messages.message', 'messages.created_at')
     .innerJoin('users', 'messages.user_id', 'users.id')
     .groupBy('users.username', 'messages.message', 'messages.created_at')
-    .orderBy('messages.created_at', 'asc')
     .where('messages.discussion_id', discussionId)
+    .orderBy('messages.created_at', 'desc')
     .limit(end - start)
     .offset(start)
 
