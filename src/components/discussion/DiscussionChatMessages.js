@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Scrollbars } from 'react-custom-scrollbars'
+import { MESSAGE_INTERVAL } from '../../constants'
 import Loader from '../parts/Loader'
 import moment from 'moment'
 
@@ -21,9 +22,12 @@ class DiscussionChatMessages extends Component {
 
   scrollLoadMessages() {
     let chatScroll = this.refs.chatScroll
+    let { discussionMessages, loadDiscussionMessages, setStartLoadMessages, setEndLoadMessages } = this.props
 
-    if(!chatScroll.getValues().top) {
-      console.log("END")
+    if(!chatScroll.getValues().top && !discussionMessages.loadDisable) {
+      setStartLoadMessages(discussionMessages.startLoad + MESSAGE_INTERVAL)
+      setEndLoadMessages(discussionMessages.endLoad + MESSAGE_INTERVAL)
+      loadDiscussionMessages()
     }
   }
 

@@ -15,8 +15,16 @@ export const SET_MESSAGE_ARCHIVE = 'SET_MESSAGE_ARCHIVE'
 export const CLEAR_MESSAGE_ARCHIVE = 'CLEAR_MESSAGE_ARCHIVE'
 export const START_LOAD_MESSAGES = 'START_LOAD_MESSAGES'
 export const END_LOAD_MESSAGES = 'END_LOAD_MESSAGES'
+export const LOAD_DISABLE_MESSAGES = 'LOAD_DISABLE_MESSAGES'
 
 export const SCROLL_TO_BOTTOM = 'SCROLL_TO_BOTTOM'
+
+export function setLoadDisableMessages(loadDisable) {
+  return {
+    type: LOAD_DISABLE_MESSAGES,
+    loadDisable
+  }
+}
 
 export function setStartLoadMessages(startLoad) {
   return {
@@ -25,7 +33,7 @@ export function setStartLoadMessages(startLoad) {
   }
 }
 
-export function endStartLoadMessages(endLoad) {
+export function setEndLoadMessages(endLoad) {
   return {
     type: END_LOAD_MESSAGES,
     endLoad

@@ -13,7 +13,8 @@ import {
   CLEAR_MESSAGE_ARCHIVE,
   SCROLL_TO_BOTTOM,
   START_LOAD_MESSAGES,
-  END_LOAD_MESSAGES } from '../actions/discussionAction'
+  END_LOAD_MESSAGES,
+  LOAD_DISABLE_MESSAGES } from '../actions/discussionAction'
 
 const discussionInfoState = Immutable.Map({
   isFetching: false,
@@ -59,7 +60,8 @@ const discussionMessagesState = Immutable.Map({
   messageArchive: Immutable.List.of(),
   scrollToBottom: false,
   startLoad: 0,
-  endLoad: 50
+  endLoad: 50,
+  loadDisable: false
 })
 
 function discussionMessages(state = discussionMessagesState, action) {
@@ -105,6 +107,10 @@ function discussionMessages(state = discussionMessagesState, action) {
     case END_LOAD_MESSAGES:
       return state.merge({
         endLoad: action.endLoad
+      })
+    case LOAD_DISABLE_MESSAGES:
+      return state.merge({
+        loadDisable: action.loadDisable
       })
     default:
       return state

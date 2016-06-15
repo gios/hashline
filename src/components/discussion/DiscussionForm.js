@@ -2,21 +2,14 @@ import React, { Component } from 'react'
 import { NotificationManager } from 'react-notifications'
 import DiscussionExpiredTimer from './DiscussionExpiredTimer'
 import DiscussionChatMessages from './DiscussionChatMessages'
-import { ENTER_KEYCODE } from '../../constants'
+import { ENTER_KEYCODE, MESSAGE_INTERVAL } from '../../constants'
 import Loader from '../parts/Loader'
 
 class DiscussionForm extends Component {
 
   componentWillMount() {
-    let { discussionId, discussionInfo, user, socket, discussionMessages } = this.props
-
-    this.props.getDiscussionMessages(discussionId, discussionMessages.startLoad, discussionMessages.endLoad).then(status => {
-      if(status.error) {
-        NotificationManager.error(status.payload.response.message)
-        return
-      }
-      this.props.setMessageArchive(status.payload)
-    })
+    let { discussionId, discussionInfo, user, socket } = this.props
+    this.loadDiscussionMessages()
 
     if(user.payload) {
       socket.emit('join discussion', { discussionId, username: user.payload.username, email: user.payload.email })
@@ -26,6 +19,24 @@ class DiscussionForm extends Component {
     if(!discussionInfo.payload) {
       this.props.onJoinDiscussion({ id: discussionId })
     }
+  }
+
+  loadDiscussionMessages() {
+    let { discussionId, discussionMessages, setLoadDisableMessages } = this.props
+
+    this.props.getDiscussionMessages(discussionId, discussionMessages.startLoad, discussionMessages.endLoad).then(status => {
+      if(status.error) {
+        NotificationManager.error(status.payload.response.message)
+        return
+      }
+
+      if(status.payload <= MESSAGE_INTERVAL) {
+        setLoadDisableMessages(true)
+      } else {
+        setLoadDisableMessages(false)
+      }
+      this.props.setMessageArchive(status.payload)
+    })
   }
 
   componentWillUnmount() {
@@ -127,6 +138,9 @@ class DiscussionForm extends Component {
           <form>
             <fieldset className='form-group chat-area'>
               <DiscussionChatMessages clientHeight={clientHeight}
+                                      setStartLoadMessages={this.props.setStartLoadMessages}
+                                      setEndLoadMessages={this.props.setEndLoadMessages}
+                                      loadDiscussionMessages={this.loadDiscussionMessages.bind(this)}
                                       discussionMessages={discussionMessages}
                                       setScrollToBottom={this.props.setScrollToBottom}/>
               <textarea cols='40'
