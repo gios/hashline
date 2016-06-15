@@ -8,9 +8,9 @@ import Loader from '../parts/Loader'
 class DiscussionForm extends Component {
 
   componentWillMount() {
-    let { discussionId, discussionInfo, user, socket } = this.props
+    let { discussionId, discussionInfo, user, socket, discussionMessages } = this.props
 
-    this.props.getDiscussionMessages(discussionId, 0, 100).then(status => {
+    this.props.getDiscussionMessages(discussionId, discussionMessages.startLoad, discussionMessages.endLoad).then(status => {
       if(status.error) {
         NotificationManager.error(status.payload.response.message)
         return

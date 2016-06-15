@@ -11,7 +11,9 @@ import {
   SET_CHAT_MESSAGE,
   SET_MESSAGE_ARCHIVE,
   CLEAR_MESSAGE_ARCHIVE,
-  SCROLL_TO_BOTTOM } from '../actions/discussionAction'
+  SCROLL_TO_BOTTOM,
+  START_LOAD_MESSAGES,
+  END_LOAD_MESSAGES } from '../actions/discussionAction'
 
 const discussionInfoState = Immutable.Map({
   isFetching: false,
@@ -55,7 +57,9 @@ const discussionMessagesState = Immutable.Map({
   error: false,
   chatMessage: '',
   messageArchive: Immutable.List.of(),
-  scrollToBottom: false
+  scrollToBottom: false,
+  startLoad: 0,
+  endLoad: 50
 })
 
 function discussionMessages(state = discussionMessagesState, action) {
@@ -93,6 +97,14 @@ function discussionMessages(state = discussionMessagesState, action) {
     case SCROLL_TO_BOTTOM:
       return state.merge({
         scrollToBottom: action.scrollToBottom
+      })
+    case START_LOAD_MESSAGES:
+      return state.merge({
+        startLoad: action.startLoad
+      })
+    case END_LOAD_MESSAGES:
+      return state.merge({
+        endLoad: action.endLoad
       })
     default:
       return state

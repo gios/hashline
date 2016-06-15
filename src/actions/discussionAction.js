@@ -13,8 +13,24 @@ export const GET_CONNECTED_USERS = 'GET_CONNECTED_USERS'
 export const SET_CHAT_MESSAGE = 'SET_CHAT_MESSAGE'
 export const SET_MESSAGE_ARCHIVE = 'SET_MESSAGE_ARCHIVE'
 export const CLEAR_MESSAGE_ARCHIVE = 'CLEAR_MESSAGE_ARCHIVE'
+export const START_LOAD_MESSAGES = 'START_LOAD_MESSAGES'
+export const END_LOAD_MESSAGES = 'END_LOAD_MESSAGES'
 
 export const SCROLL_TO_BOTTOM = 'SCROLL_TO_BOTTOM'
+
+export function setStartLoadMessages(startLoad) {
+  return {
+    type: START_LOAD_MESSAGES,
+    startLoad
+  }
+}
+
+export function endStartLoadMessages(endLoad) {
+  return {
+    type: END_LOAD_MESSAGES,
+    endLoad
+  }
+}
 
 export function setScrollToBottom(scrollToBottom) {
   return {
