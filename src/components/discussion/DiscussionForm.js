@@ -36,6 +36,9 @@ class DiscussionForm extends Component {
         setLoadDisableMessages(false)
       }
       this.props.setMessageArchive(status.payload)
+    }).catch(err => {
+      NotificationManager.error(err.message)
+      setLoadDisableMessages(true)
     })
   }
 
