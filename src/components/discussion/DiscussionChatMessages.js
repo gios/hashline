@@ -22,7 +22,11 @@ class DiscussionChatMessages extends Component {
 
   scrollLoadMessages() {
     let chatScroll = this.refs.chatScroll
-    let { discussionMessages, loadDiscussionMessages, setStartLoadMessages, setEndLoadMessages, setScrollToBottom } = this.props
+    let { discussionMessages,
+          loadDiscussionMessages,
+          setStartLoadMessages,
+          setEndLoadMessages,
+          setScrollToBottom } = this.props
 
     if(!chatScroll.getValues().top && !discussionMessages.loadDisable) {
       setScrollToBottom(false)
