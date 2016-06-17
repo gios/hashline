@@ -33,15 +33,13 @@ class DiscussionChatMessages extends Component {
 
   render() {
     let { clientHeight, discussionMessages } = this.props
-    let messageBlock
+    let messageBlock, loader
 
     if(discussionMessages.isFetching) {
-      messageBlock = <tr>
-        <td>
-          <Loader size={2}/>
-        </td>
-      </tr>
-    } else if(!discussionMessages.isFetching && !discussionMessages.messageArchive.length) {
+      loader = <Loader size={2}/>
+    }
+
+    if(!discussionMessages.isFetching && !discussionMessages.messageArchive.length) {
       messageBlock = <tr>
         <td>
           <div className='no-messages text-xs-center'>
@@ -71,6 +69,7 @@ class DiscussionChatMessages extends Component {
 
     return (
       <div className='card' ref='chatContainer'>
+        {loader}
         <Scrollbars ref='chatScroll'
                     style={{height: `${clientHeight - 200}px`}}
                     onScroll={this.scrollLoadMessages.bind(this)}>
