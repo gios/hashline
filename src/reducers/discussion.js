@@ -9,6 +9,7 @@ import {
   FAILURE_GET_DISCUSSION_MESSAGES,
   GET_CONNECTED_USERS,
   SET_CHAT_MESSAGE,
+  SET_SENT_MESSAGE_ARCHIVE,
   SET_MESSAGE_ARCHIVE,
   CLEAR_MESSAGE_ARCHIVE,
   SCROLL_TO_BOTTOM,
@@ -87,6 +88,10 @@ function discussionMessages(state = discussionMessagesState, action) {
     case SET_CHAT_MESSAGE:
       return state.merge({
         chatMessage: action.chatMessage
+      })
+    case SET_SENT_MESSAGE_ARCHIVE:
+      return state.merge({
+        messageArchive: state.get('messageArchive').push(action.sentMessage)
       })
     case SET_MESSAGE_ARCHIVE:
       return state.merge({

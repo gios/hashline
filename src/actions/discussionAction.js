@@ -12,7 +12,9 @@ export const FAILURE_GET_DISCUSSION_MESSAGES = 'FAILURE_GET_DISCUSSION_MESSAGES'
 export const GET_CONNECTED_USERS = 'GET_CONNECTED_USERS'
 export const SET_CHAT_MESSAGE = 'SET_CHAT_MESSAGE'
 export const SET_MESSAGE_ARCHIVE = 'SET_MESSAGE_ARCHIVE'
+export const SET_SENT_MESSAGE_ARCHIVE = 'SET_SENT_MESSAGE_ARCHIVE'
 export const CLEAR_MESSAGE_ARCHIVE = 'CLEAR_MESSAGE_ARCHIVE'
+
 export const START_LOAD_MESSAGES = 'START_LOAD_MESSAGES'
 export const END_LOAD_MESSAGES = 'END_LOAD_MESSAGES'
 export const LOAD_DISABLE_MESSAGES = 'LOAD_DISABLE_MESSAGES'
@@ -58,6 +60,13 @@ export function setChatMessage(chatMessage) {
   return {
     type: SET_CHAT_MESSAGE,
     chatMessage
+  }
+}
+
+export function setSentMessageArchive(sentMessage) {
+  return {
+    type: SET_SENT_MESSAGE_ARCHIVE,
+    sentMessage
   }
 }
 
