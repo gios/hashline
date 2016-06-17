@@ -90,7 +90,7 @@ function discussionMessages(state = discussionMessagesState, action) {
       })
     case SET_MESSAGE_ARCHIVE:
       return state.merge({
-        messageArchive: state.get('messageArchive').concat(action.messageArchive).sortBy(hitter => hitter.created_at)
+        messageArchive: state.get('messageArchive').concat(action.messageArchive)
       })
     case CLEAR_MESSAGE_ARCHIVE:
       return state.merge({

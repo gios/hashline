@@ -103,7 +103,7 @@ module.exports = function(router) {
     .limit(end - start)
     .offset(start)
 
-    this.body = discussionMessages
+    this.body = discussionMessages.sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
   })
 
   router.post('/api/discussion_info/:id', function *() {
