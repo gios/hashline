@@ -3,6 +3,7 @@ import { NotificationManager } from 'react-notifications'
 import DiscussionExpiredTimer from './DiscussionExpiredTimer'
 import DiscussionChatMessages from './DiscussionChatMessages'
 import { ENTER_KEYCODE, MESSAGE_INTERVAL } from '../../constants'
+import { trimField } from '../../utils/helpers'
 import Loader from '../parts/Loader'
 
 class DiscussionForm extends Component {
@@ -59,13 +60,22 @@ class DiscussionForm extends Component {
   }
 
   sendMessage(e) {
+    let message = this.refs.addMessage.value
+    let { socket, discussionId, user, setChatMessage } = this.props
+
     if(!e.which || e.which === ENTER_KEYCODE) {
-      e.preventDefault()
-      let message = this.refs.addMessage.value
-      let { socket, discussionId, user, setChatMessage } = this.props
-      socket.emit('chat message', message, discussionId, user.payload)
-      setChatMessage('')
+      if(this.validateMessage(message)) {
+        e.preventDefault()
+        socket.emit('chat message', message, discussionId, user.payload)
+        setChatMessage('')
+      } else {
+        setTimeout(() => setChatMessage(''))
+      }
     }
+  }
+
+  validateMessage(message) {
+    return !(trimField(message) === '')
   }
 
   render() {

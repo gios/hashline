@@ -45,6 +45,10 @@ export let idToken = {
   }
 }
 
+export function trimField(str) {
+    return str.replace(/^\s+|\s+$/g,'');
+}
+
 export function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1)
 }
