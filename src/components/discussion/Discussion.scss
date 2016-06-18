@@ -43,6 +43,10 @@
 
   .chat-messages-area {
     font-size: .8em;
+
+    & > tr > td {
+      border-top: 0;
+    }
   }
 
   .message-time {
@@ -51,6 +55,7 @@
   }
 
   .message-username {
+    text-transform: capitalize;
     color: #449d44;
     font-weight: bold;
   }
