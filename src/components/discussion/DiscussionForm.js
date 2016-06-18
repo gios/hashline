@@ -24,7 +24,7 @@ class DiscussionForm extends Component {
   loadDiscussionMessages() {
     let { discussionId, discussionMessages, setLoadDisableMessages } = this.props
 
-    this.props.getDiscussionMessages(discussionId, discussionMessages.startLoad, discussionMessages.endLoad).then(status => {
+    return this.props.getDiscussionMessages(discussionId, discussionMessages.startLoad, discussionMessages.endLoad).then(status => {
       if(status.error) {
         NotificationManager.error(status.payload.response.message)
         return

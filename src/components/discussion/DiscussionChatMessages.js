@@ -29,10 +29,15 @@ class DiscussionChatMessages extends Component {
           setScrollToBottom } = this.props
 
     if(!chatScroll.getValues().top && !discussionMessages.loadDisable) {
+      let startScrollLoad = chatScroll.getScrollHeight()
       setScrollToBottom(false)
       setStartLoadMessages(discussionMessages.startLoad + MESSAGE_INTERVAL)
       setEndLoadMessages(discussionMessages.endLoad + MESSAGE_INTERVAL)
-      loadDiscussionMessages()
+      loadDiscussionMessages().then(() => {
+        let endScrollLoad = chatScroll.getScrollHeight()
+        let diffScrollLoad = endScrollLoad - startScrollLoad
+        setTimeout(() => this.refs.chatScroll.scrollTop(diffScrollLoad))
+      })
     }
   }
 
