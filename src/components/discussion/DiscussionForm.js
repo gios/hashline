@@ -55,22 +55,22 @@ class DiscussionForm extends Component {
   }
 
   changeChatMessage(e) {
-    this.props.setChatMessage(e.target.value)
-    this.props.setScrollToBottom(false)
+    let { discussionMessages } = this.props
+
+    if(this.validateMessage(e.target.value) || discussionMessages.chatMessage.length) {
+      this.props.setChatMessage(e.target.value)
+      this.props.setScrollToBottom(false)
+    }
   }
 
   sendMessage(e) {
     let message = this.refs.addMessage.value
     let { socket, discussionId, user, setChatMessage } = this.props
 
-    if(!e.which || e.which === ENTER_KEYCODE) {
-      if(this.validateMessage(message)) {
-        e.preventDefault()
-        socket.emit('chat message', message, discussionId, user.payload)
-        setChatMessage('')
-      } else {
-        setTimeout(() => setChatMessage(''))
-      }
+    if((!e.which || e.which === ENTER_KEYCODE) && this.validateMessage(message)) {
+      e.preventDefault()
+      socket.emit('chat message', message, discussionId, user.payload)
+      setChatMessage('')
     }
   }
 
