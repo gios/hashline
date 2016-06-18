@@ -67,14 +67,12 @@ class DiscussionChatMessages extends Component {
       messageBlock = discussionMessages.messageArchive.map((item, index) => {
         return (
           <tr key={index}>
+            <td>
+              <div className='message-username m-b-1'>{item.username}</div>
+              <div className='message-item'>{item.message}</div>
+            </td>
             <td className='message-time'>
               <div>{this.testChatDate(item.created_at)}</div>
-            </td>
-            <th scope='row' className='message-username'>
-              <div>{item.username}</div>
-            </th>
-            <td>
-              <div className='message-item'>{item.message}</div>
             </td>
           </tr>
         )
