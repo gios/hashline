@@ -20,6 +20,10 @@ class DiscussionChatMessages extends Component {
     }
   }
 
+  testChatDate(date) {
+    return moment().diff(date, 'day') >= 1 ? moment(date).format('DD.MM.YY') : moment(date).format('H:mm:ss')
+  }
+
   scrollLoadMessages() {
     let chatScroll = this.refs.chatScroll
     let { discussionMessages,
@@ -64,7 +68,7 @@ class DiscussionChatMessages extends Component {
         return (
           <tr key={index}>
             <td className='message-time'>
-              <div>{moment(item.created_at).format('H:mm:ss')}</div>
+              <div>{this.testChatDate(item.created_at)}</div>
             </td>
             <th scope='row' className='message-username'>
               <div>{item.username}</div>
