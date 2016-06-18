@@ -43,7 +43,9 @@ class DiscussionForm extends Component {
   }
 
   componentWillUnmount() {
-    let { socket, discussionId, user, clearMessageArchive } = this.props
+    let { socket, discussionId, user, clearMessageArchive, setStartLoadMessages, setEndLoadMessages } = this.props
+    setStartLoadMessages(0)
+    setEndLoadMessages(MESSAGE_INTERVAL)
     clearMessageArchive()
     socket.emit('leave discussion', { discussionId, username: user.payload.username })
     socket.removeListener('leave discussion')
