@@ -80,7 +80,7 @@ class DiscussionChatMessages extends Component {
     }
 
     return (
-      <div className='messages-outer'>
+      <div className='messages-outer m-b-1'>
         <Scrollbars ref='chatScroll'
                     style={{height: `${clientHeight - 200}px`, minHeight: '20em'}}
                     onScroll={this.scrollLoadMessages.bind(this)}>
