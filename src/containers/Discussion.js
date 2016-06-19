@@ -26,6 +26,9 @@ class Discussion extends Component {
   componentWillMount() {
     let { dispatch, discussionId } = this.props
 
+    if(!this.socket) {
+      return
+    }
     this.socket.removeListener('leave discussion')
     this.socket.on('join discussion', (username) => {
       this.socket.emit('connected users', discussionId)
@@ -61,6 +64,9 @@ class Discussion extends Component {
   }
 
   componentWillUnmount() {
+    if(!this.socket) {
+      return
+    }
     $('#discussion-password').modal('hide')
     this.socket.removeListener('join discussion')
     this.socket.removeListener('connected users')
