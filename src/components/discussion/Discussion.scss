@@ -25,20 +25,16 @@
 }
 
 .chat-area {
-  .card-block {
-    padding: 1rem;
-  }
-
   .table {
     margin-bottom: 0;
   }
 
-  & > .card {
+  & > .messages-outer {
     min-height: 20em;
   }
 
-  & > .card-block {
-    display: inline;
+  .messages-inner {
+    padding: .5em;
   }
 
   .chat-messages-area {

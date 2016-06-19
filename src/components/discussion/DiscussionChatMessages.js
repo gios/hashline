@@ -80,12 +80,12 @@ class DiscussionChatMessages extends Component {
     }
 
     return (
-      <div className='card' ref='chatContainer'>
+      <div className='messages-outer'>
         <Scrollbars ref='chatScroll'
                     style={{height: `${clientHeight - 200}px`}}
                     onScroll={this.scrollLoadMessages.bind(this)}>
           {loader}
-          <div className='card-block'>
+          <div className='messages-inner'>
             <div className='table-responsive'>
               <table className='table'>
                 <tbody className='chat-messages-area'>
