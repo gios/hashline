@@ -46,7 +46,7 @@ class App extends Component {
           dispatch(push('/login'))
           dispatch(runLogout())}
         }/>}
-        { (isAuthenticated) ?
+        { isAuthenticated ?
         <div>
           <Sidebar ref='sidebar'
                    isToggled={isToggled}

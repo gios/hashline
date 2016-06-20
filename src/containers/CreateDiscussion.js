@@ -30,6 +30,7 @@ class Login extends Component {
 
   render() {
     let { dispatch,
+          isAuthenticated,
           userInfo,
           discussionTypes,
           discussionTags,
@@ -39,7 +40,7 @@ class Login extends Component {
 
     return (
       <div>
-        <CreateDiscussionForm discussionTypes={discussionTypes}
+        {isAuthenticated && <CreateDiscussionForm discussionTypes={discussionTypes}
                               discussionTags={discussionTags}
                               discussionLimites={discussionLimites}
                               discussionSettings={discussionSettings}
@@ -67,6 +68,7 @@ class Login extends Component {
                                   .then((status) => this.notificationStutus(status))
                                 }
                               }/>
+        }
       </div>
     )
   }
@@ -74,6 +76,7 @@ class Login extends Component {
 
 function inject(state) {
   return {
+    isAuthenticated: state.login.auth.get('isAuthenticated'),
     discussionTypes: state.createDiscussion.discussionTypes.toJS(),
     discussionTags: state.createDiscussion.discussionTags.toJS(),
     discussionLimites: state.createDiscussion.discussionLimites.toJS(),

@@ -22,16 +22,18 @@ class MyDiscussions extends Component {
   }
 
   render() {
-    let { dispatch, discussions } = this.props
+    let { dispatch, discussions, isAuthenticated } = this.props
 
     return (
       <div>
-        <DiscussionsBlock discussions={discussions}
-                          getterMethodDiscussions={USER_GETTER_METHOD_DISCUSSION}
-                          onJoinDiscussion={this.onJoinDiscussion.bind(this)}
-                          onLoadDiscussions={getterMethod => dispatch(getDiscussions(getterMethod)).then(status => {
-                            status.error && NotificationManager.error(status.payload.response.message)
-                          })}/>
+        {isAuthenticated &&
+          <DiscussionsBlock discussions={discussions}
+                            getterMethodDiscussions={USER_GETTER_METHOD_DISCUSSION}
+                            onJoinDiscussion={this.onJoinDiscussion.bind(this)}
+                            onLoadDiscussions={getterMethod => dispatch(getDiscussions(getterMethod)).then(status => {
+                              status.error && NotificationManager.error(status.payload.response.message)
+                            })}/>
+        }
       </div>
     )
   }
@@ -39,6 +41,7 @@ class MyDiscussions extends Component {
 
 function inject(state) {
   return {
+    isAuthenticated: state.login.auth.get('isAuthenticated'),
     discussions: state.discussions.getDiscussions.toJS()
   }
 }
