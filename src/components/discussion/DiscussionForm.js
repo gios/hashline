@@ -67,7 +67,7 @@ class DiscussionForm extends Component {
     let message = this.refs.addMessage.value
     let { socket, discussionId, user, setChatMessage } = this.props
 
-    if((!e.which || e.which === ENTER_KEYCODE) && this.validateMessage(message)) {
+    if((!e.which || e.ctrlKey && e.which === ENTER_KEYCODE) && this.validateMessage(message)) {
       e.preventDefault()
       socket.emit('chat message', message, discussionId, user.payload)
       setChatMessage('')
@@ -163,9 +163,10 @@ class DiscussionForm extends Component {
                         className='form-control chat-message'
                         ref='addMessage'
                         placeholder='Write something'
-                        onKeyPress={this.sendMessage.bind(this)}
+                        onKeyDown={this.sendMessage.bind(this)}
                         onChange={this.changeChatMessage.bind(this)}
                         value={discussionMessages.chatMessage}></textarea>
+              <span>Press Ctrl + Enter for send message</span>
               <button type='button'
                       className='btn btn-primary pull-xs-right m-t-1'
                       onClick={this.sendMessage.bind(this)}>Send</button>
