@@ -28,9 +28,8 @@ class MyDiscussions extends Component {
       <div>
         {isAuthenticated &&
           <DiscussionsBlock discussions={discussions}
-                            getterMethodDiscussions={USER_GETTER_METHOD_DISCUSSION}
                             onJoinDiscussion={this.onJoinDiscussion.bind(this)}
-                            onLoadDiscussions={getterMethod => dispatch(getDiscussions(getterMethod)).then(status => {
+                            onLoadDiscussions={() => dispatch(getDiscussions(USER_GETTER_METHOD_DISCUSSION)).then(status => {
                               status.error && NotificationManager.error(status.payload.response.message)
                             })}/>
         }

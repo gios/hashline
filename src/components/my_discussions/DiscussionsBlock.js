@@ -7,7 +7,7 @@ import DiscussionCard from '../discussion/DiscussionCard'
 class DiscussionsBlock extends Component {
 
   componentWillMount() {
-    this.props.onLoadDiscussions(this.props.getterMethodDiscussions)
+    this.props.onLoadDiscussions()
   }
 
   renderDiscussions() {
