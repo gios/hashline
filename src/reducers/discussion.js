@@ -61,7 +61,7 @@ const discussionMessagesState = Immutable.Map({
   messageArchive: Immutable.List.of(),
   scrollToBottom: false,
   startLoad: 0,
-  endLoad: 80,
+  endLoad: 100,
   loadDisable: false
 })
 
