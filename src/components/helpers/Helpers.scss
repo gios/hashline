@@ -9,14 +9,19 @@
   position: absolute;
   text-align: center;
   z-index: 999;
-  background-color: rgba(92, 184, 92, .7);
-  color: #000;
+  background-color: rgba(92, 184, 92, .9);
+  color: #fff;
+  font-size: 1em;
   width: 100%;
   padding: .4em;
   line-height: 2em;
-  font-weight: bold;
   animation-name: anim-log-out;
   animation-duration: 1s;
+}
+
+.logged-out-button {
+  display: block;
+  margin: 0 auto;
 }
 
 @keyframes anim-log-out {
