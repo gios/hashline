@@ -7,14 +7,14 @@ import DiscussionCard from '../discussion/DiscussionCard'
 class DiscussionsBlock extends Component {
 
   componentWillMount() {
-    this.props.onLoadDiscussions(this.props.allDiscussions)
+    this.props.onLoadDiscussions(this.props.getterMethodDiscussions)
   }
 
   renderDiscussions() {
     let { discussions, onJoinDiscussion } = this.props
 
     if(discussions.isFetching) {
-      return <Loader size={4} color='red'/>
+      return <Loader size={4}/>
     } else if(discussions.payload) {
       if(!discussions.payload.length) {
         return (

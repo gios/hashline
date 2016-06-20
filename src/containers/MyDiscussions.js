@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { getDiscussion } from '../actions/discussionAction'
 import { getDiscussions } from '../actions/discussionsAction'
 import DiscussionsBlock from '../components/my_discussions/DiscussionsBlock'
+import { USER_GETTER_METHOD_DISCUSSION } from '../constants'
 import { NotificationManager } from 'react-notifications'
 import { push } from 'react-router-redux'
 
@@ -26,9 +27,9 @@ class MyDiscussions extends Component {
     return (
       <div>
         <DiscussionsBlock discussions={discussions}
-                          allDiscussions={false}
+                          getterMethodDiscussions={USER_GETTER_METHOD_DISCUSSION}
                           onJoinDiscussion={this.onJoinDiscussion.bind(this)}
-                          onLoadDiscussions={isAll => dispatch(getDiscussions(isAll)).then(status => {
+                          onLoadDiscussions={getterMethod => dispatch(getDiscussions(getterMethod)).then(status => {
                             status.error && NotificationManager.error(status.payload.response.message)
                           })}/>
       </div>

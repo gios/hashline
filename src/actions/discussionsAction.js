@@ -5,7 +5,7 @@ export const REQUEST_GET_DISCUSSIONS = 'REQUEST_GET_DISCUSSIONS'
 export const SUCCESS_GET_DISCUSSIONS = 'SUCCESS_GET_DISCUSSIONS'
 export const FAILURE_GET_DISCUSSIONS = 'FAILURE_GET_DISCUSSIONS'
 
-export function getDiscussions(all_discussions) {
+export function getDiscussions(getterMethod) {
   return {
     [CALL_API]: {
       endpoint: '/api/discussions',
@@ -15,7 +15,7 @@ export function getDiscussions(all_discussions) {
         'Content-Type': 'application/json'
       },
       types: [REQUEST_GET_DISCUSSIONS, SUCCESS_GET_DISCUSSIONS, FAILURE_GET_DISCUSSIONS],
-      body: JSON.stringify({ all_discussions })
+      body: JSON.stringify({ getterMethod })
     }
   }
 }
