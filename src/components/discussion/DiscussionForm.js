@@ -166,9 +166,9 @@ class DiscussionForm extends Component {
                         onKeyDown={this.sendMessage.bind(this)}
                         onChange={this.changeChatMessage.bind(this)}
                         value={discussionMessages.chatMessage}></textarea>
-              <span>Press Ctrl + Enter for send message</span>
+              <span className='pull-xs-right m-t-1'>Press <kbd>Ctrl + Enter</kbd> for send message.</span>
               <button type='button'
-                      className='btn btn-primary pull-xs-right m-t-1'
+                      className='btn btn-primary pull-xs-left m-t-1'
                       onClick={this.sendMessage.bind(this)}>Send</button>
             </fieldset>
           </form>
