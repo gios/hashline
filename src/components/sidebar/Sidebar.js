@@ -39,7 +39,8 @@ class Sidebar extends Component {
 
   toggleSidebar() {
     let sidebarEl = document.querySelector('.navbar-static')
-    let { onToggle, isToggled } = this.props
+    let { onToggle, isToggled, setScrollToBottom } = this.props
+    setScrollToBottom(false)
 
     if (isToggled) {
       onToggle(false)

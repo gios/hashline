@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { push, replace } from 'react-router-redux'
 import { NotificationManager } from 'react-notifications'
 import { NotificationContainer } from 'react-notifications'
+import { setScrollToBottom } from '../actions/discussionAction'
 import { runLogout, setNextPathname } from '../actions/loginAction'
 import { toggleSidebar, setMobileSidebar, getUserData, setClientHeight, setClientWidth } from '../actions/sidebarAction'
 import { getSidebarTypes } from '../actions/sidebarAction'
@@ -53,6 +54,7 @@ class App extends Component {
                    userInfo={userInfo}
                    sidebarTypes={sidebarTypes}
                    activeRoute={activeRoute}
+                   setScrollToBottom={scroll => dispatch(setScrollToBottom(scroll))}
                    setClientHeight={height => dispatch(setClientHeight(height))}
                    setClientWidth={width => dispatch(setClientWidth(width))}
                    onSetMobile={value => dispatch(setMobileSidebar(value))}
