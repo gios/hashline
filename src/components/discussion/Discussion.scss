@@ -54,12 +54,16 @@
 
   .message-username {
     text-transform: capitalize;
-    color: #449d44;
+    color: #5cb85c;
     font-weight: bold;
+    background: linear-gradient(to right, #f7f4f4, rgba(0, 0, 0, 0));
+    padding: .3em;
+    border-radius: 1em;
   }
 
   .message-item {
     word-break: break-word;
+    margin-left: 0.5em;
   }
 
   .no-messages {
