@@ -67,8 +67,8 @@ class createDiscussionForm extends Component {
     let { name, description, password, selectedType, selectedLimited, selectedTags, isPrivate, isLimited } = this.props.discussionSettings
 
     return {
-      name,
-      description,
+      name: name.trim(),
+      description: description.trim(),
       typeId: discussionTypes.payload.filter((item) => item.value === selectedType.value)[0].id,
       isPrivate,
       password: (isPrivate) ? password : null,
