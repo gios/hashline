@@ -60,6 +60,6 @@ export function signUpUser(creds) {
         idToken.setToken(user.id_token)
         dispatch(signUpSuccess(user))
       })
-      .catch(err => console.error(err)) // eslint-disable-line no-console
+      .catch(err => window.console.error(err))
   }
 }

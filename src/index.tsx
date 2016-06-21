@@ -21,7 +21,7 @@ import * as $ from 'jquery'
 import * as Tether from 'tether'
 window.$ = window.jQuery = $
 window.Tether = Tether
-require('bootstrap')
+import 'bootstrap'
 
 const store = configureStore()
 const history = syncHistoryWithStore(browserHistory, store)

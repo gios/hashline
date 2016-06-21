@@ -84,6 +84,6 @@ export function loginUser(creds) {
         idToken.setToken(user.id_token)
         dispatch(receiveLogin(user))
       })
-      .catch(err => console.error(err)) // eslint-disable-line no-console
+      .catch(err => window.console.error(err))
   }
 }

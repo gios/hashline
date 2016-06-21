@@ -25,7 +25,6 @@
   },
   "homepage": "https://github.com/gios/hashline#readme",
   "dependencies": {
-    "@types/core-js": "^0.9.22-alpha",
     "@types/jquery": "^1.10.21-alpha",
     "@types/react": "^0.14.21-alpha",
     "@types/react-dom": "^0.14.8-alpha",
