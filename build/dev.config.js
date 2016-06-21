@@ -1,18 +1,17 @@
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.tsx',
   output: {
     publicPath: '/assets/',
     filename: 'bundle.js'
   },
+  resolve: {
+    extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js']
+  },
   module: {
     loaders: [
       {
-        loader: 'babel-loader',
-        test: /\.js$/,
-        exclude: /node_modules/,
-        query: {
-          presets: ['es2015', 'stage-2', 'react']
-        }
+        test: /\.tsx?$/,
+        loader: 'ts-loader'
       },
       {
         test: /\.scss$/,
