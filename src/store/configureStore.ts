@@ -8,10 +8,7 @@ import { authChecker } from '../middleware'
 import * as reducers from '../reducers/index'
 
 const middleware = routerMiddleware(browserHistory)
-const reducer = combineReducers({
-  reducers, // MUST BE ...reducers
-  routing: routerReducer
-})
+const reducer = combineReducers(Object.assign({}, reducers, { routing: routerReducer }))
 
 export default function configureStore(initialState) {
   const store = createStore(reducer, initialState, compose(
