@@ -142,10 +142,10 @@ class Sidebar extends Component {
               </Link>
             </li>
             <li className='nav-item'>
-              <a className='nav-link sidebar-link' href='javascript:void(0)'>
+              <Link to='/mostdiscussed' className={this.routeSelector('mostdiscussed')} onClick={this.triggerRoute.bind(this)}>
                 <i className='fa fa-comments'></i>
                 <span className='sidebar-list-item'>Most discussed</span>
-              </a>
+              </Link>
             </li>
             <li className='nav-item'>
               <a className='nav-link sidebar-link' data-toggle='collapse' href='#typeCollapse' aria-expanded='false' aria-controls='typeCollapse'>

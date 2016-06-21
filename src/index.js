@@ -36,6 +36,7 @@ render(
         <Route path='create' component={Containers.CreateDiscussion}/>
         <Route path='mydiscussions' component={Containers.MyDiscussions}/>
         <Route path='recent' component={Containers.RecentDiscussions}/>
+        <Route path='mostdiscussed' component={Containers.MostDiscussedDiscussions}/>
         <Route path='discussion' component={Containers.Discussion}>
           <Route path=':id' component={Containers.Discussion}/>
         </Route>
