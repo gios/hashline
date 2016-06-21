@@ -188,6 +188,7 @@ module.exports = function(router) {
 
     switch(getterMethod) {
       case 'most_discussed_discussions':
+      // TODO
         discussionsTags = yield knex('discussions')
         .select('discussions.name', 'users.email AS user_email', 'tags.name AS tag_name')
         .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
