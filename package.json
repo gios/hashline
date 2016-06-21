@@ -26,6 +26,7 @@
   "homepage": "https://github.com/gios/hashline#readme",
   "dependencies": {
     "@types/jquery": "^1.10.21-alpha",
+    "@types/moment": "^2.11.22-alpha",
     "@types/react": "^0.14.21-alpha",
     "@types/react-dom": "^0.14.8-alpha",
     "@types/react-redux": "^4.4.21-alpha",
