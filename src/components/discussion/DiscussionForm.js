@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { NotificationManager } from 'react-notifications'
+import moment from 'moment'
 import DiscussionExpiredTimer from './DiscussionExpiredTimer'
 import DiscussionChatMessages from './DiscussionChatMessages'
 import { ENTER_KEYCODE, MESSAGE_INTERVAL } from '../../constants'
@@ -114,6 +115,10 @@ class DiscussionForm extends Component {
           <li className='list-group-item'>
             <strong>Description:</strong>
             <div className='chat-info-description'>{discussionInfo.payload.description}</div>
+          </li>
+          <li className='list-group-item'>
+            <strong>Created At:</strong>
+            <div className='pull-xs-right'>{moment(discussionInfo.payload.created_at).format('DD MMM YYYY H:mm:ss')}</div>
           </li>
           <li className='list-group-item'>
             <strong>Creator:</strong>

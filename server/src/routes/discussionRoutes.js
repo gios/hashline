@@ -199,6 +199,7 @@ module.exports = function(router) {
         .select('discussions.id',
                 'discussions.name',
                 'discussions.description',
+                'discussions.created_at',
                 'types.name AS type_name',
                 'users.email AS user_email',
                 'users.username AS username',
@@ -212,6 +213,7 @@ module.exports = function(router) {
         .groupBy('discussions.id',
                 'discussions.name',
                 'discussions.description',
+                'discussions.created_at',
                 'types.name',
                 'users.email',
                 'users.username',
@@ -219,7 +221,7 @@ module.exports = function(router) {
                 'discussions.is_limited',
                 'discussions.limited_time',
                 'discussions.closed')
-        .orderBy('discussions.created_at', 'asc')
+        .orderBy('discussions.created_at', 'desc')
         break;
       case 'user_discussions':
         discussionsTags = yield knex('discussions')
@@ -234,6 +236,7 @@ module.exports = function(router) {
         .select('discussions.id',
                 'discussions.name',
                 'discussions.description',
+                'discussions.created_at',
                 'types.name AS type_name',
                 'users.email AS user_email',
                 'users.username AS username',
@@ -247,6 +250,7 @@ module.exports = function(router) {
         .groupBy('discussions.id',
                 'discussions.name',
                 'discussions.description',
+                'discussions.created_at',
                 'types.name',
                 'users.email',
                 'users.username',
@@ -268,6 +272,7 @@ module.exports = function(router) {
         .select('discussions.id',
                 'discussions.name',
                 'discussions.description',
+                'discussions.created_at',
                 'types.name AS type_name',
                 'users.email AS user_email',
                 'users.username AS username',
@@ -281,6 +286,7 @@ module.exports = function(router) {
         .groupBy('discussions.id',
                 'discussions.name',
                 'discussions.description',
+                'discussions.created_at',
                 'types.name',
                 'users.email',
                 'users.username',
