@@ -3,6 +3,8 @@ import Login from './Login'
 import CreateDiscussion from './CreateDiscussion'
 import MyDiscussions from './MyDiscussions'
 import Discussion from './Discussion'
+import Discussions from './Discussions'
+
 import IndexDash from './IndexDash'
 import RecentDiscussions from './RecentDiscussions'
 import MostDiscussedDiscussions from './MostDiscussedDiscussions'
@@ -14,6 +16,7 @@ export default {
   CreateDiscussion,
   MyDiscussions,
   Discussion,
+  Discussions,
   IndexDash,
   RecentDiscussions,
   MostDiscussedDiscussions,

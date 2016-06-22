@@ -12,7 +12,7 @@ class DiscussionsBlock extends Component {
 
   componentWillReceiveProps(nextProps) {
     if(this.props.pathname !== nextProps.pathname) {
-      this.props.onLoadDiscussions(nextProps.pathname)
+      setTimeout(() => this.props.onLoadDiscussions(nextProps.pathname))
     }
   }
 
