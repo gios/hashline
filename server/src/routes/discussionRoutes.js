@@ -189,7 +189,7 @@ module.exports = function(router) {
       user_id: userInfo.id,
       id
     }).del()
-    console.log(deletedDiscussion)
+
     this.body = deletedDiscussion
   })
 
