@@ -6,7 +6,8 @@ import DiscussionsBlock from '../components/my_discussions/DiscussionsBlock'
 import { USER_GETTER_METHOD_DISCUSSION,
          RECENT_GETTER_METHOD_DISCUSSION,
          MOST_DISCUSSED_GETTER_METHOD_DISCUSSION,
-         BY_TYPE_GETTER_METHOD_DISCUSSION } from '../constants'
+         BY_TYPE_GETTER_METHOD_DISCUSSION,
+         LIMITED_GETTER_METHOD_DISCUSSION } from '../constants'
 import { NotificationManager } from 'react-notifications'
 import { push } from 'react-router-redux'
 
@@ -41,6 +42,13 @@ class Discussions extends Component {
                                  pathname={pathname}
                                  onJoinDiscussion={this.onJoinDiscussion.bind(this)}
                                  onLoadDiscussions={() => dispatch(getDiscussions(USER_GETTER_METHOD_DISCUSSION)).then(status => {
+                                   status.error && NotificationManager.error(status.payload.response.message)
+                                 })}/>
+      case 'limited':
+        return <DiscussionsBlock discussions={discussions}
+                                 pathname={pathname}
+                                 onJoinDiscussion={this.onJoinDiscussion.bind(this)}
+                                 onLoadDiscussions={() => dispatch(getDiscussions(LIMITED_GETTER_METHOD_DISCUSSION)).then(status => {
                                    status.error && NotificationManager.error(status.payload.response.message)
                                  })}/>
       case 'recent':

@@ -41,6 +41,7 @@ render(
           <Route path='event' component={Containers.Discussions}/>
           <Route path='question' component={Containers.Discussions}/>
         </Route>
+        <Route path='limited' component={Containers.Discussions}/>
         <Route path='discussion' component={Containers.Discussion}>
           <Route path=':id' component={Containers.Discussion}/>
         </Route>
