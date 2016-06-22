@@ -22,12 +22,13 @@ class MyDiscussions extends Component {
   }
 
   render() {
-    let { dispatch, discussions, isAuthenticated } = this.props
+    let { dispatch, discussions, isAuthenticated, pathname } = this.props
 
     return (
       <div>
         {isAuthenticated &&
           <DiscussionsBlock discussions={discussions}
+                            pathname={pathname}
                             onJoinDiscussion={this.onJoinDiscussion.bind(this)}
                             onLoadDiscussions={() => dispatch(getDiscussions(USER_GETTER_METHOD_DISCUSSION)).then(status => {
                               status.error && NotificationManager.error(status.payload.response.message)
@@ -38,8 +39,9 @@ class MyDiscussions extends Component {
   }
 }
 
-function inject(state) {
+function inject(state, ownProps) {
   return {
+    pathname: ownProps.location.pathname,
     isAuthenticated: state.login.auth.get('isAuthenticated'),
     discussions: state.discussions.getDiscussions.toJS()
   }

@@ -35,11 +35,15 @@ class MostDiscussedDiscussions extends Component {
       <div>
         {isAuthenticated &&
           <DiscussionsBlock discussions={discussions}
+                            pathname={pathname}
                             onJoinDiscussion={this.onJoinDiscussion.bind(this)}
-                            onLoadDiscussions={() => dispatch(getDiscussions(`${BY_TYPE_GETTER_METHOD_DISCUSSION}--${this.getDiscussionType(pathname)}`))
-                            .then(status => {
-                              status.error && NotificationManager.error(status.payload.response.message)
-                            })}/>
+                            onLoadDiscussions={pathnameNext => {
+                              if(pathnameNext) {
+                                pathname = pathnameNext
+                              }
+                              dispatch(getDiscussions(`${BY_TYPE_GETTER_METHOD_DISCUSSION}--${this.getDiscussionType(pathname)}`))
+                              .then(status => status.error && NotificationManager.error(status.payload.response.message))}
+                            }/>
         }
       </div>
     )
@@ -48,6 +52,7 @@ class MostDiscussedDiscussions extends Component {
 
 function inject(state, ownProps) {
   return {
+    all: ownProps,
     pathname: ownProps.location.pathname,
     isAuthenticated: state.login.auth.get('isAuthenticated'),
     discussions: state.discussions.getDiscussions.toJS()

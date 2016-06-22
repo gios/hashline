@@ -10,6 +10,12 @@ class DiscussionsBlock extends Component {
     this.props.onLoadDiscussions()
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(this.props.pathname !== nextProps.pathname) {
+      this.props.onLoadDiscussions(nextProps.pathname)
+    }
+  }
+
   renderDiscussions() {
     let { discussions, onJoinDiscussion } = this.props
 
