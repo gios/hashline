@@ -57,7 +57,7 @@ class Discussions extends Component {
                                  onLoadDiscussions={() => dispatch(getDiscussions(MOST_DISCUSSED_GETTER_METHOD_DISCUSSION)).then(status => {
                                    status.error && NotificationManager.error(status.payload.response.message)
                                  })}/>
-      case 'bytype':
+      case /^bytype?/.test(pathname) && pathname:
         return <DiscussionsBlock discussions={discussions}
                                  pathname={pathname}
                                  onJoinDiscussion={this.onJoinDiscussion.bind(this)}
