@@ -185,8 +185,48 @@ module.exports = function(router) {
     let userInfo = this.state.user
     let discussionsTags, discussionsData
     let getterMethod = this.request.body.getterMethod
+    let typeDiscussion = /^by_type_discussions?/.test(getterMethod) ? getterMethod.split('--')[1] : false
 
     switch(getterMethod) {
+      case typeDiscussion && `by_type_discussions--${typeDiscussion}`:
+        var typeDiscussionFormatted = typeDiscussion.charAt(0).toUpperCase() + typeDiscussion.slice(1)
+        discussionsTags = yield knex('discussions')
+        .select('discussions.name', 'users.email AS user_email', 'tags.name AS tag_name')
+        .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
+        .innerJoin('tags', 'tags.id', 'discussions_tags.tag_id')
+        .innerJoin('users', 'discussions.user_id', 'users.id')
+        .innerJoin('types', 'discussions.type_id', 'types.id')
+        .groupBy('discussions.name', 'users.email', 'tags.name')
+        .where('types.name', typeDiscussionFormatted)
+
+        discussionsData = yield knex('discussions')
+        .select('discussions.id',
+                'discussions.name',
+                'discussions.description',
+                'discussions.created_at',
+                'types.name AS type_name',
+                'users.email AS user_email',
+                'users.username AS username',
+                'discussions.is_private',
+                'discussions.is_limited',
+                'discussions.limited_time',
+                'discussions.closed')
+        .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
+        .innerJoin('types', 'discussions.type_id', 'types.id')
+        .innerJoin('users', 'discussions.user_id', 'users.id')
+        .groupBy('discussions.id',
+                'discussions.name',
+                'discussions.description',
+                'discussions.created_at',
+                'types.name',
+                'users.email',
+                'users.username',
+                'discussions.is_private',
+                'discussions.is_limited',
+                'discussions.limited_time',
+                'discussions.closed')
+        .where('types.name', typeDiscussionFormatted)
+        break;
       case 'most_discussed_discussions':
         discussionsTags = yield knex('discussions')
         .select('discussions.name', 'users.email AS user_email', 'tags.name AS tag_name')
