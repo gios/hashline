@@ -47,6 +47,11 @@ class DiscussionCard extends Component {
     }
   }
 
+  deleteDiscussion() {
+    let { id } = this.props.discussion
+    this.props.deleteDiscussion(id)
+  }
+
   formatExpired() {
     let { limited_time } = this.props.discussion
     let getExpiredDuration = moment.duration(moment(limited_time).diff(moment()))
@@ -63,14 +68,17 @@ class DiscussionCard extends Component {
   }
 
   render() {
-    let { name, description, is_limited, is_private, tags, type_name, closed, username, created_at } = this.props.discussion
+    let { name, description, is_limited, is_private, tags, type_name, closed, username, created_at, user_email } = this.props.discussion
+    let { email } = this.props.userInfo.payload
 
     return (
         <div className='card card-block col-xs-12 col-sm-12 col-md-12 col-lg-6 my-discussion-card'>
           <div className='discussion-btns m-x-1'>
-            <button type='button'
-                    className='btn btn-danger m-x-1'
-                    ref='deleteButton'>Delete</button>
+            {user_email === email &&
+              <button onClick={this.deleteDiscussion.bind(this)}
+                      type='button'
+                      className='btn btn-danger m-x-1'>Delete</button>
+            }
             {(closed)
               ? <button type='button'
                         className='btn btn-warning disabled'

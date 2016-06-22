@@ -35,7 +35,12 @@ class DiscussionsBlock extends Component {
       }
       return discussions.payload.map((discussion) => {
         return (
-          <DiscussionCard onJoinDiscussion={onJoinDiscussion} key={discussion.id} discussion={discussion} closed={discussion.closed}/>
+          <DiscussionCard onJoinDiscussion={onJoinDiscussion}
+                          key={discussion.id}
+                          discussion={discussion}
+                          closed={discussion.closed}
+                          deleteDiscussion={this.props.deleteDiscussion}
+                          userInfo={this.props.userInfo}/>
         )
       })
     }

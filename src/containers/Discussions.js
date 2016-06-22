@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getDiscussion } from '../actions/discussionAction'
+import { getDiscussion, deleteDiscussion } from '../actions/discussionAction'
 import { getDiscussions } from '../actions/discussionsAction'
 import DiscussionsBlock from '../components/discussions/DiscussionsBlock'
 import { USER_GETTER_METHOD_DISCUSSION,
@@ -35,12 +35,16 @@ class Discussions extends Component {
   }
 
   routeDiscussionSelector(pathname) {
-    let { dispatch, discussions } = this.props
+    let { dispatch, discussions, userInfo } = this.props
 
     switch(pathname) {
       case 'trending':
         return <DiscussionsBlock discussions={discussions}
                                  pathname={pathname}
+                                 userInfo={userInfo}
+                                 deleteDiscussion={id => dispatch(deleteDiscussion(id)).then(status => {
+                                   status.error && NotificationManager.error(status.payload.response.message)
+                                 })}
                                  onJoinDiscussion={this.onJoinDiscussion.bind(this)}
                                  onLoadDiscussions={() => dispatch(getDiscussions(TRENDING_GETTER_METHOD_DISCUSSION)).then(status => {
                                    status.error && NotificationManager.error(status.payload.response.message)
@@ -48,6 +52,10 @@ class Discussions extends Component {
       case 'mydiscussions':
         return <DiscussionsBlock discussions={discussions}
                                  pathname={pathname}
+                                 userInfo={userInfo}
+                                 deleteDiscussion={id => dispatch(deleteDiscussion(id)).then(status => {
+                                   status.error && NotificationManager.error(status.payload.response.message)
+                                 })}
                                  onJoinDiscussion={this.onJoinDiscussion.bind(this)}
                                  onLoadDiscussions={() => dispatch(getDiscussions(USER_GETTER_METHOD_DISCUSSION)).then(status => {
                                    status.error && NotificationManager.error(status.payload.response.message)
@@ -55,6 +63,10 @@ class Discussions extends Component {
       case 'limited':
         return <DiscussionsBlock discussions={discussions}
                                  pathname={pathname}
+                                 userInfo={userInfo}
+                                 deleteDiscussion={id => dispatch(deleteDiscussion(id)).then(status => {
+                                   status.error && NotificationManager.error(status.payload.response.message)
+                                 })}
                                  onJoinDiscussion={this.onJoinDiscussion.bind(this)}
                                  onLoadDiscussions={() => dispatch(getDiscussions(LIMITED_GETTER_METHOD_DISCUSSION)).then(status => {
                                    status.error && NotificationManager.error(status.payload.response.message)
@@ -62,6 +74,10 @@ class Discussions extends Component {
       case 'recent':
         return <DiscussionsBlock discussions={discussions}
                                  pathname={pathname}
+                                 userInfo={userInfo}
+                                 deleteDiscussion={id => dispatch(deleteDiscussion(id)).then(status => {
+                                   status.error && NotificationManager.error(status.payload.response.message)
+                                 })}
                                  onJoinDiscussion={this.onJoinDiscussion.bind(this)}
                                  onLoadDiscussions={() => {dispatch(getDiscussions(RECENT_GETTER_METHOD_DISCUSSION)).then(status => {
                                    status.error && NotificationManager.error(status.payload.response.message)
@@ -69,6 +85,10 @@ class Discussions extends Component {
       case 'mostdiscussed':
         return <DiscussionsBlock discussions={discussions}
                                  pathname={pathname}
+                                 userInfo={userInfo}
+                                 deleteDiscussion={id => dispatch(deleteDiscussion(id)).then(status => {
+                                   status.error && NotificationManager.error(status.payload.response.message)
+                                 })}
                                  onJoinDiscussion={this.onJoinDiscussion.bind(this)}
                                  onLoadDiscussions={() => dispatch(getDiscussions(MOST_DISCUSSED_GETTER_METHOD_DISCUSSION)).then(status => {
                                    status.error && NotificationManager.error(status.payload.response.message)
@@ -76,6 +96,10 @@ class Discussions extends Component {
       case /^type?/.test(pathname) && pathname:
         return <DiscussionsBlock discussions={discussions}
                                  pathname={pathname}
+                                 userInfo={userInfo}
+                                 deleteDiscussion={id => dispatch(deleteDiscussion(id)).then(status => {
+                                   status.error && NotificationManager.error(status.payload.response.message)
+                                 })}
                                  onJoinDiscussion={this.onJoinDiscussion.bind(this)}
                                  onLoadDiscussions={pathnameNext => {
                                    if(pathnameNext) {
@@ -87,6 +111,10 @@ class Discussions extends Component {
       default:
         return <DiscussionsBlock discussions={discussions}
                                  pathname={pathname}
+                                 userInfo={userInfo}
+                                 deleteDiscussion={id => dispatch(deleteDiscussion(id)).then(status => {
+                                   status.error && NotificationManager.error(status.payload.response.message)
+                                 })}
                                  onJoinDiscussion={this.onJoinDiscussion.bind(this)}
                                  onLoadDiscussions={() => dispatch(getDiscussions(null)).then(status => {
                                    status.error && NotificationManager.error(status.payload.response.message)
@@ -108,6 +136,7 @@ function inject(state, ownProps) {
     all: ownProps,
     pathname: ownProps.location.pathname,
     isAuthenticated: state.login.auth.get('isAuthenticated'),
+    userInfo: state.sidebar.userInfo.toJS(),
     discussions: state.discussions.getDiscussions.toJS()
   }
 }

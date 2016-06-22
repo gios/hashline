@@ -91,7 +91,7 @@ export function deleteDiscussion(id) {
   return {
     [CALL_API]: {
       endpoint: `/api/discussion`,
-      method: 'DEL',
+      method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${idToken.getToken()}`,
         'Content-Type': 'application/json'
