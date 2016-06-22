@@ -4,6 +4,8 @@ import CreateDiscussion from './CreateDiscussion'
 import MyDiscussions from './MyDiscussions'
 import Discussion from './Discussion'
 import IndexDash from './IndexDash'
+import RecentDiscussions from './RecentDiscussions'
+import MostDiscussedDiscussions from './MostDiscussedDiscussions'
 
 export default {
   App,
@@ -11,5 +13,7 @@ export default {
   CreateDiscussion,
   MyDiscussions,
   Discussion,
-  IndexDash
+  IndexDash,
+  RecentDiscussions,
+  MostDiscussedDiscussions
 }
