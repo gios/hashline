@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getDiscussion } from '../actions/discussionAction'
 import { getDiscussions } from '../actions/discussionsAction'
-import DiscussionsBlock from '../components/my_discussions/DiscussionsBlock'
+import DiscussionsBlock from '../components/discussions/DiscussionsBlock'
 import { USER_GETTER_METHOD_DISCUSSION,
          RECENT_GETTER_METHOD_DISCUSSION,
          MOST_DISCUSSED_GETTER_METHOD_DISCUSSION,

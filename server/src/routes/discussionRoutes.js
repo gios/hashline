@@ -181,6 +181,18 @@ module.exports = function(router) {
     this.body = foundDiscussion
   })
 
+  router.del('/api/discussion', function *() {
+    let userInfo = this.state.user
+    let discussionId = this.request.body.discussionId
+
+    let deletedDiscussion = yield knex('discussions').where({
+      user_id: userInfo.id,
+      id: discussionId
+    }).del()
+    console.log(deletedDiscussion)
+    this.body = deletedDiscussion
+  })
+
   router.post('/api/discussions', function *() {
     let userInfo = this.state.user
     let discussionsTags, discussionsData
