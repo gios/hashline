@@ -43,7 +43,12 @@ class Discussions extends Component {
                                  pathname={pathname}
                                  userInfo={userInfo}
                                  deleteDiscussion={id => dispatch(deleteDiscussion(id)).then(status => {
-                                   status.error && NotificationManager.error(status.payload.response.message)
+                                   if(status.error) {
+                                     NotificationManager.error(status.payload.response.message)
+                                     return
+                                   }
+                                   dispatch(getDiscussions(TRENDING_GETTER_METHOD_DISCUSSION))
+                                   .then(status => status.error && NotificationManager.error(status.payload.response.message))
                                  })}
                                  onJoinDiscussion={this.onJoinDiscussion.bind(this)}
                                  onLoadDiscussions={() => dispatch(getDiscussions(TRENDING_GETTER_METHOD_DISCUSSION)).then(status => {
@@ -54,7 +59,12 @@ class Discussions extends Component {
                                  pathname={pathname}
                                  userInfo={userInfo}
                                  deleteDiscussion={id => dispatch(deleteDiscussion(id)).then(status => {
-                                   status.error && NotificationManager.error(status.payload.response.message)
+                                   if(status.error) {
+                                     NotificationManager.error(status.payload.response.message)
+                                     return
+                                   }
+                                   dispatch(getDiscussions(USER_GETTER_METHOD_DISCUSSION))
+                                   .then(status => status.error && NotificationManager.error(status.payload.response.message))
                                  })}
                                  onJoinDiscussion={this.onJoinDiscussion.bind(this)}
                                  onLoadDiscussions={() => dispatch(getDiscussions(USER_GETTER_METHOD_DISCUSSION)).then(status => {
@@ -65,7 +75,12 @@ class Discussions extends Component {
                                  pathname={pathname}
                                  userInfo={userInfo}
                                  deleteDiscussion={id => dispatch(deleteDiscussion(id)).then(status => {
-                                   status.error && NotificationManager.error(status.payload.response.message)
+                                   if(status.error) {
+                                     NotificationManager.error(status.payload.response.message)
+                                     return
+                                   }
+                                   dispatch(getDiscussions(LIMITED_GETTER_METHOD_DISCUSSION))
+                                   .then(status => status.error && NotificationManager.error(status.payload.response.message))
                                  })}
                                  onJoinDiscussion={this.onJoinDiscussion.bind(this)}
                                  onLoadDiscussions={() => dispatch(getDiscussions(LIMITED_GETTER_METHOD_DISCUSSION)).then(status => {
@@ -76,18 +91,28 @@ class Discussions extends Component {
                                  pathname={pathname}
                                  userInfo={userInfo}
                                  deleteDiscussion={id => dispatch(deleteDiscussion(id)).then(status => {
-                                   status.error && NotificationManager.error(status.payload.response.message)
+                                   if(status.error) {
+                                     NotificationManager.error(status.payload.response.message)
+                                     return
+                                   }
+                                   dispatch(getDiscussions(RECENT_GETTER_METHOD_DISCUSSION))
+                                   .then(status => status.error && NotificationManager.error(status.payload.response.message))
                                  })}
                                  onJoinDiscussion={this.onJoinDiscussion.bind(this)}
-                                 onLoadDiscussions={() => {dispatch(getDiscussions(RECENT_GETTER_METHOD_DISCUSSION)).then(status => {
+                                 onLoadDiscussions={() => dispatch(getDiscussions(RECENT_GETTER_METHOD_DISCUSSION)).then(status => {
                                    status.error && NotificationManager.error(status.payload.response.message)
-                                 })}}/>
+                                 })}/>
       case 'mostdiscussed':
         return <DiscussionsBlock discussions={discussions}
                                  pathname={pathname}
                                  userInfo={userInfo}
                                  deleteDiscussion={id => dispatch(deleteDiscussion(id)).then(status => {
-                                   status.error && NotificationManager.error(status.payload.response.message)
+                                   if(status.error) {
+                                     NotificationManager.error(status.payload.response.message)
+                                     return
+                                   }
+                                   dispatch(getDiscussions(MOST_DISCUSSED_GETTER_METHOD_DISCUSSION))
+                                   .then(status => status.error && NotificationManager.error(status.payload.response.message))
                                  })}
                                  onJoinDiscussion={this.onJoinDiscussion.bind(this)}
                                  onLoadDiscussions={() => dispatch(getDiscussions(MOST_DISCUSSED_GETTER_METHOD_DISCUSSION)).then(status => {
@@ -98,7 +123,12 @@ class Discussions extends Component {
                                  pathname={pathname}
                                  userInfo={userInfo}
                                  deleteDiscussion={id => dispatch(deleteDiscussion(id)).then(status => {
-                                   status.error && NotificationManager.error(status.payload.response.message)
+                                   if(status.error) {
+                                     NotificationManager.error(status.payload.response.message)
+                                     return
+                                   }
+                                   dispatch(getDiscussions(`${BY_TYPE_GETTER_METHOD_DISCUSSION}--${this.getDiscussionType(pathname)}`))
+                                   .then(status => status.error && NotificationManager.error(status.payload.response.message))
                                  })}
                                  onJoinDiscussion={this.onJoinDiscussion.bind(this)}
                                  onLoadDiscussions={pathnameNext => {
@@ -113,7 +143,12 @@ class Discussions extends Component {
                                  pathname={pathname}
                                  userInfo={userInfo}
                                  deleteDiscussion={id => dispatch(deleteDiscussion(id)).then(status => {
-                                   status.error && NotificationManager.error(status.payload.response.message)
+                                   if(status.error) {
+                                     NotificationManager.error(status.payload.response.message)
+                                     return
+                                   }
+                                   dispatch(getDiscussions(null))
+                                   .then(status => status.error && NotificationManager.error(status.payload.response.message))
                                  })}
                                  onJoinDiscussion={this.onJoinDiscussion.bind(this)}
                                  onLoadDiscussions={() => dispatch(getDiscussions(null)).then(status => {
