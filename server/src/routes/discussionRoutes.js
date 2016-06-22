@@ -188,7 +188,6 @@ module.exports = function(router) {
 
     switch(getterMethod) {
       case 'most_discussed_discussions':
-      // TODO
         discussionsTags = yield knex('discussions')
         .select('discussions.name', 'users.email AS user_email', 'tags.name AS tag_name')
         .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
@@ -211,6 +210,8 @@ module.exports = function(router) {
         .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
         .innerJoin('types', 'discussions.type_id', 'types.id')
         .innerJoin('users', 'discussions.user_id', 'users.id')
+        .leftJoin('messages', 'discussions.id', 'messages.discussion_id')
+        .count('messages.id as messages_count')
         .groupBy('discussions.id',
                 'discussions.name',
                 'discussions.description',
@@ -222,7 +223,7 @@ module.exports = function(router) {
                 'discussions.is_limited',
                 'discussions.limited_time',
                 'discussions.closed')
-        .orderBy('discussions.created_at', 'desc')
+        .orderBy('messages_count', 'desc')
         break;
       case 'recent_discussions':
         discussionsTags = yield knex('discussions')
