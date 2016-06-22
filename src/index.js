@@ -45,6 +45,7 @@ render(
         <Route path='discussion' component={Containers.Discussion}>
           <Route path=':id' component={Containers.Discussion}/>
         </Route>
+        <Route path='*' component={Containers.NotFound} />
       </Route>
     </Router>
   </Provider>,

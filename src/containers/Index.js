@@ -3,11 +3,13 @@ import Login from './Login'
 import CreateDiscussion from './CreateDiscussion'
 import Discussion from './Discussion'
 import Discussions from './Discussions'
+import NotFound from './NotFound'
 
 export default {
   App,
   Login,
   CreateDiscussion,
   Discussion,
-  Discussions
+  Discussions,
+  NotFound
 }
