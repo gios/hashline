@@ -48,8 +48,12 @@ class DiscussionCard extends Component {
   }
 
   deleteDiscussion() {
-    let { id } = this.props.discussion
-    this.props.deleteDiscussion(id)
+    let deleteStatus = confirm('Do you wanna delete this discussion?')
+
+    if(deleteStatus) {
+      let { id } = this.props.discussion
+      this.props.deleteDiscussion(id)
+    }
   }
 
   formatExpired() {
