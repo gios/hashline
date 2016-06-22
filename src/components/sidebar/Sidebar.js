@@ -132,10 +132,10 @@ class Sidebar extends Component {
               </Link>
             </li>
             <li className='nav-item'>
-              <a className='nav-link sidebar-link' href='javascript:void(0)'>
+              <Link to='/trending' className={this.routeSelector('trending')} onClick={this.triggerRoute.bind(this)}>
                 <i className='fa fa-fire'></i>
                 <span className='sidebar-list-item'>Trending</span>
-              </a>
+              </Link>
             </li>
             <li className='nav-item'>
               <Link to='/recent' className={this.routeSelector('recent')} onClick={this.triggerRoute.bind(this)}>

@@ -7,7 +7,8 @@ import { USER_GETTER_METHOD_DISCUSSION,
          RECENT_GETTER_METHOD_DISCUSSION,
          MOST_DISCUSSED_GETTER_METHOD_DISCUSSION,
          BY_TYPE_GETTER_METHOD_DISCUSSION,
-         LIMITED_GETTER_METHOD_DISCUSSION } from '../constants'
+         LIMITED_GETTER_METHOD_DISCUSSION,
+         TRENDING_GETTER_METHOD_DISCUSSION } from '../constants'
 import { NotificationManager } from 'react-notifications'
 import { push } from 'react-router-redux'
 
@@ -37,6 +38,13 @@ class Discussions extends Component {
     let { dispatch, discussions } = this.props
 
     switch(pathname) {
+      case 'trending':
+        return <DiscussionsBlock discussions={discussions}
+                                 pathname={pathname}
+                                 onJoinDiscussion={this.onJoinDiscussion.bind(this)}
+                                 onLoadDiscussions={() => dispatch(getDiscussions(TRENDING_GETTER_METHOD_DISCUSSION)).then(status => {
+                                   status.error && NotificationManager.error(status.payload.response.message)
+                                 })}/>
       case 'mydiscussions':
         return <DiscussionsBlock discussions={discussions}
                                  pathname={pathname}
