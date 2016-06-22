@@ -7,6 +7,9 @@ import {
   REQUEST_GET_DISCUSSION_MESSAGES,
   SUCCESS_GET_DISCUSSION_MESSAGES,
   FAILURE_GET_DISCUSSION_MESSAGES,
+  REQUEST_DELETE_DISCUSSION,
+  SUCCESS_DELETE_DISCUSSION,
+  FAILURE_DELETE_DISCUSSION,
   GET_CONNECTED_USERS,
   SET_CHAT_MESSAGE,
   SET_SENT_MESSAGE_ARCHIVE,
@@ -16,6 +19,37 @@ import {
   START_LOAD_MESSAGES,
   END_LOAD_MESSAGES,
   LOAD_DISABLE_MESSAGES } from '../actions/discussionAction'
+
+const discussionDeleteState = Immutable.Map({
+  isFetching: false,
+  payload: null,
+  error: false
+})
+
+function discussionDelete(state = discussionDeleteState, action) {
+  switch (action.type) {
+    case REQUEST_DELETE_DISCUSSION:
+      return state.merge({
+        isFetching: true,
+        payload: null,
+        error: false
+      })
+    case SUCCESS_DELETE_DISCUSSION:
+      return state.merge({
+        isFetching: false,
+        payload: action.payload,
+        error: false
+      })
+    case FAILURE_DELETE_DISCUSSION:
+      return state.merge({
+        isFetching: false,
+        payload: action.payload.response,
+        error: true
+      })
+    default:
+      return state
+  }
+}
 
 const discussionInfoState = Immutable.Map({
   isFetching: false,
@@ -124,5 +158,6 @@ function discussionMessages(state = discussionMessagesState, action) {
 
 export let discussion = combineReducers({
   discussionInfo,
+  discussionDelete,
   discussionMessages
 })

@@ -9,6 +9,10 @@ export const REQUEST_GET_DISCUSSION_MESSAGES = 'REQUEST_GET_DISCUSSION_MESSAGES'
 export const SUCCESS_GET_DISCUSSION_MESSAGES = 'SUCCESS_GET_DISCUSSION_MESSAGES'
 export const FAILURE_GET_DISCUSSION_MESSAGES = 'FAILURE_GET_DISCUSSION_MESSAGES'
 
+export const REQUEST_DELETE_DISCUSSION = 'REQUEST_DELETE_DISCUSSION'
+export const SUCCESS_DELETE_DISCUSSION = 'SUCCESS_DELETE_DISCUSSION'
+export const FAILURE_DELETE_DISCUSSION = 'FAILURE_DELETE_DISCUSSION'
+
 export const GET_CONNECTED_USERS = 'GET_CONNECTED_USERS'
 export const SET_CHAT_MESSAGE = 'SET_CHAT_MESSAGE'
 export const SET_MESSAGE_ARCHIVE = 'SET_MESSAGE_ARCHIVE'
@@ -80,6 +84,21 @@ export function setMessageArchive(messageArchive) {
 export function clearMessageArchive() {
   return {
     type: CLEAR_MESSAGE_ARCHIVE
+  }
+}
+
+export function deleteDiscussion(id) {
+  return {
+    [CALL_API]: {
+      endpoint: `/api/discussion`,
+      method: 'DEL',
+      headers: {
+        'Authorization': `Bearer ${idToken.getToken()}`,
+        'Content-Type': 'application/json'
+      },
+      types: [REQUEST_DELETE_DISCUSSION, SUCCESS_DELETE_DISCUSSION, FAILURE_DELETE_DISCUSSION],
+      body: JSON.stringify({ id })
+    }
   }
 }
 
