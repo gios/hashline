@@ -67,15 +67,20 @@ class DiscussionCard extends Component {
 
     return (
         <div className='card card-block col-xs-12 col-sm-12 col-md-12 col-lg-6 my-discussion-card'>
-          {(closed)
-            ? <button type='button'
-                      className='btn btn-danger discussion-join-btn m-x-1 disabled'
-                      ref='closeButton'>Closed</button>
-            : <button onClick={this.joinToDiscussion.bind(this)}
-                      type='button'
-                      className='btn btn-success discussion-join-btn m-x-1'
-                      ref='joinButton'>Join</button>
-          }
+          <div className='discussion-btns m-x-1'>
+            <button type='button'
+                    className='btn btn-danger m-x-1'
+                    ref='deleteButton'>Delete</button>
+            {(closed)
+              ? <button type='button'
+                        className='btn btn-warning disabled'
+                        ref='closeButton'>Closed</button>
+              : <button onClick={this.joinToDiscussion.bind(this)}
+                        type='button'
+                        className='btn btn-success'
+                        ref='joinButton'>Join</button>
+            }
+          </div>
           <h4 className='card-title'>{name}</h4>
           <div className='my-discussion-labels'>
             {(is_private) ? <span className='label label-warning'>Private</span> : <span className='label label-primary'>Public</span>}

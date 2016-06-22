@@ -7,7 +7,7 @@
     overflow-x: hidden;
     word-wrap: initial;
     white-space: nowrap;
-    width: 78%;
+    width: 70%;
   }
 
   & > .my-discussion-labels .label:not(:first-child) {
@@ -18,7 +18,7 @@
     margin-left: .5em;
   }
 
-  & > .discussion-join-btn {
+  & > .discussion-btns {
     position: absolute;
     right: 0;
   }
