@@ -37,7 +37,7 @@ render(
         <Route path='mydiscussions' component={Containers.Discussions}/>
         <Route path='recent' component={Containers.Discussions}/>
         <Route path='mostdiscussed' component={Containers.Discussions}/>
-        <Route path='bytype' component={Containers.Discussions}>
+        <Route path='type' component={Containers.Discussions}>
           <Route path='event' component={Containers.Discussions}/>
           <Route path='question' component={Containers.Discussions}/>
         </Route>

@@ -98,8 +98,8 @@ class Sidebar extends Component {
       typesOptions = sidebarTypes.payload.types && sidebarTypes.payload.types.map((item) => {
         return (
           <li key={item.id} className='nav-item'>
-            <Link to={`/bytype/${item.name.toLowerCase()}`}
-                  className={this.routeSelector(`bytype/${item.name.toLowerCase()}`)}
+            <Link to={`/type/${item.name.toLowerCase()}`}
+                  className={this.routeSelector(`type/${item.name.toLowerCase()}`)}
                   onClick={this.triggerRoute.bind(this)}>
               <i className='fa fa-chevron-circle-right'></i>
               <span className='sidebar-list-item'>{item.name}</span>

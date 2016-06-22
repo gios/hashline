@@ -26,7 +26,7 @@ class Discussions extends Component {
   }
 
   getDiscussionType(pathname) {
-    if(pathname.includes('bytype')) {
+    if(pathname.includes('type')) {
       return pathname.split('/')[1]
     } else {
       return ''
@@ -65,7 +65,7 @@ class Discussions extends Component {
                                  onLoadDiscussions={() => dispatch(getDiscussions(MOST_DISCUSSED_GETTER_METHOD_DISCUSSION)).then(status => {
                                    status.error && NotificationManager.error(status.payload.response.message)
                                  })}/>
-      case /^bytype?/.test(pathname) && pathname:
+      case /^type?/.test(pathname) && pathname:
         return <DiscussionsBlock discussions={discussions}
                                  pathname={pathname}
                                  onJoinDiscussion={this.onJoinDiscussion.bind(this)}
