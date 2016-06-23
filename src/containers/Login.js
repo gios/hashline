@@ -38,17 +38,13 @@ class Login extends Component {
       if (pathname === 'login') {
         return <LoginForm inputErrors={inputErrors}
                           auth={auth}
-                          onClickLogin={creds => dispatch(loginUser(creds)).then(status => {
-                            status.error && NotificationManager.error(status.payload.response.message)
-                          })}
+                          onClickLogin={creds => dispatch(loginUser(creds))}
                           emitEmailError={value => dispatch(incorrectEmail(value))}
                           emitPasswordError={(value, message) => dispatch(incorrectPassword(value, message))}/>
       } else {
         return <SignUpForm inputErrors={inputErrors}
                            auth={auth}
-                           onClickSignUp={creds => dispatch(signUpUser(creds)).then(status => {
-                             status.error && NotificationManager.error(status.payload.response.message)
-                           })}
+                           onClickSignUp={creds => dispatch(signUpUser(creds))}
                            emitUsernameError={value => dispatch(incorrectUsername(value))}
                            emitEmailError={value => dispatch(incorrectEmail(value))}
                            emitPasswordError={(value, message) => dispatch(incorrectPassword(value, message))}/>

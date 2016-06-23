@@ -73,12 +73,11 @@ class DiscussionCard extends Component {
 
   render() {
     let { name, description, is_limited, is_private, tags, type_name, closed, username, created_at, user_email } = this.props.discussion
-    let { email } = this.props.userInfo.payload
 
     return (
         <div className='card card-block col-xs-12 col-sm-12 col-md-12 col-lg-6 my-discussion-card'>
           <div className='discussion-btns m-x-1'>
-            {user_email === email &&
+            {user_email === (this.props.userInfo.payload && this.props.userInfo.payload.email) &&
               <button onClick={this.deleteDiscussion.bind(this)}
                       type='button'
                       className='btn btn-danger m-x-1'>Delete</button>

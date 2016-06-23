@@ -72,6 +72,7 @@ module.exports = function(router, jwt, SHARED_SECRET) {
   router.get('/api/user', function *() {
     let userInfo = this.state.user
     this.body = {
+      id: userInfo.id,
       username: userInfo.username,
       email: userInfo.email
     }

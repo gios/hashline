@@ -15,11 +15,13 @@ module.exports = function(io, socket) {
 
   socket.on('join user', user => {
     socket.user_id = user.id
+    console.log("USER " + user.id)
     socket.join(`user-${user.id}`)
   })
 
   socket.on('invite users', (usersInvite, discussionId, sender) => {
     usersInvite.forEach(user => {
+      console.log(user)
       socket.broadcast.to(`user-${user.id}`).emit('invite users', sender, discussionId)
     })
   })
