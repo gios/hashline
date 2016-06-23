@@ -14,11 +14,6 @@ import socket from '../utils/socket'
 
 class App extends Component {
 
-  constructor(props) {
-    super(props)
-    this.socket = props.isAuthenticated && socket
-  }
-
   componentWillMount() {
     let { dispatch, isAuthenticated, activeRoute } = this.props
 
@@ -29,6 +24,18 @@ class App extends Component {
         dispatch(setNextPathname(activeRoute))
       }
     }
+
+    if(!this.socket) {
+      return
+    }
+
+    this.socket.on('invite users', (sender, discussionId) => {
+      alert(sender, discussionId)
+    })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.socket = nextProps.isAuthenticated && socket
   }
 
   sidebarMobileTrigger() {

@@ -14,28 +14,33 @@ module.exports = function(io, socket) {
   }
 
   socket.on('join user', user => {
-    console.log(user)
-    socket.username = user.username
-    socket.join(user.username)
+    socket.user_id = user.id
+    socket.join(`user-${user.id}`)
+  })
+
+  socket.on('invite users', (usersInvite, discussionId, sender) => {
+    usersInvite.forEach(user => {
+      socket.broadcast.to(`user-${user.id}`).emit('invite users', sender, discussionId)
+    })
   })
 
   socket.on('join discussion', params => {
     socket.username = params.username
     socket.email = params.email
     socket.discussionId = params.discussionId
-    socket.join(params.discussionId)
-    socket.broadcast.to(params.discussionId).emit('join discussion', params.username)
+    socket.join(`discussion-${params.discussionId}`)
+    socket.broadcast.to(`discussion-${params.discussionId}`).emit('join discussion', params.username)
   })
 
   socket.on('leave discussion', params => {
-    socket.leave(params.discussionId)
-    socket.broadcast.to(params.discussionId).emit('leave discussion', params.username)
+    socket.leave(`discussion-${params.discussionId}`)
+    socket.broadcast.to(`discussion-${params.discussionId}`).emit('leave discussion', params.username)
   })
 
   socket.on('connected users', discussionId => {
     io.emit('connected users', {
-      users: getUserInRoom(discussionId),
-      length: getUserInRoom(discussionId).length
+      users: getUserInRoom(`discussion-${discussionId}`),
+      length: getUserInRoom(`discussion-${discussionId}`).length
     })
   })
 
@@ -56,7 +61,7 @@ module.exports = function(io, socket) {
         .where('id', message_id[0])
         .first()
         .then(message => {
-          io.sockets.to(discussionId).emit('chat message', message.created_at, user.username, message.message)
+          io.sockets.to(`discussion-${discussionId}`).emit('chat message', message.created_at, user.username, message.message)
         })
       })
       .catch(err => {
@@ -69,12 +74,12 @@ module.exports = function(io, socket) {
   })
 
   socket.on('disconnect', () => {
-    socket.leave(socket.username)
-    socket.leave(socket.discussionId)
-    socket.broadcast.to(socket.discussionId).emit('leave discussion', socket.username)
+    socket.leave(`user-${socket.user_id}`)
+    socket.leave(`discussion-${socket.discussionId}`)
+    socket.broadcast.to(`discussion-${socket.discussionId}`).emit('leave discussion', socket.username)
     io.emit('connected users', {
-      users: getUserInRoom(socket.discussionId),
-      length: getUserInRoom(socket.discussionId).length
+      users: getUserInRoom(`discussion-${socket.discussionId}`),
+      length: getUserInRoom(`discussion-${socket.discussionId}`).length
     })
     logger.info('USER DISCONNECTED')
   })
