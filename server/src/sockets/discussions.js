@@ -13,6 +13,11 @@ module.exports = function(io, socket) {
     return usersInRoom || []
   }
 
+  socket.on('join user', user => {
+    socket.username = user.username
+    socket.join(user.username)
+  })
+
   socket.on('join discussion', params => {
     socket.username = params.username
     socket.email = params.email
@@ -63,6 +68,7 @@ module.exports = function(io, socket) {
   })
 
   socket.on('disconnect', () => {
+    socket.leave(socket.username)
     socket.leave(socket.discussionId)
     socket.broadcast.to(socket.discussionId).emit('leave discussion', socket.username)
     io.emit('connected users', {
