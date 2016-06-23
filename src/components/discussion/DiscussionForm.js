@@ -3,6 +3,7 @@ import { NotificationManager } from 'react-notifications'
 import moment from 'moment'
 import DiscussionExpiredTimer from './DiscussionExpiredTimer'
 import DiscussionChatMessages from './DiscussionChatMessages'
+import Select from 'react-select'
 import { ENTER_KEYCODE, MESSAGE_INTERVAL } from '../../constants'
 import { trimField } from '../../utils/helpers'
 import Loader from '../parts/Loader'
@@ -79,6 +80,40 @@ class DiscussionForm extends Component {
     return !(trimField(message) === '')
   }
 
+  loadingSelect(type) {
+    if(type.isFetching) {
+       return true
+    } else if(type.payload) {
+       return false
+    }
+  }
+
+  selectUsers(usersInvite) {
+    this.props.discussionUsersInvite(usersInvite)
+  }
+
+  inputUsersInvite(query) {
+    this.props.getSearchUsers(query.trim())
+  }
+
+  inviteUsers() {
+    console.log('invite')
+  }
+
+  renderUsersSelect() {
+    let { discussionInfo, searchUsers } = this.props
+    let isLoading = this.loadingSelect(searchUsers)
+
+    return (
+      <Select isLoading={isLoading}
+              onChange={this.selectUsers.bind(this)}
+              onInputChange={this.inputUsersInvite.bind(this)}
+              value={discussionInfo.usersInvite}
+              multi={true}
+              options={searchUsers.payload}/>
+    )
+  }
+
   render() {
     let { discussionInfo, clientHeight, discussionMessages } = this.props
     let discussionInfoRender
@@ -148,6 +183,17 @@ class DiscussionForm extends Component {
             </div>
           </li>
           <DiscussionExpiredTimer discussionInfo={discussionInfo}/>
+          <li className='list-group-item'>
+            <strong>Invite:</strong>
+            <div className='pull-xs-right'>
+              <button type='button'
+                      className='btn btn-primary btn-sm'
+                      onClick={this.inviteUsers.bind(this)}>Invite</button>
+            </div>
+          </li>
+          <li className='list-group-item'>
+            {this.renderUsersSelect()}
+          </li>
         </ul>
       )
     }

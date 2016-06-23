@@ -76,4 +76,21 @@ module.exports = function(router, jwt, SHARED_SECRET) {
       email: userInfo.email
     }
   })
+
+  router.post('/api/search_users', function *() {
+    let query = this.request.body.query
+    let users
+
+    if(query) {
+      users = yield knex('users')
+      .select(knex.raw('id, LOWER(username) as value, username as label'))
+      .where(knex.raw(`LOWER(username) like '%${query}%'`))
+      .orWhere(knex.raw(`LOWER(email) like '%${query}%'`))
+      .limit(15)
+    } else {
+      users = []
+    }
+
+    this.body = users
+  })
 }

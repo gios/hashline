@@ -11,7 +11,9 @@ import { getDiscussion,
          setScrollToBottom,
          setStartLoadMessages,
          setEndLoadMessages,
-         setLoadDisableMessages } from '../actions/discussionAction'
+         setLoadDisableMessages,
+         discussionUsersInvite,
+         getSearchUsers } from '../actions/discussionAction'
 import DiscussionForm from '../components/discussion/DiscussionForm'
 import DiscussionPasswordModal from '../components/discussion/DiscussionPasswordModal'
 import io from 'socket.io-client'
@@ -74,7 +76,7 @@ class Discussion extends Component {
   }
 
   render() {
-    let { dispatch, discussionId, discussionInfo, discussionMessages, user, clientHeight } = this.props
+    let { dispatch, discussionId, discussionInfo, discussionMessages, user, clientHeight, searchUsers } = this.props
     return (
       <div>
         {user.payload && <DiscussionForm socket={this.socket}
@@ -84,6 +86,9 @@ class Discussion extends Component {
                                          discussionId={discussionId}
                                          discussionInfo={discussionInfo}
                                          discussionMessages={discussionMessages}
+                                         searchUsers={searchUsers}
+                                         getSearchUsers={search => dispatch(getSearchUsers(search))}
+                                         discussionUsersInvite={usersInvite => dispatch(discussionUsersInvite(usersInvite))}
                                          setStartLoadMessages={start => dispatch(setStartLoadMessages(start))}
                                          setEndLoadMessages={end => dispatch(setEndLoadMessages(end))}
                                          setLoadDisableMessages={disabled => dispatch(setLoadDisableMessages(disabled))}
@@ -102,6 +107,7 @@ class Discussion extends Component {
 function inject(state, routing) {
   return {
     discussionId: routing.params.id,
+    searchUsers: state.discussion.searchUsers.toJS(),
     discussionInfo: state.discussion.discussionInfo.toJS(),
     discussionMessages: state.discussion.discussionMessages.toJS(),
     user: state.sidebar.userInfo.toJS(),

@@ -10,6 +10,9 @@ import {
   REQUEST_DELETE_DISCUSSION,
   SUCCESS_DELETE_DISCUSSION,
   FAILURE_DELETE_DISCUSSION,
+  REQUEST_SEARCH_USERS_INVITE,
+  SUCCESS_SEARCH_USERS_INVITE,
+  FAILURE_SEARCH_USERS_INVITE,
   GET_CONNECTED_USERS,
   SET_CHAT_MESSAGE,
   SET_SENT_MESSAGE_ARCHIVE,
@@ -18,7 +21,8 @@ import {
   SCROLL_TO_BOTTOM,
   START_LOAD_MESSAGES,
   END_LOAD_MESSAGES,
-  LOAD_DISABLE_MESSAGES } from '../actions/discussionAction'
+  LOAD_DISABLE_MESSAGES,
+  DISCUSSION_USERS_INVITE } from '../actions/discussionAction'
 
 const discussionDeleteState = Immutable.Map({
   isFetching: false,
@@ -55,7 +59,8 @@ const discussionInfoState = Immutable.Map({
   isFetching: false,
   payload: null,
   error: false,
-  connectedUsers: null
+  connectedUsers: null,
+  usersInvite: ''
 })
 
 function discussionInfo(state = discussionInfoState, action) {
@@ -81,6 +86,41 @@ function discussionInfo(state = discussionInfoState, action) {
     case GET_CONNECTED_USERS:
       return state.merge({
         connectedUsers: action.connectedUsers
+      })
+    case DISCUSSION_USERS_INVITE:
+      return state.merge({
+        usersInvite: action.usersInvite
+      })
+    default:
+      return state
+  }
+}
+
+const searchUsersState = Immutable.Map({
+  isFetching: false,
+  payload: null,
+  error: false
+})
+
+function searchUsers(state = searchUsersState, action) {
+  switch (action.type) {
+    case REQUEST_SEARCH_USERS_INVITE:
+      return state.merge({
+        isFetching: true,
+        payload: null,
+        error: false
+      })
+    case SUCCESS_SEARCH_USERS_INVITE:
+      return state.merge({
+        isFetching: false,
+        payload: action.payload,
+        error: false
+      })
+    case FAILURE_SEARCH_USERS_INVITE:
+      return state.merge({
+        isFetching: false,
+        payload: action.payload.response,
+        error: true
       })
     default:
       return state
@@ -159,5 +199,6 @@ function discussionMessages(state = discussionMessagesState, action) {
 export let discussion = combineReducers({
   discussionInfo,
   discussionDelete,
-  discussionMessages
+  discussionMessages,
+  searchUsers
 })

@@ -13,6 +13,10 @@ export const REQUEST_DELETE_DISCUSSION = 'REQUEST_DELETE_DISCUSSION'
 export const SUCCESS_DELETE_DISCUSSION = 'SUCCESS_DELETE_DISCUSSION'
 export const FAILURE_DELETE_DISCUSSION = 'FAILURE_DELETE_DISCUSSION'
 
+export const REQUEST_SEARCH_USERS_INVITE = 'REQUEST_SEARCH_USERS_INVITE'
+export const SUCCESS_SEARCH_USERS_INVITE = 'SUCCESS_SEARCH_USERS_INVITE'
+export const FAILURE_SEARCH_USERS_INVITE = 'FAILURE_SEARCH_USERS_INVITE'
+
 export const GET_CONNECTED_USERS = 'GET_CONNECTED_USERS'
 export const SET_CHAT_MESSAGE = 'SET_CHAT_MESSAGE'
 export const SET_MESSAGE_ARCHIVE = 'SET_MESSAGE_ARCHIVE'
@@ -22,8 +26,16 @@ export const CLEAR_MESSAGE_ARCHIVE = 'CLEAR_MESSAGE_ARCHIVE'
 export const START_LOAD_MESSAGES = 'START_LOAD_MESSAGES'
 export const END_LOAD_MESSAGES = 'END_LOAD_MESSAGES'
 export const LOAD_DISABLE_MESSAGES = 'LOAD_DISABLE_MESSAGES'
+export const DISCUSSION_USERS_INVITE = 'DISCUSSION_USERS_INVITE'
 
 export const SCROLL_TO_BOTTOM = 'SCROLL_TO_BOTTOM'
+
+export function discussionUsersInvite(usersInvite) {
+  return {
+    type: DISCUSSION_USERS_INVITE,
+    usersInvite
+  }
+}
 
 export function setLoadDisableMessages(loadDisable) {
   return {
@@ -84,6 +96,21 @@ export function setMessageArchive(messageArchive) {
 export function clearMessageArchive() {
   return {
     type: CLEAR_MESSAGE_ARCHIVE
+  }
+}
+
+export function getSearchUsers(query) {
+  return {
+    [CALL_API]: {
+      endpoint: `/api/search_users`,
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${idToken.getToken()}`,
+        'Content-Type': 'application/json'
+      },
+      types: [REQUEST_SEARCH_USERS_INVITE, SUCCESS_SEARCH_USERS_INVITE, FAILURE_SEARCH_USERS_INVITE],
+      body: JSON.stringify({ query })
+    }
   }
 }
 
