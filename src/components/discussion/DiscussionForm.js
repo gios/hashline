@@ -90,10 +90,12 @@ class DiscussionForm extends Component {
 
   selectUsers(usersInvite) {
     this.props.discussionUsersInvite(usersInvite)
+    this.props.setScrollToBottom(false)
   }
 
   inputUsersInvite(query) {
     this.props.getSearchUsers(query.trim())
+    this.props.setScrollToBottom(false)
   }
 
   inviteUsers() {
