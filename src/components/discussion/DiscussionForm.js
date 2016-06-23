@@ -124,7 +124,7 @@ class DiscussionForm extends Component {
     } else if(discussionInfo.payload && discussionInfo.connectedUsers) {
       discussionInfoRender = (
         <ul className='list-group'>
-        <a className='online-users-chat' data-toggle='collapse' href='#online-users' aria-expanded='false' aria-controls='online-users'>
+          <a className='online-users-chat' data-toggle='collapse' href='#online-users' aria-expanded='false' aria-controls='online-users'>
             <li className='list-group-item m-b-1'>
               <strong>Connected Users:</strong>
               <span className='label label-default label-pill pull-xs-right'>{discussionInfo.connectedUsers.length}</span>
