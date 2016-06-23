@@ -20,33 +20,25 @@ import socket from '../utils/socket'
 
 class Discussion extends Component {
 
-  constructor(props) {
-    super(props)
-    this.socket = props.isAuthenticated && socket
-  }
-
   componentWillMount() {
     let { dispatch, discussionId } = this.props
 
-    if(!this.socket) {
-      return
-    }
-    this.socket.removeListener('leave discussion')
-    this.socket.on('join discussion', (username) => {
-      this.socket.emit('connected users', discussionId)
+    socket.removeListener('leave discussion')
+    socket.on('join discussion', (username) => {
+      socket.emit('connected users', discussionId)
       NotificationManager.info(`User ${username} is connected`)
     })
 
-    this.socket.on('leave discussion', (username) => {
-      this.socket.emit('connected users', discussionId)
+    socket.on('leave discussion', (username) => {
+      socket.emit('connected users', discussionId)
       NotificationManager.info(`User ${username} is disconnected`)
     })
 
-    this.socket.on('connected users', (connectedUsers) => {
+    socket.on('connected users', (connectedUsers) => {
       dispatch(getConnectedUsers(connectedUsers))
     })
 
-    this.socket.on('chat message', (created_at, username, message) => {
+    socket.on('chat message', (created_at, username, message) => {
       dispatch(setSentMessageArchive({ created_at, username, message }))
       dispatch(setScrollToBottom(true))
     })
@@ -66,20 +58,17 @@ class Discussion extends Component {
   }
 
   componentWillUnmount() {
-    if(!this.socket) {
-      return
-    }
     $('#discussion-password').modal('hide')
-    this.socket.removeListener('join discussion')
-    this.socket.removeListener('connected users')
-    this.socket.removeListener('chat message')
+    socket.removeListener('join discussion')
+    socket.removeListener('connected users')
+    socket.removeListener('chat message')
   }
 
   render() {
     let { dispatch, discussionId, discussionInfo, discussionMessages, user, clientHeight, searchUsers } = this.props
     return (
       <div>
-        {user.payload && <DiscussionForm socket={this.socket}
+        {user.payload && <DiscussionForm socket={socket}
                                          clientHeight={clientHeight}
                                          clearMessageArchive={() => dispatch(clearMessageArchive())}
                                          user={user}
