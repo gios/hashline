@@ -106,6 +106,7 @@ class DiscussionForm extends Component {
 
     return (
       <Select isLoading={isLoading}
+              noResultsText={'User not found'}
               onChange={this.selectUsers.bind(this)}
               onInputChange={this.inputUsersInvite.bind(this)}
               value={discussionInfo.usersInvite}
