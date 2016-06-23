@@ -53,6 +53,7 @@ require('./src/routes/discussionRoutes')(router, jwt, SHARED_SECRET)
 io.on('connection', (socket) => {
   tracer.info('USER CONNECTED')
   require('./src/sockets/discussions')(io, socket)
+  require('./src/sockets/notification')(io, socket)
 })
 
 server.listen(process.env.PORT || 5000)

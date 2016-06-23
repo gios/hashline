@@ -100,7 +100,7 @@ class DiscussionForm extends Component {
 
   inviteUsers() {
     // TODO: SEND INVITATION
-    console.log(this.props.discussionInfo.usersInvite)
+    // this.props.socket.emit('invite users', this.props.discussionInfo.usersInvite)
   }
 
   renderUsersSelect() {
