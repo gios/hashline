@@ -23,15 +23,17 @@ class App extends Component {
       if(activeRoute !== 'login') {
         dispatch(setNextPathname(activeRoute))
       }
-    }
+    } else {
+      // TODO WORKING ONLY AFTER REFRESH
+      this.socket = isAuthenticated && socket
 
-    if(!this.socket) {
-      return
+      if(!this.socket) {
+        return
+      }
+      this.socket.on('invite users', (sender, discussionId) => {
+        console.log(sender, discussionId)
+      })
     }
-
-    this.socket.on('invite users', (sender, discussionId) => {
-      alert(sender, discussionId)
-    })
   }
 
   componentWillReceiveProps(nextProps) {
