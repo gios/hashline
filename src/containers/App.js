@@ -23,21 +23,11 @@ class App extends Component {
       if(activeRoute !== 'login') {
         dispatch(setNextPathname(activeRoute))
       }
-    } else {
-      // TODO WORKING ONLY AFTER REFRESH
-      this.socket = isAuthenticated && socket
-
-      if(!this.socket) {
-        return
-      }
-      this.socket.on('invite users', (sender, discussionId) => {
-        console.log(sender, discussionId)
-      })
     }
-  }
 
-  componentWillReceiveProps(nextProps) {
-    this.socket = nextProps.isAuthenticated && socket
+    socket.on('invite users', (sender, discussionId) => {
+      console.log(sender, discussionId)
+    })
   }
 
   sidebarMobileTrigger() {
@@ -79,7 +69,7 @@ class App extends Component {
                        NotificationManager.error(status.payload.response.message)
                        return
                      }
-                     this.socket.emit('join user', status.payload)
+                     socket.emit('join user', status.payload)
                    })}
                    onGetSidebarTypes={() => dispatch(getSidebarTypes()).then(status => {
                      status.error && NotificationManager.error(status.payload.response.message)
