@@ -78,6 +78,7 @@ module.exports = function(router, jwt, SHARED_SECRET) {
   })
 
   router.post('/api/search_users', function *() {
+    let userInfo = this.state.user
     let query = this.request.body.query.toLowerCase()
     let users
 
@@ -85,6 +86,7 @@ module.exports = function(router, jwt, SHARED_SECRET) {
       users = yield knex('users')
       .select(knex.raw('id, LOWER(username) as value, username as label'))
       .where(knex.raw(`LOWER(username) LIKE '%${query}%'`))
+      .whereNot('username', userInfo.username)
       .limit(15)
     } else {
       users = []

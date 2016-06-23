@@ -97,7 +97,8 @@ class DiscussionForm extends Component {
   }
 
   inviteUsers() {
-    console.log('invite')
+    // TODO: SEND INVITATION
+    console.log(this.props.discussionInfo.usersInvite)
   }
 
   renderUsersSelect() {
