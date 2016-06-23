@@ -60,7 +60,7 @@ const discussionInfoState = Immutable.Map({
   payload: null,
   error: false,
   connectedUsers: null,
-  usersInvite: ''
+  usersInvite: []
 })
 
 function discussionInfo(state = discussionInfoState, action) {
