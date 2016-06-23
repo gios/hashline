@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { replace } from 'react-router-redux'
-import { NotificationManager } from 'react-notifications'
 import { loginUser } from '../actions/loginAction'
 import { signUpUser } from '../actions/signUpAction'
 import { incorrectUsername, incorrectEmail, incorrectPassword } from '../actions/authErrorsAction'
