@@ -16,13 +16,13 @@ import { getDiscussion,
          getSearchUsers } from '../actions/discussionAction'
 import DiscussionForm from '../components/discussion/DiscussionForm'
 import DiscussionPasswordModal from '../components/discussion/DiscussionPasswordModal'
-import io from 'socket.io-client'
+import socket from '../utils/socket'
 
 class Discussion extends Component {
 
   constructor(props) {
     super(props)
-    this.socket = props.isAuthenticated && io('', { path: '/api/chat' })
+    this.socket = props.isAuthenticated && socket
   }
 
   componentWillMount() {

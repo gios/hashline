@@ -10,8 +10,14 @@ import { getSidebarTypes } from '../actions/sidebarAction'
 import Sidebar from './../components/sidebar/Sidebar'
 import LoggedOutMessage from './../components/helpers/LoggedOutMessage'
 import Swipeable from 'react-swipeable'
+import socket from '../utils/socket'
 
 class App extends Component {
+
+  constructor(props) {
+    super(props)
+    this.socket = props.isAuthenticated && socket
+  }
 
   componentWillMount() {
     let { dispatch, isAuthenticated, activeRoute } = this.props
@@ -60,7 +66,11 @@ class App extends Component {
                    onSetMobile={value => dispatch(setMobileSidebar(value))}
                    onToggle={value => dispatch(toggleSidebar(value))}
                    onGetUserData={() => dispatch(getUserData()).then(status => {
-                     status.error && NotificationManager.error(status.payload.response.message)
+                     if(status.error) {
+                       NotificationManager.error(status.payload.response.message)
+                       return
+                     }
+                     this.socket.emit('join user', status.payload)
                    })}
                    onGetSidebarTypes={() => dispatch(getSidebarTypes()).then(status => {
                      status.error && NotificationManager.error(status.payload.response.message)

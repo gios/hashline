@@ -14,6 +14,7 @@ module.exports = function(io, socket) {
   }
 
   socket.on('join user', user => {
+    console.log(user)
     socket.username = user.username
     socket.join(user.username)
   })
