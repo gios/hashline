@@ -163,6 +163,12 @@ class DiscussionForm extends Component {
                   <button type='button'
                           className='btn btn-primary btn-sm m-t-1'
                           onClick={this.inviteUsers.bind(this)}>Invite</button>
+                  {discussionInfo.errorUsersInvite &&
+                    <div className='pull-xs-right m-t-1 error-users-invite'>
+                      <span>{discussionInfo.errorUsersInvite.message}:</span><br/>
+                      <span>{discussionInfo.errorUsersInvite.users.map(user => `${user}, `.replace(/,\s*$/, ''))}</span>
+                    </div>
+                  }
                 </div>
               </div>
             </div>

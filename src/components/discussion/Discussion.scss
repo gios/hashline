@@ -71,6 +71,16 @@
   }
 }
 
+.error-users-invite {
+  font-size: .8em;
+  color: darken(#ff9494, 30%);
+
+  & > span:last-child {
+    font-size: 1.1em;
+    font-weight: bold;
+  }
+}
+
 .chat-message {
   resize: none;
   font-size: .8em;

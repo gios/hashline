@@ -35,7 +35,7 @@ module.exports = function(io, socket) {
       })
 
       if(usernamesError.length) {
-        io.sockets.to(`user-${senderId}`).emit('error invite users', { error: 'Some users already invited', users: usernamesError })
+        io.sockets.to(`user-${senderId}`).emit('error invite users', { message: 'Some users already invited', users: usernamesError })
         return
       }
 

@@ -13,7 +13,8 @@ import { getDiscussion,
          setEndLoadMessages,
          setLoadDisableMessages,
          discussionUsersInvite,
-         getSearchUsers } from '../actions/discussionAction'
+         getSearchUsers,
+         setErrorUsersInvite } from '../actions/discussionAction'
 import DiscussionForm from '../components/discussion/DiscussionForm'
 import DiscussionPasswordModal from '../components/discussion/DiscussionPasswordModal'
 import socket from '../utils/socket'
@@ -44,7 +45,7 @@ class Discussion extends Component {
     })
 
     socket.on('error invite users', error => {
-      console.log(error)
+      dispatch(setErrorUsersInvite(error))
     })
   }
 

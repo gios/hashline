@@ -23,19 +23,14 @@ class NotificationsBlock extends Component {
           </NoDiscussionsCard>
         )
       }
-      return (
-        <div>
-          {notifications.payload.map(notification => {
-            return (
-              <div className='col-sm-4'>
-                <Notification key={notification.id}
-                              notification={notification}
-                              onJoinDiscussion={target => this.props.onJoinDiscussion(target)}/>
-              </div>
-            )
-          })}
-        </div>
-      )
+      return notifications.payload.map(notification => {
+        return (
+          <div key={notification.id} className='col-sm-4'>
+            <Notification notification={notification}
+                          onJoinDiscussion={target => this.props.onJoinDiscussion(target)}/>
+          </div>
+        )
+      })
     }
   }
 
