@@ -100,7 +100,7 @@ class DiscussionForm extends Component {
 
   inviteUsers() {
     let { user, discussionId } = this.props
-    this.props.socket.emit('invite users', this.props.discussionInfo.usersInvite, discussionId, user.payload.username)
+    this.props.socket.emit('invite users', this.props.discussionInfo.usersInvite, parseInt(discussionId), user.payload.id)
     this.props.discussionUsersInvite([])
   }
 

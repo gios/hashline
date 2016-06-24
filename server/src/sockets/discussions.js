@@ -18,9 +18,56 @@ module.exports = function(io, socket) {
     socket.join(`user-${user.id}`)
   })
 
-  socket.on('invite users', (usersInvite, discussionId, sender) => {
-    usersInvite.forEach(user => {
-      socket.broadcast.to(`user-${user.id}`).emit('invite users', sender, discussionId)
+  socket.on('invite users', (usersInvite, discussionId, senderId) => {
+    knex('notifications').insert(usersInvite.map(user => {
+      return {
+        sender_id: senderId,
+        discussion_id: discussionId,
+        user_id: user.id
+      }
+    }))
+    .then(() => {
+      Promise.all([
+        knex('discussions')
+        .select('discussions.id',
+                'discussions.name',
+                'discussions.description',
+                'discussions.created_at',
+                'types.name AS type_name',
+                'users.email AS user_email',
+                'users.username AS username',
+                'discussions.is_private',
+                'discussions.is_limited',
+                'discussions.limited_time',
+                'discussions.closed')
+        .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
+        .innerJoin('types', 'discussions.type_id', 'types.id')
+        .innerJoin('users', 'discussions.user_id', 'users.id')
+        .groupBy('discussions.id',
+                'discussions.name',
+                'discussions.description',
+                'discussions.created_at',
+                'types.name',
+                'users.email',
+                'users.username',
+                'discussions.is_private',
+                'discussions.is_limited',
+                'discussions.limited_time',
+                'discussions.closed')
+        .where('discussions.id', discussionId)
+        .first(),
+        knex('users')
+        .select('id', 'username', 'email')
+        .where('id', senderId)
+        .first()
+      ])
+      .then(data => {
+        let discussionsData = data[0]
+        let senderData = data[1]
+        usersInvite.forEach(user => {
+          socket.broadcast.to(`user-${user.id}`).emit('invite users', discussionsData, senderData)
+        })
+      })
     })
   })
 
