@@ -26,7 +26,13 @@ class NotificationsBlock extends Component {
       return (
         <div>
           {notifications.payload.map(notification => {
-            return <Notification key={notification.id} notification={notification}/>
+            return (
+              <div className='col-sm-4'>
+                <Notification key={notification.id}
+                              notification={notification}
+                              onJoinDiscussion={target => this.props.onJoinDiscussion(target)}/>
+              </div>
+            )
           })}
         </div>
       )
@@ -35,7 +41,7 @@ class NotificationsBlock extends Component {
 
   render() {
     return (
-      <div>
+      <div className='row'>
         {this.renderNotifications()}
       </div>
     )
