@@ -11,6 +11,14 @@ export const FAILURE_DELETE_NOTIFICATION = 'FAILURE_DELETE_NOTIFICATION'
 
 export const SET_NOTIFICATIONS_ARCHIVE = 'SET_NOTIFICATIONS_ARCHIVE'
 export const SET_SENT_NOTIFICATIONS_ARCHIVE = 'SET_SENT_NOTIFICATIONS_ARCHIVE'
+export const DELETE_NOTIFICATION_FROM_ARCHIVE = 'DELETE_NOTIFICATION_FROM_ARCHIVE'
+
+export function deleteNotificationFromArchive(id) {
+  return {
+    type: DELETE_NOTIFICATION_FROM_ARCHIVE,
+    id
+  }
+}
 
 export function setNotificationsArchive(notificationsArchive) {
   return {

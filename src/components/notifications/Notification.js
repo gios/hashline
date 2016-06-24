@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
+import { NotificationManager } from 'react-notifications'
 
 class Notification extends Component {
 
@@ -8,7 +9,13 @@ class Notification extends Component {
     let deleteNotification = confirm('Are you sure to delete this notification?')
 
     if(deleteNotification) {
-      this.props.deleteNotification(id)
+      this.props.deleteNotification(id).then(() => {
+        if(status.error) {
+          NotificationManager.error(status.payload.response.message)
+          return
+        }
+        this.props.deleteNotificationFromArchive(id)
+      })
     }
   }
 

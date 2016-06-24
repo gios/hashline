@@ -7,7 +7,8 @@ import { REQUEST_GET_NOTIFICATIONS,
          SUCCESS_DELETE_NOTIFICATION,
          FAILURE_DELETE_NOTIFICATION,
          SET_NOTIFICATIONS_ARCHIVE,
-         SET_SENT_NOTIFICATIONS_ARCHIVE } from '../actions/notificationsAction'
+         SET_SENT_NOTIFICATIONS_ARCHIVE,
+         DELETE_NOTIFICATION_FROM_ARCHIVE } from '../actions/notificationsAction'
 
 const notificationsInfoState = Immutable.Map({
   isFetching: false,
@@ -43,6 +44,12 @@ function notificationsInfo(state = notificationsInfoState, action) {
     case SET_SENT_NOTIFICATIONS_ARCHIVE:
       return state.merge({
         notificationsArchive: state.get('notificationsArchive').unshift(action.sentNotifications)
+      })
+    case DELETE_NOTIFICATION_FROM_ARCHIVE:
+      return state.merge({
+        notificationsArchive: state.get('notificationsArchive').find(item => {
+          return item.id === action.id
+        })
       })
     default:
       return state

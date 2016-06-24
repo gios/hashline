@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { NotificationManager } from 'react-notifications'
 import NotificationsBlock from '../components/notifications/NotificationsBlock'
-import { getNotifications, setNotificationsArchive, deleteNotification } from '../actions/notificationsAction'
+import { getNotifications,
+         setNotificationsArchive,
+         deleteNotification,
+         deleteNotificationFromArchive } from '../actions/notificationsAction'
 import { getDiscussion } from '../actions/discussionAction'
 import { push } from 'react-router-redux'
 
@@ -26,6 +29,7 @@ class Notifications extends Component {
     return (
       <div>
         <NotificationsBlock notifications={notifications}
+                            deleteNotificationFromArchive={id => dispatch(deleteNotificationFromArchive(id))}
                             onJoinDiscussion={target => this.onJoinDiscussion(target)}
                             deleteNotification={id => dispatch(deleteNotification(id))}
                             setNotificationsArchive={notifications => dispatch(setNotificationsArchive(notifications))}
