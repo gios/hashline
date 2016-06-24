@@ -42,6 +42,10 @@ class Discussion extends Component {
       dispatch(setSentMessageArchive({ created_at, username, message }))
       dispatch(setScrollToBottom(true))
     })
+
+    socket.on('error invite users', error => {
+      console.log(error)
+    })
   }
 
   onJoinDiscussion({ id, password = '' }) {
@@ -62,6 +66,7 @@ class Discussion extends Component {
     socket.removeListener('join discussion')
     socket.removeListener('connected users')
     socket.removeListener('chat message')
+    socket.removeListener('error invite users')
   }
 
   render() {

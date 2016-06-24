@@ -19,53 +19,74 @@ module.exports = function(io, socket) {
   })
 
   socket.on('invite users', (usersInvite, discussionId, senderId) => {
-    knex('notifications').insert(usersInvite.map(user => {
-      return {
-        sender_id: senderId,
-        discussion_id: discussionId,
-        user_id: user.id
+    knex('notifications')
+    .select('notifications.user_id', 'notifications.discussion_id', 'users.username')
+    .innerJoin('users', 'notifications.user_id', 'users.id')
+    .whereIn('user_id', usersInvite.map(user => user.id))
+    .then(notifications => {
+      let usernamesError = []
+
+      notifications.map(notification => {
+        usersInvite.map(user => {
+          if((notification.user_id === user.id) && (notification.discussion_id === discussionId)) {
+            usernamesError.push(notification.username)
+          }
+        })
+      })
+
+      if(usernamesError.length) {
+        io.sockets.to(`user-${senderId}`).emit('error invite users', { error: 'Some users already invited', users: usernamesError })
+        return
       }
-    }))
-    .then(() => {
-      Promise.all([
-        knex('discussions')
-        .select('discussions.id',
-                'discussions.name',
-                'discussions.description',
-                'discussions.created_at',
-                'types.name AS type_name',
-                'users.email AS user_email',
-                'users.username AS username',
-                'discussions.is_private',
-                'discussions.is_limited',
-                'discussions.limited_time',
-                'discussions.closed')
-        .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
-        .innerJoin('types', 'discussions.type_id', 'types.id')
-        .innerJoin('users', 'discussions.user_id', 'users.id')
-        .groupBy('discussions.id',
-                'discussions.name',
-                'discussions.description',
-                'discussions.created_at',
-                'types.name',
-                'users.email',
-                'users.username',
-                'discussions.is_private',
-                'discussions.is_limited',
-                'discussions.limited_time',
-                'discussions.closed')
-        .where('discussions.id', discussionId)
-        .first(),
-        knex('users')
-        .select('id', 'username', 'email')
-        .where('id', senderId)
-        .first()
-      ])
-      .then(data => {
-        let discussionsData = data[0]
-        let senderData = data[1]
-        usersInvite.forEach(user => {
-          socket.broadcast.to(`user-${user.id}`).emit('invite users', discussionsData, senderData)
+
+      knex('notifications').insert(usersInvite.map(user => {
+        return {
+          sender_id: senderId,
+          discussion_id: discussionId,
+          user_id: user.id
+        }
+      }))
+      .then(() => {
+        Promise.all([
+          knex('discussions')
+          .select('discussions.id',
+                  'discussions.name',
+                  'discussions.description',
+                  'discussions.created_at',
+                  'types.name AS type_name',
+                  'users.email AS user_email',
+                  'users.username AS username',
+                  'discussions.is_private',
+                  'discussions.is_limited',
+                  'discussions.limited_time',
+                  'discussions.closed')
+          .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
+          .innerJoin('types', 'discussions.type_id', 'types.id')
+          .innerJoin('users', 'discussions.user_id', 'users.id')
+          .groupBy('discussions.id',
+                  'discussions.name',
+                  'discussions.description',
+                  'discussions.created_at',
+                  'types.name',
+                  'users.email',
+                  'users.username',
+                  'discussions.is_private',
+                  'discussions.is_limited',
+                  'discussions.limited_time',
+                  'discussions.closed')
+          .where('discussions.id', discussionId)
+          .first(),
+          knex('users')
+          .select('id', 'username', 'email')
+          .where('id', senderId)
+          .first()
+        ])
+        .then(data => {
+          let discussionsData = data[0]
+          let senderData = data[1]
+          usersInvite.forEach(user => {
+            socket.broadcast.to(`user-${user.id}`).emit('invite users', discussionsData, senderData)
+          })
         })
       })
     })

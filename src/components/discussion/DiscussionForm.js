@@ -54,6 +54,7 @@ class DiscussionForm extends Component {
     socket.removeListener('leave discussion')
     socket.removeListener('join discussion')
     socket.removeListener('connected users')
+    socket.removeListener('invite users')
   }
 
   changeChatMessage(e) {
