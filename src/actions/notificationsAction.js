@@ -5,6 +5,10 @@ export const REQUEST_GET_NOTIFICATIONS = 'REQUEST_GET_NOTIFICATIONS'
 export const SUCCESS_GET_NOTIFICATIONS = 'SUCCESS_GET_NOTIFICATIONS'
 export const FAILURE_GET_NOTIFICATIONS = 'FAILURE_GET_NOTIFICATIONS'
 
+export const REQUEST_DELETE_NOTIFICATION = 'REQUEST_DELETE_NOTIFICATION'
+export const SUCCESS_DELETE_NOTIFICATION = 'SUCCESS_DELETE_NOTIFICATION'
+export const FAILURE_DELETE_NOTIFICATION = 'FAILURE_DELETE_NOTIFICATION'
+
 export const SET_NOTIFICATIONS_ARCHIVE = 'SET_NOTIFICATIONS_ARCHIVE'
 export const SET_SENT_NOTIFICATIONS_ARCHIVE = 'SET_SENT_NOTIFICATIONS_ARCHIVE'
 
@@ -29,6 +33,21 @@ export function getNotifications() {
       method: 'GET',
       headers: { 'Authorization': `Bearer ${idToken.getToken()}` },
       types: [REQUEST_GET_NOTIFICATIONS, SUCCESS_GET_NOTIFICATIONS, FAILURE_GET_NOTIFICATIONS]
+    }
+  }
+}
+
+export function deleteNotification(id) {
+  return {
+    [CALL_API]: {
+      endpoint: '/api/notification',
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${idToken.getToken()}`,
+        'Content-Type': 'application/json'
+      },
+      types: [REQUEST_DELETE_NOTIFICATION, SUCCESS_DELETE_NOTIFICATION, FAILURE_DELETE_NOTIFICATION],
+      body: JSON.stringify({ id })
     }
   }
 }

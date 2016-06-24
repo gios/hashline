@@ -3,6 +3,9 @@ import Immutable from 'immutable'
 import { REQUEST_GET_NOTIFICATIONS,
          SUCCESS_GET_NOTIFICATIONS,
          FAILURE_GET_NOTIFICATIONS,
+         REQUEST_DELETE_NOTIFICATION,
+         SUCCESS_DELETE_NOTIFICATION,
+         FAILURE_DELETE_NOTIFICATION,
          SET_NOTIFICATIONS_ARCHIVE,
          SET_SENT_NOTIFICATIONS_ARCHIVE } from '../actions/notificationsAction'
 
@@ -46,6 +49,38 @@ function notificationsInfo(state = notificationsInfoState, action) {
   }
 }
 
+const notificationDeleteState = Immutable.Map({
+  isFetching: false,
+  payload: null,
+  error: false
+})
+
+function notificationDelete(state = notificationDeleteState, action) {
+  switch (action.type) {
+    case REQUEST_DELETE_NOTIFICATION:
+      return state.merge({
+        isFetching: true,
+        payload: null,
+        error: false
+      })
+    case SUCCESS_DELETE_NOTIFICATION:
+      return state.merge({
+        isFetching: false,
+        payload: action.payload,
+        error: false
+      })
+    case FAILURE_DELETE_NOTIFICATION:
+      return state.merge({
+        isFetching: false,
+        payload: action.payload.response,
+        error: true
+      })
+    default:
+      return state
+  }
+}
+
 export let notifications = combineReducers({
-  notificationsInfo
+  notificationsInfo,
+  notificationDelete
 })

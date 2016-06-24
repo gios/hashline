@@ -28,4 +28,12 @@ module.exports = function(router) {
 
     this.body = notificationsData
   })
+
+  router.del('/api/notification', function *() {
+    let id = this.request.body.id
+    let deletedNotification = yield knex('notifications')
+    .where('id', id).del()
+
+    this.body = { id: deletedNotification }
+  })
 }

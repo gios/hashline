@@ -3,8 +3,17 @@ import moment from 'moment'
 
 class Notification extends Component {
 
+  deleteNotificationConfirm(id) {
+
+    let deleteNotification = confirm('Are you sure to delete this notification?')
+
+    if(deleteNotification) {
+      this.props.deleteNotification(id)
+    }
+  }
+
   render() {
-    let { discussion_name, discussion_type, notification_created_at, notification_discussion_id, sender_name } = this.props.notification
+    let { id, discussion_name, discussion_type, notification_created_at, notification_discussion_id, sender_name } = this.props.notification
 
     return (
       <div className='card'>
@@ -16,6 +25,7 @@ class Notification extends Component {
           <p className='card-text'><strong>{sender_name}</strong></p>
           <p className='card-text'><small className='text-muted'>{moment(notification_created_at).format('DD MMM YYYY H:mm:ss')}</small></p>
           <button onClick={this.props.onJoinDiscussion.bind(this, { id: notification_discussion_id })} className='btn btn-primary'>Connect to discussion</button>
+          <button onClick={this.deleteNotificationConfirm.bind(this, id)} className='btn btn-danger pull-xs-right'>Delete</button>
         </div>
       </div>
     )
