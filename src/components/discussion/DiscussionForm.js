@@ -120,7 +120,7 @@ class DiscussionForm extends Component {
   }
 
   render() {
-    let { discussionInfo, clientHeight, discussionMessages } = this.props
+    let { discussionInfo, clientHeight, discussionMessages, user } = this.props
     let discussionInfoRender
 
     if(discussionInfo.isFetching) {
@@ -148,20 +148,24 @@ class DiscussionForm extends Component {
               </ul>
             </div>
           </div>
-          <a className='online-users-chat' data-toggle='collapse' href='#invite-users' aria-expanded='false' aria-controls='invite-users'>
-            <li className='list-group-item m-b-1'>
-              <strong>Invite Users:</strong>
-              <i className='fa fa-arrow-down pull-xs-right' aria-hidden='true'></i>
-            </li>
-          </a>
-          <div className='collapse' id='invite-users'>
-            <div className='card card-block'>
-              {this.renderUsersSelect()}
-              <button type='button'
-                      className='btn btn-primary btn-sm m-t-1'
-                      onClick={this.inviteUsers.bind(this)}>Invite</button>
+          { (discussionInfo.payload && discussionInfo.payload.username) === (user.payload && user.payload.username) &&
+            <div>
+              <a className='online-users-chat' data-toggle='collapse' href='#invite-users' aria-expanded='false' aria-controls='invite-users'>
+                <li className='list-group-item m-b-1'>
+                  <strong>Invite Users:</strong>
+                  <i className='fa fa-arrow-down pull-xs-right' aria-hidden='true'></i>
+                </li>
+              </a>
+              <div className='collapse' id='invite-users'>
+                <div className='card card-block'>
+                  {this.renderUsersSelect()}
+                  <button type='button'
+                          className='btn btn-primary btn-sm m-t-1'
+                          onClick={this.inviteUsers.bind(this)}>Invite</button>
+                </div>
+              </div>
             </div>
-          </div>
+          }
           <li className='list-group-item'>
             <strong>Name:</strong>
             <div className='chat-info-description'>{discussionInfo.payload.name}</div>
