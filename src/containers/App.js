@@ -28,6 +28,7 @@ class App extends Component {
 
     socket.on('invite users', notificationsData => {
       dispatch(setSentNotificationsArchive(notificationsData))
+      dispatch(getUserData())
     })
   }
 
