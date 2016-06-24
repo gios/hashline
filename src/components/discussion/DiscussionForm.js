@@ -92,17 +92,19 @@ class DiscussionForm extends Component {
   selectUsers(usersInvite) {
     this.props.discussionUsersInvite(usersInvite)
     this.props.setScrollToBottom(false)
+    this.props.clearErrorUsersInvite()
   }
 
   inputUsersInvite(query) {
     this.props.getSearchUsers(query.trim())
     this.props.setScrollToBottom(false)
+    this.props.clearErrorUsersInvite()
   }
 
   inviteUsers() {
-    let { user, discussionId } = this.props
-    this.props.socket.emit('invite users', this.props.discussionInfo.usersInvite, parseInt(discussionId), user.payload.id)
-    this.props.discussionUsersInvite([])
+    let { user, discussionId, discussionInfo, socket, discussionUsersInvite } = this.props
+    socket.emit('invite users', discussionInfo.usersInvite, parseInt(discussionId), user.payload.id)
+    discussionUsersInvite([])
   }
 
   renderUsersSelect() {
@@ -166,7 +168,7 @@ class DiscussionForm extends Component {
                   {discussionInfo.errorUsersInvite &&
                     <div className='pull-xs-right m-t-1 error-users-invite'>
                       <span>{discussionInfo.errorUsersInvite.message}:</span><br/>
-                      <span>{discussionInfo.errorUsersInvite.users.map(user => `${user}, `.replace(/,\s*$/, ''))}</span>
+                      <span>{discussionInfo.errorUsersInvite.users.map(user => `${user} `)}</span>
                     </div>
                   }
                 </div>

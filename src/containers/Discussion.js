@@ -82,6 +82,7 @@ class Discussion extends Component {
                                          discussionInfo={discussionInfo}
                                          discussionMessages={discussionMessages}
                                          searchUsers={searchUsers}
+                                         clearErrorUsersInvite={() => dispatch(setErrorUsersInvite(null))}
                                          getSearchUsers={search => dispatch(getSearchUsers(search))}
                                          discussionUsersInvite={usersInvite => dispatch(discussionUsersInvite(usersInvite))}
                                          setStartLoadMessages={start => dispatch(setStartLoadMessages(start))}
