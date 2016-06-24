@@ -24,7 +24,7 @@ class Notifications extends Component {
     let { dispatch, notifications } = this.props
 
     return (
-      <div className='text-xs-center m-t-3'>
+      <div>
         <NotificationsBlock notifications={notifications}
                             onJoinDiscussion={target => this.onJoinDiscussion(target)}
                             getNotifications={() => dispatch(getNotifications()).then(status => {
