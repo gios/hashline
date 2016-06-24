@@ -1,11 +1,16 @@
 import { combineReducers } from 'redux'
 import Immutable from 'immutable'
-import { REQUEST_GET_NOTIFICATIONS, SUCCESS_GET_NOTIFICATIONS, FAILURE_GET_NOTIFICATIONS } from '../actions/notificationsAction'
+import { REQUEST_GET_NOTIFICATIONS,
+         SUCCESS_GET_NOTIFICATIONS,
+         FAILURE_GET_NOTIFICATIONS,
+         SET_NOTIFICATIONS_ARCHIVE,
+         SET_SENT_NOTIFICATIONS_ARCHIVE } from '../actions/notificationsAction'
 
 const notificationsInfoState = Immutable.Map({
   isFetching: false,
   payload: null,
-  error: false
+  error: false,
+  notificationsArchive: Immutable.List.of()
 })
 
 function notificationsInfo(state = notificationsInfoState, action) {
@@ -27,6 +32,14 @@ function notificationsInfo(state = notificationsInfoState, action) {
         isFetching: false,
         payload: action.payload.response,
         error: true
+      })
+    case SET_NOTIFICATIONS_ARCHIVE:
+      return state.merge({
+        notificationsArchive: state.get('notificationsArchive').push(...action.notificationsArchive)
+      })
+    case SET_SENT_NOTIFICATIONS_ARCHIVE:
+      return state.merge({
+        notificationsArchive: state.get('notificationsArchive').unshift(action.sentNotifications)
       })
     default:
       return state

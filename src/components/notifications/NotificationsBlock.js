@@ -1,12 +1,19 @@
 import React, { Component } from 'react'
 import Loader from '../parts/Loader'
+import { NotificationManager } from 'react-notifications'
 import NoDiscussionsCard from '../discussions/NoDiscussionsCard'
 import Notification from './Notification'
 
 class NotificationsBlock extends Component {
 
   componentWillMount() {
-    this.props.getNotifications()
+    this.props.getNotifications().then(notifications => {
+      if(status.error) {
+        NotificationManager.error(status.payload.response.message)
+        return
+      }
+      this.props.setNotificationsArchive(notifications.payload)
+    })
   }
 
   renderNotifications() {
@@ -14,8 +21,8 @@ class NotificationsBlock extends Component {
 
     if(notifications.isFetching) {
       return <Loader size={4}/>
-    } else if(notifications.payload) {
-      if(!notifications.payload.length) {
+    } else if(notifications.notificationsArchive) {
+      if(!notifications.notificationsArchive.length) {
         return (
           <NoDiscussionsCard>
             <h3>You don't have any notifications.</h3><br/>
@@ -23,7 +30,7 @@ class NotificationsBlock extends Component {
           </NoDiscussionsCard>
         )
       }
-      return notifications.payload.map(notification => {
+      return notifications.notificationsArchive.map(notification => {
         return (
           <div key={notification.id} className='col-sm-4'>
             <Notification notification={notification}

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { NotificationManager } from 'react-notifications'
 import NotificationsBlock from '../components/notifications/NotificationsBlock'
-import { getNotifications } from '../actions/notificationsAction'
+import { getNotifications, setNotificationsArchive } from '../actions/notificationsAction'
 import { getDiscussion } from '../actions/discussionAction'
 import { push } from 'react-router-redux'
 
@@ -27,9 +27,8 @@ class Notifications extends Component {
       <div>
         <NotificationsBlock notifications={notifications}
                             onJoinDiscussion={target => this.onJoinDiscussion(target)}
-                            getNotifications={() => dispatch(getNotifications()).then(status => {
-                              status.error && NotificationManager.error(status.payload.response.message)
-                            })}/>
+                            setNotificationsArchive={notifications => dispatch(setNotificationsArchive(notifications))}
+                            getNotifications={() => dispatch(getNotifications())}/>
       </div>
     )
   }
