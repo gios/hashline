@@ -32,7 +32,7 @@ class NotificationsBlock extends Component {
       }
       return notifications.notificationsArchive.map(notification => {
         return (
-          <div key={notification.id} className='col-sm-4'>
+          <div key={notification.id} className='col-xs-12 col-sm-12 col-md-6 col-lg-4'>
             <Notification notification={notification}
                           onJoinDiscussion={target => this.props.onJoinDiscussion(target)}/>
           </div>
