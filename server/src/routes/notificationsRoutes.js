@@ -24,6 +24,7 @@ module.exports = function(router) {
              'discussion_type',
              'sender_name')
     .where('notifications.user_id', userInfo.id)
+    .orderBy('notification_created_at', 'desc')
 
     this.body = notificationsData
   })
