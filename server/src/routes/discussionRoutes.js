@@ -119,6 +119,7 @@ module.exports = function(router) {
             'users.username',
             'discussions.is_private',
             'discussions.is_limited',
+            'discussions.created_at',
             'discussions.limited_time',
             'discussions.closed')
     .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
@@ -131,6 +132,7 @@ module.exports = function(router) {
              'users.username',
              'discussions.is_private',
              'discussions.is_limited',
+             'discussions.created_at',
              'discussions.limited_time',
              'discussions.closed')
     .where('discussions.id', id)
