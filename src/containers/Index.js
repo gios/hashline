@@ -4,6 +4,7 @@ import CreateDiscussion from './CreateDiscussion'
 import Discussion from './Discussion'
 import Discussions from './Discussions'
 import NotFound from './NotFound'
+import Notifications from './Notifications'
 
 export default {
   App,
@@ -11,5 +12,6 @@ export default {
   CreateDiscussion,
   Discussion,
   Discussions,
-  NotFound
+  NotFound,
+  Notifications
 }

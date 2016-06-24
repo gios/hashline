@@ -43,6 +43,7 @@ render(
         </Route>
         <Route path='limited' component={Containers.Discussions}/>
         <Route path='trending' component={Containers.Discussions}/>
+        <Route path='notifications' component={Containers.Notifications}/>
         <Route path='discussion' component={Containers.Discussion}>
           <Route path=':id' component={Containers.Discussion}/>
         </Route>
