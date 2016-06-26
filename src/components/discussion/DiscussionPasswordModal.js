@@ -15,18 +15,14 @@ class DiscussionPasswordModal extends Component {
         <div className='modal-dialog' role='document'>
           <div className='modal-content'>
             <div className='modal-header'>
-              <button type='button' className='close' data-dismiss='modal' aria-label='Close'>
-                <span aria-hidden='true'>&times; </span>
-              </button>
               <h4 className='modal-title text-xs-center'>This discussion is protected </h4>
             </div>
             <form onSubmit={this.discussionPasswordSubmit.bind(this)}>
               <div className='modal-body'>
-                <small className='text-muted'>This discussion is protected , please enter appropriate password.</small>
+                <small className='text-muted'>This discussion is protected, please enter appropriate password.</small>
                 <input type='password' className='form-control' placeholder='Password' ref='passwordRef'></input>
               </div>
               <div className='modal-footer'>
-                <button type='button' className='btn btn-secondary' data-dismiss='modal'>Close</button>
                 <button type='submit' className='btn btn-primary'>Apply</button>
               </div>
             </form>
