@@ -50,15 +50,19 @@ class Discussion extends Component {
   }
 
   onJoinDiscussion({ id, password = '' }) {
-    let { dispatch } = this.props
+    let { dispatch, user } = this.props
 
     dispatch(getDiscussion(parseInt(id), password)).then((status) => {
       if(status.error && status.payload.status === 412) {
         NotificationManager.error(status.payload.response.message)
         $('#discussion-password').modal('show')
+        return
       } else if(status.error) {
         NotificationManager.error(status.payload.response.message)
+        return
       }
+      socket.emit('join discussion', { discussionId: parseInt(id), username: user.payload.username, email: user.payload.email })
+      socket.emit('connected users', parseInt(id))
     })
   }
 

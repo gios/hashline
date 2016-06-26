@@ -11,19 +11,27 @@ import { USER_GETTER_METHOD_DISCUSSION,
          TRENDING_GETTER_METHOD_DISCUSSION } from '../constants'
 import { NotificationManager } from 'react-notifications'
 import { push } from 'react-router-redux'
+import socket from '../utils/socket'
 
 class Discussions extends Component {
 
   onJoinDiscussion({ id, password = '' }) {
-    let { dispatch } = this.props
+    let { dispatch, userInfo } = this.props
 
     dispatch(getDiscussion(parseInt(id), password)).then((status) => {
       if(status.error) {
         NotificationManager.error(status.payload.response.message)
         return
       }
+      socket.emit('join discussion', { discussionId: parseInt(id), username: userInfo.payload.username, email: userInfo.payload.email })
+      socket.emit('connected users', parseInt(id))
       dispatch(push(`/discussion/${id}`))
     })
+  }
+
+  componentWillUnmount() {
+    socket.removeListener('join discussion')
+    socket.removeListener('connected users')
   }
 
   getDiscussionType(pathname) {

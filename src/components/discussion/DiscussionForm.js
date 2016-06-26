@@ -11,13 +11,8 @@ import Loader from '../parts/Loader'
 class DiscussionForm extends Component {
 
   componentWillMount() {
-    let { discussionId, discussionInfo, user, socket } = this.props
+    let { discussionId, discussionInfo } = this.props
     this.loadDiscussionMessages()
-
-    if(user.payload) {
-      socket.emit('join discussion', { discussionId, username: user.payload.username, email: user.payload.email })
-      socket.emit('connected users', discussionId)
-    }
 
     if(!discussionInfo.payload) {
       this.props.onJoinDiscussion({ id: discussionId })
