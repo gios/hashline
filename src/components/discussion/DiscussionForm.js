@@ -13,6 +13,10 @@ class DiscussionForm extends Component {
   componentWillMount() {
     let { discussionId, discussionInfo } = this.props
 
+    if(discussionInfo.payload) {
+      this.loadDiscussionMessages()
+    }
+
     if(!discussionInfo.payload) {
       this.props.onJoinDiscussion({ id: discussionId })
     }
