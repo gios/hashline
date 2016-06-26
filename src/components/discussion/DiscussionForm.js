@@ -74,6 +74,7 @@ class DiscussionForm extends Component {
       e.preventDefault()
       socket.emit('chat message', message, discussionId, user.payload)
       setChatMessage('')
+      this.refs.addMessage.focus()
     }
   }
 
