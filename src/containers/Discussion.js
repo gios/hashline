@@ -61,6 +61,7 @@ class Discussion extends Component {
         NotificationManager.error(status.payload.response.message)
         return
       }
+      this.refs.discussionFormRef.loadDiscussionMessages()
       socket.emit('join discussion', { discussionId: parseInt(id), username: user.payload.username, email: user.payload.email })
       socket.emit('connected users', parseInt(id))
     })
@@ -79,6 +80,7 @@ class Discussion extends Component {
     return (
       <div>
         {user.payload && <DiscussionForm socket={socket}
+                                         ref='discussionFormRef'
                                          clientHeight={clientHeight}
                                          clearMessageArchive={() => dispatch(clearMessageArchive())}
                                          user={user}
