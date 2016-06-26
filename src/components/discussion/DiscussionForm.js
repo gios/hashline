@@ -128,19 +128,19 @@ class DiscussionForm extends Component {
 
     if(discussionInfo.isFetching) {
       discussionInfoRender = <Loader size={2}/>
-    } else if(discussionInfo.payload && discussionInfo.connectedUsers) {
+    } else if(discussionInfo.payload) {
       discussionInfoRender = (
         <ul className='list-group'>
           <a className='online-users-chat' data-toggle='collapse' href='#online-users' aria-expanded='false' aria-controls='online-users'>
             <li className='list-group-item m-b-1'>
               <strong>Connected Users:</strong>
-              <span className='label label-default label-pill pull-xs-right'>{discussionInfo.connectedUsers.length}</span>
+              <span className='label label-default label-pill pull-xs-right'>{discussionInfo.connectedUsers && discussionInfo.connectedUsers.length}</span>
             </li>
           </a>
           <div className='collapse' id='online-users'>
             <div className='card card-block'>
               <ul className='list-group'>
-                  {discussionInfo.connectedUsers.users.map(user => {
+                  {discussionInfo.connectedUsers && discussionInfo.connectedUsers.users.map(user => {
                     return (
                       <li key={user.index} className='list-group-item'>
                         <span className='label label-default pull-xs-right chat-user-label'>{user.email}</span>
