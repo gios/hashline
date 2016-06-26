@@ -84,17 +84,6 @@ module.exports = function(io, socket) {
 
     socket.join(`discussion-${params.discussionId}`)
     socket.broadcast.to(`discussion-${params.discussionId}`).emit('join discussion', params.username)
-
-    // knex('discussions')
-    // .select('is_private')
-    // .where('id', params.discussionId)
-    // .then(is_private => {
-    //   console.log(is_private.length)
-    //   if(!is_private.length) {
-    //     socket.join(`discussion-${params.discussionId}`)
-    //     socket.broadcast.to(`discussion-${params.discussionId}`).emit('join discussion', params.username)
-    //   }
-    // })
   })
 
   socket.on('leave discussion', params => {
