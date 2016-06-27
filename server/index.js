@@ -48,8 +48,8 @@ app.use(router.routes())
 app.use(router.allowedMethods())
 
 require('./src/routes/userRoutes')(router, jwt, SHARED_SECRET)
-require('./src/routes/discussionRoutes')(router, jwt, SHARED_SECRET)
-require('./src/routes/notificationsRoutes')(router, jwt, SHARED_SECRET)
+require('./src/routes/discussionRoutes')(router)
+require('./src/routes/notificationsRoutes')(router)
 
 io.on('connection', (socket) => {
   tracer.info('USER CONNECTED')
