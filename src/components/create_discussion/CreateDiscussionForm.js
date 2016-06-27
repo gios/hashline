@@ -213,7 +213,7 @@ class createDiscussionForm extends Component {
                               data-toggle='tooltip'
                               data-trigger='manual'
                               data-placement='right'
-                              data-original-title='Description should be more than 50 symbols'
+                              data-original-title='Description should be more than 20 symbols'
                               ref='discussionDescription'
                               style={{resize: 'none'}}></textarea>
                   </div>
