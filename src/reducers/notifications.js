@@ -47,9 +47,9 @@ function notificationsInfo(state = notificationsInfoState, action) {
       })
     case DELETE_NOTIFICATION_FROM_ARCHIVE:
       return state.merge({
-        notificationsArchive: state.get('notificationsArchive').find(item => {
+        notificationsArchive: state.get('notificationsArchive').delete(state.get('notificationsArchive').findIndex(item => {
           return item.id === action.id
-        })
+        }))
       })
     default:
       return state

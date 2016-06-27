@@ -12,7 +12,10 @@ class DiscussionsBlock extends Component {
 
   componentWillReceiveProps(nextProps) {
     if(this.props.pathname !== nextProps.pathname) {
-      setTimeout(() => this.props.onLoadDiscussions(nextProps.pathname))
+      setTimeout(() => {
+        this.props.clearDiscussionsArchive()
+        this.props.onLoadDiscussions(nextProps.pathname)
+      })
     }
   }
 
@@ -21,8 +24,8 @@ class DiscussionsBlock extends Component {
 
     if(discussions.isFetching) {
       return <Loader size={4}/>
-    } else if(discussions.payload) {
-      if(!discussions.payload.length) {
+    } else if(discussions.discussionsArchive) {
+      if(!discussions.discussionsArchive.length) {
         return (
           <NoDiscussionsCard>
             <h3>You don't have any discussions.</h3><br/>
@@ -33,7 +36,7 @@ class DiscussionsBlock extends Component {
           </NoDiscussionsCard>
         )
       }
-      return discussions.payload.map((discussion) => {
+      return discussions.discussionsArchive.map((discussion) => {
         return (
           <DiscussionCard onJoinDiscussion={onJoinDiscussion}
                           key={discussion.id}
