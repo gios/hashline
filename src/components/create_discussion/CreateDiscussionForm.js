@@ -120,7 +120,7 @@ class createDiscussionForm extends Component {
   }
 
   validateDescription(value) {
-    return (value.length >= 50) ? true : false
+    return (value.length >= 20) ? true : false
   }
 
   loadingSelect(type) {
