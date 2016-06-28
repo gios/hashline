@@ -5,7 +5,6 @@ import { NotificationManager } from 'react-notifications'
 class Notification extends Component {
 
   deleteNotificationConfirm(id) {
-
     let deleteNotification = confirm('Are you sure to delete this notification?')
 
     if(deleteNotification) {
@@ -31,7 +30,7 @@ class Notification extends Component {
           <h5 className='card-title'>{discussion_name}</h5>
           <p className='card-text'><strong>{sender_name}</strong></p>
           <p className='card-text'><small className='text-muted'>{moment(notification_created_at).format('DD MMM YYYY H:mm:ss')}</small></p>
-          <button onClick={this.props.onJoinDiscussion.bind(this, { id: notification_discussion_id })} className='btn btn-primary'>Connect to discussion</button>
+          <button onClick={this.props.onJoinDiscussion.bind(this, { notificationId: id, id: notification_discussion_id })} className='btn btn-primary'>Connect to discussion</button>
           <button onClick={this.deleteNotificationConfirm.bind(this, id)} className='btn btn-danger pull-xs-right'>Delete</button>
         </div>
       </div>

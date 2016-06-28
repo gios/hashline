@@ -11,7 +11,7 @@ import { push } from 'react-router-redux'
 
 class Notifications extends Component {
 
-  onJoinDiscussion({ id, password = '' }) {
+  onJoinDiscussion({ notificationId, id, password = '' }) {
     let { dispatch } = this.props
 
     dispatch(getDiscussion(parseInt(id), password)).then((status) => {
@@ -19,6 +19,8 @@ class Notifications extends Component {
         NotificationManager.error(status.payload.response.message)
         return
       }
+      dispatch(deleteNotification(notificationId))
+      dispatch(deleteNotificationFromArchive(notificationId))
       dispatch(push(`/discussion/${id}`))
     })
   }
