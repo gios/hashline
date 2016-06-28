@@ -4,7 +4,10 @@ import { getDiscussion, deleteDiscussion } from '../actions/discussionAction'
 import { getDiscussions,
          setDiscussionsArchive,
          clearDiscussionsArchive,
-         deleteDiscussionFromArchive } from '../actions/discussionsAction'
+         deleteDiscussionFromArchive,
+         setLoadDisableDiscussions,
+         setStartLoadDiscussions,
+         setEndLoadDiscussions } from '../actions/discussionsAction'
 import DiscussionsBlock from '../components/discussions/DiscussionsBlock'
 import { USER_GETTER_METHOD_DISCUSSION,
          RECENT_GETTER_METHOD_DISCUSSION,
@@ -48,132 +51,50 @@ class Discussions extends Component {
 
   routeDiscussionSelector(pathname) {
     let { dispatch, discussions, userInfo } = this.props
+    let getterMethod = null
 
     switch(pathname) {
       case 'trending':
-        return <DiscussionsBlock discussions={discussions}
-                                 pathname={pathname}
-                                 userInfo={userInfo}
-                                 clearDiscussionsArchive={() => dispatch(clearDiscussionsArchive())}
-                                 deleteDiscussion={id => dispatch(deleteDiscussion(id)).then(status => {
-                                   if(status.error) {
-                                     NotificationManager.error(status.payload.response.message)
-                                     return
-                                   }
-                                   dispatch(deleteDiscussionFromArchive(id))
-                                 })}
-                                 onJoinDiscussion={this.onJoinDiscussion.bind(this)}
-                                 onLoadDiscussions={() => dispatch(getDiscussions(TRENDING_GETTER_METHOD_DISCUSSION)).then(status => {
-                                   status.error && NotificationManager.error(status.payload.response.message)
-                                   dispatch(setDiscussionsArchive(status.payload))
-                                 })}/>
+        getterMethod = TRENDING_GETTER_METHOD_DISCUSSION
+        break;
       case 'mydiscussions':
-        return <DiscussionsBlock discussions={discussions}
-                                 pathname={pathname}
-                                 userInfo={userInfo}
-                                 clearDiscussionsArchive={() => dispatch(clearDiscussionsArchive())}
-                                 deleteDiscussion={id => dispatch(deleteDiscussion(id)).then(status => {
-                                   if(status.error) {
-                                     NotificationManager.error(status.payload.response.message)
-                                     return
-                                   }
-                                   dispatch(deleteDiscussionFromArchive(id))
-                                 })}
-                                 onJoinDiscussion={this.onJoinDiscussion.bind(this)}
-                                 onLoadDiscussions={() => dispatch(getDiscussions(USER_GETTER_METHOD_DISCUSSION)).then(status => {
-                                   status.error && NotificationManager.error(status.payload.response.message)
-                                   dispatch(setDiscussionsArchive(status.payload))
-                                 })}/>
+        getterMethod = USER_GETTER_METHOD_DISCUSSION
+        break;
       case 'limited':
-        return <DiscussionsBlock discussions={discussions}
-                                 pathname={pathname}
-                                 userInfo={userInfo}
-                                 clearDiscussionsArchive={() => dispatch(clearDiscussionsArchive())}
-                                 deleteDiscussion={id => dispatch(deleteDiscussion(id)).then(status => {
-                                   if(status.error) {
-                                     NotificationManager.error(status.payload.response.message)
-                                     return
-                                   }
-                                   dispatch(deleteDiscussionFromArchive(id))
-                                 })}
-                                 onJoinDiscussion={this.onJoinDiscussion.bind(this)}
-                                 onLoadDiscussions={() => dispatch(getDiscussions(LIMITED_GETTER_METHOD_DISCUSSION)).then(status => {
-                                   status.error && NotificationManager.error(status.payload.response.message)
-                                   dispatch(setDiscussionsArchive(status.payload))
-                                 })}/>
+        getterMethod = LIMITED_GETTER_METHOD_DISCUSSION
+        break;
       case 'recent':
-        return <DiscussionsBlock discussions={discussions}
-                                 pathname={pathname}
-                                 userInfo={userInfo}
-                                 clearDiscussionsArchive={() => dispatch(clearDiscussionsArchive())}
-                                 deleteDiscussion={id => dispatch(deleteDiscussion(id)).then(status => {
-                                   if(status.error) {
-                                     NotificationManager.error(status.payload.response.message)
-                                     return
-                                   }
-                                   dispatch(deleteDiscussionFromArchive(id))
-                                 })}
-                                 onJoinDiscussion={this.onJoinDiscussion.bind(this)}
-                                 onLoadDiscussions={() => dispatch(getDiscussions(RECENT_GETTER_METHOD_DISCUSSION)).then(status => {
-                                   status.error && NotificationManager.error(status.payload.response.message)
-                                   dispatch(setDiscussionsArchive(status.payload))
-                                 })}/>
+        getterMethod = RECENT_GETTER_METHOD_DISCUSSION
+        break;
       case 'mostdiscussed':
-        return <DiscussionsBlock discussions={discussions}
-                                 pathname={pathname}
-                                 userInfo={userInfo}
-                                 clearDiscussionsArchive={() => dispatch(clearDiscussionsArchive())}
-                                 deleteDiscussion={id => dispatch(deleteDiscussion(id)).then(status => {
-                                   if(status.error) {
-                                     NotificationManager.error(status.payload.response.message)
-                                     return
-                                   }
-                                   dispatch(deleteDiscussionFromArchive(id))
-                                 })}
-                                 onJoinDiscussion={this.onJoinDiscussion.bind(this)}
-                                 onLoadDiscussions={() => dispatch(getDiscussions(MOST_DISCUSSED_GETTER_METHOD_DISCUSSION)).then(status => {
-                                   status.error && NotificationManager.error(status.payload.response.message)
-                                   dispatch(setDiscussionsArchive(status.payload))
-                                 })}/>
+        getterMethod = MOST_DISCUSSED_GETTER_METHOD_DISCUSSION
+        break;
       case /^type?/.test(pathname) && pathname:
-        return <DiscussionsBlock discussions={discussions}
-                                 pathname={pathname}
-                                 userInfo={userInfo}
-                                 clearDiscussionsArchive={() => dispatch(clearDiscussionsArchive())}
-                                 deleteDiscussion={id => dispatch(deleteDiscussion(id)).then(status => {
-                                   if(status.error) {
-                                     NotificationManager.error(status.payload.response.message)
-                                     return
-                                   }
-                                   dispatch(deleteDiscussionFromArchive(id))
-                                 })}
-                                 onJoinDiscussion={this.onJoinDiscussion.bind(this)}
-                                 onLoadDiscussions={pathnameNext => {
-                                   if(pathnameNext) {
-                                     pathname = pathnameNext
-                                   }
-                                   dispatch(getDiscussions(`${BY_TYPE_GETTER_METHOD_DISCUSSION}--${this.getDiscussionType(pathname)}`))
-                                   .then(status => {
-                                     status.error && NotificationManager.error(status.payload.response.message)
-                                     dispatch(setDiscussionsArchive(status.payload))
-                                 })}}/>
+        getterMethod = `${BY_TYPE_GETTER_METHOD_DISCUSSION}--${this.getDiscussionType(pathname)}`
+        break;
       default:
-        return <DiscussionsBlock discussions={discussions}
-                                 pathname={pathname}
-                                 userInfo={userInfo}
-                                 clearDiscussionsArchive={() => dispatch(clearDiscussionsArchive())}
-                                 deleteDiscussion={id => dispatch(deleteDiscussion(id)).then(status => {
-                                   if(status.error) {
-                                     NotificationManager.error(status.payload.response.message)
-                                     return
-                                   }
-                                   dispatch(deleteDiscussionFromArchive(id))
-                                 })}
-                                 onJoinDiscussion={this.onJoinDiscussion.bind(this)}
-                                 onLoadDiscussions={() => dispatch(getDiscussions(null)).then(status => {
-                                   status.error && NotificationManager.error(status.payload.response.message)
-                                   dispatch(setDiscussionsArchive(status.payload))
-                                 })}/>}
+        getterMethod = null
+        break;
+      }
+
+    return <DiscussionsBlock discussions={discussions}
+                             pathname={pathname}
+                             userInfo={userInfo}
+                             getterMethod={getterMethod}
+                             setLoadDisableDiscussions={value => dispatch(setLoadDisableDiscussions(value))}
+                             setStartLoadDiscussions={start => dispatch(setStartLoadDiscussions(start))}
+                             setEndLoadDiscussions={end => dispatch(setEndLoadDiscussions(end))}
+                             setDiscussionsArchive={data => dispatch(setDiscussionsArchive(data))}
+                             clearDiscussionsArchive={() => dispatch(clearDiscussionsArchive())}
+                             deleteDiscussion={id => dispatch(deleteDiscussion(id)).then(status => {
+                               if(status.error) {
+                                 NotificationManager.error(status.payload.response.message)
+                                 return
+                               }
+                               dispatch(deleteDiscussionFromArchive(id))
+                             })}
+                             onJoinDiscussion={this.onJoinDiscussion.bind(this)}
+                             onLoadDiscussions={(getterMethod, start, end) => dispatch(getDiscussions(getterMethod, start, end))}/>
   }
 
   render() {

@@ -4,15 +4,20 @@ import { REQUEST_GET_DISCUSSIONS,
          SUCCESS_GET_DISCUSSIONS,
          FAILURE_GET_DISCUSSIONS,
          SET_DISCUSSIONS_ARCHIVE,
-         SET_SENT_DISCUSSIONS_ARCHIVE,
          DELETE_DISCUSSION_FROM_ARCHIVE,
-         CLEAR_DISCUSSIONS_ARCHIVE } from '../actions/discussionsAction'
+         CLEAR_DISCUSSIONS_ARCHIVE,
+         END_LOAD_DISCUSSIONS,
+         LOAD_DISABLE_DISCUSSIONS,
+         START_LOAD_DISCUSSIONS } from '../actions/discussionsAction'
 
 const discussionsGetState = Immutable.Map({
   isFetching: false,
   payload: null,
   error: false,
-  discussionsArchive: Immutable.List.of()
+  discussionsArchive: Immutable.List.of(),
+  startLoad: 0,
+  endLoad: 4,
+  loadDisable: false
 })
 
 function getDiscussions(state = discussionsGetState, action) {
@@ -39,10 +44,6 @@ function getDiscussions(state = discussionsGetState, action) {
       return state.merge({
         discussionsArchive: state.get('discussionsArchive').push(...action.discussionsArchive)
       })
-    case SET_SENT_DISCUSSIONS_ARCHIVE:
-      return state.merge({
-        discussionsArchive: state.get('discussionsArchive').unshift(action.sentDiscussions)
-      })
     case DELETE_DISCUSSION_FROM_ARCHIVE:
       return state.merge({
         discussionsArchive: state.get('discussionsArchive').delete(state.get('discussionsArchive').findIndex(item => {
@@ -52,6 +53,18 @@ function getDiscussions(state = discussionsGetState, action) {
     case CLEAR_DISCUSSIONS_ARCHIVE:
       return state.merge({
         discussionsArchive: state.get('discussionsArchive').clear()
+      })
+    case START_LOAD_DISCUSSIONS:
+      return state.merge({
+        startLoad: action.startLoad
+      })
+    case END_LOAD_DISCUSSIONS:
+      return state.merge({
+        endLoad: action.endLoad
+      })
+    case LOAD_DISABLE_DISCUSSIONS:
+      return state.merge({
+        loadDisable: action.loadDisable
       })
     default:
       return state

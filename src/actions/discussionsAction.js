@@ -6,9 +6,33 @@ export const SUCCESS_GET_DISCUSSIONS = 'SUCCESS_GET_DISCUSSIONS'
 export const FAILURE_GET_DISCUSSIONS = 'FAILURE_GET_DISCUSSIONS'
 
 export const SET_DISCUSSIONS_ARCHIVE = 'SET_DISCUSSIONS_ARCHIVE'
-export const SET_SENT_DISCUSSIONS_ARCHIVE = 'SET_SENT_DISCUSSIONS_ARCHIVE'
 export const DELETE_DISCUSSION_FROM_ARCHIVE = 'DELETE_DISCUSSION_FROM_ARCHIVE'
 export const CLEAR_DISCUSSIONS_ARCHIVE = 'CLEAR_DISCUSSIONS_ARCHIVE'
+
+export const LOAD_DISABLE_DISCUSSIONS = 'LOAD_DISABLE_DISCUSSIONS'
+export const START_LOAD_DISCUSSIONS = 'START_LOAD_DISCUSSIONS'
+export const END_LOAD_DISCUSSIONS = 'END_LOAD_DISCUSSIONS'
+
+export function setLoadDisableDiscussions(loadDisable) {
+  return {
+    type: LOAD_DISABLE_DISCUSSIONS,
+    loadDisable
+  }
+}
+
+export function setStartLoadDiscussions(startLoad) {
+  return {
+    type: START_LOAD_DISCUSSIONS,
+    startLoad
+  }
+}
+
+export function setEndLoadDiscussions(endLoad) {
+  return {
+    type: END_LOAD_DISCUSSIONS,
+    endLoad
+  }
+}
 
 export function deleteDiscussionFromArchive(id) {
   return {
@@ -30,15 +54,7 @@ export function clearDiscussionsArchive() {
   }
 }
 
-// TODO
-export function setSentDiscussionsArchive(sentDiscussions) {
-  return {
-    type: SET_SENT_DISCUSSIONS_ARCHIVE,
-    sentDiscussions
-  }
-}
-
-export function getDiscussions(getterMethod) {
+export function getDiscussions(getterMethod, start, end) {
   return {
     [CALL_API]: {
       endpoint: '/api/discussions',
@@ -48,7 +64,7 @@ export function getDiscussions(getterMethod) {
         'Content-Type': 'application/json'
       },
       types: [REQUEST_GET_DISCUSSIONS, SUCCESS_GET_DISCUSSIONS, FAILURE_GET_DISCUSSIONS],
-      body: JSON.stringify({ getterMethod })
+      body: JSON.stringify({ getterMethod, start, end })
     }
   }
 }

@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { NotificationManager } from 'react-notifications'
+import { DISCUSSIONS_INTERVAL } from '../../constants'
 import Loader from '../parts/Loader'
 import NoDiscussionsCard from './NoDiscussionsCard'
 import { Link } from 'react-router'
@@ -7,16 +9,51 @@ import DiscussionCard from '../discussion/DiscussionCard'
 class DiscussionsBlock extends Component {
 
   componentWillMount() {
-    this.props.onLoadDiscussions()
+    this.loadDiscussions()
   }
 
   componentWillReceiveProps(nextProps) {
-    if(this.props.pathname !== nextProps.pathname) {
+    let { pathname, clearDiscussionsArchive, setStartLoadDiscussions, setEndLoadDiscussions } = this.props
+
+    if(pathname !== nextProps.pathname) {
       setTimeout(() => {
-        this.props.clearDiscussionsArchive()
-        this.props.onLoadDiscussions(nextProps.pathname)
+        setStartLoadDiscussions(0)
+        setEndLoadDiscussions(DISCUSSIONS_INTERVAL)
+        clearDiscussionsArchive()
+        this.loadDiscussions()
       })
     }
+  }
+
+  loadDiscussions() {
+    let { getterMethod, setLoadDisableDiscussions } = this.props
+    let { startLoad, endLoad } = this.props.discussions
+
+    return this.props.onLoadDiscussions(getterMethod, startLoad, endLoad).then(status => {
+      if(status.error) {
+        NotificationManager.error(status.payload.response.message)
+        return
+      }
+
+      if(status.payload.length < DISCUSSIONS_INTERVAL) {
+        setLoadDisableDiscussions(true)
+      } else {
+        setLoadDisableDiscussions(false)
+      }
+      this.props.setDiscussionsArchive(status.payload)
+    }).catch(err => {
+      NotificationManager.error(err.message)
+      setLoadDisableDiscussions(true)
+    })
+  }
+
+  loadMoreDiscussions() {
+    let { setStartLoadDiscussions, setEndLoadDiscussions } = this.props
+    let { startLoad, endLoad } = this.props.discussions
+
+    setStartLoadDiscussions(startLoad + DISCUSSIONS_INTERVAL)
+    setEndLoadDiscussions(endLoad + DISCUSSIONS_INTERVAL)
+    setTimeout(() => this.loadDiscussions())
   }
 
   renderDiscussions() {
@@ -50,9 +87,14 @@ class DiscussionsBlock extends Component {
   }
 
   render() {
+    let { discussions } = this.props
+
     return (
       <div className='card-group'>
         {this.renderDiscussions()}
+        {(!discussions.loadDisable && !discussions.isFetching) && <div className='row text-xs-center'>
+          <button onClick={this.loadMoreDiscussions.bind(this)} type='button' className='btn btn-secondary m-a-2'>Load More</button>
+        </div>}
       </div>
     )
   }
