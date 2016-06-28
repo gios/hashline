@@ -58,8 +58,10 @@ class DiscussionsBlock extends Component {
 
   renderDiscussions() {
     let { discussions, onJoinDiscussion } = this.props
+    let { startLoad, endLoad } = this.props.discussions
+    let startPoint = startLoad === 0 && endLoad === DISCUSSIONS_INTERVAL
 
-    if(discussions.isFetching) {
+    if(discussions.isFetching && startPoint) {
       return <Loader size={4}/>
     } else if(discussions.discussionsArchive) {
       if(!discussions.discussionsArchive.length) {

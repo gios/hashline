@@ -212,8 +212,6 @@ module.exports = function(router) {
         .innerJoin('tags', 'tags.id', 'discussions_tags.tag_id')
         .innerJoin('users', 'discussions.user_id', 'users.id')
         .groupBy('discussions.name', 'users.email', 'tags.name')
-        .limit(end - start)
-        .offset(start)
 
         discussionsData = yield knex('discussions')
         .select('discussions.id',
@@ -256,8 +254,6 @@ module.exports = function(router) {
         .innerJoin('users', 'discussions.user_id', 'users.id')
         .groupBy('discussions.name', 'users.email', 'tags.name')
         .where('discussions.is_limited', true)
-        .limit(end - start)
-        .offset(start)
 
         discussionsData = yield knex('discussions')
         .select('discussions.id',
@@ -299,8 +295,6 @@ module.exports = function(router) {
         .innerJoin('types', 'discussions.type_id', 'types.id')
         .groupBy('discussions.name', 'users.email', 'tags.name')
         .where('types.name', typeDiscussionFormatted)
-        .limit(end - start)
-        .offset(start)
 
         discussionsData = yield knex('discussions')
         .select('discussions.id',
@@ -339,8 +333,6 @@ module.exports = function(router) {
         .innerJoin('tags', 'tags.id', 'discussions_tags.tag_id')
         .innerJoin('users', 'discussions.user_id', 'users.id')
         .groupBy('discussions.name', 'users.email', 'tags.name')
-        .limit(end - start)
-        .offset(start)
 
         discussionsData = yield knex('discussions')
         .select('discussions.id',
@@ -381,8 +373,6 @@ module.exports = function(router) {
         .innerJoin('tags', 'tags.id', 'discussions_tags.tag_id')
         .innerJoin('users', 'discussions.user_id', 'users.id')
         .groupBy('discussions.name', 'users.email', 'tags.name')
-        .limit(end - start)
-        .offset(start)
 
         discussionsData = yield knex('discussions')
         .select('discussions.id',
@@ -422,8 +412,6 @@ module.exports = function(router) {
         .innerJoin('users', 'discussions.user_id', 'users.id')
         .groupBy('discussions.name', 'users.email', 'tags.name')
         .where('users.email', userInfo.email)
-        .limit(end - start)
-        .offset(start)
 
         discussionsData = yield knex('discussions')
         .select('discussions.id',
@@ -462,8 +450,6 @@ module.exports = function(router) {
         .innerJoin('tags', 'tags.id', 'discussions_tags.tag_id')
         .innerJoin('users', 'discussions.user_id', 'users.id')
         .groupBy('discussions.name', 'users.email', 'tags.name')
-        .limit(end - start)
-        .offset(start)
 
         discussionsData = yield knex('discussions')
         .select('discussions.id',
