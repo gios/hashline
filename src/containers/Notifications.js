@@ -6,6 +6,7 @@ import { getNotifications,
          setNotificationsArchive,
          deleteNotification,
          deleteNotificationFromArchive } from '../actions/notificationsAction'
+import { getUserData } from '../actions/sidebarAction'
 import { getDiscussion } from '../actions/discussionAction'
 import { push } from 'react-router-redux'
 
@@ -19,9 +20,10 @@ class Notifications extends Component {
         NotificationManager.error(status.payload.response.message)
         return
       }
-      dispatch(deleteNotification(notificationId))
-      dispatch(deleteNotificationFromArchive(notificationId))
-      dispatch(push(`/discussion/${id}`))
+      dispatch(deleteNotification(notificationId)).then(() => {
+        dispatch(deleteNotificationFromArchive(notificationId))
+        dispatch(getUserData()).then(() => dispatch(push(`/discussion/${id}`)))
+      })
     })
   }
 
@@ -31,6 +33,7 @@ class Notifications extends Component {
     return (
       <div>
         <NotificationsBlock notifications={notifications}
+                            getUserData={() => dispatch(getUserData())}
                             deleteNotificationFromArchive={id => dispatch(deleteNotificationFromArchive(id))}
                             onJoinDiscussion={target => this.onJoinDiscussion(target)}
                             deleteNotification={id => dispatch(deleteNotification(id))}

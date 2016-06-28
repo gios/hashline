@@ -14,6 +14,7 @@ class Notification extends Component {
           return
         }
         this.props.deleteNotificationFromArchive(id)
+        this.props.getUserData()
       })
     }
   }

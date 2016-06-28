@@ -34,6 +34,7 @@ class NotificationsBlock extends Component {
         return (
           <div key={notification.id} className='col-xs-12 col-sm-12 col-md-6 col-lg-4'>
             <Notification notification={notification}
+                          getUserData={() => this.props.getUserData()}
                           deleteNotificationFromArchive={id => this.props.deleteNotificationFromArchive(id)}
                           deleteNotification={id => this.props.deleteNotification(id)}
                           onJoinDiscussion={target => this.props.onJoinDiscussion(target)}/>
