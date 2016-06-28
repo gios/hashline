@@ -16,7 +16,7 @@ const discussionsGetState = Immutable.Map({
   error: false,
   discussionsArchive: Immutable.List.of(),
   startLoad: 0,
-  endLoad: 4,
+  endLoad: 20,
   loadDisable: false
 })
 
