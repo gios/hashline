@@ -42,6 +42,7 @@ class Discussions extends Component {
   componentWillUnmount() {
     socket.removeListener('join discussion')
     socket.removeListener('connected users')
+    this.props.dispatch(clearDiscussionsArchive())
   }
 
   getDiscussionType(pathname) {
