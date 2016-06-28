@@ -75,17 +75,18 @@ class DiscussionsBlock extends Component {
             </Link>
           </NoDiscussionsCard>
         )
+      } else {
+        renderDiscussions = discussions.discussionsArchive.map((discussion) => {
+          return (
+            <DiscussionCard onJoinDiscussion={onJoinDiscussion}
+                            key={discussion.id}
+                            discussion={discussion}
+                            closed={discussion.closed}
+                            deleteDiscussion={this.props.deleteDiscussion}
+                            userInfo={this.props.userInfo}/>
+          )
+        })
       }
-      renderDiscussions = discussions.discussionsArchive.map((discussion) => {
-        return (
-          <DiscussionCard onJoinDiscussion={onJoinDiscussion}
-                          key={discussion.id}
-                          discussion={discussion}
-                          closed={discussion.closed}
-                          deleteDiscussion={this.props.deleteDiscussion}
-                          userInfo={this.props.userInfo}/>
-        )
-      })
     }
 
     return (
