@@ -56,16 +56,17 @@ class DiscussionsBlock extends Component {
     setTimeout(() => this.loadDiscussions())
   }
 
-  renderDiscussions() {
+  render() {
     let { discussions, onJoinDiscussion } = this.props
     let { startLoad, endLoad } = this.props.discussions
     let startPoint = startLoad === 0 && endLoad === DISCUSSIONS_INTERVAL
+    let renderDiscussions
 
     if(discussions.isFetching && startPoint) {
       return <Loader size={4}/>
     } else if(discussions.discussionsArchive) {
       if(!discussions.discussionsArchive.length) {
-        return (
+        renderDiscussions = (
           <NoDiscussionsCard>
             <h3>You don't have any discussions.</h3><br/>
             <p>Do you wanna create a discussion?</p>
@@ -75,7 +76,7 @@ class DiscussionsBlock extends Component {
           </NoDiscussionsCard>
         )
       }
-      return discussions.discussionsArchive.map((discussion) => {
+      renderDiscussions = discussions.discussionsArchive.map((discussion) => {
         return (
           <DiscussionCard onJoinDiscussion={onJoinDiscussion}
                           key={discussion.id}
@@ -86,17 +87,14 @@ class DiscussionsBlock extends Component {
         )
       })
     }
-  }
-
-  render() {
-    let { discussions } = this.props
 
     return (
       <div className='card-group'>
-        {this.renderDiscussions()}
+        {renderDiscussions}
         {(!discussions.loadDisable && !discussions.isFetching) && <div className='row text-xs-center'>
           <button onClick={this.loadMoreDiscussions.bind(this)} type='button' className='btn btn-secondary m-a-2'>Load More</button>
         </div>}
+        {discussions.isFetching && <Loader size={3}/>}
       </div>
     )
   }

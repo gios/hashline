@@ -33,6 +33,7 @@ class Discussions extends Component {
       socket.emit('connected users', parseInt(id))
       dispatch(push(`/discussion/${id}`))
       dispatch(clearDiscussionsArchive())
+      // RESET START END
     })
   }
 

@@ -6,6 +6,7 @@ class Loader extends Component {
     let { size } = this.props
     let sizeProportion = Math.ceil(size * 1.8)
     let loaderStyle = {
+      display: 'inherit',
       fontSize: `${sizeProportion}px`,
       margin: `${sizeProportion * 8}px auto`
     }
