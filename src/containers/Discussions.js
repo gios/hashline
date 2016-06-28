@@ -14,7 +14,8 @@ import { USER_GETTER_METHOD_DISCUSSION,
          MOST_DISCUSSED_GETTER_METHOD_DISCUSSION,
          BY_TYPE_GETTER_METHOD_DISCUSSION,
          LIMITED_GETTER_METHOD_DISCUSSION,
-         TRENDING_GETTER_METHOD_DISCUSSION } from '../constants'
+         TRENDING_GETTER_METHOD_DISCUSSION,
+         DISCUSSIONS_INTERVAL } from '../constants'
 import { NotificationManager } from 'react-notifications'
 import { push } from 'react-router-redux'
 import socket from '../utils/socket'
@@ -33,7 +34,8 @@ class Discussions extends Component {
       socket.emit('connected users', parseInt(id))
       dispatch(push(`/discussion/${id}`))
       dispatch(clearDiscussionsArchive())
-      // RESET START END
+      dispatch(setStartLoadDiscussions(0))
+      dispatch(setEndLoadDiscussions(DISCUSSIONS_INTERVAL))
     })
   }
 
