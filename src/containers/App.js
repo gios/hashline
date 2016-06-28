@@ -12,6 +12,7 @@ import Sidebar from './../components/sidebar/Sidebar'
 import LoggedOutMessage from './../components/helpers/LoggedOutMessage'
 import Swipeable from 'react-swipeable'
 import socket from '../utils/socket'
+import { isSupported, permissionGranted, requestPermission } from '../utils/notifications'
 
 class App extends Component {
 
@@ -27,9 +28,29 @@ class App extends Component {
     }
 
     socket.on('invite users', notificationsData => {
+      this.sendNotificationForInvite(notificationsData)
       dispatch(setSentNotificationsArchive(notificationsData))
       dispatch(getUserData())
     })
+  }
+
+  sendNotificationForInvite(notificationsData) {
+    let notificationsOptions = {
+      body: `${notificationsData.sender_name} invites you to connect to discussion`,
+      sound: '../assets/audio/notification.mp3' // TODO SOUND
+    }
+
+    if(isSupported()) {
+      if(permissionGranted()) {
+        let a = new Notification(notificationsData.discussion_name, notificationsOptions)
+      } else {
+        requestPermission(() => {
+          new Notification(notificationsData.discussion_name, notificationsOptions)
+        })
+      }
+    } else {
+      NotificationManager.warning(status.payload.response.message)
+    }
   }
 
   sidebarMobileTrigger() {
