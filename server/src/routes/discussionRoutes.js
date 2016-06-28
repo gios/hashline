@@ -233,21 +233,21 @@ module.exports = function(router) {
         .leftJoin('messages', 'discussions.id', 'messages.discussion_id')
         .count('messages.id as messages_count')
         .groupBy('discussions.id',
-                'discussions.name',
-                'discussions.description',
-                'discussions.created_at',
-                'types.name',
-                'users.email',
-                'users.username',
-                'discussions.is_private',
-                'discussions.is_limited',
-                'discussions.limited_time',
-                'discussions.closed')
+                 'discussions.name',
+                 'discussions.description',
+                 'discussions.created_at',
+                 'types.name',
+                 'users.email',
+                 'users.username',
+                 'discussions.is_private',
+                 'discussions.is_limited',
+                 'discussions.limited_time',
+                 'discussions.closed')
          .orderBy('messages_count', 'desc')
          .orderBy('discussions.created_at', 'desc')
          .limit(end - start)
          .offset(start)
-        break;
+         break;
       case 'limited_discussions':
         discussionsTags = yield knex('discussions')
         .select('discussions.name', 'users.email AS user_email', 'tags.name AS tag_name')
