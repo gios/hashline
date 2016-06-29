@@ -6,7 +6,6 @@ import { NotificationContainer } from 'react-notifications'
 import { setScrollToBottom } from '../actions/discussionAction'
 import { runLogout, setNextPathname } from '../actions/loginAction'
 import { toggleSidebar, setMobileSidebar, getUserData, setClientHeight, setClientWidth } from '../actions/sidebarAction'
-import { setSentNotificationsArchive } from '../actions/notificationsAction'
 import { getSidebarTypes } from '../actions/sidebarAction'
 import Sidebar from './../components/sidebar/Sidebar'
 import LoggedOutMessage from './../components/helpers/LoggedOutMessage'
@@ -29,8 +28,6 @@ class App extends Component {
 
     socket.on('invite users', notificationsData => {
       this.sendNotificationForInvite(notificationsData)
-      dispatch(setSentNotificationsArchive(notificationsData))
-      dispatch(getUserData())
     })
   }
 

@@ -22,8 +22,7 @@ import {
   START_LOAD_MESSAGES,
   END_LOAD_MESSAGES,
   LOAD_DISABLE_MESSAGES,
-  DISCUSSION_USERS_INVITE,
-  ERROR_USERS_INVITE } from '../actions/discussionAction'
+  DISCUSSION_USERS_INVITE } from '../actions/discussionAction'
 
 const discussionDeleteState = Immutable.Map({
   isFetching: false,
@@ -61,8 +60,7 @@ const discussionInfoState = Immutable.Map({
   payload: null,
   error: false,
   connectedUsers: null,
-  usersInvite: [],
-  errorUsersInvite: null
+  usersInvite: []
 })
 
 function discussionInfo(state = discussionInfoState, action) {
@@ -92,10 +90,6 @@ function discussionInfo(state = discussionInfoState, action) {
     case DISCUSSION_USERS_INVITE:
       return state.merge({
         usersInvite: action.usersInvite
-      })
-    case ERROR_USERS_INVITE:
-      return state.merge({
-        errorUsersInvite: action.errorUsersInvite
       })
     default:
       return state

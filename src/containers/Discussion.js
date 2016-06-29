@@ -13,8 +13,7 @@ import { getDiscussion,
          setEndLoadMessages,
          setLoadDisableMessages,
          discussionUsersInvite,
-         getSearchUsers,
-         setErrorUsersInvite } from '../actions/discussionAction'
+         getSearchUsers } from '../actions/discussionAction'
 import DiscussionForm from '../components/discussion/DiscussionForm'
 import DiscussionPasswordModal from '../components/discussion/DiscussionPasswordModal'
 import socket from '../utils/socket'
@@ -42,10 +41,6 @@ class Discussion extends Component {
     socket.on('chat message', (created_at, username, message) => {
       dispatch(setSentMessageArchive({ created_at, username, message }))
       dispatch(setScrollToBottom(true))
-    })
-
-    socket.on('error invite users', error => {
-      dispatch(setErrorUsersInvite(error))
     })
   }
 
@@ -88,7 +83,6 @@ class Discussion extends Component {
                                          discussionInfo={discussionInfo}
                                          discussionMessages={discussionMessages}
                                          searchUsers={searchUsers}
-                                         clearErrorUsersInvite={() => dispatch(setErrorUsersInvite(null))}
                                          getSearchUsers={search => dispatch(getSearchUsers(search))}
                                          discussionUsersInvite={usersInvite => dispatch(discussionUsersInvite(usersInvite))}
                                          setStartLoadMessages={start => dispatch(setStartLoadMessages(start))}

@@ -68,7 +68,6 @@ class Sidebar extends Component {
   render() {
     let { isMobileView, userInfo, sidebarTypes } = this.props
     let userInfoRender
-    let notificationRender
     let typesOptions
 
     let toggleSidebarBtn = (
@@ -85,7 +84,7 @@ class Sidebar extends Component {
     )
 
     if(userInfo.isFetching) {
-      userInfoRender = notificationRender = <Loader size={2}/>
+      userInfoRender = <Loader size={2}/>
     } else if(userInfo.payload) {
       userInfoRender = (
         <div>
@@ -93,7 +92,6 @@ class Sidebar extends Component {
           <div>{userInfo.payload.email}</div>
         </div>
       )
-      notificationRender = <span className='label label-default label-pill pull-xs-right'>{userInfo.payload.notifications}</span>
     }
 
     if(sidebarTypes.payload) {
@@ -181,13 +179,6 @@ class Sidebar extends Component {
               <Link to='/mydiscussions' className={this.routeSelector('mydiscussions')} onClick={this.triggerRoute.bind(this)}>
                 <i className='fa fa-commenting-o'></i>
                 <span className='sidebar-list-item'>My Discussions</span>
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link to='/notifications' className={this.routeSelector('notifications')} onClick={this.triggerRoute.bind(this)}>
-                <i className='fa fa-bell-o'></i>
-                {notificationRender}
-                <span className='sidebar-list-item'>Notification</span>
               </Link>
             </li>
             <li className='nav-item'>

@@ -89,19 +89,17 @@ class DiscussionForm extends Component {
   }
 
   selectUsers(usersInvite) {
-    let { discussionInfo, discussionUsersInvite, setScrollToBottom, clearErrorUsersInvite } = this.props
+    let { discussionInfo, discussionUsersInvite, setScrollToBottom } = this.props
 
     if(discussionInfo.usersInvite.length <= 4) {
       discussionUsersInvite(usersInvite)
       setScrollToBottom(false)
-      clearErrorUsersInvite()
     }
   }
 
   inputUsersInvite(query) {
     this.props.getSearchUsers(query.trim())
     this.props.setScrollToBottom(false)
-    this.props.clearErrorUsersInvite()
   }
 
   inviteUsers() {

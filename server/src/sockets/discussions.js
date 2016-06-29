@@ -19,62 +19,63 @@ module.exports = function(io, socket) {
   })
 
   socket.on('invite users', (usersInvite, discussionId, senderId) => {
-    knex('notifications')
-    .select('notifications.user_id', 'notifications.discussion_id', 'users.username')
-    .innerJoin('users', 'notifications.user_id', 'users.id')
-    .whereIn('user_id', usersInvite.map(user => user.id))
-    .then(notifications => {
-      let usernamesError = []
+    // knex('notifications')
+    // .select('notifications.user_id', 'notifications.discussion_id', 'users.username')
+    // .innerJoin('users', 'notifications.user_id', 'users.id')
+    // .whereIn('user_id', usersInvite.map(user => user.id))
+    // .then(notifications => {
+    //   let usernamesError = []
 
-      notifications.map(notification => {
-        usersInvite.map(user => {
-          if((notification.user_id === user.id) && (notification.discussion_id === discussionId)) {
-            usernamesError.push(notification.username)
-          }
-        })
-      })
+    //   notifications.map(notification => {
+    //     usersInvite.map(user => {
+    //       if((notification.user_id === user.id) && (notification.discussion_id === discussionId)) {
+    //         usernamesError.push(notification.username)
+    //       }
+    //     })
+    //   })
 
-      if(usernamesError.length) {
-        io.sockets.to(`user-${senderId}`).emit('error invite users', { message: 'Some users already invited', users: usernamesError })
-        return
-      }
+    //   if(usernamesError.length) {
+    //     io.sockets.to(`user-${senderId}`).emit('error invite users', { message: 'Some users already invited', users: usernamesError })
+    //     return
+    //   }
 
-      knex('notifications')
-      .insert(usersInvite.map(user => {
-        return {
-          sender_id: senderId,
-          discussion_id: discussionId,
-          user_id: user.id
-        }
-      }))
-      .then(() => {
-        knex('notifications')
-        .select('notifications.id',
-                'notifications.discussion_id AS notification_discussion_id',
-                'notifications.created_at AS notification_created_at',
-                'discussions.name AS discussion_name',
-                'discussions.limited_time AS discussion_limited_time',
-                'types.name AS discussion_type',
-                'users.username AS sender_name')
-        .innerJoin('discussions', 'notifications.discussion_id', 'discussions.id')
-        .innerJoin('types', 'discussions.type_id', 'types.id')
-        .innerJoin('users', 'notifications.sender_id', 'users.id')
-        .groupBy('notifications.id',
-                 'notification_discussion_id',
-                 'notification_created_at',
-                 'discussion_name',
-                 'discussion_limited_time',
-                 'discussion_type',
-                 'sender_name')
-        .where('notifications.discussion_id', discussionId)
-        .first()
-        .then(notificationsData => {
-          usersInvite.map(user => {
-            socket.broadcast.to(`user-${user.id}`).emit('invite users', notificationsData)
-          })
-        })
-      })
-    })
+    //   knex('notifications')
+    //   .insert(usersInvite.map(user => {
+    //     return {
+    //       sender_id: senderId,
+    //       discussion_id: discussionId,
+    //       user_id: user.id
+    //     }
+    //   }))
+    //   .then(() => {
+    //     knex('notifications')
+    //     .select('notifications.id',
+    //             'notifications.discussion_id AS notification_discussion_id',
+    //             'notifications.created_at AS notification_created_at',
+    //             'discussions.name AS discussion_name',
+    //             'discussions.limited_time AS discussion_limited_time',
+    //             'types.name AS discussion_type',
+    //             'users.username AS sender_name')
+    //     .innerJoin('discussions', 'notifications.discussion_id', 'discussions.id')
+    //     .innerJoin('types', 'discussions.type_id', 'types.id')
+    //     .innerJoin('users', 'notifications.sender_id', 'users.id')
+    //     .groupBy('notifications.id',
+    //              'notification_discussion_id',
+    //              'notification_created_at',
+    //              'discussion_name',
+    //              'discussion_limited_time',
+    //              'discussion_type',
+    //              'sender_name')
+    //     .where('notifications.discussion_id', discussionId)
+    //     .first()
+    //     .then(notificationsData => {
+    //       usersInvite.map(user => {
+    //         socket.broadcast.to(`user-${user.id}`).emit('invite users', notificationsData)
+    //       })
+    //     })
+    //   })
+    // })
+
   })
 
   socket.on('join discussion', params => {

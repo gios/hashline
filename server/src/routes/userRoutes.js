@@ -71,13 +71,11 @@ module.exports = function(router, jwt, SHARED_SECRET) {
 
   router.get('/api/user', function *() {
     let userInfo = this.state.user
-    let notificationsCount = yield knex('notifications').where('user_id', userInfo.id).count()
 
     this.body = {
       id: userInfo.id,
       username: userInfo.username,
-      email: userInfo.email,
-      notifications: notificationsCount[0].count
+      email: userInfo.email
     }
   })
 
