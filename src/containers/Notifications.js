@@ -22,14 +22,19 @@ class Notifications extends Component {
         return
       }
       dispatch(deleteNotification(notificationId)).then(() => {
-        dispatch(deleteNotificationFromArchive(notificationId))
         dispatch(getUserData()).then(() => {
+          dispatch(deleteNotificationFromArchive(notificationId))
           socket.emit('join discussion', { discussionId: parseInt(id), username: user.payload.username, email: user.payload.email })
           socket.emit('connected users', parseInt(id))
           dispatch(push(`/discussion/${id}`))
         })
       })
     })
+  }
+
+  componentWillUnmount() {
+    socket.removeListener('join discussion')
+    socket.removeListener('connected users')
   }
 
   render() {
