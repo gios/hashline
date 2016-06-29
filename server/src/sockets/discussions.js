@@ -14,7 +14,7 @@ module.exports = function(io, socket) {
   }
 
   socket.on('join user', user => {
-    socket.user_id = user.user_id
+    socket.user_id = user.id
     socket.join(`user-${user.id}`)
   })
 
