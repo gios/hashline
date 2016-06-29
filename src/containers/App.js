@@ -36,13 +36,12 @@ class App extends Component {
 
   sendNotificationForInvite(notificationsData) {
     let notificationsOptions = {
-      body: `${notificationsData.sender_name} invites you to connect to discussion`,
-      sound: '../assets/audio/notification.mp3' // TODO SOUND
+      body: `${notificationsData.sender_name} invites you to connect to discussion`
     }
 
     if(isSupported()) {
       if(permissionGranted()) {
-        let a = new Notification(notificationsData.discussion_name, notificationsOptions)
+        new Notification(notificationsData.discussion_name, notificationsOptions)
       } else {
         requestPermission(() => {
           new Notification(notificationsData.discussion_name, notificationsOptions)
