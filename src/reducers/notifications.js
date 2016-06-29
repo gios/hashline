@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { LOCATION_CHANGE } from 'react-router-redux'
 import Immutable from 'immutable'
 import { REQUEST_GET_NOTIFICATIONS,
          SUCCESS_GET_NOTIFICATIONS,
@@ -50,6 +51,10 @@ function notificationsInfo(state = notificationsInfoState, action) {
         notificationsArchive: state.get('notificationsArchive').delete(state.get('notificationsArchive').findIndex(item => {
           return item.id === action.id
         }))
+      })
+    case LOCATION_CHANGE:
+      return state.merge({
+        notificationsArchive: state.get('notificationsArchive').clear()
       })
     default:
       return state
