@@ -33,15 +33,15 @@ class App extends Component {
 
   sendNotificationForInvite(notificationsData) {
     let notificationsOptions = {
-      body: `${notificationsData.sender_name} invites you to connect to discussion`
+      body: `${notificationsData.senderName} invites you to connect to discussion`
     }
 
     if(isSupported()) {
       if(permissionGranted()) {
-        new Notification(notificationsData.discussion_name, notificationsOptions)
+        new Notification(notificationsData.discussionName, notificationsOptions)
       } else {
         requestPermission(() => {
-          new Notification(notificationsData.discussion_name, notificationsOptions)
+          new Notification(notificationsData.discussionName, notificationsOptions)
         })
       }
     } else {
