@@ -38,14 +38,30 @@ class App extends Component {
 
     if(isSupported()) {
       if(permissionGranted()) {
-        new Notification(notificationsData.discussionName, notificationsOptions)
+        this.createNotificationInstance(notificationsData.discussionId, notificationsData.discussionName, notificationsOptions)
       } else {
         requestPermission(() => {
-          new Notification(notificationsData.discussionName, notificationsOptions)
+          this.createNotificationInstance(notificationsData.discussionId, notificationsData.discussionName, notificationsOptions)
         })
       }
     } else {
       NotificationManager.warning(status.payload.response.message)
+    }
+  }
+
+  createNotificationInstance(discussionId, title, options) {
+    const inviteNotification = new Notification(title, options)
+    let self = this
+
+    inviteNotification.onclick = function(e) {
+      e.preventDefault()
+      try {
+        window.focus()
+        this.close()
+        self.props.dispatch(push(`/discussion/${discussionId}`))
+      } catch(error) {
+        NotificationManager.error(error)
+      }
     }
   }
 
