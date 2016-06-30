@@ -7,6 +7,7 @@ import { getDiscussions,
          deleteDiscussionFromArchive,
          setLoadDisableDiscussions,
          setStartLoadDiscussions,
+         updateSearchQueryDiscussions,
          setEndLoadDiscussions } from '../actions/discussionsAction'
 import DiscussionsBlock from '../components/discussions/DiscussionsBlock'
 import { USER_GETTER_METHOD_DISCUSSION,
@@ -89,6 +90,7 @@ class Discussions extends Component {
                              pathname={pathname}
                              userInfo={userInfo}
                              getterMethod={getterMethod}
+                             updateSearchQueryDiscussions={value => dispatch(updateSearchQueryDiscussions(value))}
                              setLoadDisableDiscussions={value => dispatch(setLoadDisableDiscussions(value))}
                              setStartLoadDiscussions={start => dispatch(setStartLoadDiscussions(start))}
                              setEndLoadDiscussions={end => dispatch(setEndLoadDiscussions(end))}
@@ -117,7 +119,6 @@ class Discussions extends Component {
 
 function inject(state, ownProps) {
   return {
-    all: ownProps,
     pathname: ownProps.location.pathname,
     isAuthenticated: state.login.auth.get('isAuthenticated'),
     userInfo: state.sidebar.userInfo.toJS(),

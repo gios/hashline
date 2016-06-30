@@ -70,7 +70,8 @@ class Sidebar extends Component {
     this.props.setSearchQueryDiscussions(value)
   }
 
-  runSearchQuery() {
+  runSearchQuery(e) {
+    e.preventDefault()
     this.props.runSearchQueryDiscussions()
   }
 
@@ -120,11 +121,13 @@ class Sidebar extends Component {
     searchRender = (
     <li className='nav-item'>
       <div className='input-group'>
-        <input onChange={this.searchQueryChange.bind(this)}
-               type='text'
-               className='form-control'
-               placeholder='Search string'
-               value={searchQueryDiscussions}/>
+        <form onSubmit={this.runSearchQuery.bind(this)}>
+          <input onChange={this.searchQueryChange.bind(this)}
+                 type='text'
+                 className='form-control'
+                 placeholder='Search string'
+                 value={searchQueryDiscussions}/>
+        </form>
         <span className='input-group-btn'>
           <button onClick={this.runSearchQuery.bind(this)} className='btn btn-secondary' type='button'>Go</button>
         </span>

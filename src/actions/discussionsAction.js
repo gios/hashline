@@ -13,6 +13,14 @@ export const LOAD_DISABLE_DISCUSSIONS = 'LOAD_DISABLE_DISCUSSIONS'
 export const START_LOAD_DISCUSSIONS = 'START_LOAD_DISCUSSIONS'
 export const END_LOAD_DISCUSSIONS = 'END_LOAD_DISCUSSIONS'
 export const SEARCH_QUERY_DISCUSSIONS = 'SEARCH_QUERY_DISCUSSIONS'
+export const UPDATE_SEARCH_QUERY_DISCUSSIONS = 'UPDATE_SEARCH_QUERY_DISCUSSIONS'
+
+export function updateSearchQueryDiscussions(updateSearchQuery) {
+  return {
+    type: UPDATE_SEARCH_QUERY_DISCUSSIONS,
+    updateSearchQuery
+  }
+}
 
 export function setSearchQueryDiscussions(searchQuery) {
   return {

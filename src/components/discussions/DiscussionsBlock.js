@@ -13,9 +13,10 @@ class DiscussionsBlock extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let { pathname, clearDiscussionsArchive, setStartLoadDiscussions, setEndLoadDiscussions } = this.props
+    let { pathname, clearDiscussionsArchive, setStartLoadDiscussions, setEndLoadDiscussions, updateSearchQueryDiscussions } = this.props
 
-    if(pathname !== nextProps.pathname) {
+    if(pathname !== nextProps.pathname || nextProps.discussions.updateSearchQuery) {
+      updateSearchQueryDiscussions()
       setTimeout(() => {
         setStartLoadDiscussions(0)
         setEndLoadDiscussions(DISCUSSIONS_INTERVAL)

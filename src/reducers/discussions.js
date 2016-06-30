@@ -9,6 +9,7 @@ import { REQUEST_GET_DISCUSSIONS,
          END_LOAD_DISCUSSIONS,
          SEARCH_QUERY_DISCUSSIONS,
          LOAD_DISABLE_DISCUSSIONS,
+         UPDATE_SEARCH_QUERY_DISCUSSIONS,
          START_LOAD_DISCUSSIONS } from '../actions/discussionsAction'
 
 const discussionsGetState = Immutable.Map({
@@ -19,6 +20,7 @@ const discussionsGetState = Immutable.Map({
   startLoad: 0,
   endLoad: 20,
   loadDisable: false,
+  updateSearchQuery: false,
   searchQuery: ''
 })
 
@@ -71,6 +73,10 @@ function getDiscussions(state = discussionsGetState, action) {
     case SEARCH_QUERY_DISCUSSIONS:
       return state.merge({
         searchQuery: action.searchQuery
+      })
+    case UPDATE_SEARCH_QUERY_DISCUSSIONS:
+      return state.merge({
+        updateSearchQuery: action.updateSearchQuery
       })
     default:
       return state

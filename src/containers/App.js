@@ -6,7 +6,7 @@ import { NotificationContainer } from 'react-notifications'
 import { setScrollToBottom } from '../actions/discussionAction'
 import { runLogout, setNextPathname } from '../actions/loginAction'
 import { toggleSidebar, setMobileSidebar, getUserData, setClientHeight, setClientWidth } from '../actions/sidebarAction'
-import { setSearchQueryDiscussions } from '../actions/discussionsAction'
+import { setSearchQueryDiscussions, updateSearchQueryDiscussions } from '../actions/discussionsAction'
 import { getSidebarTypes } from '../actions/sidebarAction'
 import Sidebar from './../components/sidebar/Sidebar'
 import LoggedOutMessage from './../components/helpers/LoggedOutMessage'
@@ -75,7 +75,9 @@ class App extends Component {
     let { dispatch, activeRoute } = this.props
 
     if(activeRoute !== 'search') {
-      dispatch(push('search'))
+      dispatch(push('/search'))
+    } else {
+      dispatch(updateSearchQueryDiscussions(true))
     }
   }
 
