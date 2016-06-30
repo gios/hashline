@@ -67,8 +67,7 @@ class Sidebar extends Component {
 
   render() {
     let { isMobileView, userInfo, sidebarTypes } = this.props
-    let userInfoRender
-    let typesOptions
+    let userInfoRender, typesOptions, searchRender
 
     let toggleSidebarBtn = (
       <div className='toggle-sidebar-button'>
@@ -109,6 +108,16 @@ class Sidebar extends Component {
       })
     }
 
+    searchRender = (
+    <li className='nav-item'>
+      <div className='input-group'>
+        <input type='text' className='form-control' placeholder='Search string'/>
+        <span className='input-group-btn'>
+          <button className='btn btn-secondary' type='button'>Go</button>
+        </span>
+      </div>
+    </li>)
+
     return (
       <div>
         <nav role='navigation' className='navbar navbar-dark navbar-static'>
@@ -125,6 +134,17 @@ class Sidebar extends Component {
             </Link>
           </div>
           <ul className='nav sidebar-list-static'>
+            <li className='nav-item'>
+              <a className='nav-link sidebar-link' data-toggle='collapse' href='#searchCollapse' aria-expanded='false' aria-controls='searchCollapse'>
+                <i className='fa fa-search'></i>
+                <span className='sidebar-list-item'>Search</span>
+              </a>
+            </li>
+            <div className='collapse' id='searchCollapse'>
+              <ul className='nav sidebar-list-static nested'>
+                {searchRender}
+              </ul>
+            </div>
             <li className='nav-item'>
               <Link to='/' className={this.routeSelector('/')} onClick={this.triggerRoute.bind(this)}>
                 <i className='fa fa-dashcube'></i>
