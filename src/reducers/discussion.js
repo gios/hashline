@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import Immutable from 'immutable'
+import { LOCATION_CHANGE } from 'react-router-redux'
 import {
   REQUEST_GET_DISCUSSION,
   SUCCESS_GET_DISCUSSION,
@@ -190,6 +191,10 @@ function discussionMessages(state = discussionMessagesState, action) {
     case LOAD_DISABLE_MESSAGES:
       return state.merge({
         loadDisable: action.loadDisable
+      })
+    case LOCATION_CHANGE:
+      return state.merge({
+        messageArchive: state.get('messageArchive').clear()
       })
     default:
       return state

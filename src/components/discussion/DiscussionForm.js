@@ -22,6 +22,14 @@ class DiscussionForm extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(this.props.discussionId !== nextProps.discussionId) {
+      setTimeout(() => {
+        this.props.onJoinDiscussion({ id: nextProps.discussionId })
+      })
+    }
+  }
+
   loadDiscussionMessages() {
     let { discussionId, discussionMessages, setLoadDisableMessages } = this.props
 
