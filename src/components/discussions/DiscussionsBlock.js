@@ -28,8 +28,9 @@ class DiscussionsBlock extends Component {
   loadDiscussions() {
     let { getterMethod, setLoadDisableDiscussions } = this.props
     let { startLoad, endLoad } = this.props.discussions
+    let query = 'GiOs' // SEARCH STRING
 
-    return this.props.onLoadDiscussions(getterMethod, startLoad, endLoad).then(status => {
+    return this.props.onLoadDiscussions(getterMethod, startLoad, endLoad, query).then(status => {
       if(status.error) {
         NotificationManager.error(status.payload.response.message)
         return

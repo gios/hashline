@@ -135,7 +135,11 @@ class Sidebar extends Component {
           </div>
           <ul className='nav sidebar-list-static'>
             <li className='nav-item'>
-              <a className='nav-link sidebar-link' data-toggle='collapse' href='#searchCollapse' aria-expanded='false' aria-controls='searchCollapse'>
+              <a className={this.routeSelector('search')}
+                 data-toggle='collapse'
+                 href='#searchCollapse'
+                 aria-expanded='false'
+                 aria-controls='searchCollapse'>
                 <i className='fa fa-search'></i>
                 <span className='sidebar-list-item'>Search</span>
               </a>

@@ -34,6 +34,7 @@ render(
         <Route path='login' component={Containers.Login}/>
         <Route path='signup' component={Containers.Login}/>
         <Route path='create' component={Containers.CreateDiscussion}/>
+        <Route path='search' component={Containers.Discussions}/>
         <Route path='mydiscussions' component={Containers.Discussions}/>
         <Route path='recent' component={Containers.Discussions}/>
         <Route path='mostdiscussed' component={Containers.Discussions}/>

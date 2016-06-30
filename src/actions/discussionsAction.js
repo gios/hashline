@@ -54,7 +54,7 @@ export function clearDiscussionsArchive() {
   }
 }
 
-export function getDiscussions(getterMethod, start, end) {
+export function getDiscussions(getterMethod, start, end, query = '') {
   return {
     [CALL_API]: {
       endpoint: '/api/discussions',
@@ -64,7 +64,7 @@ export function getDiscussions(getterMethod, start, end) {
         'Content-Type': 'application/json'
       },
       types: [REQUEST_GET_DISCUSSIONS, SUCCESS_GET_DISCUSSIONS, FAILURE_GET_DISCUSSIONS],
-      body: JSON.stringify({ getterMethod, start, end })
+      body: JSON.stringify({ getterMethod, start, end, query })
     }
   }
 }

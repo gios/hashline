@@ -15,6 +15,7 @@ import { USER_GETTER_METHOD_DISCUSSION,
          BY_TYPE_GETTER_METHOD_DISCUSSION,
          LIMITED_GETTER_METHOD_DISCUSSION,
          TRENDING_GETTER_METHOD_DISCUSSION,
+         SEARCH_GETTER_METHOD_DISCUSSION,
          DISCUSSIONS_INTERVAL } from '../constants'
 import { NotificationManager } from 'react-notifications'
 import { push } from 'react-router-redux'
@@ -76,6 +77,9 @@ class Discussions extends Component {
       case /^type?/.test(pathname) && pathname:
         getterMethod = `${BY_TYPE_GETTER_METHOD_DISCUSSION}--${this.getDiscussionType(pathname)}`
         break;
+      case 'search':
+        getterMethod = SEARCH_GETTER_METHOD_DISCUSSION
+        break;
       default:
         getterMethod = null
         break;
@@ -98,7 +102,7 @@ class Discussions extends Component {
                                dispatch(deleteDiscussionFromArchive(id))
                              })}
                              onJoinDiscussion={this.onJoinDiscussion.bind(this)}
-                             onLoadDiscussions={(getterMethod, start, end) => dispatch(getDiscussions(getterMethod, start, end))}/>
+                             onLoadDiscussions={(getterMethod, start, end, query) => dispatch(getDiscussions(getterMethod, start, end, query))}/>
   }
 
   render() {

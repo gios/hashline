@@ -10,3 +10,4 @@ export const MOST_DISCUSSED_GETTER_METHOD_DISCUSSION = 'most_discussed_discussio
 export const BY_TYPE_GETTER_METHOD_DISCUSSION = 'by_type_discussions'
 export const LIMITED_GETTER_METHOD_DISCUSSION = 'limited_discussions'
 export const TRENDING_GETTER_METHOD_DISCUSSION = 'trending_discussions'
+export const SEARCH_GETTER_METHOD_DISCUSSION = 'search_discussions'
