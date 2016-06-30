@@ -12,6 +12,14 @@ export const CLEAR_DISCUSSIONS_ARCHIVE = 'CLEAR_DISCUSSIONS_ARCHIVE'
 export const LOAD_DISABLE_DISCUSSIONS = 'LOAD_DISABLE_DISCUSSIONS'
 export const START_LOAD_DISCUSSIONS = 'START_LOAD_DISCUSSIONS'
 export const END_LOAD_DISCUSSIONS = 'END_LOAD_DISCUSSIONS'
+export const SEARCH_QUERY_DISCUSSIONS = 'SEARCH_QUERY_DISCUSSIONS'
+
+export function setSearchQueryDiscussions(searchQuery) {
+  return {
+    type: SEARCH_QUERY_DISCUSSIONS,
+    searchQuery
+  }
+}
 
 export function setLoadDisableDiscussions(loadDisable) {
   return {

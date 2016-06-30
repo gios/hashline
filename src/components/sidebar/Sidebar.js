@@ -65,8 +65,17 @@ class Sidebar extends Component {
     this.props.onLogout()
   }
 
+  searchQueryChange(e) {
+    let value = e.target.value
+    this.props.setSearchQueryDiscussions(value)
+  }
+
+  runSearchQuery() {
+    this.props.runSearchQueryDiscussions()
+  }
+
   render() {
-    let { isMobileView, userInfo, sidebarTypes } = this.props
+    let { isMobileView, userInfo, sidebarTypes, searchQueryDiscussions } = this.props
     let userInfoRender, typesOptions, searchRender
 
     let toggleSidebarBtn = (
@@ -111,9 +120,13 @@ class Sidebar extends Component {
     searchRender = (
     <li className='nav-item'>
       <div className='input-group'>
-        <input type='text' className='form-control' placeholder='Search string'/>
+        <input onChange={this.searchQueryChange.bind(this)}
+               type='text'
+               className='form-control'
+               placeholder='Search string'
+               value={searchQueryDiscussions}/>
         <span className='input-group-btn'>
-          <button className='btn btn-secondary' type='button'>Go</button>
+          <button onClick={this.runSearchQuery.bind(this)} className='btn btn-secondary' type='button'>Go</button>
         </span>
       </div>
     </li>)

@@ -7,6 +7,7 @@ import { REQUEST_GET_DISCUSSIONS,
          DELETE_DISCUSSION_FROM_ARCHIVE,
          CLEAR_DISCUSSIONS_ARCHIVE,
          END_LOAD_DISCUSSIONS,
+         SEARCH_QUERY_DISCUSSIONS,
          LOAD_DISABLE_DISCUSSIONS,
          START_LOAD_DISCUSSIONS } from '../actions/discussionsAction'
 
@@ -17,7 +18,8 @@ const discussionsGetState = Immutable.Map({
   discussionsArchive: Immutable.List.of(),
   startLoad: 0,
   endLoad: 20,
-  loadDisable: false
+  loadDisable: false,
+  searchQuery: ''
 })
 
 function getDiscussions(state = discussionsGetState, action) {
@@ -65,6 +67,10 @@ function getDiscussions(state = discussionsGetState, action) {
     case LOAD_DISABLE_DISCUSSIONS:
       return state.merge({
         loadDisable: action.loadDisable
+      })
+    case SEARCH_QUERY_DISCUSSIONS:
+      return state.merge({
+        searchQuery: action.searchQuery
       })
     default:
       return state

@@ -6,6 +6,7 @@ import { NotificationContainer } from 'react-notifications'
 import { setScrollToBottom } from '../actions/discussionAction'
 import { runLogout, setNextPathname } from '../actions/loginAction'
 import { toggleSidebar, setMobileSidebar, getUserData, setClientHeight, setClientWidth } from '../actions/sidebarAction'
+import { setSearchQueryDiscussions } from '../actions/discussionsAction'
 import { getSidebarTypes } from '../actions/sidebarAction'
 import Sidebar from './../components/sidebar/Sidebar'
 import LoggedOutMessage from './../components/helpers/LoggedOutMessage'
@@ -70,6 +71,14 @@ class App extends Component {
     this.refs.sidebar.toggleSidebar()
   }
 
+  runSearchQueryDiscussions() {
+    let { dispatch, activeRoute } = this.props
+
+    if(activeRoute !== 'search') {
+      dispatch(push('search'))
+    }
+  }
+
   render() {
     let { dispatch,
           isToggled,
@@ -78,7 +87,8 @@ class App extends Component {
           loggedOut,
           userInfo,
           activeRoute,
-          sidebarTypes } = this.props
+          sidebarTypes,
+          searchQueryDiscussions } = this.props
 
     return (
       <div>
@@ -95,6 +105,9 @@ class App extends Component {
                    userInfo={userInfo}
                    sidebarTypes={sidebarTypes}
                    activeRoute={activeRoute}
+                   searchQueryDiscussions={searchQueryDiscussions}
+                   runSearchQueryDiscussions={() => this.runSearchQueryDiscussions()}
+                   setSearchQueryDiscussions={query => dispatch(setSearchQueryDiscussions(query))}
                    setScrollToBottom={scroll => dispatch(setScrollToBottom(scroll))}
                    setClientHeight={height => dispatch(setClientHeight(height))}
                    setClientWidth={width => dispatch(setClientWidth(width))}
@@ -136,7 +149,8 @@ function inject(state, routing) {
     isMobileView: state.sidebar.sidebarView.get('isMobileView'),
     userInfo: state.sidebar.userInfo.toJS(),
     sidebarTypes: state.sidebar.sidebarTypes.toJS(),
-    activeRoute: routing.location.pathname
+    activeRoute: routing.location.pathname,
+    searchQueryDiscussions: state.discussions.getDiscussions.get('searchQuery')
   }
 }
 
