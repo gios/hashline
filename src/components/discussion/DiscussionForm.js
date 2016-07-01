@@ -107,8 +107,21 @@ class DiscussionForm extends Component {
   }
 
   inviteUsers() {
+    let usersForInviteString = ''
     let { user, discussionId, discussionInfo, socket, discussionUsersInvite } = this.props
     socket.emit('invite users', discussionInfo.usersInvite, parseInt(discussionId), user.payload.id)
+    let usersForInvite = discussionInfo.usersInvite.map(item => item.value)
+    usersForInvite.forEach((item, index) => {
+      let value = ''
+      value += item
+
+      if(index !== usersForInvite.length - 1) {
+        value += ', '
+      }
+      usersForInviteString += value
+    })
+
+    NotificationManager.success(`To: ${usersForInviteString}`, 'Your invitations have successfully sent')
     discussionUsersInvite([])
   }
 
