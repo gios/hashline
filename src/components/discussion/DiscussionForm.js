@@ -11,11 +11,7 @@ import Loader from '../parts/Loader'
 class DiscussionForm extends Component {
 
   componentWillMount() {
-    let { discussionId, discussionInfo, discussionMessages } = this.props
-
-    if(discussionInfo.payload && !discussionMessages.messageArchive.length) {
-      this.loadDiscussionMessages()
-    }
+    let { discussionId, discussionInfo } = this.props
 
     if(!discussionInfo.payload || discussionInfo.payload.id !== discussionId) {
       this.props.onJoinDiscussion({ id: discussionId })
