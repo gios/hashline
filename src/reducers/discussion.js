@@ -92,6 +92,10 @@ function discussionInfo(state = discussionInfoState, action) {
       return state.merge({
         usersInvite: action.usersInvite
       })
+    case LOCATION_CHANGE:
+      return state.merge({
+        payload: null
+      })
     default:
       return state
   }
