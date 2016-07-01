@@ -11,9 +11,9 @@ import Loader from '../parts/Loader'
 class DiscussionForm extends Component {
 
   componentWillMount() {
-    let { discussionId, discussionInfo } = this.props
+    let { discussionId, discussionInfo, discussionMessages } = this.props
 
-    if(discussionInfo.payload) {
+    if(discussionInfo.payload && !discussionMessages.messageArchive.length) {
       this.loadDiscussionMessages()
     }
 
