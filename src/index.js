@@ -30,7 +30,7 @@ render(
   <Provider store={store}>
     <Router history={history}>
       <Route path='/' component={Containers.App}>
-        <IndexRoute component={Containers.Discussions}/>
+        <IndexRoute component={Containers.Dash}/>
         <Route path='login' component={Containers.Login}/>
         <Route path='signup' component={Containers.Login}/>
         <Route path='create' component={Containers.CreateDiscussion}/>

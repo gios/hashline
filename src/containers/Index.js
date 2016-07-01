@@ -4,6 +4,7 @@ import CreateDiscussion from './CreateDiscussion'
 import Discussion from './Discussion'
 import Discussions from './Discussions'
 import NotFound from './NotFound'
+import Dash from './Dash'
 
 export default {
   App,
@@ -11,5 +12,6 @@ export default {
   CreateDiscussion,
   Discussion,
   Discussions,
-  NotFound
+  NotFound,
+  Dash
 }
