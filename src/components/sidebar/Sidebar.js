@@ -218,6 +218,7 @@ class Sidebar extends Component {
               <a className='nav-link sidebar-link' href='javascript:void(0)'>
                 <i className='fa fa-rss'></i>
                 <span className='sidebar-list-item'>Feed</span>
+                <span className='label label-success pull-xs-right'>in development</span>
               </a>
             </li>
             <li className='nav-item'>
