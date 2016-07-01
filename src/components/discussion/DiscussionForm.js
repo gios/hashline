@@ -17,7 +17,7 @@ class DiscussionForm extends Component {
       this.loadDiscussionMessages()
     }
 
-    if(!discussionInfo.payload) {
+    if(!discussionInfo.payload || discussionInfo.payload.id !== discussionId) {
       this.props.onJoinDiscussion({ id: discussionId })
     }
   }

@@ -102,7 +102,7 @@ class Discussion extends Component {
 
 function inject(state, routing) {
   return {
-    discussionId: routing.params.id,
+    discussionId: parseInt(routing.params.id),
     searchUsers: state.discussion.searchUsers.toJS(),
     discussionInfo: state.discussion.discussionInfo.toJS(),
     discussionMessages: state.discussion.discussionMessages.toJS(),
