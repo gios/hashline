@@ -122,7 +122,7 @@ class DiscussionsBlock extends Component {
 
     return (
       <div>
-        {discussions.discussionsArchive && <h3 className='text-xs-center m-b-1'>{this.headerSelector(pathname)}</h3>}
+        {discussions.discussionsArchive.length && <h3 className='text-xs-center m-b-1'>{this.headerSelector(pathname)}</h3>}
         <div className='card-group'>
           {renderDiscussions}
           {(!discussions.loadDisable && !discussions.isFetching) && <div className='row text-xs-center'>
