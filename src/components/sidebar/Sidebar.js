@@ -72,7 +72,11 @@ class Sidebar extends Component {
 
   runSearchQuery(e) {
     e.preventDefault()
-    this.props.runSearchQueryDiscussions()
+    let value = this.refs.searchQueryInput.value
+
+    if(value) {
+      this.props.runSearchQueryDiscussions()
+    }
   }
 
   render() {
@@ -123,6 +127,7 @@ class Sidebar extends Component {
       <div className='input-group m-a-1'>
         <form onSubmit={this.runSearchQuery.bind(this)}>
           <input onChange={this.searchQueryChange.bind(this)}
+                 ref='searchQueryInput'
                  type='text'
                  className='form-control'
                  placeholder='Search string'
