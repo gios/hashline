@@ -36,7 +36,8 @@ exports.up = function(knex, Promise) {
 
 exports.down = function(knex, Promise) {
   return Promise.all([
-    knex.schema.dropTable('discussions')
-               .dropTable('discussions_tags')
+    knex.schema
+    .dropTable('discussions_tags')
+    .dropTable('discussions')
   ])
 }

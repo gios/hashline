@@ -7,6 +7,7 @@ exports.up = function(knex, Promise) {
         return knex.schema.createTableIfNotExists('users', (table) => {
           table.increments()
           table.string('username').unique()
+          table.float('rank')
           table.string('email').unique()
           table.string('password')
           table.timestamp('created_at').defaultTo(knex.fn.now())

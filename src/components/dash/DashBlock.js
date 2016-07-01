@@ -5,6 +5,7 @@ class DashBlock extends Component {
 
   componentWillMount() {
     this.props.getMyTrendingDiscussions()
+    this.props.getDashUserInfo()
   }
 
   render() {

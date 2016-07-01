@@ -79,6 +79,33 @@ module.exports = function(router, jwt, SHARED_SECRET) {
     }
   })
 
+  router.get('/api/user/info', function *() {
+    let userInfo = this.state.user
+    let messagesSend = yield knex('messages')
+    .count('id AS messages_send')
+    .where('user_id', userInfo.id)
+    .first()
+    let userDiscussions = yield knex('discussions').select('id').where('user_id', userInfo.id)
+    let messagesReceived = yield knex('messages')
+    .count('id AS messages_received')
+    .whereIn('discussion_id', userDiscussions.map(item => item.id))
+    .whereNot('user_id', userInfo.id)
+    .first()
+    let discussionsCreated = yield knex('discussions')
+    .count('id AS discussions_created')
+    .where('user_id', userInfo.id)
+    .first()
+    let rankNumber = messagesSend.messages_send * 0.3 + messagesReceived.messages_received * 0.7
+    yield knex('users').where('id', userInfo.id).update({ rank: rankNumber })
+
+    this.body = {
+      messages_send: messagesSend.messages_send,
+      messages_received: messagesReceived.messages_received,
+      discussions_created: discussionsCreated.discussions_created,
+      rankNumber
+    }
+  })
+
   router.post('/api/search_users', function *() {
     let userInfo = this.state.user
     let query = this.request.body.query.toLowerCase()
