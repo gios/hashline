@@ -130,7 +130,7 @@ class Sidebar extends Component {
                  ref='searchQueryInput'
                  type='text'
                  className='form-control'
-                 placeholder='Search string'
+                 placeholder='Search'
                  value={searchQueryDiscussions}/>
         </form>
         <span className='input-group-btn'>
