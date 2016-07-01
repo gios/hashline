@@ -473,6 +473,8 @@ module.exports = function(router) {
         .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
         .innerJoin('types', 'discussions.type_id', 'types.id')
         .innerJoin('users', 'discussions.user_id', 'users.id')
+        .leftJoin('messages', 'discussions.id', 'messages.discussion_id')
+        .count('messages.id as messages_count')
         .groupBy('discussions.id',
                 'discussions.name',
                 'discussions.description',
@@ -485,6 +487,8 @@ module.exports = function(router) {
                 'discussions.limited_time',
                 'discussions.closed')
         .where('users.email', userInfo.email)
+        .orderBy('messages_count', 'desc')
+        .orderBy('discussions.created_at', 'desc')
         .limit(end - start)
         .offset(start)
         break;
