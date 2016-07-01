@@ -120,7 +120,7 @@ class Sidebar extends Component {
 
     searchRender = (
     <li className='nav-item'>
-      <div className='input-group'>
+      <div className='input-group m-a-1'>
         <form onSubmit={this.runSearchQuery.bind(this)}>
           <input onChange={this.searchQueryChange.bind(this)}
                  type='text'
