@@ -26,7 +26,10 @@ class TrendingMyDiscussions extends Component {
       } else {
         return myTrendingDiscussions.payload.map((discussion) => {
           return (
-            <a href='javascript:void(0)' onClick={this.onDashJoinDiscussion.bind(this, discussion.id)} className='list-group-item dash-discussion'>
+            <a key={discussion.id}
+               href='javascript:void(0)'
+               onClick={this.onDashJoinDiscussion.bind(this, discussion.id)}
+               className='list-group-item dash-discussion'>
               {(discussion.is_private)
                 ? <span className='label label-warning pull-xs-right'>Private</span>
                 : <span className='label label-primary pull-xs-right'>Public</span>}
