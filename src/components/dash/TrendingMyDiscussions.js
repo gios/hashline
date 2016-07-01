@@ -38,6 +38,7 @@ class TrendingMyDiscussions extends Component {
                 : null}
               <h4 className='list-group-item-heading'>{discussion.name}</h4>
               <p className='list-group-item-text'>{discussion.description}</p>
+              <p className='card-text'><small className='text-muted'>Messages: </small>{discussion.messages_count}</p>
             </a>
           )
         })

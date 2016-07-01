@@ -12,7 +12,7 @@ class DashBlock extends Component {
       <div className='col-md-12'>
         <div className='col-md-6'>Info about user</div>
         <div className='col-md-6'>
-          Your trending discussions
+          <h3 className='text-xs-center'>Your trending discussions</h3>
           <TrendingMyDiscussions onJoinDiscussion={id => this.props.onJoinDiscussion(id)} myTrendingDiscussions={this.props.myTrendingDiscussions}/>
         </div>
       </div>
