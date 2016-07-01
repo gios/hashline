@@ -1,0 +1,8 @@
+.dash-discussion {
+  min-height: 6em;
+
+  & > span {
+    clear: both;
+    margin: .3em;
+  }
+}
