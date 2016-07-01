@@ -5,14 +5,6 @@ class DiscussionCard extends Component {
 
   componentDidMount() {
     this.limitedInterval = setInterval(this.forceUpdate.bind(this), 1000)
-    $(this.refs.joinButton).popover({
-      title: 'Password',
-      content: `<input type='password' class='form-control discussion-password'></input>`,
-      html: true,
-      trigger: 'manual',
-      placement: 'left'
-    })
-
     $(this.refs.closeButton).popover({
       title: 'Expired',
       content: `This discussion expired. It will be deleted during week.`,
@@ -22,29 +14,12 @@ class DiscussionCard extends Component {
   }
 
   componentWillUnmount() {
-    $(this.refs.joinButton).popover('dispose')
     clearInterval(this.limitedInterval)
   }
 
   joinToDiscussion() {
-    let { id, is_private } = this.props.discussion
-    if(is_private) {
-      setTimeout(() => {
-        $('.discussion-password').trigger('focus')
-        $('.discussion-password').on('blur', () => {
-          $(this.refs.joinButton).popover('hide')
-        })
-        $('.discussion-password').on('keypress', (e) => {
-          if(e.keyCode === 13) {
-            let password = $(e.target).val()
-            this.props.onJoinDiscussion({ id, password })
-          }
-        })
-      }, 100)
-      $(this.refs.joinButton).popover('show')
-    } else {
-      this.props.onJoinDiscussion({ id })
-    }
+    let { id } = this.props.discussion
+    this.props.onJoinDiscussion({ id })
   }
 
   deleteDiscussion() {
@@ -88,8 +63,7 @@ class DiscussionCard extends Component {
                         ref='closeButton'>Closed</button>
               : <button onClick={this.joinToDiscussion.bind(this)}
                         type='button'
-                        className='btn btn-success'
-                        ref='joinButton'>Join</button>
+                        className='btn btn-success'>Join</button>
             }
           </div>
           <h4 className='card-title'>{name}</h4>

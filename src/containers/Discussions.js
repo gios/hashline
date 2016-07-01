@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getDiscussion, deleteDiscussion } from '../actions/discussionAction'
+import { deleteDiscussion } from '../actions/discussionAction'
 import { getDiscussions,
          setDiscussionsArchive,
          clearDiscussionsArchive,
@@ -16,29 +16,16 @@ import { USER_GETTER_METHOD_DISCUSSION,
          BY_TYPE_GETTER_METHOD_DISCUSSION,
          LIMITED_GETTER_METHOD_DISCUSSION,
          TRENDING_GETTER_METHOD_DISCUSSION,
-         SEARCH_GETTER_METHOD_DISCUSSION,
-         DISCUSSIONS_INTERVAL } from '../constants'
+         SEARCH_GETTER_METHOD_DISCUSSION } from '../constants'
 import { NotificationManager } from 'react-notifications'
 import { push } from 'react-router-redux'
 import socket from '../utils/socket'
 
 class Discussions extends Component {
 
-  onJoinDiscussion({ id, password = '' }) {
-    let { dispatch, userInfo } = this.props
-
-    dispatch(getDiscussion(parseInt(id), password)).then((status) => {
-      if(status.error) {
-        NotificationManager.error(status.payload.response.message)
-        return
-      }
-      socket.emit('join discussion', { discussionId: parseInt(id), username: userInfo.payload.username, email: userInfo.payload.email })
-      socket.emit('connected users', parseInt(id))
-      dispatch(push(`/discussion/${id}`))
-      dispatch(clearDiscussionsArchive())
-      dispatch(setStartLoadDiscussions(0))
-      dispatch(setEndLoadDiscussions(DISCUSSIONS_INTERVAL))
-    })
+  onJoinDiscussion({ id }) {
+    let { dispatch } = this.props
+    dispatch(push(`/discussion/${id}`))
   }
 
   componentWillUnmount() {
