@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { NotificationManager } from 'react-notifications'
 import { DISCUSSIONS_INTERVAL } from '../../constants'
+import { capitalize } from '../../utils/helpers'
 import Loader from '../parts/Loader'
 import NoDiscussionsCard from './NoDiscussionsCard'
 import { Link } from 'react-router'
@@ -57,8 +58,37 @@ class DiscussionsBlock extends Component {
     setTimeout(() => this.loadDiscussions())
   }
 
+  getDiscussionType(pathname) {
+    if(pathname.includes('type')) {
+      return pathname.split('/')[1]
+    } else {
+      return ''
+    }
+  }
+
+  headerSelector(pathname) {
+    switch(pathname) {
+      case 'trending':
+        return 'Trending Discussions'
+      case 'mydiscussions':
+        return 'My Discussions'
+      case 'limited':
+        return 'Limited Discussions'
+      case 'recent':
+        return 'Recent Discussions'
+      case 'mostdiscussed':
+        return 'Most Discussed Discussions'
+      case /^type?/.test(pathname) && pathname:
+        return `${capitalize(this.getDiscussionType(pathname))} Discussions`
+      case 'search':
+        return 'Found Discussions'
+      default:
+        return 'Discussions'
+      }
+  }
+
   render() {
-    let { discussions, onJoinDiscussion } = this.props
+    let { discussions, onJoinDiscussion, pathname } = this.props
     let { startLoad, endLoad } = this.props.discussions
     let startPoint = startLoad === 0 && endLoad === DISCUSSIONS_INTERVAL
     let renderDiscussions
@@ -91,12 +121,15 @@ class DiscussionsBlock extends Component {
     }
 
     return (
-      <div className='card-group'>
-        {renderDiscussions}
-        {(!discussions.loadDisable && !discussions.isFetching) && <div className='row text-xs-center'>
-          <button onClick={this.loadMoreDiscussions.bind(this)} type='button' className='btn btn-secondary m-a-2'>Load More</button>
-        </div>}
-        {discussions.isFetching && <Loader size={3}/>}
+      <div>
+        {discussions.discussionsArchive && <h3 className='text-xs-center m-b-1'>{this.headerSelector(pathname)}</h3>}
+        <div className='card-group'>
+          {renderDiscussions}
+          {(!discussions.loadDisable && !discussions.isFetching) && <div className='row text-xs-center'>
+            <button onClick={this.loadMoreDiscussions.bind(this)} type='button' className='btn btn-secondary m-a-2'>Load More</button>
+          </div>}
+          {discussions.isFetching && <Loader size={3}/>}
+        </div>
       </div>
     )
   }
