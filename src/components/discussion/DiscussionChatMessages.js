@@ -3,8 +3,14 @@ import { Scrollbars } from 'react-custom-scrollbars'
 import { MESSAGE_INTERVAL } from '../../constants'
 import Loader from '../parts/Loader'
 import moment from 'moment'
+import ReactEmoji from 'react-emoji'
 
 class DiscussionChatMessages extends Component {
+
+  constructor(props) {
+    super(props)
+    this.emojify = ReactEmoji.emojify.bind(this)
+  }
 
   componentDidMount() {
     this.props.setScrollToBottom(true)
@@ -66,13 +72,13 @@ class DiscussionChatMessages extends Component {
     } else if(discussionMessages.messageArchive.length) {
       messageBlock = discussionMessages.messageArchive.map((item, index) => {
         let indexIterator = (index - 1 >= 0) ? index - 1 : index
-        let skipUsername = (item.username === discussionMessages.messageArchive[indexIterator].username && (index || indexIterator)) ? true : false;
+        let skipUsername = (item.username === discussionMessages.messageArchive[indexIterator].username && (index || indexIterator)) ? true : false
 
         return (
           <tr key={index}>
             <td>
               {!skipUsername && <div className='message-username m-b-1'>{item.username}</div>}
-              <div className='message-item'>{item.message}</div>
+              <div className='message-item'>{this.emojify(item.message)}</div>
             </td>
             <td className='message-time'>
               <div>{this.testChatDate(item.created_at)}</div>
