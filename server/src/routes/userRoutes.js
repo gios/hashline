@@ -95,7 +95,7 @@ module.exports = function(router, jwt, SHARED_SECRET) {
     .count('id AS discussions_created')
     .where('user_id', userInfo.id)
     .first()
-    let rankNumber = messagesSent.messages_sent * 0.3 + messagesReceived.messages_received * 0.7
+    let rankNumber = messagesSent.messages_sent * 0.1 + messagesReceived.messages_received * 0.9
     yield knex('users').where('id', userInfo.id).update({ rank: rankNumber })
     let usersRankSorted = yield knex('users').orderBy('rank', 'DESC')
     let userRankIndex = usersRankSorted.findIndex(item => item.id === userInfo.id)
