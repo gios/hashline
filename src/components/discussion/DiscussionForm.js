@@ -37,6 +37,10 @@ class DiscussionForm extends Component {
     }
   }
 
+  componentDidMount() {
+    this.refs.addMessage.htmlEl.focus()
+  }
+
   loadDiscussionMessages() {
     let { discussionId, discussionMessages, setLoadDisableMessages } = this.props
 
@@ -168,7 +172,7 @@ class DiscussionForm extends Component {
       attributes: {
         width: '25px',
         height: '25px',
-        onClick: this.emojiSelectOpen.bind(this)
+        onMouseOver: this.emojiSelectOpen.bind(this)
       }
     }
     let discussionInfoRender
@@ -287,7 +291,7 @@ class DiscussionForm extends Component {
                                placeholder='Write something'
                                onKeyDown={this.sendMessage.bind(this)}
                                onChange={this.changeChatMessage.bind(this)}
-                               html={this.emojify(discussionMessages.chatMessage)}/>
+                               html={discussionMessages.chatMessage}/>
               <span className='pull-xs-right m-t-1'>Press <kbd>Ctrl + Enter</kbd> for send message.</span>
               <button type='button'
                       className='btn btn-primary pull-xs-left m-t-1'
