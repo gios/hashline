@@ -7,8 +7,18 @@ import Select from 'react-select'
 import { ENTER_KEYCODE, MESSAGE_INTERVAL } from '../../constants'
 import { trimField } from '../../utils/helpers'
 import Loader from '../parts/Loader'
+import ReactEmoji from 'react-emoji'
+import EmojiPicker from 'react-emoji-picker'
 
 class DiscussionForm extends Component {
+
+  constructor(props) {
+    super(props)
+    this.emojify = ReactEmoji.emojify.bind(this)
+    this.state = {
+      show: false
+    }
+  }
 
   componentWillMount() {
     let { discussionId, discussionInfo } = this.props
@@ -140,8 +150,25 @@ class DiscussionForm extends Component {
     )
   }
 
+  emojiSelectOpen() {
+    this.setState({show: true})
+  }
+
+  setEmoji(emoji) {
+    let { discussionMessages, setChatMessage } = this.props
+    setChatMessage(discussionMessages.chatMessage + emoji)
+    this.refs.addMessage.focus()
+  }
+
   render() {
     let { discussionInfo, clientHeight, discussionMessages, user } = this.props
+    let emojiOptions = {
+      attributes: {
+        width: '25px',
+        height: '25px',
+        onClick: this.emojiSelectOpen.bind(this)
+      }
+    }
     let discussionInfoRender
 
     if(discussionInfo.isFetching) {
@@ -248,6 +275,11 @@ class DiscussionForm extends Component {
                                       loadDiscussionMessages={this.loadDiscussionMessages.bind(this)}
                                       discussionMessages={discussionMessages}
                                       setScrollToBottom={this.props.setScrollToBottom}/>
+              {this.state.show && <EmojiPicker onSelect={this.setEmoji.bind(this)}/>}
+              <div className='chat-emoji-icon'>
+                <small className='text-muted'>Emoji Selector </small>
+                {this.emojify(':)', emojiOptions)}
+              </div>
               <textarea cols='40'
                         rows='3'
                         className='form-control chat-message'

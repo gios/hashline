@@ -46,6 +46,11 @@
     }
   }
 
+  .chat-emoji-icon {
+    position: absolute;
+    right: 1em;
+  }
+
   .message-time {
     width: 10%;
     color: #a7a7a7;
@@ -84,4 +89,5 @@
 .chat-message {
   resize: none;
   font-size: .8em;
+  padding-right: 10em;
 }
