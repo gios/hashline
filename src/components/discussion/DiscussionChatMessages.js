@@ -80,7 +80,7 @@ class DiscussionChatMessages extends Component {
               {!skipUsername && <div className='message-username m-b-1'>{item.username}</div>}
               <div className='message-item'>{this.emojify(item.message)}</div>
             </td>
-            <td className='message-time'>
+            <td className='message-time' style={{verticalAlign: `${!skipUsername ? 'bottom' : 'top'}`}}>
               <div>{this.testChatDate(item.created_at)}</div>
             </td>
           </tr>
