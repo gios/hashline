@@ -66,7 +66,8 @@ class DiscussionChatMessages extends Component {
     } else if(discussionMessages.messageArchive.length) {
       messageBlock = discussionMessages.messageArchive.map((item, index) => {
         let indexIterator = (index - 1 >= 0) ? index - 1 : index
-        let skipUsername = (item.username === discussionMessages.messageArchive[indexIterator].username && indexIterator) ? true : false;
+        let skipUsername = (item.username === discussionMessages.messageArchive[indexIterator].username && (index || indexIterator)) ? true : false;
+
         return (
           <tr key={index}>
             <td>
