@@ -9,6 +9,7 @@ import { trimField } from '../../utils/helpers'
 import Loader from '../parts/Loader'
 import ReactEmoji from 'react-emoji'
 import EmojiPicker from 'react-emoji-picker'
+import ContentEditable from 'react-contenteditable'
 
 class DiscussionForm extends Component {
 
@@ -71,22 +72,22 @@ class DiscussionForm extends Component {
 
   changeChatMessage(e) {
     let { discussionMessages } = this.props
+    let message = e.currentTarget.textContent
 
-    if(this.validateMessage(e.target.value) || discussionMessages.chatMessage.length) {
-      this.props.setChatMessage(e.target.value)
+    if(this.validateMessage(message) || discussionMessages.chatMessage.length) {
+      this.props.setChatMessage(message)
       this.props.setScrollToBottom(false)
     }
   }
 
   sendMessage(e) {
-    let message = this.refs.addMessage.value
+    let message = this.refs.addMessage.htmlEl.textContent
     let { socket, discussionId, user, setChatMessage } = this.props
 
     if((!e.which || e.ctrlKey && e.which === ENTER_KEYCODE) && this.validateMessage(message)) {
       e.preventDefault()
       socket.emit('chat message', message, discussionId, user.payload)
       setChatMessage('')
-      this.refs.addMessage.focus()
     }
   }
 
@@ -280,14 +281,12 @@ class DiscussionForm extends Component {
                 <small className='text-muted'>Emoji Selector </small>
                 {this.emojify(':)', emojiOptions)}
               </div>
-              <textarea cols='40'
-                        rows='3'
-                        className='form-control chat-message'
-                        ref='addMessage'
-                        placeholder='Write something'
-                        onKeyDown={this.sendMessage.bind(this)}
-                        onChange={this.changeChatMessage.bind(this)}
-                        value={discussionMessages.chatMessage}></textarea>
+              <ContentEditable className='form-control chat-message'
+                               ref='addMessage'
+                               placeholder='Write something'
+                               onKeyDown={this.sendMessage.bind(this)}
+                               onChange={this.changeChatMessage.bind(this)}
+                               html={discussionMessages.chatMessage}/>
               <span className='pull-xs-right m-t-1'>Press <kbd>Ctrl + Enter</kbd> for send message.</span>
               <button type='button'
                       className='btn btn-primary pull-xs-left m-t-1'

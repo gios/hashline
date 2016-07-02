@@ -87,7 +87,8 @@
 }
 
 .chat-message {
-  resize: none;
+  height: 5em;
+  overflow-y: auto;
   font-size: .8em;
   padding-right: 10em;
 }
