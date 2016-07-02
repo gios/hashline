@@ -81,8 +81,8 @@ module.exports = function(router, jwt, SHARED_SECRET) {
 
   router.get('/api/user/info', function *() {
     let userInfo = this.state.user
-    let messagesSend = yield knex('messages')
-    .count('id AS messages_send')
+    let messagesSent = yield knex('messages')
+    .count('id AS messages_sent')
     .where('user_id', userInfo.id)
     .first()
     let userDiscussions = yield knex('discussions').select('id').where('user_id', userInfo.id)
@@ -95,13 +95,13 @@ module.exports = function(router, jwt, SHARED_SECRET) {
     .count('id AS discussions_created')
     .where('user_id', userInfo.id)
     .first()
-    let rankNumber = messagesSend.messages_send * 0.3 + messagesReceived.messages_received * 0.7
+    let rankNumber = messagesSent.messages_sent * 0.3 + messagesReceived.messages_received * 0.7
     yield knex('users').where('id', userInfo.id).update({ rank: rankNumber })
     let usersRankSorted = yield knex('users').orderBy('rank', 'DESC')
     let userRankIndex = usersRankSorted.findIndex(item => item.id === userInfo.id)
 
     this.body = {
-      messages_send: messagesSend.messages_send,
+      messages_sent: messagesSent.messages_sent,
       messages_received: messagesReceived.messages_received,
       discussions_created: discussionsCreated.discussions_created,
       rank: userRankIndex + 1

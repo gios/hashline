@@ -12,10 +12,11 @@ class Dash extends Component {
   }
 
   render() {
-    let { dispatch, myTrendingDiscussions } = this.props
+    let { dispatch, myTrendingDiscussions, dashUserInfo } = this.props
 
     return (
       <DashBlock myTrendingDiscussions={myTrendingDiscussions}
+                 dashUserInfo={dashUserInfo}
                  onJoinDiscussion={this.onJoinDiscussion.bind(this)}
                  getDashUserInfo={() => dispatch(getDashUserInfo())}
                  getMyTrendingDiscussions={() => dispatch(getMyTrendingDiscussions())}/>
@@ -26,6 +27,7 @@ class Dash extends Component {
 function inject(state) {
   return {
     myTrendingDiscussions: state.dash.myTrendingDiscussions.toJS(),
+    dashUserInfo: state.dash.dashUserInfo.toJS(),
     userInfo: state.sidebar.userInfo.toJS()
   }
 }
