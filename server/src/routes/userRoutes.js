@@ -97,12 +97,14 @@ module.exports = function(router, jwt, SHARED_SECRET) {
     .first()
     let rankNumber = messagesSend.messages_send * 0.3 + messagesReceived.messages_received * 0.7
     yield knex('users').where('id', userInfo.id).update({ rank: rankNumber })
+    let usersRankSorted = yield knex('users').orderBy('rank', 'DESC')
+    let userRankIndex = usersRankSorted.findIndex(item => item.id === userInfo.id)
 
     this.body = {
       messages_send: messagesSend.messages_send,
       messages_received: messagesReceived.messages_received,
       discussions_created: discussionsCreated.discussions_created,
-      rankNumber
+      rank: userRankIndex + 1
     }
   })
 
