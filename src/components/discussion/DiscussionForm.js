@@ -10,6 +10,7 @@ import Loader from '../parts/Loader'
 import ReactEmoji from 'react-emoji'
 import EmojiPicker from 'react-emoji-picker'
 import ContentEditable from 'react-contenteditable'
+import Popover from 'react-popover'
 
 class DiscussionForm extends Component {
 
@@ -17,7 +18,7 @@ class DiscussionForm extends Component {
     super(props)
     this.emojify = ReactEmoji.emojify.bind(this)
     this.state = {
-      show: false
+      isOpen: false
     }
   }
 
@@ -156,8 +157,28 @@ class DiscussionForm extends Component {
     )
   }
 
-  emojiSelectOpen() {
-    this.setState({show: true})
+  emojiSelect() {
+    this.setState({ isOpen: !this.state.isOpen })
+  }
+
+  renderEmojiPopover() {
+    let emojiPopoverBody = <EmojiPicker onSelect={this.setEmoji.bind(this)}/>
+    let emojiOptions = {
+      attributes: {
+        width: '25px',
+        height: '25px',
+        onMouseOver: this.emojiSelect.bind(this)
+      }
+    }
+
+    return (
+      <Popover isOpen={this.state.isOpen} body={emojiPopoverBody}>
+        <div className='chat-emoji-icon'>
+          <small className='text-muted'>Emoji Selector </small>
+          {this.emojify(':)', emojiOptions)}
+        </div>
+      </Popover>
+    )
   }
 
   setEmoji(emoji) {
@@ -168,13 +189,6 @@ class DiscussionForm extends Component {
 
   render() {
     let { discussionInfo, clientHeight, discussionMessages, user } = this.props
-    let emojiOptions = {
-      attributes: {
-        width: '25px',
-        height: '25px',
-        onMouseOver: this.emojiSelectOpen.bind(this)
-      }
-    }
     let discussionInfoRender
 
     if(discussionInfo.isFetching) {
@@ -281,11 +295,7 @@ class DiscussionForm extends Component {
                                       loadDiscussionMessages={this.loadDiscussionMessages.bind(this)}
                                       discussionMessages={discussionMessages}
                                       setScrollToBottom={this.props.setScrollToBottom}/>
-              {this.state.show && <EmojiPicker onSelect={this.setEmoji.bind(this)}/>}
-              <div className='chat-emoji-icon'>
-                <small className='text-muted'>Emoji Selector </small>
-                {this.emojify(':)', emojiOptions)}
-              </div>
+              {this.renderEmojiPopover()}
               <ContentEditable className='form-control chat-message'
                                ref='addMessage'
                                placeholder='Write something'

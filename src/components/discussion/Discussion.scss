@@ -91,3 +91,17 @@
   font-size: .8em;
   padding-right: 10em;
 }
+
+.Popover-body {
+  display: inline-flex;
+  flex-direction: column;
+  width: 24em;
+  padding: 1rem;
+  background: hsl(0, 0%, 27%);
+  color: white;
+  border-radius: 0.3rem;
+}
+
+.Popover-tipShape {
+  fill: hsl(0, 0%, 27%)
+}
