@@ -73,23 +73,18 @@ class DiscussionForm extends Component {
     socket.removeListener('invite users')
   }
 
-  changeChatMessage(e) {
-    let { discussionMessages } = this.props
-    let message = e.currentTarget.textContent
-
-    // --------------------------------------
-    // TODO
-    // e.target.value PARSE THIS OBJECT ON img to :smiley:
+  parseMessageEmojiImg(message = '') {
     let imgRegexp = /<img([^>]*[^/])>/g
     let imgClassRegexp = /class="(:[\w]*:)"/
-    let messageTest = e.target.value
-    let emojiLinks = messageTest.replace(imgRegexp, str => {
+    return message.replace(imgRegexp, str => {
       let emojiLink = str.match(imgClassRegexp)[1]
       return emojiLink
     })
-    console.log(emojiLinks)
+  }
 
-    // --------------------------------------
+  changeChatMessage(e) {
+    let { discussionMessages } = this.props
+    let message = e.target.value
 
     if(this.validateMessage(message) || discussionMessages.chatMessage.length) {
       this.props.setChatMessage(message)
@@ -98,7 +93,7 @@ class DiscussionForm extends Component {
   }
 
   sendMessage(e) {
-    let message = this.refs.addMessage.htmlEl.textContent
+    let message = this.parseMessageEmojiImg(this.refs.addMessage.lastHtml)
     let { socket, discussionId, user, setChatMessage } = this.props
 
     if((!e.which || e.ctrlKey && e.which === ENTER_KEYCODE) && this.validateMessage(message)) {
