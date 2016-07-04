@@ -312,7 +312,7 @@ class DiscussionForm extends Component {
                                       discussionMessages={discussionMessages}
                                       setScrollToBottom={this.props.setScrollToBottom}/>
               {this.renderEmojiPopover()}
-              <ContentEditable className='form-control chat-message'
+              <ContentEditable className='chat-message'
                                ref='addMessage'
                                placeholder='Write something'
                                onKeyDown={this.sendMessage.bind(this)}
