@@ -11,6 +11,11 @@ html, body {
   width: 100%;
 }
 
+.notification-img {
+  background: url(./assets/img/notification.jpg) no-repeat;
+  display: none;
+}
+
 .background-wrapper {
   background: url(./assets/img/background-wrapper.jpg) no-repeat center center fixed;
   background-size: cover;
