@@ -11,6 +11,7 @@ import ReactEmoji from 'react-emoji'
 import EmojiPicker from 'react-emoji-picker'
 import ContentEditable from 'react-contenteditable'
 import Popover from 'react-popover'
+import ReactDOMServer from 'react-dom/server'
 
 class DiscussionForm extends Component {
 
@@ -75,6 +76,8 @@ class DiscussionForm extends Component {
   changeChatMessage(e) {
     let { discussionMessages } = this.props
     let message = e.currentTarget.textContent
+    // TODO
+    // e.target.value PARSE THIS OBJECT ON img to :smiley:
 
     if(this.validateMessage(message) || discussionMessages.chatMessage.length) {
       this.props.setChatMessage(message)
@@ -198,8 +201,14 @@ class DiscussionForm extends Component {
   }
 
   setEmoji(emoji) {
+    let emojiOptions = {
+      attributes: {
+        className: emoji
+      }
+    }
+    let renderedEmoji = ReactDOMServer.renderToStaticMarkup(this.emojify(emoji, emojiOptions)[0])
     let { discussionMessages, setChatMessage } = this.props
-    setChatMessage(discussionMessages.chatMessage + emoji)
+    setChatMessage(discussionMessages.chatMessage + renderedEmoji)
     setTimeout(() => this.placeCaretAtEnd(this.refs.addMessage.htmlEl))
   }
 
