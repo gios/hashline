@@ -3,6 +3,26 @@ import Loader from '../parts/Loader'
 
 class UserSTatusInfo extends Component {
 
+  rankLabelSelector(rank) {
+    let rankColor = ''
+
+    switch(rank) {
+      case 1:
+        rankColor = 'rank-gold'
+        break;
+      case 2:
+        rankColor = 'rank-silver'
+        break;
+      case 3:
+        rankColor = 'rank-bronze'
+        break;
+      default:
+        rankColor = 'rank-others'
+    }
+
+    return <span className={`label ${rankColor}`}>{rank}</span>
+  }
+
   renderUserStatusInfo() {
     let { dashUserInfo } = this.props
 
@@ -12,7 +32,7 @@ class UserSTatusInfo extends Component {
       return (
         <div className='card'>
           <div className='card-block'>
-            <h4 className='card-title'>Rank <span className='label label-info'>{dashUserInfo.payload.rank}</span></h4>
+            <h4 className='card-title'>Rank {this.rankLabelSelector(dashUserInfo.payload.rank)}</h4>
             <p className='card-text'>This rank is calculated using the ratio between the created and received messages from your discussions.</p>
           </div>
           <ul className='list-group list-group-flush'>
