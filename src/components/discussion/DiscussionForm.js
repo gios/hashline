@@ -172,7 +172,7 @@ class DiscussionForm extends Component {
     return (
       <Popover isOpen={discussionMessages.emojiPopup} body={emojiPopoverBody} onOuterAction={this.emojiSelect.bind(this)}>
         <div className='chat-emoji-icon'>
-          <small className='text-muted'>Emoji Selector </small>
+          <small className='text-muted'>Emoji Picker </small>
           {this.emojify(':)', emojiOptions)}
         </div>
       </Popover>
