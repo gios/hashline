@@ -100,6 +100,10 @@
   background: hsl(0, 0%, 27%);
   color: white;
   border-radius: 0.3rem;
+
+  & > span > span {
+    display: none;
+  }
 }
 
 .Popover-tipShape {
