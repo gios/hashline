@@ -17,9 +17,6 @@ class DiscussionForm extends Component {
   constructor(props) {
     super(props)
     this.emojify = ReactEmoji.emojify.bind(this)
-    this.state = {
-      isOpen: false
-    }
   }
 
   componentWillMount() {
@@ -158,10 +155,11 @@ class DiscussionForm extends Component {
   }
 
   emojiSelect() {
-    this.setState({ isOpen: !this.state.isOpen })
+    this.props.toggleEmojiPopup()
   }
 
   renderEmojiPopover() {
+    let { discussionMessages } = this.props
     let emojiPopoverBody = <EmojiPicker onSelect={this.setEmoji.bind(this)}/>
     let emojiOptions = {
       attributes: {
@@ -172,7 +170,7 @@ class DiscussionForm extends Component {
     }
 
     return (
-      <Popover isOpen={this.state.isOpen} body={emojiPopoverBody} onOuterAction={this.emojiSelect.bind(this)}>
+      <Popover isOpen={discussionMessages.emojiPopup} body={emojiPopoverBody} onOuterAction={this.emojiSelect.bind(this)}>
         <div className='chat-emoji-icon'>
           <small className='text-muted'>Emoji Selector </small>
           {this.emojify(':)', emojiOptions)}

@@ -13,7 +13,8 @@ import { getDiscussion,
          setEndLoadMessages,
          setLoadDisableMessages,
          discussionUsersInvite,
-         getSearchUsers } from '../actions/discussionAction'
+         getSearchUsers,
+         toggleEmojiPopup } from '../actions/discussionAction'
 import DiscussionForm from '../components/discussion/DiscussionForm'
 import DiscussionPasswordModal from '../components/discussion/DiscussionPasswordModal'
 import socket from '../utils/socket'
@@ -83,6 +84,7 @@ class Discussion extends Component {
                                          discussionInfo={discussionInfo}
                                          discussionMessages={discussionMessages}
                                          searchUsers={searchUsers}
+                                         toggleEmojiPopup={() => dispatch(toggleEmojiPopup())}
                                          getSearchUsers={search => dispatch(getSearchUsers(search))}
                                          discussionUsersInvite={usersInvite => dispatch(discussionUsersInvite(usersInvite))}
                                          setStartLoadMessages={start => dispatch(setStartLoadMessages(start))}

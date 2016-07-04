@@ -23,7 +23,8 @@ import {
   START_LOAD_MESSAGES,
   END_LOAD_MESSAGES,
   LOAD_DISABLE_MESSAGES,
-  DISCUSSION_USERS_INVITE } from '../actions/discussionAction'
+  DISCUSSION_USERS_INVITE,
+  TOGGLE_EMOJI_POPUP } from '../actions/discussionAction'
 
 const discussionDeleteState = Immutable.Map({
   isFetching: false,
@@ -141,7 +142,8 @@ const discussionMessagesState = Immutable.Map({
   scrollToBottom: false,
   startLoad: 0,
   endLoad: 100,
-  loadDisable: false
+  loadDisable: false,
+  emojiPopup: false
 })
 
 function discussionMessages(state = discussionMessagesState, action) {
@@ -199,6 +201,10 @@ function discussionMessages(state = discussionMessagesState, action) {
     case LOCATION_CHANGE:
       return state.merge({
         messageArchive: state.get('messageArchive').clear()
+      })
+    case TOGGLE_EMOJI_POPUP:
+      return state.merge({
+        emojiPopup: !state.get('emojiPopup')
       })
     default:
       return state
