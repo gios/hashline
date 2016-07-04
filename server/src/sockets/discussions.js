@@ -57,7 +57,7 @@ module.exports = function(io, socket) {
   })
 
   socket.on('connected users', discussionId => {
-    io.emit('connected users', {
+    io.sockets.to(`discussion-${discussionId}`).emit('connected users', {
       users: getUserInRoom(`discussion-${discussionId}`),
       length: getUserInRoom(`discussion-${discussionId}`).length
     })
