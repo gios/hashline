@@ -211,7 +211,7 @@ class DiscussionForm extends Component {
     if(isChatMessage === 'chat-message' || 'form-group chat-area') {
       pasteHtmlAtCaret(renderedEmoji)
     }
-    setChatMessage(this.refs.addMessage.lastHtml)
+    setChatMessage(this.refs.addMessage.htmlEl.innerHTML)
   }
 
   typingMessage() {
