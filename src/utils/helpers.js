@@ -31,16 +31,16 @@ export function throttle(fn, threshhold, scope) {
 }
 
 export let idToken = {
-  setToken: function (token) {
+  setToken: function(token) {
     localStorage.setItem('id_token', token)
   },
-  getToken: function () {
+  getToken: function() {
     return localStorage.getItem('id_token')
   },
-  hasToken: function () {
+  hasToken: function() {
     return localStorage.getItem('id_token') ? true : false
   },
-  removeToken: function () {
+  removeToken: function() {
     localStorage.removeItem('id_token')
   }
 }
