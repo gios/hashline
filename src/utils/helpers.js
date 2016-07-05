@@ -1,10 +1,10 @@
 export function DOMtoArray(obj) {
-  let array = [];
+  let array = []
 
   for (let i = obj.length >>> 0; i--;) {
-    array[i] = obj[i];
+    array[i] = obj[i]
   }
-  return array;
+  return array
 }
 
 export function throttle(fn, threshhold, scope) {
@@ -31,24 +31,42 @@ export function throttle(fn, threshhold, scope) {
 }
 
 export let idToken = {
-  setToken: function(token) {
+  setToken: function (token) {
     localStorage.setItem('id_token', token)
   },
-  getToken: function() {
+  getToken: function () {
     return localStorage.getItem('id_token')
   },
-  hasToken: function() {
+  hasToken: function () {
     return localStorage.getItem('id_token') ? true : false
   },
-  removeToken: function() {
+  removeToken: function () {
     localStorage.removeItem('id_token')
   }
 }
 
 export function trimField(str) {
-    return str.replace(/^\s+|\s+$/g,'');
+  return str.replace(/^\s+|\s+$/g, '')
 }
 
 export function capitalize(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1)
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
+export function placeCaretAtEnd(el) {
+  el.focus()
+
+  if (typeof window.getSelection !== 'undefined' && typeof document.createRange !== 'undefined') {
+    let range = document.createRange()
+    range.selectNodeContents(el)
+    range.collapse(false)
+    let sel = window.getSelection()
+    sel.removeAllRanges()
+    sel.addRange(range)
+  } else if (typeof document.body.createTextRange !== 'undefined') {
+    let textRange = document.body.createTextRange()
+    textRange.moveToElementText(el)
+    textRange.collapse(false)
+    textRange.select()
+  }
 }

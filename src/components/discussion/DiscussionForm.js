@@ -5,7 +5,7 @@ import DiscussionExpiredTimer from './DiscussionExpiredTimer'
 import DiscussionChatMessages from './DiscussionChatMessages'
 import Select from 'react-select'
 import { ENTER_KEYCODE, MESSAGE_INTERVAL } from '../../constants'
-import { trimField } from '../../utils/helpers'
+import { trimField, placeCaretAtEnd } from '../../utils/helpers'
 import Loader from '../parts/Loader'
 import ReactEmoji from 'react-emoji'
 import EmojiPicker from 'react-emoji-picker'
@@ -193,24 +193,6 @@ class DiscussionForm extends Component {
     )
   }
 
-  placeCaretAtEnd(el) {
-    el.focus()
-
-    if(typeof window.getSelection !== 'undefined' && typeof document.createRange !== 'undefined') {
-      let range = document.createRange()
-      range.selectNodeContents(el)
-      range.collapse(false)
-      let sel = window.getSelection()
-      sel.removeAllRanges()
-      sel.addRange(range)
-    } else if(typeof document.body.createTextRange !== 'undefined') {
-      let textRange = document.body.createTextRange()
-      textRange.moveToElementText(el)
-      textRange.collapse(false)
-      textRange.select()
-    }
-  }
-
   setEmoji(emoji) {
     let { discussionMessages, setChatMessage } = this.props
     let message = discussionMessages.chatMessage
@@ -225,7 +207,7 @@ class DiscussionForm extends Component {
       message = message.slice(0, message.length - 4)
     }
     setChatMessage(message + renderedEmoji)
-    setTimeout(() => this.placeCaretAtEnd(this.refs.addMessage.htmlEl))
+    setTimeout(() => placeCaretAtEnd(this.refs.addMessage.htmlEl))
   }
 
   typingMessage() {
