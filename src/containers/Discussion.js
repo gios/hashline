@@ -14,7 +14,8 @@ import { getDiscussion,
          setLoadDisableMessages,
          discussionUsersInvite,
          getSearchUsers,
-         toggleEmojiPopup } from '../actions/discussionAction'
+         toggleEmojiPopup,
+         typingMessage } from '../actions/discussionAction'
 import DiscussionForm from '../components/discussion/DiscussionForm'
 import DiscussionPasswordModal from '../components/discussion/DiscussionPasswordModal'
 import socket from '../utils/socket'
@@ -43,6 +44,10 @@ class Discussion extends Component {
       dispatch(setSentMessageArchive({ created_at, username, message }))
       dispatch(setScrollToBottom(true))
     })
+
+    socket.on('typing message', username => {
+      dispatch(typingMessage(username))
+    })
   }
 
   onJoinDiscussion({ id, password = '' }) {
@@ -68,7 +73,7 @@ class Discussion extends Component {
     socket.removeListener('join discussion')
     socket.removeListener('connected users')
     socket.removeListener('chat message')
-    socket.removeListener('error invite users')
+    socket.removeListener('typing message')
   }
 
   render() {

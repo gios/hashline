@@ -71,6 +71,7 @@ class DiscussionForm extends Component {
     socket.removeListener('join discussion')
     socket.removeListener('connected users')
     socket.removeListener('invite users')
+    socket.removeListener('typing message')
   }
 
   parseMessageEmojiImg(message = '') {
@@ -83,11 +84,12 @@ class DiscussionForm extends Component {
   }
 
   changeChatMessage(e) {
-    let { discussionMessages } = this.props
+    let { discussionMessages, socket, user, discussionId } = this.props
     let message = e.target.value
 
     if(this.validateMessage(message) || discussionMessages.chatMessage.length) {
       this.props.setChatMessage(message)
+      socket.emit('typing message', discussionId, user.payload)
       this.props.setScrollToBottom(false)
     }
   }
@@ -219,6 +221,16 @@ class DiscussionForm extends Component {
     setTimeout(() => this.placeCaretAtEnd(this.refs.addMessage.htmlEl))
   }
 
+  typingMessage() {
+    let { discussionMessages } = this.props
+
+    if(discussionMessages.userTyping) {
+      return <div className='typing'>{discussionMessages.userTyping} typing</div>
+    } else {
+      return null;
+    }
+  }
+
   render() {
     let { discussionInfo, clientHeight, discussionMessages, user } = this.props
     let discussionInfoRender
@@ -327,6 +339,7 @@ class DiscussionForm extends Component {
                                       loadDiscussionMessages={this.loadDiscussionMessages.bind(this)}
                                       discussionMessages={discussionMessages}
                                       setScrollToBottom={this.props.setScrollToBottom}/>
+              {this.typingMessage()}
               {this.renderEmojiPopover()}
               <ContentEditable className='chat-message'
                                ref='addMessage'

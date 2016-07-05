@@ -30,6 +30,14 @@ export const DISCUSSION_USERS_INVITE = 'DISCUSSION_USERS_INVITE'
 
 export const SCROLL_TO_BOTTOM = 'SCROLL_TO_BOTTOM'
 export const TOGGLE_EMOJI_POPUP = 'TOGGLE_EMOJI_POPUP'
+export const USER_TYPING_MESSAGE = 'TYPING_MESSAGE'
+
+export function typingMessage(userTyping) {
+  return {
+    type: USER_TYPING_MESSAGE,
+    userTyping
+  }
+}
 
 export function toggleEmojiPopup(emojiPopup) {
   return {
