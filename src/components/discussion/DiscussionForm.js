@@ -212,14 +212,19 @@ class DiscussionForm extends Component {
   }
 
   setEmoji(emoji) {
+    let { discussionMessages, setChatMessage } = this.props
+    let message = discussionMessages.chatMessage
     let emojiOptions = {
       attributes: {
         className: emoji
       }
     }
     let renderedEmoji = ReactDOMServer.renderToStaticMarkup(this.emojify(emoji, emojiOptions)[0])
-    let { discussionMessages, setChatMessage } = this.props
-    setChatMessage(discussionMessages.chatMessage + renderedEmoji)
+
+    if(message.endsWith('<br><br>')) {
+      message = message.slice(0, message.length - 4)
+    }
+    setChatMessage(message + renderedEmoji)
     setTimeout(() => this.placeCaretAtEnd(this.refs.addMessage.htmlEl))
   }
 
