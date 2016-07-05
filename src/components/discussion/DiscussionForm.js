@@ -5,7 +5,7 @@ import DiscussionExpiredTimer from './DiscussionExpiredTimer'
 import DiscussionChatMessages from './DiscussionChatMessages'
 import Select from 'react-select'
 import { ENTER_KEYCODE, MESSAGE_INTERVAL } from '../../constants'
-import { trimField, placeCaretAtEnd } from '../../utils/helpers'
+import { trimField, pasteHtmlAtCaret } from '../../utils/helpers'
 import Loader from '../parts/Loader'
 import ReactEmoji from 'react-emoji'
 import EmojiPicker from 'react-emoji-picker'
@@ -80,7 +80,7 @@ class DiscussionForm extends Component {
 
     return message.replace(imgRegexp, str => {
       return str.match(imgClassRegexp)[1]
-    })
+    }).replace(/&nbsp;/g, ' ')
   }
 
   changeChatMessage(e) {
@@ -202,12 +202,16 @@ class DiscussionForm extends Component {
       }
     }
     let renderedEmoji = ReactDOMServer.renderToStaticMarkup(this.emojify(emoji, emojiOptions)[0])
+    let isChatMessage = window.getSelection().anchorNode.parentElement.className
 
     if(message.endsWith('<br><br>')) {
       message = message.slice(0, message.length - 4)
     }
-    setChatMessage(message + renderedEmoji)
-    setTimeout(() => placeCaretAtEnd(this.refs.addMessage.htmlEl))
+
+    if(isChatMessage === 'chat-message' || 'form-group chat-area') {
+      pasteHtmlAtCaret(renderedEmoji)
+    }
+    setChatMessage(this.refs.addMessage.lastHtml)
   }
 
   typingMessage() {
