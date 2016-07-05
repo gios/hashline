@@ -23,7 +23,7 @@ import socket from '../utils/socket'
 class Discussion extends Component {
 
   componentWillMount() {
-    let { dispatch, discussionId, discussionMessages } = this.props
+    let { dispatch, discussionId } = this.props
 
     socket.removeListener('leave discussion')
     socket.on('join discussion', (username) => {
@@ -46,11 +46,9 @@ class Discussion extends Component {
     })
 
     socket.on('typing message', username => {
-      // const typingTimeout = setTimeout(() => dispatch(typingMessage('')), 5000)
-      // if(discussionMessages.userTyping) {
-      //   clearTimeout(typingTimeout)
-      // }
       dispatch(typingMessage(username))
+      clearTimeout(this.typingTimeout)
+      this.typingTimeout = setTimeout(() => dispatch(typingMessage('')), 3000)
     })
   }
 
