@@ -77,9 +77,9 @@ class DiscussionForm extends Component {
   parseMessageEmojiImg(message = '') {
     let imgRegexp = /<img([^>]*[^/])>/g
     let imgClassRegexp = /class="(:[\w]*:)"/
+
     return message.replace(imgRegexp, str => {
-      let emojiLink = str.match(imgClassRegexp)[1]
-      return emojiLink
+      return str.match(imgClassRegexp)[1]
     })
   }
 
@@ -95,14 +95,16 @@ class DiscussionForm extends Component {
   }
 
   sendMessage(e) {
-    let message = this.parseMessageEmojiImg(this.refs.addMessage.lastHtml)
-    let { socket, discussionId, user, setChatMessage } = this.props
-
-    if((!e.which || e.ctrlKey && e.which === ENTER_KEYCODE) && this.validateMessage(message)) {
+    if((!e.which || (e.which === ENTER_KEYCODE && !e.shiftKey))) {
       e.preventDefault()
-      socket.emit('chat message', message, discussionId, user.payload)
-      setChatMessage('')
-      this.refs.addMessage.htmlEl.focus()
+      let message = this.parseMessageEmojiImg(this.refs.addMessage.lastHtml)
+      let { socket, discussionId, user, setChatMessage } = this.props
+
+      if(this.validateMessage(message)) {
+        socket.emit('chat message', message, discussionId, user.payload)
+        setChatMessage('')
+        this.refs.addMessage.htmlEl.focus()
+      }
     }
   }
 
@@ -347,7 +349,7 @@ class DiscussionForm extends Component {
                                onKeyDown={this.sendMessage.bind(this)}
                                onChange={this.changeChatMessage.bind(this)}
                                html={discussionMessages.chatMessage}/>
-              <span className='pull-xs-right m-t-1'>Press <kbd>Ctrl + Enter</kbd> for send message.</span>
+              <span className='pull-xs-right m-t-1'>Press <kbd>Shift + Enter</kbd> for newline message.</span>
               <button type='button'
                       className='btn btn-primary pull-xs-left m-t-1'
                       onClick={this.sendMessage.bind(this)}>Send</button>
