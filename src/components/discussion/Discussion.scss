@@ -125,6 +125,8 @@
 }
 
 .typing {
+  position: absolute;
+  transform: translate(5px, -20px);
   font-size: .8em;
   font-style: italic;
 }
