@@ -4,6 +4,7 @@ import { MESSAGE_INTERVAL } from '../../constants'
 import Loader from '../parts/Loader'
 import moment from 'moment'
 import ReactEmoji from 'react-emoji'
+import ReactDOMServer from 'react-dom/server'
 
 class DiscussionChatMessages extends Component {
 
@@ -73,12 +74,19 @@ class DiscussionChatMessages extends Component {
       messageBlock = discussionMessages.messageArchive.map((item, index) => {
         let indexIterator = (index - 1 >= 0) ? index - 1 : index
         let skipUsername = (item.username === discussionMessages.messageArchive[indexIterator].username && (index || indexIterator)) ? true : false
+        let message = this.emojify(item.message).map(part => {
+          if(React.isValidElement(part)) {
+            return ReactDOMServer.renderToStaticMarkup(part)
+          } else {
+            return part
+          }
+        }).join('')
 
         return (
           <tr key={index}>
             <td>
               {!skipUsername && <div className='message-username m-b-1'>{item.username}</div>}
-              <div className='message-item'>{this.emojify(item.message)}</div>
+              <div className='message-item' dangerouslySetInnerHTML={{__html: message}}></div>
             </td>
             <td className='message-time' style={{verticalAlign: `${!skipUsername ? 'bottom' : 'top'}`}}>
               <div>{this.testChatDate(item.created_at)}</div>
