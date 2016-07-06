@@ -1,6 +1,8 @@
 'use strict';
 
 const path = require('path')
+const cluster = require('cluster')
+const numCPUs = require('os').cpus().length
 const app = require('koa')()
 const server = require('http').createServer(app.callback())
 const io = require('socket.io')(server, { path: '/api/chat' })
@@ -17,43 +19,53 @@ const tracer = require('tracer').colorConsole()
 
 const SHARED_SECRET = 'hashline'
 
-app.use(function *(next) {
-  yield send(this, path.resolve(__dirname, '/../public/', 'index.html'))
-  yield next
-})
-
-app.use(function *(next) {
-  try {
-    yield next
-  } catch (err) {
-    if (400 < this.status && this.status < 500) {
-      tracer.warn(err)
-    } else {
-      tracer.error(err)
-    }
-
-    this.status = err.status || 500
-    this.body = { code: this.status, message: err.message || 'Internal server error' }
-    this.app.emit('error', err, this)
+if(cluster.isMaster) {
+  for(let i = 0; i < numCPUs; i++) {
+    cluster.fork()
   }
-})
 
-app.use(logger())
-app.use(helmet())
-app.use(bodyParser())
-app.use(serve(__dirname + '/../public'))
-app.use(favicon(__dirname + '/../public/favicon.ico'))
-app.use(jwt({ secret: SHARED_SECRET }).unless({ path: routes }))
-app.use(router.routes())
-app.use(router.allowedMethods())
+  cluster.on('exit', worker => {
+    tracer.warn(`worker ${worker.process.pid} died`)
+  })
+} else {
+  app.use(function *(next) {
+    yield send(this, path.resolve(__dirname, '/../public/', 'index.html'))
+    yield next
+  })
 
-require('./src/routes/userRoutes')(router, jwt, SHARED_SECRET)
-require('./src/routes/discussionRoutes')(router)
+  app.use(function *(next) {
+    try {
+      yield next
+    } catch (err) {
+      if (400 < this.status && this.status < 500) {
+        tracer.warn(err)
+      } else {
+        tracer.error(err)
+      }
 
-io.on('connection', (socket) => {
-  tracer.info('USER CONNECTED')
-  require('./src/sockets/discussions')(io, socket)
-})
+      this.status = err.status || 500
+      this.body = { code: this.status, message: err.message || 'Internal server error' }
+      this.app.emit('error', err, this)
+    }
+  })
 
-server.listen(process.env.PORT || 5000)
-tracer.info('Hashline is running on port', process.env.PORT || 5000)
+  app.use(logger())
+  app.use(helmet())
+  app.use(bodyParser())
+  app.use(serve(__dirname + '/../public'))
+  app.use(favicon(__dirname + '/../public/favicon.ico'))
+  app.use(jwt({ secret: SHARED_SECRET }).unless({ path: routes }))
+  app.use(router.routes())
+  app.use(router.allowedMethods())
+
+  require('./src/routes/userRoutes')(router, jwt, SHARED_SECRET)
+  require('./src/routes/discussionRoutes')(router)
+
+  io.on('connection', (socket) => {
+    tracer.info('USER CONNECTED')
+    require('./src/sockets/discussions')(io, socket)
+  })
+
+  server.listen(process.env.PORT || 5000)
+  tracer.info('Hashline is running on port', process.env.PORT || 5000)
+}
