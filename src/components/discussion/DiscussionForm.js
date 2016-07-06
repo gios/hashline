@@ -287,7 +287,7 @@ class DiscussionForm extends Component {
           </li>
           <li className='list-group-item'>
             <strong>Created At:</strong>
-            <div className='pull-xs-right'>{moment(discussionInfo.payload.created_at).format('DD MMM YYYY H:mm:ss')}</div>
+            <div className='chat-info-description'>{moment(discussionInfo.payload.created_at).format('DD MMM YYYY H:mm:ss')}</div>
           </li>
           <li className='list-group-item'>
             <strong>Creator:</strong>
@@ -323,7 +323,7 @@ class DiscussionForm extends Component {
 
     return (
       <div>
-        <div className='col-sm-8'>
+        <div className='col-sm-12 col-md-12 col-lg-8'>
           <form>
             <fieldset className='form-group chat-area'>
               <DiscussionChatMessages clientHeight={clientHeight}
@@ -347,7 +347,7 @@ class DiscussionForm extends Component {
             </fieldset>
           </form>
         </div>
-        <div className='col-sm-4'>
+        <div className='col-sm-12 col-md-12 col-lg-4'>
           {discussionInfoRender}
         </div>
       </div>
