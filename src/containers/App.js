@@ -10,7 +10,6 @@ import { setSearchQueryDiscussions, updateSearchQueryDiscussions } from '../acti
 import { getSidebarTypes } from '../actions/sidebarAction'
 import Sidebar from './../components/sidebar/Sidebar'
 import LoggedOutMessage from './../components/helpers/LoggedOutMessage'
-import Swipeable from 'react-swipeable'
 import socket from '../utils/socket'
 import { isSupported, permissionGranted, requestPermission } from '../utils/notifications'
 
@@ -65,10 +64,6 @@ class App extends Component {
         NotificationManager.error(error)
       }
     }
-  }
-
-  sidebarMobileTrigger() {
-    this.refs.sidebar.toggleSidebar()
   }
 
   runSearchQueryDiscussions() {
@@ -130,14 +125,11 @@ class App extends Component {
                      dispatch(push('/login'))
                      dispatch(runLogout())}
                    }/>
-          <Swipeable onSwipedRight={this.sidebarMobileTrigger.bind(this)}
-                     onSwipedLeft={this.sidebarMobileTrigger.bind(this)}>
-            <div className='content-wrapper'>
-              <div className='container-fluid'>
-                {this.props.children}
-              </div>
+          <div className='content-wrapper'>
+            <div className='container-fluid'>
+              {this.props.children}
             </div>
-          </Swipeable>
+          </div>
         </div> : this.props.children}
       </div>
     )
