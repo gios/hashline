@@ -141,6 +141,32 @@
   width: 0px;
 }
 
+.my-discussion-card {
+  word-wrap: break-word;
+  height: 23em;
+
+  & > .card-title {
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    word-wrap: initial;
+    white-space: nowrap;
+    width: 60%;
+  }
+
+  & > .my-discussion-labels .label:not(:first-child) {
+    margin-left: 1em;
+  }
+
+  & > .tag-labels .label:not(:first-child) {
+    margin-left: .5em;
+  }
+
+  & > .discussion-btns {
+    position: absolute;
+    right: 0;
+  }
+}
+
 @keyframes ellipsis {
   to {
     width: 1.25em;
@@ -150,5 +176,23 @@
 @-webkit-keyframes ellipsis {
   to {
     width: 1.25em;
+  }
+}
+
+@media (max-width: 544px) {
+  .my-discussion-card {
+    & > .discussion-btns {
+      position: relative;
+      text-align: right;
+      margin-bottom: 1em;
+    }
+
+    & > .card-title {
+      text-overflow: ellipsis;
+      overflow-x: hidden;
+      word-wrap: initial;
+      white-space: nowrap;
+      width: 100%;
+    }
   }
 }
