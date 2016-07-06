@@ -60,6 +60,7 @@
     "react-swipeable": "^3.3.1",
     "redux": "^3.5.2",
     "redux-api-middleware": "^1.0.2",
+    "redux-thunk": "^2.1.0",
     "socket.io": "^1.4.6",
     "socket.io-client": "^1.4.6",
     "tether": "^1.3.2",
