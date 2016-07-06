@@ -207,13 +207,6 @@ module.exports = function(router) {
 
     switch(getterMethod) {
       case 'search_discussions':
-        discussionsTags = yield knex('discussions')
-        .select('discussions.name', 'users.email AS user_email', 'tags.name AS tag_name')
-        .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
-        .innerJoin('tags', 'tags.id', 'discussions_tags.tag_id')
-        .innerJoin('users', 'discussions.user_id', 'users.id')
-        .groupBy('discussions.name', 'users.email', 'tags.name')
-
         discussionsData = yield knex('discussions')
         .select('discussions.id',
                 'discussions.name',
@@ -249,15 +242,16 @@ module.exports = function(router) {
         .orWhere(knex.raw(`LOWER(users.username) LIKE '%${query}%'`))
         .limit(end - start)
         .offset(start)
-        break;
-      case 'trending_discussions':
+
         discussionsTags = yield knex('discussions')
         .select('discussions.name', 'users.email AS user_email', 'tags.name AS tag_name')
         .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
         .innerJoin('tags', 'tags.id', 'discussions_tags.tag_id')
         .innerJoin('users', 'discussions.user_id', 'users.id')
         .groupBy('discussions.name', 'users.email', 'tags.name')
-
+        .whereIn('discussions_tags.discussion_id', discussionsData.map(item => item.id))
+        break;
+      case 'trending_discussions':
         discussionsData = yield knex('discussions')
         .select('discussions.id',
                 'discussions.name',
@@ -290,16 +284,16 @@ module.exports = function(router) {
          .orderBy('discussions.created_at', 'desc')
          .limit(end - start)
          .offset(start)
+
+         discussionsTags = yield knex('discussions')
+         .select('discussions.name', 'users.email AS user_email', 'tags.name AS tag_name')
+         .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
+         .innerJoin('tags', 'tags.id', 'discussions_tags.tag_id')
+         .innerJoin('users', 'discussions.user_id', 'users.id')
+         .groupBy('discussions.name', 'users.email', 'tags.name')
+         .whereIn('discussions_tags.discussion_id', discussionsData.map(item => item.id))
          break;
       case 'limited_discussions':
-        discussionsTags = yield knex('discussions')
-        .select('discussions.name', 'users.email AS user_email', 'tags.name AS tag_name')
-        .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
-        .innerJoin('tags', 'tags.id', 'discussions_tags.tag_id')
-        .innerJoin('users', 'discussions.user_id', 'users.id')
-        .groupBy('discussions.name', 'users.email', 'tags.name')
-        .where('discussions.is_limited', true)
-
         discussionsData = yield knex('discussions')
         .select('discussions.id',
                 'discussions.name',
@@ -329,18 +323,18 @@ module.exports = function(router) {
         .where('discussions.is_limited', true)
         .limit(end - start)
         .offset(start)
+
+        discussionsTags = yield knex('discussions')
+        .select('discussions.name', 'users.email AS user_email', 'tags.name AS tag_name')
+        .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
+        .innerJoin('tags', 'tags.id', 'discussions_tags.tag_id')
+        .innerJoin('users', 'discussions.user_id', 'users.id')
+        .groupBy('discussions.name', 'users.email', 'tags.name')
+        .where('discussions.is_limited', true)
+        .whereIn('discussions_tags.discussion_id', discussionsData.map(item => item.id))
         break;
       case typeDiscussion && `by_type_discussions--${typeDiscussion}`:
         var typeDiscussionFormatted = typeDiscussion.charAt(0).toUpperCase() + typeDiscussion.slice(1)
-        discussionsTags = yield knex('discussions')
-        .select('discussions.name', 'users.email AS user_email', 'tags.name AS tag_name')
-        .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
-        .innerJoin('tags', 'tags.id', 'discussions_tags.tag_id')
-        .innerJoin('users', 'discussions.user_id', 'users.id')
-        .innerJoin('types', 'discussions.type_id', 'types.id')
-        .groupBy('discussions.name', 'users.email', 'tags.name')
-        .where('types.name', typeDiscussionFormatted)
-
         discussionsData = yield knex('discussions')
         .select('discussions.id',
                 'discussions.name',
@@ -370,15 +364,18 @@ module.exports = function(router) {
         .where('types.name', typeDiscussionFormatted)
         .limit(end - start)
         .offset(start)
+
+        discussionsTags = yield knex('discussions')
+        .select('discussions.name', 'users.email AS user_email', 'tags.name AS tag_name')
+        .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
+        .innerJoin('tags', 'tags.id', 'discussions_tags.tag_id')
+        .innerJoin('users', 'discussions.user_id', 'users.id')
+        .innerJoin('types', 'discussions.type_id', 'types.id')
+        .groupBy('discussions.name', 'users.email', 'tags.name')
+        .where('types.name', typeDiscussionFormatted)
+        .whereIn('discussions_tags.discussion_id', discussionsData.map(item => item.id))
         break;
       case 'most_discussed_discussions':
-        discussionsTags = yield knex('discussions')
-        .select('discussions.name', 'users.email AS user_email', 'tags.name AS tag_name')
-        .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
-        .innerJoin('tags', 'tags.id', 'discussions_tags.tag_id')
-        .innerJoin('users', 'discussions.user_id', 'users.id')
-        .groupBy('discussions.name', 'users.email', 'tags.name')
-
         discussionsData = yield knex('discussions')
         .select('discussions.id',
                 'discussions.name',
@@ -410,15 +407,16 @@ module.exports = function(router) {
         .orderBy('messages_count', 'desc')
         .limit(end - start)
         .offset(start)
+
+        discussionsTags = yield knex('discussions')
+        .select('discussions.name', 'users.email AS user_email', 'tags.name AS tag_name')
+        .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
+        .innerJoin('tags', 'tags.id', 'discussions_tags.tag_id')
+        .innerJoin('users', 'discussions.user_id', 'users.id')
+        .groupBy('discussions.name', 'users.email', 'tags.name')
+        .whereIn('discussions_tags.discussion_id', discussionsData.map(item => item.id))
         break;
       case 'recent_discussions':
-        discussionsTags = yield knex('discussions')
-        .select('discussions.name', 'users.email AS user_email', 'tags.name AS tag_name')
-        .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
-        .innerJoin('tags', 'tags.id', 'discussions_tags.tag_id')
-        .innerJoin('users', 'discussions.user_id', 'users.id')
-        .groupBy('discussions.name', 'users.email', 'tags.name')
-
         discussionsData = yield knex('discussions')
         .select('discussions.id',
                 'discussions.name',
@@ -448,16 +446,16 @@ module.exports = function(router) {
         .orderBy('discussions.created_at', 'desc')
         .limit(end - start)
         .offset(start)
-        break;
-      case 'user_discussions':
+
         discussionsTags = yield knex('discussions')
         .select('discussions.name', 'users.email AS user_email', 'tags.name AS tag_name')
         .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
         .innerJoin('tags', 'tags.id', 'discussions_tags.tag_id')
         .innerJoin('users', 'discussions.user_id', 'users.id')
         .groupBy('discussions.name', 'users.email', 'tags.name')
-        .where('users.email', userInfo.email)
-
+        .whereIn('discussions_tags.discussion_id', discussionsData.map(item => item.id))
+        break;
+      case 'user_discussions':
         discussionsData = yield knex('discussions')
         .select('discussions.id',
                 'discussions.name',
@@ -491,15 +489,17 @@ module.exports = function(router) {
         .orderBy('discussions.created_at', 'desc')
         .limit(end - start)
         .offset(start)
-        break;
-      default:
+
         discussionsTags = yield knex('discussions')
         .select('discussions.name', 'users.email AS user_email', 'tags.name AS tag_name')
         .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
         .innerJoin('tags', 'tags.id', 'discussions_tags.tag_id')
         .innerJoin('users', 'discussions.user_id', 'users.id')
         .groupBy('discussions.name', 'users.email', 'tags.name')
-
+        .where('users.email', userInfo.email)
+        .whereIn('discussions_tags.discussion_id', discussionsData.map(item => item.id))
+        break;
+      default:
         discussionsData = yield knex('discussions')
         .select('discussions.id',
                 'discussions.name',
@@ -528,6 +528,14 @@ module.exports = function(router) {
                 'discussions.closed')
         .limit(end - start)
         .offset(start)
+
+        discussionsTags = yield knex('discussions')
+        .select('discussions.name', 'users.email AS user_email', 'tags.name AS tag_name')
+        .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
+        .innerJoin('tags', 'tags.id', 'discussions_tags.tag_id')
+        .innerJoin('users', 'discussions.user_id', 'users.id')
+        .groupBy('discussions.name', 'users.email', 'tags.name')
+        .whereIn('discussions_tags.discussion_id', discussionsData.map(item => item.id))
         break;
     }
 
