@@ -213,7 +213,7 @@ class DiscussionForm extends Component {
       }
     }
     let renderedEmoji = ReactDOMServer.renderToStaticMarkup(this.emojify(emoji, emojiOptions)[0])
-    let isChatMessage = window.getSelection().anchorNode.parentElement.className
+    let isChatMessage = window.getSelection().anchorNode ? window.getSelection().anchorNode.className : false
 
     if(message.endsWith('<br><br>')) {
       message = message.slice(0, message.length - 4)
