@@ -89,7 +89,7 @@ class DiscussionChatMessages extends Component {
               <div className='message-item' dangerouslySetInnerHTML={{__html: message}}></div>
             </td>
             <td className='message-time' style={{verticalAlign: `${!skipUsername ? 'bottom' : 'top'}`}}>
-              <div>{this.testChatDate(item.created_at)}</div>
+              <div><abbr title={moment(item.created_at).format('H:mm:ss D MMM YYYY')}>{this.testChatDate(item.created_at)}</abbr></div>
             </td>
           </tr>
         )
