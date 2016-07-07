@@ -343,10 +343,14 @@ class DiscussionForm extends Component {
                                onKeyDown={this.sendMessage.bind(this)}
                                onChange={this.changeChatMessage.bind(this)}
                                html={discussionMessages.chatMessage}/>
-              <span className='pull-xs-right m-t-1'>Press <kbd>Shift + Enter</kbd> for newline message.</span>
-              <button type='button'
-                      className='btn btn-primary pull-xs-left m-t-1'
-                      onClick={this.sendMessage.bind(this)}>Send</button>
+              <div className='col-xs-12 col-sm-4 col-md-4 col-lg-4 p-a-0'>
+                <button type='button'
+                        className='btn btn-primary pull-xs-left m-t-1'
+                        onClick={this.sendMessage.bind(this)}>Send</button>
+              </div>
+              <div className='col-xs-12 col-sm-8 col-md-8 col-lg-8 p-a-0'>
+                <span className='pull-xs-right m-t-1'>Press <kbd>Shift + Enter</kbd> for newline message.</span>
+              </div>
             </fieldset>
           </form>
         </div>
