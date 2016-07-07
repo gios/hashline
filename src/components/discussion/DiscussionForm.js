@@ -5,7 +5,7 @@ import DiscussionExpiredTimer from './DiscussionExpiredTimer'
 import DiscussionChatMessages from './DiscussionChatMessages'
 import Select from 'react-select'
 import { ENTER_KEYCODE, MESSAGE_INTERVAL } from '../../constants'
-import { trimField, pasteHtmlAtCaret } from '../../utils/helpers'
+import { trimField, pasteHtmlAtCaret, placeCaretAtEnd } from '../../utils/helpers'
 import Loader from '../parts/Loader'
 import ReactEmoji from 'react-emoji'
 import EmojiPicker from 'react-emoji-picker'
@@ -208,7 +208,10 @@ class DiscussionForm extends Component {
       message = message.slice(0, message.length - 4)
     }
 
-    if(isChatMessage === 'chat-message' || 'form-group chat-area') {
+    if(isChatMessage === 'chat-message') {
+      pasteHtmlAtCaret(renderedEmoji)
+    } else {
+      placeCaretAtEnd(this.refs.addMessage.htmlEl)
       pasteHtmlAtCaret(renderedEmoji)
     }
     setChatMessage(this.refs.addMessage.htmlEl.innerHTML)

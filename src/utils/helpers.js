@@ -73,16 +73,15 @@ export function placeCaretAtEnd(el) {
 
 export function pasteHtmlAtCaret(html) {
   let sel, range
-  if (window.getSelection) {
-    // IE9 and non-IE
+
+  if(window.getSelection) {
     sel = window.getSelection()
-    if (sel.getRangeAt && sel.rangeCount) {
+
+    if(sel.getRangeAt && sel.rangeCount) {
       range = sel.getRangeAt(0)
       range.deleteContents()
 
-      // Range.createContextualFragment() would be useful here but is
-      // non-standard and not supported in all browsers (IE9, for one)
-      let el = document.createElement("div")
+      let el = document.createElement('div')
       el.innerHTML = html
       let frag = document.createDocumentFragment(), node, lastNode
       while ((node = el.firstChild)) {
@@ -90,7 +89,6 @@ export function pasteHtmlAtCaret(html) {
       }
       range.insertNode(frag)
 
-      // Preserve the selection
       if (lastNode) {
         range = range.cloneRange()
         range.setStartAfter(lastNode)
@@ -99,8 +97,7 @@ export function pasteHtmlAtCaret(html) {
         sel.addRange(range)
       }
     }
-  } else if (document.selection && document.selection.type != "Control") {
-    // IE < 9
+  } else if(document.selection && document.selection.type != 'Control') {
     document.selection.createRange().pasteHTML(html)
   }
 }
