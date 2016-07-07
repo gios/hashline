@@ -1,8 +1,6 @@
 'use strict';
 
 const path = require('path')
-const cluster = require('cluster')
-const numCPUs = require('os').cpus().length
 const app = require('koa')()
 const server = require('http').createServer(app.callback())
 const io = require('socket.io')(server, { path: '/api/chat' })
@@ -19,15 +17,6 @@ const tracer = require('tracer').colorConsole()
 
 const SHARED_SECRET = 'hashline'
 
-if(cluster.isMaster) {
-  for(let i = 0; i < numCPUs; i++) {
-    cluster.fork()
-  }
-
-  cluster.on('exit', worker => {
-    tracer.warn(`worker ${worker.process.pid} died`)
-  })
-} else {
   app.use(function *(next) {
     yield send(this, path.resolve(__dirname, '/../public/', 'index.html'))
     yield next
@@ -68,4 +57,3 @@ if(cluster.isMaster) {
 
   server.listen(process.env.PORT || 5000)
   tracer.info('Hashline is running on port', process.env.PORT || 5000)
-}
