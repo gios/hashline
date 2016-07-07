@@ -12,20 +12,23 @@ class Dash extends Component {
   }
 
   render() {
-    let { dispatch, myTrendingDiscussions, dashUserInfo } = this.props
+    let { dispatch, myTrendingDiscussions, dashUserInfo, isAuthenticated } = this.props
 
     return (
-      <DashBlock myTrendingDiscussions={myTrendingDiscussions}
-                 dashUserInfo={dashUserInfo}
-                 onJoinDiscussion={this.onJoinDiscussion.bind(this)}
-                 getDashUserInfo={() => dispatch(getDashUserInfo())}
-                 getMyTrendingDiscussions={() => dispatch(getMyTrendingDiscussions())}/>
+      <div>
+        {isAuthenticated && <DashBlock myTrendingDiscussions={myTrendingDiscussions}
+                                       dashUserInfo={dashUserInfo}
+                                       onJoinDiscussion={this.onJoinDiscussion.bind(this)}
+                                       getDashUserInfo={() => dispatch(getDashUserInfo())}
+                                       getMyTrendingDiscussions={() => dispatch(getMyTrendingDiscussions())}/>}
+      </div>
     )
   }
 }
 
 function inject(state) {
   return {
+    isAuthenticated: state.login.auth.get('isAuthenticated'),
     myTrendingDiscussions: state.dash.myTrendingDiscussions.toJS(),
     dashUserInfo: state.dash.dashUserInfo.toJS(),
     userInfo: state.sidebar.userInfo.toJS()
