@@ -193,6 +193,17 @@ class DiscussionForm extends Component {
     )
   }
 
+  emojiCursorPosition(e) {
+    if(e.target.className !== 'chat-message') {
+      let range = document.createRange()
+      range.selectNodeContents(e.target)
+      range.collapse(false)
+      let selection = window.getSelection()
+      selection.removeAllRanges()
+      selection.addRange(range)
+    }
+  }
+
   setEmoji(emoji) {
     let { discussionMessages, setChatMessage } = this.props
     let message = discussionMessages.chatMessage
@@ -341,6 +352,7 @@ class DiscussionForm extends Component {
                                ref='addMessage'
                                placeholder='Write something'
                                tabindex='0'
+                               onMouseDown={this.emojiCursorPosition.bind(this)}
                                onKeyDown={this.sendMessage.bind(this)}
                                onChange={this.changeChatMessage.bind(this)}
                                html={discussionMessages.chatMessage}/>
