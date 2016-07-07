@@ -12,6 +12,7 @@ import Sidebar from './../components/sidebar/Sidebar'
 import LoggedOutMessage from './../components/helpers/LoggedOutMessage'
 import socket from '../utils/socket'
 import { isSupported, permissionGranted, requestPermission } from '../utils/notifications'
+import notificationImage from '../assets/img/notification.jpg'
 
 class App extends Component {
 
@@ -34,7 +35,7 @@ class App extends Component {
   sendNotificationForInvite(notificationsData) {
     let notificationsOptions = {
       body: `${notificationsData.senderName} invites you to connect to discussion`,
-      icon: '/img/notification.jpg'
+      icon: notificationImage
     }
 
     if(isSupported()) {

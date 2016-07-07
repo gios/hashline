@@ -20,6 +20,7 @@ import DiscussionForm from '../components/discussion/DiscussionForm'
 import DiscussionPasswordModal from '../components/discussion/DiscussionPasswordModal'
 import socket from '../utils/socket'
 import { tabVisibility } from '../utils/helpers'
+import notificationSound from '../assets/audio/notification.mp3'
 
 class Discussion extends Component {
 
@@ -43,8 +44,8 @@ class Discussion extends Component {
 
     socket.on('chat message', (created_at, username, message) => {
       if(!tabVisibility()) {
-        const notificationSound = new Audio('/audio/notification.mp3')
-        notificationSound.play()
+        const notificationSoundInstance = new Audio(notificationSound)
+        notificationSoundInstance.play()
       }
       dispatch(setSentMessageArchive({ created_at, username, message }))
       dispatch(setScrollToBottom(true))

@@ -33,6 +33,13 @@ module.exports = {
         exclude: /node_modules/
       },
       {
+        test: /\.(mp3|wav)$/i,
+        loaders: [
+          'file?name=audio/[name].[ext]'
+        ],
+        exclude: /node_modules/
+      },
+      {
         test: /\.(eot|woff|woff2|ttf|svg)$/,
         loader: 'file?name=fonts/[name].[ext]'
       }
