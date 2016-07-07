@@ -89,7 +89,6 @@ class App extends Component {
 
     return (
       <div>
-        <div className='notification-img'></div>
         <NotificationContainer/>
         { loggedOut && <LoggedOutMessage onLogout={() => {
           dispatch(push('/login'))
