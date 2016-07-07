@@ -81,3 +81,9 @@
     box-shadow: 0 2.5em 0 0 #5cb85c;
   }
 }
+
+@media (max-height: 544px) {
+  .copyright-footer {
+    display: none;
+  }
+}
