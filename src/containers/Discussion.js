@@ -43,7 +43,7 @@ class Discussion extends Component {
 
     socket.on('chat message', (created_at, username, message) => {
       if(!tabVisibility()) {
-        const notificationSound = new Audio('./assets/audio/notification.mp3')
+        const notificationSound = new Audio('/audio/notification.mp3')
         notificationSound.play()
       }
       dispatch(setSentMessageArchive({ created_at, username, message }))

@@ -34,7 +34,7 @@ class App extends Component {
   sendNotificationForInvite(notificationsData) {
     let notificationsOptions = {
       body: `${notificationsData.senderName} invites you to connect to discussion`,
-      icon: 'assets/img/notification.jpg'
+      icon: '/img/notification.jpg'
     }
 
     if(isSupported()) {
