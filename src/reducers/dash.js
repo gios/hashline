@@ -1,25 +1,106 @@
 import { combineReducers } from 'redux'
-import { apiRequestInit, apiRequestInitState } from './helpers'
+import Immutable from 'immutable'
 import { REQUEST_GET_MY_TRENDING_DISCUSSIONS,
-         SUCCESS_GET_MY_TRENDING_DISCUSSIONS,
-         FAILURE_GET_MY_TRENDING_DISCUSSIONS,
-         REQUEST_DASH_USER_INFO,
-         SUCCESS_DASH_USER_INFO,
-         FAILURE_DASH_USER_INFO,
-         REQUEST_DASH_USERS_RANK,
-         SUCCESS_DASH_USERS_RANK,
-         FAILURE_DASH_USERS_RANK } from '../actions/dashAction'
+  SUCCESS_GET_MY_TRENDING_DISCUSSIONS,
+  FAILURE_GET_MY_TRENDING_DISCUSSIONS,
+  REQUEST_DASH_USER_INFO,
+  SUCCESS_DASH_USER_INFO,
+  FAILURE_DASH_USER_INFO,
+  REQUEST_DASH_USERS_RANK,
+  SUCCESS_DASH_USERS_RANK,
+  FAILURE_DASH_USERS_RANK } from '../actions/dashAction'
 
-function dashUsersRank(state = apiRequestInitState, action) {
-  return apiRequestInit(state, action, REQUEST_DASH_USERS_RANK, SUCCESS_DASH_USERS_RANK, FAILURE_DASH_USERS_RANK)
+const getMyTrendingDiscussionsState = Immutable.Map({
+  isFetching: false,
+  payload: null,
+  error: false
+})
+
+function myTrendingDiscussions(state = getMyTrendingDiscussionsState, action) {
+  switch(action.type) {
+    case REQUEST_GET_MY_TRENDING_DISCUSSIONS:
+      return state.merge({
+        isFetching: true,
+        payload: null,
+        error: false
+      })
+    case SUCCESS_GET_MY_TRENDING_DISCUSSIONS:
+      return state.merge({
+        isFetching: false,
+        payload: action.payload,
+        error: false
+      })
+    case FAILURE_GET_MY_TRENDING_DISCUSSIONS:
+      return state.merge({
+        isFetching: false,
+        payload: action.payload.response,
+        error: true
+      })
+    default:
+      return state
+  }
 }
 
-function dashUserInfo(state = apiRequestInitState, action) {
-  return apiRequestInit(state, action, REQUEST_DASH_USER_INFO, SUCCESS_DASH_USER_INFO, FAILURE_DASH_USER_INFO)
+const getDashUserInfoState = Immutable.Map({
+  isFetching: false,
+  payload: null,
+  error: false
+})
+
+function dashUserInfo(state = getDashUserInfoState, action) {
+  switch(action.type) {
+    case REQUEST_DASH_USER_INFO:
+      return state.merge({
+        isFetching: true,
+        payload: null,
+        error: false
+      })
+    case SUCCESS_DASH_USER_INFO:
+      return state.merge({
+        isFetching: false,
+        payload: action.payload,
+        error: false
+      })
+    case FAILURE_DASH_USER_INFO:
+      return state.merge({
+        isFetching: false,
+        payload: action.payload.response,
+        error: true
+      })
+    default:
+      return state
+  }
 }
 
-function myTrendingDiscussions(state = apiRequestInitState, action) {
-  return apiRequestInit(state, action, REQUEST_GET_MY_TRENDING_DISCUSSIONS, SUCCESS_GET_MY_TRENDING_DISCUSSIONS, FAILURE_GET_MY_TRENDING_DISCUSSIONS)
+const dashUsersRankState = Immutable.Map({
+  isFetching: false,
+  payload: null,
+  error: false
+})
+
+function dashUsersRank(state = dashUsersRankState, action) {
+  switch(action.type) {
+    case REQUEST_DASH_USERS_RANK:
+      return state.merge({
+        isFetching: true,
+        payload: null,
+        error: false
+      })
+    case SUCCESS_DASH_USERS_RANK:
+      return state.merge({
+        isFetching: false,
+        payload: action.payload,
+        error: false
+      })
+    case FAILURE_DASH_USERS_RANK:
+      return state.merge({
+        isFetching: false,
+        payload: action.payload.response,
+        error: true
+      })
+    default:
+      return state
+  }
 }
 
 export let dash = combineReducers({

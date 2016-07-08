@@ -15,7 +15,7 @@ class DashBlock extends Component {
       <div className='col-md-12'>
         <div className='col-md-6'>
           <h4 className='text-xs-center m-b-1'>User Status</h4>
-          <UserStatusInfo dashUserInfo={this.props.dashUserInfo}/>
+          <UserStatusInfo dashUserInfo={this.props.dashUserInfo} dashUsersRank={this.props.dashUsersRank}/>
         </div>
         <div className='col-md-6'>
           <h4 className='text-xs-center m-b-1'>Your trending discussions</h4>

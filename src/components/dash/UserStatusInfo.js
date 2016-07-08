@@ -84,11 +84,11 @@ class UserSTatusInfo extends Component {
   }
 
   renderUserStatusInfo() {
-    let { dashUserInfo } = this.props
+    let { dashUserInfo, dashUsersRank } = this.props
 
-    if(dashUserInfo.isFetching) {
+    if(dashUserInfo.isFetching || dashUsersRank.isFetching) {
       return <Loader size={3}/>
-    } else if(dashUserInfo.payload) {
+    } else if(dashUserInfo.payload && dashUsersRank.payload) {
       return (
         <div className='card'>
           <DropModal ref='rankTable' modalStyle={{width: '50%'}}>{this.getRankTableContent()}</DropModal>
