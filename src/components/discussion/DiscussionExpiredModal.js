@@ -3,17 +3,16 @@ import { DropModal } from 'boron'
 
 class DiscussionExpiredModal extends Component {
 
-  getExpiredModalStyles() {
-    return {
-      pointerEvents: 'none'
-    }
+  redirectToBase(e) {
+    e.preventDefault()
+    this.props.redirectToBase()
   }
 
   render() {
     return (
       <DropModal ref='expiredDiscussionModal'
                  className='text-xs-center'
-                 backdropStyle={this.getExpiredModalStyles()}
+                 closeOnClick={false}
                  keyboard={false}>
         <div className='modal-header'>
           <h3 className='modal-title'>This discussion has expired</h3>
@@ -21,6 +20,11 @@ class DiscussionExpiredModal extends Component {
         <div className='modal-body'>
           <p className='text-muted'>The discussion expired, you can't join the discussion.</p>
         </div>
+        <form onSubmit={this.redirectToBase.bind(this)}>
+          <div className='modal-footer'>
+            <button type='submit' className='btn btn-success'>To Dash</button>
+          </div>
+        </form>
       </DropModal>
     )
   }

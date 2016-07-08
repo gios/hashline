@@ -22,6 +22,7 @@ import DiscussionExpiredModal from '../components/discussion/DiscussionExpiredMo
 import socket from '../utils/socket'
 import { tabVisibility } from '../utils/helpers'
 import notificationSound from '../assets/audio/notification.mp3'
+import { replace } from 'react-router-redux'
 
 class Discussion extends Component {
 
@@ -113,7 +114,8 @@ class Discussion extends Component {
         <DiscussionPasswordModal ref='discussionPasswordModal'
                                  discussionId={discussionId}
                                  onJoinDiscussion={this.onJoinDiscussion.bind(this)}/>
-        <DiscussionExpiredModal ref='discussionExpiredModal'/>
+        <DiscussionExpiredModal ref='discussionExpiredModal'
+                                redirectToBase={() => dispatch(replace('/'))}/>
       </div>
     )
   }
