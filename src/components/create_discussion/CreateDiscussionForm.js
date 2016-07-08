@@ -175,7 +175,7 @@ class createDiscussionForm extends Component {
   }
 
   render() {
-    let { discussionSettings } = this.props
+    let { discussionSettings, discussionCreate } = this.props
     return (
       <div>
         <div className='card-group'>
@@ -275,7 +275,10 @@ class createDiscussionForm extends Component {
             </div>
           </div>
         </div>
-        <button type='button' className='btn btn-success m-y-1' onClick={this.createDiscussion.bind(this)}>Create Discussion</button>
+        <button type='button'
+                className='btn btn-success m-y-1'
+                disabled={discussionCreate.isFetching ? true : false}
+                onClick={this.createDiscussion.bind(this)}>Create Discussion</button>
       </div>
     )
   }
