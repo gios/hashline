@@ -12,7 +12,10 @@ class DiscussionPasswordModal extends Component {
 
   render() {
     return (
-      <DropModal ref='privateDiscussionModal' className='text-xs-center'>
+      <DropModal ref='privateDiscussionModal'
+                 closeOnClick={false}
+                 keyboard={false}
+                 className='text-xs-center'>
         <div className='modal-header'>
           <h4 className='modal-title'>This discussion is protected </h4>
         </div>
