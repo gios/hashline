@@ -540,7 +540,6 @@ module.exports = function(router) {
         break;
     }
 
-    discussionsData.forEach(item => item.messages_count = item.messages_count / 2)
     for (let indexData of discussionsData) {
       indexData.tags = []
       let diffLimited = moment.duration(moment(indexData.limited_time).diff(moment().utcOffset(userInfo.gmt)))
