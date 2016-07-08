@@ -27,7 +27,7 @@ class UserSTatusInfo extends Component {
   getRankTableContent() {
     return (
       <div>
-        <div className='modal-header'>
+        <div className='modal-header text-xs-center'>
           <h4 className='modal-title'>Rank Table</h4>
         </div>
         <div className='modal-body'>
@@ -84,7 +84,7 @@ class UserSTatusInfo extends Component {
     } else if(dashUserInfo.payload && dashUsersRank.payload) {
       return (
         <div className='card'>
-          <DropModal ref='rankTable' modalStyle={{width: '50%'}}>{this.getRankTableContent()}</DropModal>
+          <DropModal ref='rankTable'>{this.getRankTableContent()}</DropModal>
           <div className='card-block'>
             <button onClick={this.openRankTableModal.bind(this)} type='button' className='btn btn-sm btn-primary pull-xs-right'>Rank Table</button>
             <h4 className='card-title'>Rank {this.rankLabelSelector(dashUserInfo.payload.rank)}</h4>
