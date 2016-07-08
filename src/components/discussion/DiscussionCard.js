@@ -27,9 +27,9 @@ class DiscussionCard extends Component {
     let { name } = this.props.discussion
 
     return (
-      <div>
+      <div className='text-xs-center'>
         <div className='modal-header'>
-          <h4 className='modal-title text-xs-center'>Delete <strong>{name}</strong></h4>
+          <h4 className='modal-title'>Delete <strong>{name}</strong></h4>
         </div>
         <div className='modal-body'>
           <p className='text-muted'>This discussion will be completely removed from your discussions.</p>

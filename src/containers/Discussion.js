@@ -18,6 +18,7 @@ import { getDiscussion,
          typingMessage } from '../actions/discussionAction'
 import DiscussionForm from '../components/discussion/DiscussionForm'
 import DiscussionPasswordModal from '../components/discussion/DiscussionPasswordModal'
+import DiscussionExpiredModal from '../components/discussion/DiscussionExpiredModal'
 import socket from '../utils/socket'
 import { tabVisibility } from '../utils/helpers'
 import notificationSound from '../assets/audio/notification.mp3'
@@ -68,6 +69,7 @@ class Discussion extends Component {
         return
       } else if(status.error) {
         NotificationManager.error(status.payload.response.message)
+        this.refs.discussionExpiredModal.refs.expiredDiscussionModal.show()
         return
       }
       this.refs.discussionFormRef.loadDiscussionMessages()
@@ -111,6 +113,7 @@ class Discussion extends Component {
         <DiscussionPasswordModal ref='discussionPasswordModal'
                                  discussionId={discussionId}
                                  onJoinDiscussion={this.onJoinDiscussion.bind(this)}/>
+        <DiscussionExpiredModal ref='discussionExpiredModal'/>
       </div>
     )
   }

@@ -352,7 +352,7 @@ class DiscussionForm extends Component {
               <ContentEditable className='chat-message'
                                ref='addMessage'
                                placeholder='Write something'
-                               tabindex='0'
+                               tabIndex='0'
                                onMouseDown={this.emojiCursorPosition.bind(this)}
                                onKeyDown={this.sendMessage.bind(this)}
                                onChange={this.changeChatMessage.bind(this)}
