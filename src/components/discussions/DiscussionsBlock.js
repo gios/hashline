@@ -28,10 +28,10 @@ class DiscussionsBlock extends Component {
   }
 
   loadDiscussions() {
-    let { getterMethod, setLoadDisableDiscussions, redirectToBase } = this.props
+    let { getterMethod, setLoadDisableDiscussions, redirectToBase, pathname } = this.props
     let { startLoad, endLoad, searchQuery } = this.props.discussions
 
-    if(!searchQuery) {
+    if(!searchQuery && pathname === 'search') {
       redirectToBase()
       return
     }
