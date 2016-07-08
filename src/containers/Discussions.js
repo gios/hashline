@@ -18,7 +18,7 @@ import { USER_GETTER_METHOD_DISCUSSION,
          TRENDING_GETTER_METHOD_DISCUSSION,
          SEARCH_GETTER_METHOD_DISCUSSION } from '../constants'
 import { NotificationManager } from 'react-notifications'
-import { push } from 'react-router-redux'
+import { push, replace } from 'react-router-redux'
 import socket from '../utils/socket'
 
 class Discussions extends Component {
@@ -71,12 +71,13 @@ class Discussions extends Component {
       default:
         getterMethod = null
         break;
-      }
+    }
 
     return <DiscussionsBlock discussions={discussions}
                              pathname={pathname}
                              userInfo={userInfo}
                              getterMethod={getterMethod}
+                             redirectToBase={() => dispatch(replace('/'))}
                              updateSearchQueryDiscussions={value => dispatch(updateSearchQueryDiscussions(value))}
                              setLoadDisableDiscussions={value => dispatch(setLoadDisableDiscussions(value))}
                              setStartLoadDiscussions={start => dispatch(setStartLoadDiscussions(start))}

@@ -28,8 +28,13 @@ class DiscussionsBlock extends Component {
   }
 
   loadDiscussions() {
-    let { getterMethod, setLoadDisableDiscussions } = this.props
+    let { getterMethod, setLoadDisableDiscussions, redirectToBase } = this.props
     let { startLoad, endLoad, searchQuery } = this.props.discussions
+
+    if(!searchQuery) {
+      redirectToBase()
+      return
+    }
 
     return this.props.onLoadDiscussions(getterMethod, startLoad, endLoad, searchQuery).then(status => {
       if(status.error) {
