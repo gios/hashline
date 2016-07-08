@@ -186,8 +186,8 @@
 @media (max-width: 544px) {
   .my-discussion-card {
     & > .discussion-btns {
+      text-align: center;
       position: relative;
-      text-align: right;
       margin-bottom: 1em;
     }
 
