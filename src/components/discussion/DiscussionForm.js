@@ -170,6 +170,7 @@ class DiscussionForm extends Component {
 
   emojiSelect() {
     this.props.toggleEmojiPopup()
+    this.props.setScrollToBottom(false)
   }
 
   renderEmojiPopover() {
