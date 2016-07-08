@@ -26,41 +26,21 @@ class UserSTatusInfo extends Component {
 
   getRankTableContent() {
     return (
-      <div className='text-xs-center'>
+      <div>
         <div className='modal-header'>
           <h4 className='modal-title'>Rank Table</h4>
         </div>
         <div className='modal-body'>
           <div className='table-responsive'>
-            <table className="table">
-              <thead className="thead-inverse">
+            <table className='table'>
+              <thead className='thead-inverse'>
                 <tr>
                   <th>Rank</th>
                   <th>Name</th>
-                  <th>Discussions created</th>
-                  <th>Messages Sent</th>
-                  <th>Messages Received</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
+                {this.renderRankInternal()}
               </tbody>
             </table>
           </div>
@@ -72,6 +52,19 @@ class UserSTatusInfo extends Component {
         </form>
       </div>
     )
+  }
+
+  renderRankInternal() {
+    let { dashUsersRank } = this.props
+
+    return dashUsersRank.payload.map((item, index) => {
+      return (
+        <tr key={index}>
+          <th>{item.rank}</th>
+          <td>{item.username}</td>
+        </tr>
+      )
+    })
   }
 
   openRankTableModal() {

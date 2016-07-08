@@ -109,8 +109,10 @@ module.exports = function(router, jwt, SHARED_SECRET) {
   })
 
   router.get('/api/users_rank', function *() {
-    let usersRankSorted = yield knex('users').orderBy('rank', 'DESC')
-    this.body = usersRankSorted
+    let usersRankSorted = yield knex('users').select('username').orderBy('rank', 'DESC').limit(5)
+    this.body = usersRankSorted.map((item, rank) => {
+      return { rank: rank + 1, username: item.username }
+    })
   })
 
   router.post('/api/search_users', function *() {
