@@ -65,13 +65,18 @@ class UserSTatusInfo extends Component {
             </table>
           </div>
         </div>
-        <form onSubmit={() => this.refs.deleteModal.toggle()}>
+        <form onSubmit={this.closeRankTableModal.bind(this)}>
           <div className='modal-footer'>
             <button type='submit' className='btn btn-primary'>Back</button>
           </div>
         </form>
       </div>
     )
+  }
+
+  closeRankTableModal(e) {
+    e.preventDefault()
+    this.refs.rankTable.hide()
   }
 
   renderUserStatusInfo() {
@@ -84,7 +89,7 @@ class UserSTatusInfo extends Component {
         <div className='card'>
           <DropModal ref='rankTable' modalStyle={{width: '50%'}}>{this.getRankTableContent()}</DropModal>
           <div className='card-block'>
-            <button onClick={() => this.refs.rankTable.toggle()} type='button' className='btn btn-sm btn-primary pull-xs-right'>Rank Table</button>
+            <button onClick={() => this.refs.rankTable.show()} type='button' className='btn btn-sm btn-primary pull-xs-right'>Rank Table</button>
             <h4 className='card-title'>Rank {this.rankLabelSelector(dashUserInfo.payload.rank)}</h4>
             <p className='card-text'>This rank is calculated using the ratio between the created and received messages from your discussions.</p>
           </div>
