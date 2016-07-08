@@ -188,6 +188,7 @@ module.exports = function(router) {
     let id = this.request.body.id
 
     yield knex('discussions_tags').where('discussion_id', id).del()
+    yield knex('messages').where('discussion_id', id).del()
     let deletedDiscussion = yield knex('discussions').where({
       user_id: userInfo.id,
       id
