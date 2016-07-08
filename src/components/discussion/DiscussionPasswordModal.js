@@ -22,7 +22,8 @@ class DiscussionPasswordModal extends Component {
             <input type='password' className='form-control' placeholder='Password' ref='passwordRef'></input>
           </div>
           <div className='modal-footer'>
-            <button type='submit' className='btn btn-primary'>Apply</button>
+            <button type='submit' className='btn btn-success'>Apply</button>
+            <button onClick={() => this.props.redirectToBase()} type='button' className='btn btn-primary'>To Dash</button>
           </div>
         </form>
       </DropModal>

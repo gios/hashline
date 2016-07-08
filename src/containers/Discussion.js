@@ -112,6 +112,7 @@ class Discussion extends Component {
                                          setChatMessage={message => dispatch(setChatMessage(message))}
                                          onJoinDiscussion={this.onJoinDiscussion.bind(this)}/>}
         <DiscussionPasswordModal ref='discussionPasswordModal'
+                                 redirectToBase={() => dispatch(replace('/'))}
                                  discussionId={discussionId}
                                  onJoinDiscussion={this.onJoinDiscussion.bind(this)}/>
         <DiscussionExpiredModal ref='discussionExpiredModal'
