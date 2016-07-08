@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
+import { DropModal } from 'boron'
 
 class DiscussionCard extends Component {
 
@@ -22,13 +23,24 @@ class DiscussionCard extends Component {
     this.props.onJoinDiscussion({ id })
   }
 
-  deleteDiscussion() {
-    let deleteStatus = confirm('Do you wanna delete this discussion?')
+  getDeleteContent() {
+    let { name } = this.props.discussion
 
-    if(deleteStatus) {
-      let { id } = this.props.discussion
-      this.props.deleteDiscussion(id)
-    }
+    return (
+      <div className='text-xs-center p-a-2'>
+        <h4>DELETE</h4>
+        <div className='m-t-1'><strong>{name}</strong></div>
+        <div className='m-t-2'>
+          <button onClick={this.deleteDiscussion.bind(this)} type='button' className='btn btn-success m-x-1'>Delete</button>
+          <button onClick={() => this.refs.deleteModal.toggle()} type='button' className='btn btn-danger m-x-1'>Cancel</button>
+        </div>
+      </div>
+    )
+  }
+
+  deleteDiscussion() {
+    let { id } = this.props.discussion
+    this.props.deleteDiscussion(id)
   }
 
   formatExpired() {
@@ -52,8 +64,9 @@ class DiscussionCard extends Component {
     return (
         <div className='card card-block col-xs-12 col-sm-12 col-md-12 col-lg-6 my-discussion-card'>
           <div className='discussion-btns m-x-1'>
+            <DropModal ref='deleteModal'>{this.getDeleteContent()}</DropModal>
             {user_email === (this.props.userInfo.payload && this.props.userInfo.payload.email) &&
-              <button onClick={this.deleteDiscussion.bind(this)}
+              <button onClick={() => this.refs.deleteModal.toggle()}
                       type='button'
                       className='btn btn-danger m-x-1'>Delete</button>
             }

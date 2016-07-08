@@ -26,6 +26,7 @@
   "homepage": "https://github.com/gios/hashline#readme",
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.2",
+    "boron": "^0.2.3",
     "font-awesome": "^4.5.0",
     "immutable": "^3.7.6",
     "isomorphic-fetch": "^2.2.1",
