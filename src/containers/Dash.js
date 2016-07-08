@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import DashBlock from '../components/dash/DashBlock'
-import { getMyTrendingDiscussions, getDashUserInfo } from '../actions/dashAction'
+import { getMyTrendingDiscussions, getDashUserInfo, getDashUsersRank } from '../actions/dashAction'
 import { push } from 'react-router-redux'
 
 class Dash extends Component {
@@ -18,6 +18,7 @@ class Dash extends Component {
       <div>
         {isAuthenticated && <DashBlock myTrendingDiscussions={myTrendingDiscussions}
                                        dashUserInfo={dashUserInfo}
+                                       getDashUsersRank={() => dispatch(getDashUsersRank())}
                                        onJoinDiscussion={this.onJoinDiscussion.bind(this)}
                                        getDashUserInfo={() => dispatch(getDashUserInfo())}
                                        getMyTrendingDiscussions={() => dispatch(getMyTrendingDiscussions())}/>}

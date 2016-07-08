@@ -1,11 +1,15 @@
 import { combineReducers } from 'redux'
 import Immutable from 'immutable'
+import { apiRequestInit, apiRequestInitState } from './helpers'
 import { REQUEST_GET_MY_TRENDING_DISCUSSIONS,
          SUCCESS_GET_MY_TRENDING_DISCUSSIONS,
          FAILURE_GET_MY_TRENDING_DISCUSSIONS,
          REQUEST_DASH_USER_INFO,
          SUCCESS_DASH_USER_INFO,
-         FAILURE_DASH_USER_INFO } from '../actions/dashAction'
+         FAILURE_DASH_USER_INFO,
+         REQUEST_DASH_USERS_RANK,
+         SUCCESS_DASH_USERS_RANK,
+         FAILURE_DASH_USERS_RANK } from '../actions/dashAction'
 
 const getMyTrendingDiscussionsState = Immutable.Map({
   isFetching: false,
@@ -69,7 +73,12 @@ function dashUserInfo(state = getDashUserInfoState, action) {
   }
 }
 
+function dashUsersRank(state = apiRequestInitState, action) {
+  return apiRequestInit(state, action, REQUEST_DASH_USERS_RANK, SUCCESS_DASH_USERS_RANK, FAILURE_DASH_USERS_RANK)
+}
+
 export let dash = combineReducers({
   myTrendingDiscussions,
-  dashUserInfo
+  dashUserInfo,
+  dashUsersRank
 })

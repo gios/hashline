@@ -108,6 +108,11 @@ module.exports = function(router, jwt, SHARED_SECRET) {
     }
   })
 
+  router.get('/api/users_rank', function *() {
+    let usersRankSorted = yield knex('users').orderBy('rank', 'DESC')
+    this.body = usersRankSorted
+  })
+
   router.post('/api/search_users', function *() {
     let userInfo = this.state.user
     let query = this.request.body.query.toLowerCase()

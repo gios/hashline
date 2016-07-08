@@ -10,6 +10,23 @@ export const REQUEST_DASH_USER_INFO = 'REQUEST_DASH_USER_INFO'
 export const SUCCESS_DASH_USER_INFO = 'SUCCESS_DASH_USER_INFO'
 export const FAILURE_DASH_USER_INFO = 'FAILURE_DASH_USER_INFO'
 
+export const REQUEST_DASH_USERS_RANK = 'REQUEST_DASH_USER_INFO'
+export const SUCCESS_DASH_USERS_RANK = 'SUCCESS_DASH_USER_INFO'
+export const FAILURE_DASH_USERS_RANK = 'FAILURE_DASH_USER_INFO'
+
+export function getDashUsersRank() {
+  return {
+    [CALL_API]: {
+      endpoint: '/api/users_rank',
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${idToken.getToken()}`
+      },
+      types: [REQUEST_DASH_USERS_RANK, SUCCESS_DASH_USERS_RANK, FAILURE_DASH_USERS_RANK]
+    }
+  }
+}
+
 export function getDashUserInfo() {
   return {
     [CALL_API]: {
