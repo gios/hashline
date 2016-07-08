@@ -64,7 +64,7 @@ class Discussion extends Component {
     dispatch(getDiscussion(parseInt(id), password)).then((status) => {
       if(status.error && status.payload.status === 412) {
         NotificationManager.error(status.payload.response.message)
-        $('#discussion-password').modal('show')
+        this.refs.discussionPasswordModal.refs.privateDiscussionModal.show()
         return
       } else if(status.error) {
         NotificationManager.error(status.payload.response.message)
@@ -77,7 +77,7 @@ class Discussion extends Component {
   }
 
   componentWillUnmount() {
-    $('#discussion-password').modal('hide')
+    this.refs.discussionPasswordModal.refs.privateDiscussionModal.hide()
     socket.removeListener('join discussion')
     socket.removeListener('connected users')
     socket.removeListener('chat message')
@@ -108,7 +108,8 @@ class Discussion extends Component {
                                          getDiscussionMessages={(discussionId, start, end) => dispatch(getDiscussionMessages(discussionId, start, end))}
                                          setChatMessage={message => dispatch(setChatMessage(message))}
                                          onJoinDiscussion={this.onJoinDiscussion.bind(this)}/>}
-        <DiscussionPasswordModal discussionId={discussionId}
+        <DiscussionPasswordModal ref='discussionPasswordModal'
+                                 discussionId={discussionId}
                                  onJoinDiscussion={this.onJoinDiscussion.bind(this)}/>
       </div>
     )

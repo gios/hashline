@@ -27,18 +27,25 @@ class DiscussionCard extends Component {
     let { name } = this.props.discussion
 
     return (
-      <div className='text-xs-center p-a-2'>
-        <h4>DELETE</h4>
-        <div className='m-t-1'><strong>{name}</strong></div>
-        <div className='m-t-2'>
-          <button onClick={this.deleteDiscussion.bind(this)} type='button' className='btn btn-success m-x-1'>Delete</button>
-          <button onClick={() => this.refs.deleteModal.toggle()} type='button' className='btn btn-danger m-x-1'>Cancel</button>
+      <div>
+        <div className='modal-header'>
+          <h4 className='modal-title text-xs-center'>Delete <strong>{name}</strong></h4>
         </div>
+        <div className='modal-body'>
+          <p className='text-muted'>This discussion will be completely removed from your discussions.</p>
+        </div>
+        <form onSubmit={this.deleteDiscussion.bind(this)}>
+          <div className='modal-footer'>
+            <button type='submit' className='btn btn-success'>Delete</button>
+            <button onClick={() => this.refs.deleteModal.toggle()} type='button' className='btn btn-danger'>Cancel</button>
+          </div>
+        </form>
       </div>
     )
   }
 
-  deleteDiscussion() {
+  deleteDiscussion(e) {
+    e.preventDefault()
     let { id } = this.props.discussion
     this.props.deleteDiscussion(id)
   }
