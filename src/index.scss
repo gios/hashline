@@ -1,13 +1,10 @@
-// Libraries
 @import '~bootstrap/scss/bootstrap';
 @import '~react-notifications/lib/notifications';
 @import '~font-awesome/scss/font-awesome';
 @import '~react-select/scss/default';
 
-// Global Styles
 @import './global';
 
-// Components
 @import './components/login/Login';
 @import './components/parts/Parts';
 @import './components/sidebar/Sidebar';
