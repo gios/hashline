@@ -21,7 +21,7 @@ class DiscussionPasswordModal extends Component {
         <form onSubmit={this.discussionPasswordSubmit.bind(this)}>
           <div className='modal-body'>
             <small className='text-muted'>This discussion is protected, please enter appropriate password.</small>
-            <input type='password' className='form-control' placeholder='Password' ref='passwordRef'></input>
+            <input autoFocus type='password' className='form-control' placeholder='Password' ref='passwordRef'></input>
           </div>
           <div className='modal-footer'>
             <button type='submit' className='btn btn-success'>Apply</button>
