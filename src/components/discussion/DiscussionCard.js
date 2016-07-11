@@ -8,7 +8,7 @@ class DiscussionCard extends Component {
     this.limitedInterval = setInterval(this.forceUpdate.bind(this), 1000)
     $(this.refs.closeButton).popover({
       title: 'Expired',
-      content: `This discussion expired. It will be deleted during week.`,
+      content: `This discussion expired. It will be deleted during a week.`,
       placement: 'left',
       trigger: 'hover'
     })

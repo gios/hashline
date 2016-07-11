@@ -18,7 +18,7 @@ class DiscussionExpiredModal extends Component {
           <h3 className='modal-title'>This discussion has expired</h3>
         </div>
         <div className='modal-body'>
-          <p className='text-muted'>The discussion expired, you can't join the discussion.</p>
+          <p className='text-muted'>The discussion expired, you can't join the discussion. This discussion expired. It will be deleted during a week.</p>
         </div>
         <form onSubmit={this.redirectToBase.bind(this)}>
           <div className='modal-footer'>
