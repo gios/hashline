@@ -6,7 +6,7 @@ class DiscussionPasswordModal extends Component {
   discussionPasswordSubmit(e) {
     e.preventDefault()
     let { discussionId } = this.props
-    this.props.onJoinDiscussion({ id: discussionId, password: this.refs.passwordRef.value })
+    this.props.onJoinDiscussion({ id: discussionId, password: this.refs.passwordRef.value, store: this.refs.savePassword.checked })
   }
 
   render() {

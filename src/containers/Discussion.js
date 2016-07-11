@@ -68,7 +68,7 @@ class Discussion extends Component {
     })
   }
 
-  onJoinDiscussion({ id, password = '' }) {
+  onJoinDiscussion({ id, password = '', store }) {
     let { dispatch, user } = this.props
 
     dispatch(getDiscussion(parseInt(id), password)).then(status => {
@@ -82,6 +82,9 @@ class Discussion extends Component {
         return
       }
 
+      if(store) {
+        sessionStorage.setItem('passwordCache', status.payload.passwordCache)
+      }
       this.refs.discussionPasswordModal.refs.privateDiscussionModal.hide()
       this.refs.discussionExpiredModal.refs.expiredDiscussionModal.hide()
       this.refs.discussionFormRef.loadDiscussionMessages()
