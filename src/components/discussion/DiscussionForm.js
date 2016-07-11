@@ -229,11 +229,19 @@ class DiscussionForm extends Component {
     setChatMessage(this.refs.addMessage.htmlEl.innerHTML)
   }
 
+  typingUsersFilter(users) {
+    if(users.length > 3) {
+      return <div className='typing'><strong>{users.slice(0, 3).map(user => ' ' + user)}</strong> and others typing</div>
+    } else {
+      return <div className='typing'><strong>{users.map(user => ' ' + user)}</strong> typing</div>
+    }
+  }
+
   typingMessage() {
     let { discussionMessages } = this.props
 
     if(discussionMessages.userTyping.length) {
-      return <div className='typing'><strong>{discussionMessages.userTyping.map(item => ' ' + item)}</strong> typing</div>
+      return this.typingUsersFilter(discussionMessages.userTyping)
     } else {
       return null;
     }
