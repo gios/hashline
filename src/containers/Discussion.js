@@ -71,6 +71,10 @@ class Discussion extends Component {
   onJoinDiscussion({ id, password = '' }) {
     let { dispatch, user } = this.props
 
+    if(sessionStorage.getItem('storedPassword')) {
+      password = sessionStorage.getItem('storedPassword')
+    }
+
     dispatch(getDiscussion(parseInt(id), password)).then((status) => {
       if(status.error && status.payload.status === 412) {
         NotificationManager.error(status.payload.response.message)
@@ -80,6 +84,11 @@ class Discussion extends Component {
         NotificationManager.error(status.payload.response.message)
         this.refs.discussionExpiredModal.refs.expiredDiscussionModal.show()
         return
+      }
+
+      if(this.refs.discussionPasswordModal.refs.savePassword
+        && this.refs.discussionPasswordModal.refs.savePassword.checked) {
+        sessionStorage.setItem('storedPassword', password)
       }
       this.refs.discussionPasswordModal.refs.privateDiscussionModal.hide()
       this.refs.discussionExpiredModal.refs.expiredDiscussionModal.hide()

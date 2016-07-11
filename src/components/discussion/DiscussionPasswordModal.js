@@ -22,6 +22,11 @@ class DiscussionPasswordModal extends Component {
           <div className='modal-body'>
             <small className='text-muted'>This discussion is protected, please enter appropriate password.</small>
             <input autoFocus type='password' className='form-control' placeholder='Password' ref='passwordRef'></input>
+            <div className='checkbox text-xs-left'>
+              <label>
+                <input ref='savePassword' type='checkbox'/> Save password for this tab
+              </label>
+            </div>
           </div>
           <div className='modal-footer'>
             <button type='submit' className='btn btn-success'>Apply</button>
