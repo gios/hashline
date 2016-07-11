@@ -232,8 +232,8 @@ class DiscussionForm extends Component {
   typingMessage() {
     let { discussionMessages } = this.props
 
-    if(discussionMessages.userTyping) {
-      return <div className='typing'><strong>{discussionMessages.userTyping}</strong> typing</div>
+    if(discussionMessages.userTyping.length) {
+      return <div className='typing'><strong>{discussionMessages.userTyping.map(item => ' ' + item)}</strong> typing</div>
     } else {
       return null;
     }

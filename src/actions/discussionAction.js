@@ -30,7 +30,15 @@ export const DISCUSSION_USERS_INVITE = 'DISCUSSION_USERS_INVITE'
 
 export const SCROLL_TO_BOTTOM = 'SCROLL_TO_BOTTOM'
 export const TOGGLE_EMOJI_POPUP = 'TOGGLE_EMOJI_POPUP'
-export const USER_TYPING_MESSAGE = 'TYPING_MESSAGE'
+export const USER_TYPING_MESSAGE = 'USER_TYPING_MESSAGE'
+export const REMOVE_USER_TYPING_MESSAGE = 'REMOVE_USER_TYPING_MESSAGE'
+
+export function removeTypingMessage(userTyping) {
+  return {
+    type: REMOVE_USER_TYPING_MESSAGE,
+    userTyping
+  }
+}
 
 export function typingMessage(userTyping) {
   return {

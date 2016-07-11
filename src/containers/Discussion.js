@@ -15,7 +15,8 @@ import { getDiscussion,
          discussionUsersInvite,
          getSearchUsers,
          toggleEmojiPopup,
-         typingMessage } from '../actions/discussionAction'
+         typingMessage,
+         removeTypingMessage } from '../actions/discussionAction'
 import DiscussionForm from '../components/discussion/DiscussionForm'
 import DiscussionPasswordModal from '../components/discussion/DiscussionPasswordModal'
 import DiscussionExpiredModal from '../components/discussion/DiscussionExpiredModal'
@@ -28,6 +29,7 @@ class Discussion extends Component {
 
   componentWillMount() {
     let { dispatch, discussionId } = this.props
+    this.typingTimeouts = []
 
     socket.removeListener('leave discussion')
     socket.on('join discussion', (username) => {
@@ -55,8 +57,10 @@ class Discussion extends Component {
 
     socket.on('typing message', username => {
       dispatch(typingMessage(username))
-      clearTimeout(this.typingTimeout)
-      this.typingTimeout = setTimeout(() => dispatch(typingMessage('')), 3000)
+      clearTimeout(this.typingTimeouts.findIndex(timer => timer === this.typingTimeout))
+      const typingTimeoutId = setTimeout(() => dispatch(removeTypingMessage(username)), 10000)
+      this.typingTimeout = typingTimeoutId
+      this.typingTimeouts.push(typingTimeoutId)
     })
   }
 

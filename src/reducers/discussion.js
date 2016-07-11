@@ -25,7 +25,8 @@ import {
   LOAD_DISABLE_MESSAGES,
   DISCUSSION_USERS_INVITE,
   TOGGLE_EMOJI_POPUP,
-  USER_TYPING_MESSAGE } from '../actions/discussionAction'
+  USER_TYPING_MESSAGE,
+  REMOVE_USER_TYPING_MESSAGE } from '../actions/discussionAction'
 
 const discussionDeleteState = Immutable.Map({
   isFetching: false,
@@ -145,7 +146,7 @@ const discussionMessagesState = Immutable.Map({
   endLoad: 100,
   loadDisable: false,
   emojiPopup: false,
-  userTyping: ''
+  userTyping: Immutable.List.of()
 })
 
 function discussionMessages(state = discussionMessagesState, action) {
@@ -209,8 +210,17 @@ function discussionMessages(state = discussionMessagesState, action) {
         emojiPopup: !state.get('emojiPopup')
       })
     case USER_TYPING_MESSAGE:
+      if(state.get('userTyping').includes(action.userTyping)) {
+        return state
+      }
       return state.merge({
-        userTyping: action.userTyping
+        userTyping: state.get('userTyping').push(action.userTyping)
+      })
+    case REMOVE_USER_TYPING_MESSAGE:
+      return state.merge({
+        userTyping: state.get('userTyping').delete(state.get('userTyping').findIndex(username => {
+          return username === action.username
+        }))
       })
     default:
       return state
