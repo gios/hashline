@@ -70,8 +70,13 @@ class Discussion extends Component {
 
   onJoinDiscussion({ id, password = '', store }) {
     let { dispatch, user } = this.props
+    let passwordCache = null
 
-    dispatch(getDiscussion(parseInt(id), password)).then(status => {
+    if(sessionStorage.getItem(`d${id} passwordCache`)) {
+      passwordCache = sessionStorage.getItem(`d${id} passwordCache`)
+    }
+
+    dispatch(getDiscussion(parseInt(id), password, passwordCache)).then(status => {
       if(status.error && status.payload.status === 412) {
         NotificationManager.error(status.payload.response.message)
         this.refs.discussionPasswordModal.refs.privateDiscussionModal.show()
@@ -83,7 +88,7 @@ class Discussion extends Component {
       }
 
       if(store) {
-        sessionStorage.setItem('passwordCache', status.payload.passwordCache)
+        sessionStorage.setItem(`d${id} passwordCache`, status.payload.passwordCache)
       }
       this.refs.discussionPasswordModal.refs.privateDiscussionModal.hide()
       this.refs.discussionExpiredModal.refs.expiredDiscussionModal.hide()

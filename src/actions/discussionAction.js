@@ -153,7 +153,7 @@ export function deleteDiscussion(id) {
   }
 }
 
-export function getDiscussion(id, password) {
+export function getDiscussion(id, password, passwordCache) {
   return {
     [CALL_API]: {
       endpoint: `/api/discussion_info/${id}`,
@@ -163,7 +163,7 @@ export function getDiscussion(id, password) {
         'Content-Type': 'application/json'
       },
       types: [REQUEST_GET_DISCUSSION, SUCCESS_GET_DISCUSSION, FAILURE_GET_DISCUSSION],
-      body: JSON.stringify({ id, password })
+      body: JSON.stringify({ id, password, passwordCache })
     }
   }
 }

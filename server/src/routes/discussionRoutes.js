@@ -111,6 +111,7 @@ module.exports = function(router) {
     let userInfo = this.state.user
     let id = this.request.body.id
     let password = this.request.body.password
+    let passwordCache = this.request.body.passwordCache
 
     let foundDiscussion = yield knex('discussions')
     .select('discussions.id',
@@ -150,7 +151,15 @@ module.exports = function(router) {
       this.throw('This discussion doesn\'t exist', 404)
     }
 
-    if(foundDiscussion.is_private) {
+    if(passwordCache) {
+      let foundDiscussionPassword = yield knex('discussions').select('password').where('discussions.id', id).first()
+      let decodeFoundDiscussionPassword = userMethods.encryptoPassword(foundDiscussionPassword.password)
+      let isCorrectPassword = discussionMethods.encryptoPassword(passwordCache) === decodeFoundDiscussionPassword ? true : false
+
+      if(!isCorrectPassword) {
+        this.throw('Password cache isn\'t correct for this discussion', 412)
+      }
+    } else if(foundDiscussion.is_private) {
       let foundDiscussionPassword = yield knex('discussions').select('password').where('discussions.id', id).first()
       let isCorrectPassword = userMethods.encryptoPassword(foundDiscussionPassword.password) === password ? true : false
 
