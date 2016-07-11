@@ -220,7 +220,6 @@ module.exports = function(router) {
                 'discussions.is_limited',
                 'discussions.limited_time',
                 'discussions.closed')
-        .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
         .innerJoin('types', 'discussions.type_id', 'types.id')
         .innerJoin('users', 'discussions.user_id', 'users.id')
         .leftJoin('messages', 'discussions.id', 'messages.discussion_id')
@@ -265,7 +264,6 @@ module.exports = function(router) {
                 'discussions.is_limited',
                 'discussions.limited_time',
                 'discussions.closed')
-        .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
         .innerJoin('types', 'discussions.type_id', 'types.id')
         .innerJoin('users', 'discussions.user_id', 'users.id')
         .leftJoin('messages', 'discussions.id', 'messages.discussion_id')
@@ -307,7 +305,6 @@ module.exports = function(router) {
                 'discussions.is_limited',
                 'discussions.limited_time',
                 'discussions.closed')
-        .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
         .innerJoin('types', 'discussions.type_id', 'types.id')
         .innerJoin('users', 'discussions.user_id', 'users.id')
         .groupBy('discussions.id',
@@ -348,7 +345,6 @@ module.exports = function(router) {
                 'discussions.is_limited',
                 'discussions.limited_time',
                 'discussions.closed')
-        .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
         .innerJoin('types', 'discussions.type_id', 'types.id')
         .innerJoin('users', 'discussions.user_id', 'users.id')
         .groupBy('discussions.id',
@@ -389,7 +385,6 @@ module.exports = function(router) {
                 'discussions.is_limited',
                 'discussions.limited_time',
                 'discussions.closed')
-        .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
         .innerJoin('types', 'discussions.type_id', 'types.id')
         .innerJoin('users', 'discussions.user_id', 'users.id')
         .leftJoin('messages', 'discussions.id', 'messages.discussion_id')
@@ -430,7 +425,6 @@ module.exports = function(router) {
                 'discussions.is_limited',
                 'discussions.limited_time',
                 'discussions.closed')
-        .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
         .innerJoin('types', 'discussions.type_id', 'types.id')
         .innerJoin('users', 'discussions.user_id', 'users.id')
         .groupBy('discussions.id',
@@ -469,7 +463,6 @@ module.exports = function(router) {
                 'discussions.is_limited',
                 'discussions.limited_time',
                 'discussions.closed')
-        .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
         .innerJoin('types', 'discussions.type_id', 'types.id')
         .innerJoin('users', 'discussions.user_id', 'users.id')
         .leftJoin('messages', 'discussions.id', 'messages.discussion_id')
@@ -513,7 +506,6 @@ module.exports = function(router) {
                 'discussions.is_limited',
                 'discussions.limited_time',
                 'discussions.closed')
-        .leftJoin('discussions_tags', 'discussions.id', 'discussions_tags.discussion_id')
         .innerJoin('types', 'discussions.type_id', 'types.id')
         .innerJoin('users', 'discussions.user_id', 'users.id')
         .groupBy('discussions.id',
