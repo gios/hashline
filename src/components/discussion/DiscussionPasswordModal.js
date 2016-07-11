@@ -24,7 +24,7 @@ class DiscussionPasswordModal extends Component {
             <input autoFocus type='password' className='form-control' placeholder='Password' ref='passwordRef'></input>
             <div className='checkbox text-xs-left'>
               <label>
-                <input ref='savePassword' type='checkbox'/> Save password for this tab
+                <input ref='savePassword' type='checkbox'/><small className='text-muted'>Save password for this session</small>
               </label>
             </div>
           </div>

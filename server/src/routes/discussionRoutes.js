@@ -3,6 +3,7 @@ module.exports = function(router) {
 
   const knex = require('../knexConfig')
   const userMethods = require('../methods/userMethods')
+  const discussionMethods = require('../methods/discussionMethods')
   const moment = require('moment')
 
   router.get('/api/discussions/get_types', function *() {
@@ -157,6 +158,8 @@ module.exports = function(router) {
         this.throw('Password of this discussion not correct', 412)
       }
     }
+
+    foundDiscussion.passwordCache = discussionMethods.cryptoPassword(password)
 
     foundDiscussion.tags = []
     let diffLimited = moment.duration(moment(foundDiscussion.limited_time).diff(moment().utcOffset(userInfo.gmt)))
