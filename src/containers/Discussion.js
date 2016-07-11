@@ -58,9 +58,13 @@ class Discussion extends Component {
     socket.on('typing message', username => {
       dispatch(typingMessage(username))
       clearTimeout(this.typingTimeouts.findIndex(timer => timer === this.typingTimeout))
-      const typingTimeoutId = setTimeout(() => dispatch(removeTypingMessage(username)), 3000)
+      const typingTimeoutId = setTimeout(() => dispatch(removeTypingMessage(username)), 10000)
       this.typingTimeout = typingTimeoutId
       this.typingTimeouts.push(typingTimeoutId)
+    })
+
+    socket.on('stop typing message', username => {
+      dispatch(removeTypingMessage(username))
     })
   }
 

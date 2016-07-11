@@ -96,6 +96,10 @@ module.exports = function(io, socket) {
     socket.broadcast.to(`discussion-${discussionId}`).emit('typing message', user.username)
   })
 
+  socket.on('stop typing message', (discussionId, user) => {
+    socket.broadcast.to(`discussion-${discussionId}`).emit('stop typing message', user.username)
+  })
+
   socket.on('disconnect', () => {
     socket.leave(`user-${socket.user_id}`)
     socket.leave(`discussion-${socket.discussionId}`)

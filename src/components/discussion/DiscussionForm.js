@@ -72,6 +72,7 @@ class DiscussionForm extends Component {
     socket.removeListener('connected users')
     socket.removeListener('invite users')
     socket.removeListener('typing message')
+    socket.removeListener('stop typing message')
   }
 
   parseMessageEmojiImg(message = '') {
@@ -102,6 +103,7 @@ class DiscussionForm extends Component {
 
       if(this.validateMessage(message)) {
         socket.emit('chat message', message, discussionId, user.payload)
+        socket.emit('stop typing message', discussionId, user.payload)
         setChatMessage('')
         this.refs.addMessage.htmlEl.focus()
       }
