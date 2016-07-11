@@ -7,7 +7,6 @@ class DiscussionPasswordModal extends Component {
     e.preventDefault()
     let { discussionId } = this.props
     this.props.onJoinDiscussion({ id: discussionId, password: this.refs.passwordRef.value })
-    this.refs.privateDiscussionModal.hide()
   }
 
   render() {

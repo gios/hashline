@@ -81,6 +81,8 @@ class Discussion extends Component {
         this.refs.discussionExpiredModal.refs.expiredDiscussionModal.show()
         return
       }
+      this.refs.discussionPasswordModal.refs.privateDiscussionModal.hide()
+      this.refs.discussionExpiredModal.refs.expiredDiscussionModal.hide()
       this.refs.discussionFormRef.loadDiscussionMessages()
       socket.emit('join discussion', { discussionId: parseInt(id), username: user.payload.username, email: user.payload.email })
       socket.emit('connected users', parseInt(id))
