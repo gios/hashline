@@ -2,8 +2,8 @@ module.exports = function(router) {
   'use strict';
 
   const knex = require('../knexConfig')
-  const userMethods = require('../methods/userMethods')
-  const discussionMethods = require('../methods/discussionMethods')
+  const userMethods = require('../methods/cipherMethods')('aes-256-cbc', 'salt')
+  const discussionMethods = require('../methods/cipherMethods')('aes192', 'salt')
   const moment = require('moment')
 
   router.get('/api/discussions/get_types', function *() {

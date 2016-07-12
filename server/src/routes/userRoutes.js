@@ -2,7 +2,7 @@ module.exports = function(router, jwt, SHARED_SECRET) {
   'use strict';
 
   const knex = require('../knexConfig')
-  const userMethods = require('../methods/userMethods')
+  const userMethods = require('../methods/cipherMethods')('aes-256-cbc', 'salt')
 
   router.post('/authenticate', function *() {
     let email = this.request.body.email
