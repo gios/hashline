@@ -25,7 +25,7 @@ class Login extends Component {
       NotificationManager.error(status.payload.response.message)
       return
     }
-    NotificationManager.success(status.payload.message, 'Success', 0, () => dispatch(push('/mydiscussions')))
+    NotificationManager.success(status.payload.message, 'Success', 0, () => dispatch(push(`/discussion/${status.payload.id}`)))
   }
 
   render() {
