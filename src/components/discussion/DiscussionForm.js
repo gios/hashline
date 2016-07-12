@@ -97,7 +97,6 @@ class DiscussionForm extends Component {
 
   sendMessage(e) {
     if((!e.which || (e.which === ENTER_KEYCODE && !e.shiftKey))) {
-      e.preventDefault()
       let message = this.parseMessageEmojiImg(e.currentTarget.innerHTML)
       let { socket, discussionId, user, setChatMessage } = this.props
 
