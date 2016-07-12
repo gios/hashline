@@ -98,10 +98,11 @@ class DiscussionForm extends Component {
   sendMessage(e) {
     if((!e.which || (e.which === ENTER_KEYCODE && !e.shiftKey))) {
       e.preventDefault()
-      let message = this.parseMessageEmojiImg(this.refs.addMessage.lastHtml)
+      let message = this.parseMessageEmojiImg(e.currentTarget.innerHTML)
       let { socket, discussionId, user, setChatMessage } = this.props
 
       if(this.validateMessage(message)) {
+        this.emojiSelect()
         socket.emit('chat message', message, discussionId, user.payload)
         socket.emit('stop typing message', discussionId, user.payload)
         setChatMessage('')
@@ -207,7 +208,10 @@ class DiscussionForm extends Component {
     }
   }
 
-  setEmoji(emoji) {
+  setEmoji(emoji, event) {
+    if(!event) {
+      return
+    }
     let { discussionMessages, setChatMessage } = this.props
     let message = discussionMessages.chatMessage
     let emojiOptions = {
