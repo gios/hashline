@@ -3,6 +3,7 @@
 ![alt tag](https://github.com/gios/hashline/blob/master/main.png)
 ![alt tag](https://github.com/gios/hashline/blob/master/hashline_img1.png)
 ![alt tag](https://github.com/gios/hashline/blob/master/hashline_img2.png)
+![alt tag](https://github.com/gios/hashline/blob/master/hashline_img3.png)
 
 ## Technologies
 * Redux
