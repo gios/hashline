@@ -25,8 +25,7 @@ module.exports = function(io, socket) {
       .where('id', senderId)
       .first(),
       knex('discussions')
-      .select('id',
-              'name')
+      .select('id', 'name')
       .where('id', discussionId)
       .first()
     ])
