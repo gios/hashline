@@ -25,6 +25,8 @@ class UserSTatusInfo extends Component {
   }
 
   getRankTableContent() {
+    let { dashUsersRank } = this.props
+
     return (
       <div>
         <div className='modal-header text-xs-center'>
@@ -40,7 +42,7 @@ class UserSTatusInfo extends Component {
                 </tr>
               </thead>
               <tbody>
-                {this.renderRankInternal()}
+                {dashUsersRank.payload && this.renderRankInternal()}
               </tbody>
             </table>
           </div>

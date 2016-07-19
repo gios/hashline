@@ -561,6 +561,7 @@ module.exports = function(router) {
 
         if(diffLimited.as('days') < -7) {
           yield knex('discussions_tags').where('discussion_id', indexData.id).del()
+          yield knex('messages').where('discussion_id', indexData.id).del()
           yield knex('discussions').where('id', indexData.id).del()
         }
       }
