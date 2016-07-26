@@ -1,5 +1,5 @@
 # Hashline
-Realtime discussions
+Realtime discussions.
 
 [![Build Status](https://travis-ci.org/gios/hashline.svg?branch=master)](https://travis-ci.org/gios/hashline)
 ## Login Page
