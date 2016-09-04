@@ -57,7 +57,7 @@
     "react-redux": "^4.4.5",
     "react-router": "^2.4.0",
     "react-router-redux": "^4.0.0",
-    "react-select": "^1.0.0-beta13",
+    "react-select": "^1.0.0-rc.1",
     "redux": "^3.5.2",
     "redux-api-middleware": "^1.0.2",
     "redux-thunk": "^2.1.0",

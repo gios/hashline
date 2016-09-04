@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import Select from 'react-select'
+import Select, { Creatable } from 'react-select'
 import { DOMtoArray } from '../../utils/helpers'
 
 class createDiscussionForm extends Component {
@@ -164,7 +164,7 @@ class createDiscussionForm extends Component {
     let isLoading = this.loadingSelect(discussionTags)
 
     return (
-      <Select isLoading={isLoading}
+      <Creatable isLoading={isLoading}
               onChange={this.selectTags.bind(this)}
               className='tagsSelector'
               value={discussionSettings.selectedTags}
